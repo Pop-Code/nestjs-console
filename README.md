@@ -65,9 +65,37 @@ export class MyService {
         const spin = this.consoleService.createSpinner();
         spin.start();
         // DO SOME WORK
+        console.log(options.all);
         spin.stop();
     }
 }
+```
+
+Add scripts in your package.json (Only if you want to use them)
+
+```json
+{
+    "scripts": {
+        "console:dev": "ts-node -r tsconfig-paths/register src/console.ts",
+        "console": "node lib/console.js"
+    }
+}
+```
+
+Usage from cli (we suppose your app was built in the lib forlder)
+
+```bash
+# direct call
+node lib/console.js --help
+
+# using npm
+npm run console -- --help
+
+# using yarn
+yarn run console --help
+
+# during dev you can call the console using ts-node
+yarn run console:dev --help
 ```
 
 ### Documentation

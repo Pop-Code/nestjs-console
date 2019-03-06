@@ -72,12 +72,13 @@
 yarn install nestjs-console</code></pre>
 				<h3 id="prepare-the-cli-endpoint">Prepare the cli endpoint</h3>
 				<p>Create a file next to main.ts named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { bootstrap } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
-<span class="hljs-keyword">import</span> { AppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bundles/app'</span>;
+				<pre><code class="language-ts"><span class="hljs-comment">// console.ts</span>
+<span class="hljs-keyword">import</span> { bootstrap } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { MyAppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.application.module'</span>;
 
-bootstrap(AppModule, { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
+bootstrap(MyAppModule, { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
 				<h3 id="usage">Usage</h3>
-				<p>Import the ConsoleModule inside your module</p>
+				<p>An example of nestjs module that import the ConsoleModule</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// module.ts</span>
 <span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
@@ -85,8 +86,9 @@ bootstrap(AppModule, { logger: <span class="hljs-literal">false</span> }).catch(
 
 <span class="hljs-meta">@Module</span>({
     imports: [
-        ConsoleModule <span class="hljs-comment">// Import the module where you need it</span>
+        ConsoleModule
     ],
+    providers: [MyService]
     exports: [MyService]
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
@@ -110,9 +112,29 @@ bootstrap(AppModule, { logger: <span class="hljs-literal">false</span> }).catch(
         <span class="hljs-keyword">const</span> spin = <span class="hljs-keyword">this</span>.consoleService.createSpinner();
         spin.start();
         <span class="hljs-comment">// DO SOME WORK</span>
+        <span class="hljs-built_in">console</span>.log(options.all);
         spin.stop();
     }
 }</code></pre>
+				<p>Add scripts in your package.json (Only if you want to use them)</p>
+				<pre><code class="language-json">{
+    <span class="hljs-attr">"scripts"</span>: {
+        <span class="hljs-attr">"console:dev"</span>: <span class="hljs-string">"ts-node -r tsconfig-paths/register src/console.ts"</span>,
+        <span class="hljs-attr">"console"</span>: <span class="hljs-string">"node lib/console.js"</span>
+    }
+}</code></pre>
+				<p>Usage from cli (we suppose your app was built in the lib forlder)</p>
+				<pre><code class="language-bash"><span class="hljs-comment"># direct call</span>
+node lib/console.js --<span class="hljs-built_in">help</span>
+
+<span class="hljs-comment"># using npm</span>
+npm run console -- --<span class="hljs-built_in">help</span>
+
+<span class="hljs-comment"># using yarn</span>
+yarn run console --<span class="hljs-built_in">help</span>
+
+<span class="hljs-comment"># during dev you can call the console using ts-node</span>
+yarn run console:dev --<span class="hljs-built_in">help</span></code></pre>
 				<h3 id="documentation">Documentation</h3>
 				<p>A typedoc is generated and available on github <a href="https://pop-code.github.io/nestjs-console">https://pop-code.github.io/nestjs-console</a></p>
 			</div>
