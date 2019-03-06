@@ -29,7 +29,7 @@
         "typedoc": "^0.13.0"
     },
     "scripts": {
-        "build": "rm -Rf build && tsc",
+        "build": "rm -Rf lib && tsc",
         "doc": "rm -Rf docs && typedoc src"
     }
 }
