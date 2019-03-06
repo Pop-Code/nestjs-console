@@ -1,6 +1,6 @@
 # nestjs-console
 
-[NestJS Console][doc-link] is a module that provide a cli. A ready to use service class for your module exposes the required methods to register commands and sub commands using the [npm package commander][commander-link]
+[NestJS Console][doc-link] is a module that provide a cli. A ready to use service class for your module that exposes the required methods to register commands and sub commands using the [npm package commander][commander-link]
 
 ### Install
 
