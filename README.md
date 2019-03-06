@@ -54,8 +54,8 @@ export class MyService {
         this.consoleService
             .getCli()
             .command('mycommand')
-            .options('-a, --all', 'an exemple')
-            .action(this.mycommand.bind(this));
+            .options('-a, --all', 'an exemple of options')
+            .action(this.myCommand.bind(this));
     }
 
     myCommand(options) {
