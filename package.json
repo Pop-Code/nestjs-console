@@ -30,6 +30,6 @@
     },
     "scripts": {
         "build": "rm -Rf ./lib && tsc",
-        "doc": "rm -Rf ./docs && typedoc ./src"
+        "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll"
     }
 }
