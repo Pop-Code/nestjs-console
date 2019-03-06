@@ -30,6 +30,6 @@
     },
     "scripts": {
         "build": "rm -Rf build && tsc",
-        "doc": "rm -Rf doc && typedoc src"
+        "doc": "rm -Rf docs && typedoc src"
     }
 }

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;module&quot; | NestJS Console</title>
+	<title>&quot;override/commander&quot; | NestJS Console</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_module_.html">&quot;module&quot;</a>
+					<a href="_override_commander_.html">&quot;override/commander&quot;</a>
 				</li>
 			</ul>
-			<h1>External module &quot;module&quot;</h1>
+			<h1>External module &quot;override/commander&quot;</h1>
 		</div>
 	</div>
 </header>
@@ -70,52 +70,43 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
-							<h3>Classes</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-class tsd-parent-kind-external-module"><a href="../classes/_module_.consolemodule.html" class="tsd-kind-icon">Console<wbr>Module</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Object literals</h3>
+							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported"><a href="_module_.html#cliprovider" class="tsd-kind-icon">cli<wbr>Provider</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported"><a href="_override_commander_.html#forwardsubcommands" class="tsd-kind-icon">forward<wbr>Subcommands</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Object literals</h2>
-				<section class="tsd-panel tsd-member tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="cliprovider" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> cli<wbr>Provider</h3>
-					<div class="tsd-signature tsd-kind-icon">cli<wbr>Provider<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in module.ts:5</li>
-						</ul>
-					</aside>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="cliprovider.provide" class="tsd-anchor"></a>
-						<h3>provide</h3>
-						<div class="tsd-signature tsd-kind-icon">provide<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> =&nbsp;&quot;Commander&quot;</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in module.ts:6</li>
-							</ul>
-						</aside>
-					</section>
-					<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-object-literal tsd-is-not-exported">
-						<a name="cliprovider.usevalue" class="tsd-anchor"></a>
-						<h3>use<wbr>Value</h3>
-						<div class="tsd-signature tsd-kind-icon">use<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CommanderStatic</span><span class="tsd-signature-symbol"> =&nbsp;commander</span></div>
-						<aside class="tsd-sources">
-							<ul>
-								<li>Defined in module.ts:7</li>
-							</ul>
-						</aside>
-					</section>
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+					<a name="forwardsubcommands" class="tsd-anchor"></a>
+					<h3>forward<wbr>Subcommands</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<li class="tsd-signature tsd-kind-icon">forward<wbr>Subcommands<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommanderStatic</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c587fe7/src/override/commander.ts#L7">override/commander.ts:7</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Patch commander to support git style subcommand without to works with external file for program</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://github.com/tj/commander.js/issues/764#issuecomment-399739989">https://github.com/tj/commander.js/issues/764#issuecomment-399739989</a></p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CommanderStatic</span></h4>
+						</li>
+					</ul>
 				</section>
 			</section>
 		</div>
@@ -131,10 +122,10 @@
 					<li class=" tsd-kind-external-module">
 						<a href="_index_.html">"index"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="_module_.html">"module"</a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="_override_commander_.html">"override/commander"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -144,11 +135,8 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-class tsd-parent-kind-external-module">
-						<a href="../classes/_module_.consolemodule.html" class="tsd-kind-icon">Console<wbr>Module</a>
-					</li>
-					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_module_.html#cliprovider" class="tsd-kind-icon">cli<wbr>Provider</a>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module tsd-is-not-exported">
+						<a href="_override_commander_.html#forwardsubcommands" class="tsd-kind-icon">forward<wbr>Subcommands</a>
 					</li>
 				</ul>
 			</nav>
