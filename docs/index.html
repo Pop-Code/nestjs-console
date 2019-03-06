@@ -65,7 +65,56 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="nestjs-console">nestjs-console</h1>
-				<p>A NestJS module that provide a cli</p>
+				<p><a href="https://pop-code.github.io/nestjs-console">NestJS Console</a> is a module that provide a cli. A ready to use service class for your module that exposes the required methods to register commands and sub commands using the <a href="https://www.npmjs.com/package/commander">npm package commander</a></p>
+				<h3 id="install">Install</h3>
+				<pre><code class="language-bash">npm install nestjs-console
+<span class="hljs-comment"># or unig yarn</span>
+yarn install nestjs-console</code></pre>
+				<h3 id="prepare-the-cli-endpoint">Prepare the cli endpoint</h3>
+				<p>Create a file next to main.ts named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { bootstrap } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { AppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./bundles/app'</span>;
+
+bootstrap(AppModule, { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
+				<h3 id="usage">Usage</h3>
+				<p>Import the ConsoleModule inside your module</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// module.ts</span>
+<span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
+<span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./service'</span>;
+
+<span class="hljs-meta">@Module</span>({
+    imports: [
+        ConsoleModule <span class="hljs-comment">// Import the module where you need it</span>
+    ],
+    exports: [MyService]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
+				<p>You can now inject the ConsoleService inside any nestjs providers, controllers...</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.ts</span>
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
+<span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
+        <span class="hljs-keyword">this</span>.consoleService
+            .getCli()
+            .command(<span class="hljs-string">'mycommand'</span>)
+            .options(<span class="hljs-string">'-a, --all'</span>, <span class="hljs-string">'an exemple of options'</span>)
+            .action(<span class="hljs-keyword">this</span>.myCommand.bind(<span class="hljs-keyword">this</span>));
+    }
+
+    myCommand(options) {
+        <span class="hljs-comment">//See Ora npm package for details about spinner</span>
+        <span class="hljs-keyword">const</span> spin = <span class="hljs-keyword">this</span>.consoleService.createSpinner();
+        spin.start();
+        <span class="hljs-comment">// DO SOME WORK</span>
+        spin.stop();
+    }
+}</code></pre>
+				<h3 id="documentation">Documentation</h3>
+				<p>A typedoc is generated and available on github <a href="https://pop-code.github.io/nestjs-console">https://pop-code.github.io/nestjs-console</a></p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
