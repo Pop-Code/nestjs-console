@@ -1,7 +1,14 @@
 {
     "name": "nestjs-console",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "A NestJS module that provide a cli",
+    "keywords": [
+        "nestjs",
+        "module",
+        "cli",
+        "console",
+        "commander"
+    ],
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
     "repository": "git@github.com:Pop-Code/nestjs-console.git",
