@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A NestJS module that provide a cli",
     "main": "./lib/index.js",
     "types": "./lib/index.d.ts",
