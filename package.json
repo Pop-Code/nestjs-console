@@ -1,9 +1,9 @@
 {
     "name": "nestjs-console",
-    "version": "0.1.0",
+    "version": "0.1.2",
     "description": "A NestJS module that provide a cli",
-    "main": "build/index.js",
-    "types": "./build/index.d.ts",
+    "main": "./lib/index.js",
+    "types": "./lib/index.d.ts",
     "repository": "git@github.com:Pop-Code/nestjs-console.git",
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
@@ -29,7 +29,7 @@
         "typedoc": "^0.13.0"
     },
     "scripts": {
-        "build": "rm -Rf lib && tsc",
-        "doc": "rm -Rf docs && typedoc src"
+        "build": "rm -Rf ./lib && tsc",
+        "doc": "rm -Rf ./docs && typedoc ./src"
     }
 }
