@@ -16,15 +16,16 @@ Create a file next to main.ts named console.ts
 Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
 
 ```ts
+// console.ts
 import { bootstrap } from 'nestjs-console';
-import { AppModule } from './bundles/app';
+import { MyAppModule } from './my.application.module';
 
-bootstrap(AppModule, { logger: false }).catch(e => console.log('Error', e));
+bootstrap(MyAppModule, { logger: false }).catch(e => console.log('Error', e));
 ```
 
 ### Usage
 
-Import the ConsoleModule inside your module
+An example of nestjs module that import the ConsoleModule
 
 ```ts
 // module.ts
@@ -34,8 +35,9 @@ import { MyService } from './service';
 
 @Module({
     imports: [
-        ConsoleModule // Import the module where you need it
+        ConsoleModule
     ],
+    providers: [MyService]
     exports: [MyService]
 })
 export class MyModule {}
