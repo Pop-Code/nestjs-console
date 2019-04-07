@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2019-04-07
+
+### Changed
+
+-   Fix doc
+
 ## [0.2.0] - 2019-04-07
 
 ### Changed
@@ -14,4 +20,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 -   Update the dependencies to support nestjs ^6.0.0
 
 [unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.0...HEAD
+[0.2.1]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/Pop-Code/nestjs-console/compare/v0.1.6...v0.2.0

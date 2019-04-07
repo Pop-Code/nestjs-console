@@ -7,7 +7,7 @@
 ```bash
 npm install nestjs-console
 # or unig yarn
-yarn install nestjs-console
+yarn add nestjs-console
 ```
 
 ### Prepare the cli endpoint
