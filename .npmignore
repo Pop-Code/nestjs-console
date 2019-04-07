@@ -3,5 +3,5 @@ src/
 .prettierrc
 .gitignore
 tsconfig.json
-typpedoc.js
+typedoc.js
 yarn.lock
