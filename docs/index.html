@@ -66,12 +66,12 @@
 			<div class="tsd-panel tsd-typography">
 				<h1 id="nestjs-console">nestjs-console</h1>
 				<p><a href="https://pop-code.github.io/nestjs-console">NestJS Console</a> is a module that provide a cli. A ready to use service class for your module that exposes the required methods to register commands and sub commands using the <a href="https://www.npmjs.com/package/commander">npm package commander</a></p>
-				<h3 id="install">Install</h3>
+				<h3 id="install-from-npm"><a href="https://www.npmjs.com/package/nestjs-console">Install FROM NPM</a></h3>
 				<pre><code class="language-bash">npm install nestjs-console
 <span class="hljs-comment"># or unig yarn</span>
 yarn install nestjs-console</code></pre>
 				<h3 id="prepare-the-cli-endpoint">Prepare the cli endpoint</h3>
-				<p>Create a file next to main.ts named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.</p>
+				<p>Create a file at root next to your entry point named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// console.ts</span>
 <span class="hljs-keyword">import</span> { bootstrap } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 <span class="hljs-keyword">import</span> { MyAppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.application.module'</span>;
@@ -100,11 +100,27 @@ bootstrap(MyAppModule, { logger: <span class="hljs-literal">false</span> }).catc
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
+        <span class="hljs-comment">//You can create single commands</span>
         <span class="hljs-keyword">this</span>.consoleService
             .getCli()
-            .command(<span class="hljs-string">'mycommand'</span>)
-            .options(<span class="hljs-string">'-a, --all'</span>, <span class="hljs-string">'an exemple of options'</span>)
+            .command(<span class="hljs-string">'mycommand &lt;value&gt;'</span>)
+            .description(
+                <span class="hljs-string">'Do something'</span>
+            )
+            .options(<span class="hljs-string">'-a, --all'</span>, <span class="hljs-string">'an example of options'</span>)
             .action(<span class="hljs-keyword">this</span>.myCommand.bind(<span class="hljs-keyword">this</span>));
+
+        <span class="hljs-comment">//You can also create nested command</span>
+        <span class="hljs-keyword">const</span> parentCommand = <span class="hljs-keyword">this</span>.consoleService
+            .getCli()
+            .command(<span class="hljs-string">'mygroupcommands'</span>)
+            .description(
+                <span class="hljs-string">'Manage a group of subcommand'</span>
+            ) <span class="hljs-keyword">as</span> PatchedCommander).forwardSubcommands();
+
+        parentCommand.command(<span class="hljs-string">'nestedcommand &lt;value&gt;'</span>).action(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> {
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Recevied value'</span>, value);
+        });
     }
 
     myCommand(options) {
@@ -135,8 +151,19 @@ yarn run console --<span class="hljs-built_in">help</span>
 
 <span class="hljs-comment"># during dev you can call the console using ts-node</span>
 yarn run console:dev --<span class="hljs-built_in">help</span></code></pre>
-				<h3 id="documentation">Documentation</h3>
+				<h3 id="response">Response</h3>
+				<pre><code><span class="hljs-comment">#example of response</span>
+
+Usage:<span class="hljs-built_in"> console </span>[options] [command]
+
+Options:
+  -h, --help           output usage information
+
+Commands:
+  mycommand &lt;value&gt;     <span class="hljs-keyword">Do</span> something
+  mygroupcommands       Manage a<span class="hljs-built_in"> group </span>of subcommand</code></pre><h3 id="documentation">Documentation</h3>
 				<p>A typedoc is generated and available on github <a href="https://pop-code.github.io/nestjs-console">https://pop-code.github.io/nestjs-console</a></p>
+				<h3 id="changelog"><a href="https://github.com/Pop-Code/nestjs-console/CHANGELOG.md">CHANGELOG</a></h3>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">

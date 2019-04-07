@@ -2,7 +2,7 @@
 
 [NestJS Console][doc-link] is a module that provide a cli. A ready to use service class for your module that exposes the required methods to register commands and sub commands using the [npm package commander][commander-link]
 
-### Install
+### [Install FROM NPM][npm]
 
 ```bash
 npm install nestjs-console
@@ -12,7 +12,7 @@ yarn install nestjs-console
 
 ### Prepare the cli endpoint
 
-Create a file next to main.ts named console.ts  
+Create a file at root next to your entry point named console.ts  
 Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
 
 ```ts
@@ -53,11 +53,27 @@ import { ConsoleService } from 'nestjs-console';
 @Injectable()
 export class MyService {
     constructor(private readonly consoleService: ConsoleService) {
+        //You can create single commands
         this.consoleService
             .getCli()
-            .command('mycommand')
-            .options('-a, --all', 'an exemple of options')
+            .command('mycommand <value>')
+            .description(
+                'Do something'
+            )
+            .options('-a, --all', 'an example of options')
             .action(this.myCommand.bind(this));
+
+        //You can also create nested command
+        const parentCommand = this.consoleService
+            .getCli()
+            .command('mygroupcommands')
+            .description(
+                'Manage a group of subcommand'
+            ) as PatchedCommander).forwardSubcommands();
+
+        parentCommand.command('nestedcommand <value>').action(value => {
+            console.log('Recevied value', value);
+        });
     }
 
     myCommand(options) {
@@ -98,9 +114,28 @@ yarn run console --help
 yarn run console:dev --help
 ```
 
+### Response
+
+```
+#example of response
+
+Usage: console [options] [command]
+
+Options:
+  -h, --help           output usage information
+
+Commands:
+  mycommand <value>     Do something
+  mygroupcommands       Manage a group of subcommand
+```
+
 ### Documentation
 
 A typedoc is generated and available on github [https://pop-code.github.io/nestjs-console][doc-link]
 
+### [CHANGELOG][changelog]
+
+[npm]: https://www.npmjs.com/package/nestjs-console
 [doc-link]: https://pop-code.github.io/nestjs-console
 [commander-link]: https://www.npmjs.com/package/commander
+[changelog]: https://github.com/Pop-Code/nestjs-console/CHANGELOG.md
