@@ -138,4 +138,4 @@ A typedoc is generated and available on github [https://pop-code.github.io/nestj
 [npm]: https://www.npmjs.com/package/nestjs-console
 [doc-link]: https://pop-code.github.io/nestjs-console
 [commander-link]: https://www.npmjs.com/package/commander
-[changelog]: https://github.com/Pop-Code/nestjs-console/CHANGELOG.md
+[changelog]: https://github.com/Pop-Code/nestjs-console/blob/master/CHANGELOG.md
