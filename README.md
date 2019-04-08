@@ -53,18 +53,18 @@ import { ConsoleService } from 'nestjs-console';
 @Injectable()
 export class MyService {
     constructor(private readonly consoleService: ConsoleService) {
-        //You can create single commands
+        // You can create single commands
         this.consoleService
             .getCli()
             .command('mycommand <value>')
             .description(
-                'Do something'
-            )
-            .options('-a, --all', 'an example of options')
+                 'Do something'
+            )     
+            .option('-a, --all', 'an example of options')
             .action(this.myCommand.bind(this));
 
         //You can also create nested command
-        const parentCommand = this.consoleService
+        const parentCommand = (this.consoleService
             .getCli()
             .command('mygroupcommands')
             .description(
