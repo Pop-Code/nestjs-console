@@ -7,3 +7,5 @@ tsconfig.json
 typedoc.js
 jest.config.js
 yarn.lock
+.circleci
+.vscode
