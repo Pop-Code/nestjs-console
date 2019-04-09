@@ -7,7 +7,6 @@ workflows:
             - test-latest
             - test-dubnium
             - test-carbon
-            - publish-github-release
 jobs:
     test-latest:
         docker:
