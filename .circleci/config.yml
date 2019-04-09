@@ -16,6 +16,7 @@ jobs:
 
         steps:
             - checkout
+            - run: yarn cache clean
             - run: yarn install
             - run: yarn test
             - codecov/upload:
