@@ -87,20 +87,19 @@
 								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_service_.consoleservice.html#constructor" class="tsd-kind-icon">constructor</a></li>
 							</ul>
 						</section>
-						<section class="tsd-index-section tsd-is-private tsd-is-private-protected">
+						<section class="tsd-index-section tsd-is-private-protected">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_service_.consoleservice.html#cli" class="tsd-kind-icon">cli</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="_service_.consoleservice.html#loader" class="tsd-kind-icon">loader</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_service_.consoleservice.html#cli" class="tsd-kind-icon">cli</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#createspinner" class="tsd-kind-icon">create<wbr>Spinner</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#getcli" class="tsd-kind-icon">get<wbr>Cli</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#init" class="tsd-kind-icon">init</a></li>
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#log" class="tsd-kind-icon">log</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#subcommands" class="tsd-kind-icon">sub<wbr>Commands</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_service_.consoleservice.html#createspinner" class="tsd-kind-icon">create<wbr>Spinner</a></li>
 							</ul>
 						</section>
 					</div>
@@ -112,19 +111,19 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Console<wbr>Service<span class="tsd-signature-symbol">(</span>cli<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommanderStatic</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Console<wbr>Service<span class="tsd-signature-symbol">(</span>cli<span class="tsd-signature-symbol">: </span><a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L11">service.ts:11</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L7">service.ts:7</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>cli: <span class="tsd-signature-type">CommanderStatic</span></h5>
+									<h5>cli: <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></h4>
@@ -132,25 +131,15 @@
 					</ul>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private tsd-is-private-protected">
+			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 					<a name="cli" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> cli</h3>
-					<div class="tsd-signature tsd-kind-icon">cli<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">CommanderStatic</span></div>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> cli</h3>
+					<div class="tsd-signature tsd-kind-icon">cli<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L13">service.ts:13</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
-					<a name="loader" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagPrivate">Private</span> loader</h3>
-					<div class="tsd-signature tsd-kind-icon">loader<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Ora</span><span class="tsd-signature-symbol"> =&nbsp;ora()</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L11">service.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L8">service.ts:8</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -158,42 +147,19 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Methods</h2>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="createspinner" class="tsd-anchor"></a>
-					<h3>create<wbr>Spinner</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">create<wbr>Spinner<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L23">service.ts:23</a></li>
-								</ul>
-							</aside>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> text: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">any</span></h4>
-						</li>
-					</ul>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getcli" class="tsd-anchor"></a>
 					<h3>get<wbr>Cli</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">get<wbr>Cli<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommanderStatic</span></li>
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Cli<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L15">service.ts:15</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L14">service.ts:14</a></li>
 								</ul>
 							</aside>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">CommanderStatic</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -207,7 +173,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L27">service.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L18">service.ts:18</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -221,25 +187,54 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="log" class="tsd-anchor"></a>
-					<h3>log</h3>
+					<a name="subcommands" class="tsd-anchor"></a>
+					<h3>sub<wbr>Commands</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">log<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">sub<wbr>Commands<span class="tsd-signature-symbol">(</span>parent<span class="tsd-signature-symbol">: </span><a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a>, command<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/254b4e1/src/service.ts#L19">service.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L28">service.ts:28</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>parent: <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></h5>
+								</li>
+								<li>
+									<h5>command: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>description: <span class="tsd-signature-type">string</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="createspinner" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>Spinner</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>Spinner<span class="tsd-signature-symbol">(</span>text<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Ora</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/6afcb30/src/service.ts#L10">service.ts:10</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> text: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Ora</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -252,16 +247,22 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_commander_.html">"commander"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_console_.html">"console"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_constants_.html">"constants"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_decorators_.html">"decorators"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_module_.html">"module"</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_override_commander_.html">"override/commander"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_service_.html">"service"</a>
@@ -278,14 +279,8 @@
 							<li class=" tsd-kind-constructor tsd-parent-kind-class">
 								<a href="_service_.consoleservice.html#constructor" class="tsd-kind-icon">constructor</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
 								<a href="_service_.consoleservice.html#cli" class="tsd-kind-icon">cli</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
-								<a href="_service_.consoleservice.html#loader" class="tsd-kind-icon">loader</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_service_.consoleservice.html#createspinner" class="tsd-kind-icon">create<wbr>Spinner</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_service_.consoleservice.html#getcli" class="tsd-kind-icon">get<wbr>Cli</a>
@@ -294,15 +289,15 @@
 								<a href="_service_.consoleservice.html#init" class="tsd-kind-icon">init</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_service_.consoleservice.html#log" class="tsd-kind-icon">log</a>
+								<a href="_service_.consoleservice.html#subcommands" class="tsd-kind-icon">sub<wbr>Commands</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_service_.consoleservice.html#createspinner" class="tsd-kind-icon">create<wbr>Spinner</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_service_.patchedcommander.html" class="tsd-kind-icon">Patched<wbr>Commander</a>
-					</li>
 				</ul>
 			</nav>
 		</div>

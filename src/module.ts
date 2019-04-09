@@ -1,9 +1,10 @@
 import { Module } from '@nestjs/common';
 import { ConsoleService } from './service';
-import { commander } from './override/commander';
+import { commander } from './commander';
+import { COMMANDER_SERVICE_TOKEN } from './constants';
 
 const cliProvider = {
-    provide: 'Commander',
+    provide: COMMANDER_SERVICE_TOKEN,
     useValue: commander
 };
 

@@ -3,17 +3,23 @@ import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-ap
 import { NestFactory } from '@nestjs/core';
 import ora from 'ora';
 
-export async function bootstrap(
-    appModule: any,
-    options: NestApplicationContextOptions
-) {
+export interface ConsoleOptions {
+    module: any;
+    contextOptions: NestApplicationContextOptions;
+    service?: { new (...args: any[]): ConsoleService };
+}
+
+export const bootstrap = async (options: ConsoleOptions) => {
     const spinner = ora('Init');
     spinner.start();
-
-    const app = await NestFactory.createApplicationContext(appModule, options);
-    const consoleService = app.get(ConsoleService);
-
+    if (!options.service) {
+        options.service = ConsoleService;
+    }
+    const app = await NestFactory.createApplicationContext(
+        options.module,
+        options.contextOptions
+    );
+    const consoleService = app.get(options.service);
     spinner.stop();
-
     consoleService.init(process.argv);
-}
+};

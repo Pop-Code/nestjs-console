@@ -1,10 +1,14 @@
-import commander, { CommanderStatic } from 'commander';
+import commander from 'commander';
+
+export interface Command extends commander.Command {
+    forwardSubCommands(): Command;
+}
 
 /**
  * Patch commander to support git style subcommand without to works with external file for program
  * @see https://github.com/tj/commander.js/issues/764#issuecomment-399739989
  */
-function forwardSubcommands(): CommanderStatic {
+function forwardSubCommands(): Command {
     const listener = (args, unknown) => {
         // Parse any so-far unknown options
         args = args || [];
@@ -27,7 +31,7 @@ function forwardSubcommands(): CommanderStatic {
 
     if (this._args.length > 0) {
         console.error(
-            'forwardSubcommands cannot be applied to command with explicit args'
+            'subCommands cannot be applied to command with explicit args'
         );
     }
 
@@ -43,6 +47,6 @@ function forwardSubcommands(): CommanderStatic {
     return this;
 }
 
-commander.Command.prototype.forwardSubcommands = forwardSubcommands;
+commander.Command.prototype.forwardSubcommands = forwardSubCommands;
 
-export { commander };
+export { commander, forwardSubCommands };

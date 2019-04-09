@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "0.2.1",
+    "version": "1.0.0-alpha.1",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
@@ -15,9 +15,9 @@
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
     "peerDependencies": {
-        "typescript": "^3.0.0",
+        "@nestjs/common": "^5.4.0 || ^6",
         "@nestjs/core": "^5.4.0 || ^6",
-        "@nestjs/common": "^5.4.0 || ^6"
+        "typescript": "^3.0.0"
     },
     "dependencies": {
         "commander": "^2.20.0",
@@ -27,17 +27,24 @@
         "@nestjs/common": "^6.0.5",
         "@nestjs/core": "^6.0.5",
         "@nestjs/testing": "^6.0.5",
-        "@types/commander": "^2.12.2",
+        "@types/jest": "^24.0.11",
         "@types/ora": "^3.2.0",
+        "jest": "^24.7.1",
         "reflect-metadata": "^0.1.13",
         "rxjs": "^6.4.0",
+        "ts-jest": "^24.0.2",
         "ts-node": "^8.0.3",
-        "typescript": "^3.4.2",
         "tsconfig-paths": "^3.8.0",
-        "typedoc": "^0.14.2"
+        "typedoc": "^0.14.2",
+        "typescript": "^3.4.2"
     },
     "scripts": {
         "build": "rm -Rf ./lib && tsc",
-        "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll"
+        "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll",
+        "test:ci": "jest --runInBand",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:cov": "jest --coverage",
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
     }
 }

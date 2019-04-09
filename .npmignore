@@ -1,7 +1,9 @@
+coverage
 docs/
 src/
 .prettierrc
 .gitignore
 tsconfig.json
 typedoc.js
+jest.config.js
 yarn.lock
