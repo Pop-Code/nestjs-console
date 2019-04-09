@@ -18,11 +18,11 @@ jobs:
             - checkout
             - run: yarn cache clean
             - run: yarn install
-            - run: yarn test
+            - run: yarn test:cov
             - codecov/upload:
-                  file: coverage/lcov.info
+                  file: ~/coverage/lcov.info
             - codecov/upload:
-                  file: coverage/clover.xml
+                  file: ~/coverage/clover.xml
     test-carbon:
         <<: *test-template
         docker:
