@@ -1,25 +1,6 @@
 version: 2.1
 orbs:
     codecov: codecov/codecov@1.0.2
-job: &job
-    working_directory: ~/repo
-    steps:
-        - checkout
-        - run: yarn cache clean
-        - run: yarn install
-        - run: yarn test
-job_coverage: &job_coverage
-    working_directory: ~/repo
-    steps:
-        - checkout
-        - run: yarn cache clean
-        - run: yarn install
-        - run: yarn test:cov
-    coverage:
-        - codecov/upload:
-              file: ~/repo/coverage/lcov.info
-        - codecov/upload:
-              file: ~/repo/coverage/clover.xml
 workflows:
     test:
         jobs:
@@ -31,12 +12,32 @@ jobs:
     test-latest:
         docker:
             - image: circleci/node:latest
-        <<: *job_coverage
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run: yarn cache clean
+            - run: yarn install
+            - run: yarn test:cov
+        coverage:
+            - codecov/upload:
+                  file: ~/repo/coverage/lcov.info
+            - codecov/upload:
+                  file: ~/repo/coverage/clover.xml
     test-carbon:
         docker:
             - image: circleci/node:carbon
-        <<: *job
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run: yarn cache clean
+            - run: yarn install
+            - run: yarn test
     test-dubnium:
         docker:
             - image: circleci/node:dubnium
-        <<: *job
+        working_directory: ~/repo
+        steps:
+            - checkout
+            - run: yarn cache clean
+            - run: yarn install
+            - run: yarn test
