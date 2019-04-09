@@ -20,9 +20,9 @@ jobs:
             - run: yarn install
             - run: yarn test:cov
             - codecov/upload:
-                  file: ~/coverage/lcov.info
+                  file: ~/repo/coverage/lcov.info
             - codecov/upload:
-                  file: ~/coverage/clover.xml
+                  file: ~/repo/coverage/clover.xml
     test-carbon:
         <<: *test-template
         docker:
