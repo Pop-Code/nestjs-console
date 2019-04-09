@@ -1,6 +1,7 @@
-coverage
+coverage/
 docs/
 src/
+lib/test/
 .prettierrc
 .gitignore
 tsconfig.json
