@@ -3,13 +3,13 @@
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
 version: 2
-    workflows:
-        version: 2
-        test:
-            jobs:
-                - test-latest
-                - test-carbon
-                - test-dubnium
+workflows:
+    version: 2
+    test:
+        jobs:
+            - test-latest
+            - test-carbon
+            - test-dubnium
 jobs:
     test-latest: &test-template
         docker:
