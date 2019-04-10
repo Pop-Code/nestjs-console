@@ -1,6 +1,9 @@
 # nestjs-console
 
-[![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield)](https://circleci.com/gh/Pop-Code/nestjs-console) [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)](https://codecov.io/gh/Pop-Code/nestjs-console) [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)](https://npmcharts.com/compare/nestjs-console?minimal=true)
+[![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield)][ci]
+[![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
+[![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
+[![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
 
 [nestjs-console][npm] is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the [npm package commander][commander]
 
@@ -15,7 +18,7 @@ Common use case : Headless application, cront task, export data, etc...
 The console service works as a standalone process, like the classic entry point, and will initialize a NestApplicationContext (headless) instead a NestApplication.
 The console service will be accesible inside the container.
 
-1. Bootstrap (entry point e.g console.ts) invoked by cli.
+1. Bootstrap (entry point e.g console.ts) is invoked by cli.
 2. Init a headless nest app
     - Any module inside the app can create command and subcommands using nestjs-console with [commander][commander]
 3. nestjs-console invoke commander
@@ -34,21 +37,26 @@ yarn add nestjs-console
 Create a file at root next to your entry point named console.ts  
 Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
 You can create as many entry points as you want.
+You can also extend the `BootstrapConsole` class to suit your needs.
 
 ```ts
-// console.ts
-import { bootstrap } from 'nestjs-console';
+// console.ts - example of entrypoint
+import { BootstrapConsole } from 'nestjs-console';
 import { MyAppModule } from './my.application.module';
 
-bootstrap({ module: MyAppModule, contextOptions: { logger: false }).catch(e =>
-    console.log('Error', e)
-);
+BootstrapConsole.init({ module: MyAppModule })
+    .then(({ app, boot }) => {
+        // do something with your app container if you need (app)
+        // boot the cli
+        boot(/*process.argv*/);
+    })
+    .catch(e => console.log('Error', e));
 ```
 
 #### Import the module
 
 ```ts
-// module.ts
+// module.ts - your module
 import { Module } from '@nestjs/common';
 import { ConsoleModule } from 'nestjs-console';
 import { MyService } from './service';
@@ -66,7 +74,7 @@ export class MyModule {}
 You can now inject the ConsoleService inside any nestjs providers, controllers...
 
 ```ts
-// service.ts
+// service.ts - a nestjs provider
 import { Injectable } from '@nestjs/common';
 import { ConsoleService } from 'nestjs-console';
 
@@ -170,7 +178,7 @@ Commands:
 
 ### Create a Custom ConsoleService
 
-You can create any number of custom ConsoleService as any nummber of entrypoints.
+You can create any number of custom ConsoleService as any nummber of entrypoints (BootstrapConsole).
 The Commander provider can be injected using the decorators `@InjectCommander()`.
 The decorator can be imported from nestjs-console `import { InjectCommander } from 'nestjs-console';
 
@@ -206,6 +214,9 @@ export class MyCustomCli extends ConsoleService {
 ### [CHANGELOG][changelog]
 
 [npm]: https://www.npmjs.com/package/nestjs-console
+[npmchart]: https://npmcharts.com/compare/nestjs-console?minimal=true
+[ci]: https://circleci.com/gh/Pop-Code/nestjs-console
+[codecov]: https://codecov.io/gh/Pop-Code/nestjs-console
 [doclink]: https://pop-code.github.io/nestjs-console
 [commander]: https://www.npmjs.com/package/commander
 [changelog]: https://github.com/Pop-Code/nestjs-console/blob/master/CHANGELOG.md

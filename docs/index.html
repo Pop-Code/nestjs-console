@@ -74,7 +74,7 @@
 				<p>The console service works as a standalone process, like the classic entry point, and will initialize a NestApplicationContext (headless) instead a NestApplication.
 				The console service will be accesible inside the container.</p>
 				<ol>
-					<li>Bootstrap (entry point e.g console.ts) invoked by cli.</li>
+					<li>Bootstrap (entry point e.g console.ts) is invoked by cli.</li>
 					<li>Init a headless nest app<ul>
 							<li>Any module inside the app can create command and subcommands using nestjs-console with <a href="https://www.npmjs.com/package/commander">commander</a></li>
 						</ul>
@@ -88,16 +88,17 @@
 yarn add nestjs-console</code></pre>
 				<h4 id="create-a-cli-endpoint">Create a cli endpoint</h4>
 				<p>Create a file at root next to your entry point named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
-				You can create as many entry points as you want.</p>
-				<pre><code class="language-ts"><span class="hljs-comment">// console.ts</span>
-<span class="hljs-keyword">import</span> { bootstrap } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+					You can create as many entry points as you want.
+				You can also extend the <code>BootstrapConsole</code> class to suit your needs.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// console.ts - example of entrypoint</span>
+<span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 <span class="hljs-keyword">import</span> { MyAppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.application.module'</span>;
 
-bootstrap({ <span class="hljs-keyword">module</span>: MyAppModule, contextOptions: { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span>
+BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule, contextOptions: { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span>
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e)
 );</code></pre>
 				<h4 id="import-the-module">Import the module</h4>
-				<pre><code class="language-ts"><span class="hljs-comment">// module.ts</span>
+				<pre><code class="language-ts"><span class="hljs-comment">// module.ts - your module</span>
 <span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 <span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./service'</span>;
@@ -111,7 +112,7 @@ bootstrap({ <span class="hljs-keyword">module</span>: MyAppModule, contextOption
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
 				<p>You can now inject the ConsoleService inside any nestjs providers, controllers...</p>
-				<pre><code class="language-ts"><span class="hljs-comment">// service.ts</span>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
 <span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 
@@ -194,7 +195,7 @@ Options:
 Commands:
   list &lt;dir&gt;            List content of a directory
   new                   A command <span class="hljs-keyword">to</span> create an item</code></pre><h3 id="create-a-custom-consoleservice">Create a Custom ConsoleService</h3>
-				<p>You can create any number of custom ConsoleService as any nummber of entrypoints.
+				<p>You can create any number of custom ConsoleService as any nummber of entrypoints (BootstrapConsole).
 					The Commander provider can be injected using the decorators <code>@InjectCommander()</code>.
 				The decorator can be imported from nestjs-console `import { InjectCommander } from &#39;nestjs-console&#39;;</p>
 				<p>Imagine we want to set the version of the cli for all commands</p>

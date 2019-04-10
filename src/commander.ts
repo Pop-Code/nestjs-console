@@ -9,16 +9,19 @@ export interface Command extends commander.Command {
  * @see https://github.com/tj/commander.js/issues/764#issuecomment-399739989
  */
 function forwardSubCommands(): Command {
-    const listener = (args, unknown) => {
+    if (this._args.length > 0) {
+        throw new Error(
+            'Sub commands cannot be applied to command with explicit args'
+        );
+    }
+    const listener = (args: any[], unknown: any[]) => {
         // Parse any so-far unknown options
         args = args || [];
         unknown = unknown || [];
-
         const parsed = this.parseOptions(unknown);
         if (parsed.args.length) {
             args = parsed.args.concat(args);
         }
-        unknown = parsed.unknown;
 
         // Output help if necessary
         if (args.length === 0) {
@@ -26,24 +29,15 @@ function forwardSubCommands(): Command {
             process.exit(0);
         }
 
+        unknown = parsed.unknown;
         this.parseArgs(args, unknown);
     };
-
-    if (this._args.length > 0) {
-        console.error(
-            'subCommands cannot be applied to command with explicit args'
-        );
-    }
-
     const parent = this.parent || this;
     const name = parent === this ? '*' : this._name;
-
     parent.on('command:' + name, listener.bind(this));
-
     if (this._alias) {
         parent.on('command:' + this._alias, listener.bind(this));
     }
-
     return this;
 }
 

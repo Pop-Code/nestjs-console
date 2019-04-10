@@ -1,25 +1,41 @@
 import { ConsoleService } from './service';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 import { NestFactory } from '@nestjs/core';
-import ora from 'ora';
+import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
-export interface ConsoleOptions {
+export interface BootstrapConsoleOptions {
     module: any;
-    contextOptions: NestApplicationContextOptions;
+    contextOptions?: NestApplicationContextOptions;
     service?: { new (...args: any[]): ConsoleService };
+    withContainer?: boolean;
 }
 
-export const bootstrap = async (options: ConsoleOptions) => {
-    const spinner = ora('Init');
-    spinner.start();
-    if (!options.service) {
-        options.service = ConsoleService;
+export class BootstrapConsole {
+    static async init(options: BootstrapConsoleOptions) {
+        // parse the config
+        const config = {
+            contextOptions: { logger: false },
+            service: ConsoleService,
+            withContainer: false,
+            ...options
+        };
+
+        // create the app context
+        const app = await this.createAppContext(config);
+        const service = app.get(ConsoleService);
+
+        // create a boot function to be use after init
+        return {
+            app,
+            boot(argv?: string[]) {
+                return service.init(!argv ? process.argv : argv);
+            }
+        };
     }
-    const app = await NestFactory.createApplicationContext(
-        options.module,
-        options.contextOptions
-    );
-    const consoleService = app.get(options.service);
-    spinner.stop();
-    consoleService.init(process.argv);
-};
+
+    static createAppContext(options: BootstrapConsoleOptions) {
+        return NestFactory.createApplicationContext(
+            options.module,
+            options.contextOptions || {}
+        );
+    }
+}

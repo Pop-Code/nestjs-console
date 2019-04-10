@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "1.0.0-alpha.1",
+    "version": "1.0.0",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
