@@ -10,3 +10,4 @@ jest.config.js
 yarn.lock
 .circleci
 .vscode
+.renovate.json
