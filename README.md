@@ -100,7 +100,7 @@ export class MyService {
         parentCommand
             .command('file <name>')
             .description('Create a file')
-            .action((name: string, path: string) => {
+            .action((name: string) => {
                 console.log(`Creating a file named ${name} at path`);
                 process.exit(0);
             });
@@ -109,7 +109,7 @@ export class MyService {
         parentCommand
             .command('directory <name>')
             .description('Create a directory')
-            .action(() => {
+            .action((name: string) => {
                 console.log(`Creating a direcotry named ${name}`);
                 process.exit(0);
             });
@@ -172,17 +172,17 @@ Options:
   -h, --help            output usage information
 
 Commands:
-  list <dir>            List content of a directory
+  list <directory>      List content of a directory
   new                   A command to create an item
 ```
 
 ### Create a Custom ConsoleService
 
-You can create any number of custom ConsoleService as any nummber of entrypoints (BootstrapConsole).
+You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
 The Commander provider can be injected using the decorators `@InjectCommander()`.
 The decorator can be imported from nestjs-console `import { InjectCommander } from 'nestjs-console';
 
-Imagine we want to set the version of the cli for all commands
+Imagine we want to set the version of the cli for all commands, create a custom class then import it as a provider in your nest module.
 
 ```ts
 import { Injectable } from '@nestjs/common';
@@ -192,7 +192,7 @@ import {
     ConsoleService
 } from 'nestjs-console';
 
-export class MyCustomCli extends ConsoleService {
+export class CustomConsole extends ConsoleService {
     constructor(@InjectCommander() protected readonly cli: Command) {
         super(cli);
     }

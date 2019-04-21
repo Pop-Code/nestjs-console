@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
@@ -16,8 +16,7 @@
     "license": "MIT",
     "peerDependencies": {
         "@nestjs/common": "^5.4.0 || ^6",
-        "@nestjs/core": "^5.4.0 || ^6",
-        "typescript": "^3.0.0"
+        "@nestjs/core": "^5.4.0 || ^6"
     },
     "dependencies": {
         "commander": "^2.20.0",

@@ -65,7 +65,10 @@
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
 				<h1 id="nestjs-console">nestjs-console</h1>
-				<p><a href="https://circleci.com/gh/Pop-Code/nestjs-console"><img src="https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield" alt="CircleCI"></a> <a href="https://codecov.io/gh/Pop-Code/nestjs-console"><img src="https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg" alt="codecov"></a> <a href="https://npmcharts.com/compare/nestjs-console?minimal=true"><img src="https://img.shields.io/npm/dm/nestjs-console.svg?style=flat" alt="NPM Downloads"></a></p>
+				<p><a href="https://circleci.com/gh/Pop-Code/nestjs-console"><img src="https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield" alt="CircleCI"></a>
+					<a href="https://codecov.io/gh/Pop-Code/nestjs-console"><img src="https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg" alt="codecov"></a>
+					<a href="https://npmcharts.com/compare/nestjs-console?minimal=true"><img src="https://img.shields.io/npm/dm/nestjs-console.svg?style=flat" alt="NPM Downloads"></a>
+				<a href="https://www.npmjs.com/package/nestjs-console"><img src="https://img.shields.io/node/v/carbon.svg?style=flat" alt="npm"></a></p>
 				<p><a href="https://www.npmjs.com/package/nestjs-console">nestjs-console</a> is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the <a href="https://www.npmjs.com/package/commander">npm package commander</a></p>
 				<h2 id="why">Why</h2>
 				<p>The nestjs framework is missing a cli to access the application context.<br>Common use case : Headless application, cront task, export data, etc...
@@ -94,9 +97,13 @@ yarn add nestjs-console</code></pre>
 <span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 <span class="hljs-keyword">import</span> { MyAppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.application.module'</span>;
 
-BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule, contextOptions: { logger: <span class="hljs-literal">false</span> }).catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e)
-);</code></pre>
+BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule })
+    .then(({ app, boot }) =&gt; {
+        <span class="hljs-comment">// do something with your app container if you need (app)</span>
+        <span class="hljs-comment">// boot the cli</span>
+        boot(<span class="hljs-comment">/*process.argv*/</span>);
+    })
+    .catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
 				<h4 id="import-the-module">Import the module</h4>
 				<pre><code class="language-ts"><span class="hljs-comment">// module.ts - your module</span>
 <span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
@@ -138,7 +145,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule, c
         parentCommand
             .command(<span class="hljs-string">'file &lt;name&gt;'</span>)
             .description(<span class="hljs-string">'Create a file'</span>)
-            .action(<span class="hljs-function">(<span class="hljs-params">name: <span class="hljs-built_in">string</span>, path: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+            .action(<span class="hljs-function">(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span> at path`</span>);
                 process.exit(<span class="hljs-number">0</span>);
             });
@@ -147,7 +154,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule, c
         parentCommand
             .command(<span class="hljs-string">'directory &lt;name&gt;'</span>)
             .description(<span class="hljs-string">'Create a directory'</span>)
-            .action(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            .action(<span class="hljs-function">(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a direcotry named <span class="hljs-subst">${name}</span>`</span>);
                 process.exit(<span class="hljs-number">0</span>);
             });
@@ -193,12 +200,12 @@ Options:
   -h, --help            output usage information
 
 Commands:
-  list &lt;dir&gt;            List content of a directory
+  list &lt;directory&gt;      List content of a directory
   new                   A command <span class="hljs-keyword">to</span> create an item</code></pre><h3 id="create-a-custom-consoleservice">Create a Custom ConsoleService</h3>
-				<p>You can create any number of custom ConsoleService as any nummber of entrypoints (BootstrapConsole).
+				<p>You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
 					The Commander provider can be injected using the decorators <code>@InjectCommander()</code>.
 				The decorator can be imported from nestjs-console `import { InjectCommander } from &#39;nestjs-console&#39;;</p>
-				<p>Imagine we want to set the version of the cli for all commands</p>
+				<p>Imagine we want to set the version of the cli for all commands, create a custom class then import it as a provider in your nest module.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> {
     InjectCommander,
@@ -206,7 +213,7 @@ Commands:
     ConsoleService
 } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyCustomCli <span class="hljs-keyword">extends</span> ConsoleService {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CustomConsole <span class="hljs-keyword">extends</span> ConsoleService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@InjectCommander</span>() <span class="hljs-keyword">protected</span> readonly cli: Command</span>) {
         <span class="hljs-keyword">super</span>(cli);
     }
