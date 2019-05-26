@@ -1,5 +1,5 @@
-import { Injectable, INestApplicationContext } from '@nestjs/common';
-import ora from 'ora';
+import { INestApplicationContext, Injectable } from '@nestjs/common';
+import * as ora from 'ora';
 import { Command, forwardSubCommands } from './commander';
 import { InjectCommander } from './decorators';
 
@@ -10,10 +10,11 @@ export interface WithApplicationContext {
 @Injectable()
 export class ConsoleService implements WithApplicationContext {
     protected container: INestApplicationContext;
+
     constructor(@InjectCommander() protected readonly cli: Command) {}
 
     static createSpinner(text?: string) {
-        return ora(text);
+        return ora.default(text);
     }
 
     getCli() {

@@ -5,7 +5,7 @@ import { COMMANDER_SERVICE_TOKEN } from './constants';
 
 const cliProvider = {
     provide: COMMANDER_SERVICE_TOKEN,
-    useValue: commander
+    useValue: new commander.Command()
 };
 
 @Module({

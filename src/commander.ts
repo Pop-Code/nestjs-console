@@ -1,4 +1,4 @@
-import commander from 'commander';
+import * as commander from 'commander';
 
 export interface Command extends commander.Command {
     forwardSubCommands(): Command;
