@@ -87,7 +87,7 @@ export class MyService {
         // e.g create a single command (See [npm commander for more details])
         cli.command('list <directory>')
             .description('List content of a directory')
-            .action(this.myCommand.bind(this));
+            .action(this.list.bind(this));
 
         // e.g create a parent command container
         const parentCommand = this.consoleService.subCommands(
@@ -101,7 +101,7 @@ export class MyService {
             .command('file <name>')
             .description('Create a file')
             .action((name: string) => {
-                console.log(`Creating a file named ${name} at path`);
+                console.log(`Creating a file named ${name}`);
                 process.exit(0);
             });
 
@@ -115,12 +115,21 @@ export class MyService {
             });
     }
 
-    list(directory: string): void | Promise<void> {
+    async list(directory: string): void | Promise<void> {
         // See Ora npm package for details about spinner
         const spin = this.consoleService.createSpinner();
         spin.start();
-        console.log(`Listing files at path named ${directory}`);
+
+        // simulate a long task of 5 seconds
+        await new Promise(done =>
+            setTimeout(() => {
+                done();
+            }, 5000)
+        );
+
         spin.stop();
+        console.log(`Listing files at path named ${directory}`);
+
         process.exit(0);
     }
 }
