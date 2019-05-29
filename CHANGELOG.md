@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2019-05-29
+
+### Fixed
+
+-   Issue #18
+
 ## [1.0.1] - 2019-04-21
 
 ### Fixed
@@ -56,7 +62,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.1...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...HEAD
+[1.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0-alpha.1...v1.0.0
 [1.0.0-alpha.1]: https://github.com/Pop-Code/nestjs-console/compare/v0.2.2...v1.0.0-alpha.1

@@ -6,7 +6,6 @@ export interface BootstrapConsoleOptions {
     module: any;
     contextOptions?: NestApplicationContextOptions;
     service?: { new (...args: any[]): ConsoleService };
-    withContainer?: boolean;
 }
 
 export class BootstrapConsole {
@@ -15,7 +14,6 @@ export class BootstrapConsole {
         const config = {
             contextOptions: { logger: false },
             service: ConsoleService,
-            withContainer: false,
             ...options
         };
 
