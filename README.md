@@ -1,5 +1,4 @@
-# nestjs-console
-
+![npm](/resources/logo-frame.png)
 [![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield)][ci]
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
@@ -195,25 +194,13 @@ Imagine we want to set the version of the cli for all commands, create a custom 
 
 ```ts
 import { Injectable } from '@nestjs/common';
-import {
-    InjectCommander,
-    PatchedCommander,
-    ConsoleService
-} from 'nestjs-console';
+import { InjectCommander, Command, ConsoleService } from 'nestjs-console';
 
+@Injectable()
 export class CustomConsole extends ConsoleService {
     constructor(@InjectCommander() protected readonly cli: Command) {
         super(cli);
-    }
-
-    /**
-     * My custom version
-     */
-    init() {
-        // here we want to set a global version
         this.cli.version('1.0.1', '-v, --version');
-
-        super.init();
     }
 }
 ```
