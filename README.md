@@ -1,4 +1,4 @@
-![npm](/resources/logo-frame.png)
+![npm](https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png)
 [![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield)][ci]
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]

@@ -2,6 +2,7 @@ coverage/
 docs/
 src/
 lib/test/
+resources/
 .prettierrc
 .gitignore
 tsconfig.json
