@@ -11,5 +11,5 @@ module.exports = {
         '!src/index.ts',
         '!**/src/test/**'
     ],
-    coverageDirectory: '../coverage'
+    coverageDirectory: 'coverage'
 };

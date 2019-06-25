@@ -44,7 +44,7 @@
         "test:ci": "jest --runInBand",
         "test": "jest",
         "test:watch": "jest --watch",
-        "test:cov": "jest --coverage",
+        "test:cov": "jest --coverage --runInBand",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
     }
 }
