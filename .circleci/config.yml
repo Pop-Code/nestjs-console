@@ -29,7 +29,7 @@ jobs:
             - checkout
             - run: yarn cache clean
             - run: yarn install
-            - run: yarn test
+            - run: yarn test:ci
     test-dubnium:
         docker:
             - image: circleci/node:dubnium
@@ -38,4 +38,4 @@ jobs:
             - checkout
             - run: yarn cache clean
             - run: yarn install
-            - run: yarn test
+            - run: yarn test:ci
