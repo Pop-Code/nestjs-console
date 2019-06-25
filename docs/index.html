@@ -296,14 +296,15 @@ npm run console:dev -- --<span class="hljs-built_in">help</span>
 <span class="hljs-comment"># using yarn</span>
 yarn console:dev --<span class="hljs-built_in">help</span></code></pre>
 				<h4 id="example-of-response">Example of Response</h4>
-				<pre><code>Usage:<span class="hljs-built_in"> console </span>[options] [command]
+				<pre><code><span class="hljs-attribute">Usage</span>: console [options] [command]
 
-Options:
-  -h, --help            output usage information
+<span class="vim">Option<span class="hljs-variable">s:</span>
+  -h, --<span class="hljs-keyword">help</span>            output usage information
 
-Commands:
-  list &lt;directory&gt;      List content of a directory
-  new                   A command <span class="hljs-keyword">to</span> create an item</code></pre><h3 id="create-a-custom-consoleservice">Create a Custom ConsoleService</h3>
+Command<span class="hljs-variable">s:</span>
+  <span class="hljs-keyword">list</span> <span class="hljs-symbol">&lt;directory&gt;</span>      List content of <span class="hljs-keyword">a</span> directory
+  <span class="hljs-keyword">new</span>                   A <span class="hljs-keyword">command</span> <span class="hljs-keyword">to</span> create <span class="hljs-keyword">an</span> item
+  <span class="hljs-keyword">help</span> [cmd]            <span class="hljs-keyword">display</span> <span class="hljs-keyword">help</span> <span class="hljs-keyword">for</span> [cmd]</span></code></pre><h3 id="create-a-custom-consoleservice">Create a Custom ConsoleService</h3>
 				<p>You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
 					The Commander provider can be injected using the decorators <code>@InjectCommander()</code>.
 				The decorator can be imported from nestjs-console `import { InjectCommander } from &#39;nestjs-console&#39;;</p>

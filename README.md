@@ -313,6 +313,7 @@ Options:
 Commands:
   list <directory>      List content of a directory
   new                   A command to create an item
+  help [cmd]            display help for [cmd]
 ```
 
 ### Create a Custom ConsoleService

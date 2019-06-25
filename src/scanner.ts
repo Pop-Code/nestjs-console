@@ -16,10 +16,12 @@ export class ConsoleScanner {
         );
     }
 
-    private getInstanceMethods(object: any) {
-        return Object.getOwnPropertyNames(object)
-            .concat(Object.getOwnPropertyNames(object.__proto__))
-            .filter(m => m !== 'constructor');
+    private getInstanceMethods(instance: any) {
+        return Object.getOwnPropertyNames(instance)
+            .concat(Object.getOwnPropertyNames(instance.__proto__))
+            .filter(m =>
+                Reflect.hasMetadata(COMMAND_METADATA_NAME, instance, m)
+            );
     }
 
     public scan(app, includedModules?: Function[]): Set<IScanResponse> {
