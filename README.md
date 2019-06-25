@@ -216,6 +216,7 @@ export class MyService {
     constructor(private readonly consoleService: ConsoleService) {
         this.listContent = this.listContent.bind(this);
         this.createFile = this.createFile.bind(this);
+        this.createDirectory = this.createDirectory.bind(this);
 
         // get the root cli
         const cli = this.consoleService.getCli();
