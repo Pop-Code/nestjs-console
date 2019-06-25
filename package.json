@@ -23,17 +23,17 @@
         "ora": "^3.4.0"
     },
     "devDependencies": {
-        "@nestjs/common": "6.3.1",
-        "@nestjs/core": "6.3.1",
-        "@nestjs/testing": "6.3.1",
-        "@types/jest": "24.0.13",
+        "@nestjs/common": "6.3.2",
+        "@nestjs/core": "6.3.2",
+        "@nestjs/testing": "6.3.2",
+        "@types/jest": "24.0.15",
         "@types/ora": "3.2.0",
         "codecov": "3.5.0",
         "jest": "24.8.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.2",
         "ts-jest": "24.0.2",
-        "ts-node": "8.2.0",
+        "ts-node": "8.3.0",
         "tsconfig-paths": "3.8.0",
         "typedoc": "0.14.2",
         "typescript": "3.5.2"
