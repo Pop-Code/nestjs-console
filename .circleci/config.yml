@@ -17,12 +17,10 @@ jobs:
             - run: yarn cache clean
             - run: yarn install
             - run: yarn test:cov
-            - run: ls ~/repo/coverage
-            - run: cat ~/repo/coverage/lcov.info
             - codecov/upload:
-                  file: ~/repo/coverage/lcov.info
+                  file: /home/circleci/repo/coverage/lcov.info
             - codecov/upload:
-                  file: ~/repo/coverage/clover.xml
+                  file: /home/circleci/repo/coverage/clover.xml
     test-carbon:
         docker:
             - image: circleci/node:carbon
