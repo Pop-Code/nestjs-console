@@ -1,14 +1,14 @@
 import * as commander from 'commander';
 
-export interface Command extends commander.Command {
-    forwardSubCommands(): Command;
+export interface ICommand extends commander.Command {
+    forwardSubCommands(): ICommand;
 }
 
 /**
  * Patch commander to support git style subcommand without to works with external file for program
  * @see https://github.com/tj/commander.js/issues/764#issuecomment-399739989
  */
-function forwardSubCommands(): Command {
+function forwardSubCommands(): ICommand {
     if (this._args.length > 0) {
         throw new Error(
             'Sub commands cannot be applied to command with explicit args'

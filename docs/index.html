@@ -224,6 +224,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
         <span class="hljs-keyword">this</span>.listContent = <span class="hljs-keyword">this</span>.listContent.bind(<span class="hljs-keyword">this</span>);
         <span class="hljs-keyword">this</span>.createFile = <span class="hljs-keyword">this</span>.createFile.bind(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">this</span>.createDirectory = <span class="hljs-keyword">this</span>.createDirectory.bind(<span class="hljs-keyword">this</span>);
 
         <span class="hljs-comment">// get the root cli</span>
         <span class="hljs-keyword">const</span> cli = <span class="hljs-keyword">this</span>.consoleService.getCli();

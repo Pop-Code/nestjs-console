@@ -1,6 +1,6 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import * as ora from 'ora';
-import { Command, forwardSubCommands } from './commander';
+import { ICommand, forwardSubCommands } from './commander';
 import { InjectCommander } from './decorators';
 import { IWithApplicationContext } from './interfaces';
 
@@ -8,7 +8,7 @@ import { IWithApplicationContext } from './interfaces';
 export class ConsoleService implements IWithApplicationContext {
     protected container: INestApplicationContext;
 
-    constructor(@InjectCommander() protected readonly cli: Command) {}
+    constructor(@InjectCommander() protected readonly cli: ICommand) {}
 
     static createSpinner(text?: string) {
         return ora.default(text);
@@ -27,11 +27,11 @@ export class ConsoleService implements IWithApplicationContext {
         return this.container;
     }
 
-    init(argv: string[]): Command {
+    init(argv: string[]): ICommand {
         this.cli.on('command:*', () => {
             this.cli.help();
         });
-        const args = this.cli.parse(argv) as Command;
+        const args = this.cli.parse(argv) as ICommand;
         if (argv.length === 2) {
             this.cli.help();
         }
@@ -40,10 +40,10 @@ export class ConsoleService implements IWithApplicationContext {
     }
 
     subCommands(
-        parent: Command,
+        parent: ICommand,
         command: string,
         description: string
-    ): Command {
+    ): ICommand {
         const subCommand = parent.command(command).description(description);
         return forwardSubCommands.bind(subCommand)();
     }
