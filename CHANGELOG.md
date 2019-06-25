@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2019-06-25
+
+### Added
+
+-   Possiblity to register commands and sub commands (2d) using decorators.
+    2 new decorators @Console() and @Command()
+
 ## [1.0.2] - 2019-05-29
 
 ### Fixed
@@ -62,7 +69,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.1.0...HEAD
+[1.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0-alpha.1...v1.0.0

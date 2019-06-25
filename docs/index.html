@@ -64,8 +64,8 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="nestjs-console">nestjs-console</h1>
-				<p><a href="https://circleci.com/gh/Pop-Code/nestjs-console"><img src="https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield" alt="CircleCI"></a>
+				<p><a href="https://www.npmjs.com/package/nestjs-console"><img src="https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png" alt="nestjs-console"></a>
+					<a href="https://circleci.com/gh/Pop-Code/nestjs-console"><img src="https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield" alt="CircleCI"></a>
 					<a href="https://codecov.io/gh/Pop-Code/nestjs-console"><img src="https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg" alt="codecov"></a>
 					<a href="https://npmcharts.com/compare/nestjs-console?minimal=true"><img src="https://img.shields.io/npm/dm/nestjs-console.svg?style=flat" alt="NPM Downloads"></a>
 				<a href="https://www.npmjs.com/package/nestjs-console"><img src="https://img.shields.io/node/v/carbon.svg?style=flat" alt="npm"></a></p>
@@ -85,26 +85,26 @@
 					<li>nestjs-console invoke commander</li>
 					<li>commander will do the rest.</li>
 				</ol>
-				<h3 id="install-from-npm"><a href="https://www.npmjs.com/package/nestjs-console">Install FROM NPM</a></h3>
+				<h2 id="install-from-npm"><a href="https://www.npmjs.com/package/nestjs-console">Install FROM NPM</a></h2>
 				<pre><code class="language-bash">npm install nestjs-console
 <span class="hljs-comment"># or unig yarn</span>
 yarn add nestjs-console</code></pre>
-				<h4 id="create-a-cli-endpoint">Create a cli endpoint</h4>
+				<h2 id="create-a-cli-endpoint">Create a cli endpoint</h2>
 				<p>Create a file at root next to your entry point named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
 					You can create as many entry points as you want.
 				You can also extend the <code>BootstrapConsole</code> class to suit your needs.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// console.ts - example of entrypoint</span>
 <span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
-<span class="hljs-keyword">import</span> { MyAppModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./my.application.module'</span>;
+<span class="hljs-keyword">import</span> { MyModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./module'</span>;
 
-BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule })
+BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
     .then(({ app, boot }) =&gt; {
         <span class="hljs-comment">// do something with your app container if you need (app)</span>
         <span class="hljs-comment">// boot the cli</span>
         boot(<span class="hljs-comment">/*process.argv*/</span>);
     })
     .catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
-				<h4 id="import-the-module">Import the module</h4>
+				<h2 id="import-the-consolemodule-in-your-main-module">Import the ConsoleModule in your main module</h2>
 				<pre><code class="language-ts"><span class="hljs-comment">// module.ts - your module</span>
 <span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
@@ -112,13 +112,109 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule })
 
 <span class="hljs-meta">@Module</span>({
     imports: [
-        ConsoleModule <span class="hljs-comment">// import the console module</span>
+        ConsoleModule <span class="hljs-comment">// import the ConsoleModule</span>
     ],
     providers: [MyService]
     exports: [MyService]
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
-				<p>You can now inject the ConsoleService inside any nestjs providers, controllers...</p>
+				<p>You can now inject the <em>ConsoleService</em> inside any nestjs providers, controllers...</p>
+				<p>There are 2 ways of registering providers methods to the console.<br>Using decorators (&gt;=v1.1) or using the <em>ConsoleService</em>.</p>
+				<p>At the moment, it&#39;s not possible to have more than 2 dimensions in the commands stack using decorators.</p>
+				<p>Example of possible cli stack Using decorator</p>
+				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_B</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> execution
+    ]</code></pre><p>Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)</p>
+				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_B</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> [
+            C<span class="hljs-function"><span class="hljs-title">ommand_B2_a</span> -&gt;</span> execution
+            ...
+        ]
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_C</span> -&gt;</span> execution</code></pre><h1 id="api">Api</h1>
+				<p>As an example, we will define a cli with 2 commands (new and list), one of the command (new) will have 2 sub commands (directory and file)</p>
+				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> <span class="hljs-function"><span class="hljs-title">list</span> -&gt;</span> -&gt; execution,
+    -&gt; <span class="hljs-function"><span class="hljs-title">new</span> -&gt;</span> [
+        <span class="hljs-function"><span class="hljs-title">directory</span> -&gt;</span> execution,
+        <span class="hljs-function"><span class="hljs-title">file</span> -&gt;</span> execution
+    ]</code></pre><h2 id="how-to-use-decorators">How to use Decorators</h2>
+				<p>Registering methods using class decorators is very easy.
+				Each nestjs providers that are decorated with @Console will be scanned and each member methods that are decorated with @Command will be registered on the cli.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider using console decorators</span>
+<span class="hljs-keyword">import</span> { Console, Command } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+
+<span class="hljs-meta">@Console</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'list &lt;directory&gt;'</span>,
+        description: <span class="hljs-string">'List content of a directory'</span>
+    })
+    <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-comment">// See Ora npm package for details about spinner</span>
+        <span class="hljs-keyword">const</span> spin = <span class="hljs-keyword">this</span>.consoleService.createSpinner();
+        spin.start(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
+
+        <span class="hljs-comment">// simulate a long task of 1 seconds</span>
+        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">done</span> =&gt;</span>
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]);
+            }, <span class="hljs-number">1000</span>)
+        );
+
+        spin.succeed(<span class="hljs-string">'Listing done'</span>);
+
+        <span class="hljs-comment">// send the response to the  cli</span>
+        <span class="hljs-comment">// you could also use process.stdout.write()</span>
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(files));
+
+        process.exit(<span class="hljs-number">0</span>);
+    }
+}</code></pre>
+				<h4 id="register-a-command-with-sub-commands">Register a command with sub commands</h4>
+				<p>By default, the @Console will tell the module to register all decorated methods at root of the cli.<br><code>Example of Usage: [options] [command]</code></p>
+				<p>You can name your provider to use it as a parent command container.
+				This is usefull when you have a lot of commands and you want to group them as sub command. (git style)</p>
+				<p>To achieve this, you have to group your methods into class, you can pass options to the @Console decorator to configure your provider as a parent command.
+				Each decorated methods of the providers will be registered as a sub command of the provider instead of beeing registered at root.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.new.ts - a nestjs provider using console decorators (sub commands)</span>
+<span class="hljs-meta">@Console</span>({
+    name: <span class="hljs-string">'new'</span>,
+    description: <span class="hljs-string">'A command to create an item'</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyNewService {
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'file &lt;name&gt;'</span>,
+        description: <span class="hljs-string">'Create a file'</span>
+    })
+    <span class="hljs-keyword">async</span> createFile(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'directory &lt;name&gt;'</span>,
+        description: <span class="hljs-string">'Create a directory'</span>
+    })
+    <span class="hljs-keyword">async</span> createDirectory(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+}</code></pre>
+				<p><code>Example of Usage: new [options] [command]</code></p>
+				<h2 id="how-to-use-the-consoleservice">How to use the ConsoleService</h2>
+				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is usefull if you need to create the cli or a part of the cli at runtime, depending on others providers values , you could bind or not specific methods.<br>This way you can also create mutliple commands ans sub commands from the same class.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
 <span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
@@ -126,47 +222,52 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyAppModule })
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
+        <span class="hljs-keyword">this</span>.listContent = <span class="hljs-keyword">this</span>.listContent.bind(<span class="hljs-keyword">this</span>);
+        <span class="hljs-keyword">this</span>.createFile = <span class="hljs-keyword">this</span>.createFile.bind(<span class="hljs-keyword">this</span>);
+
         <span class="hljs-comment">// get the root cli</span>
         <span class="hljs-keyword">const</span> cli = <span class="hljs-keyword">this</span>.consoleService.getCli();
 
-        <span class="hljs-comment">// e.g create a single command (See [npm commander for more details])</span>
+        <span class="hljs-comment">// create a single command (See [npm commander for more details])</span>
         cli.command(<span class="hljs-string">'list &lt;directory&gt;'</span>)
             .description(<span class="hljs-string">'List content of a directory'</span>)
-            .action(<span class="hljs-keyword">this</span>.myCommand.bind(<span class="hljs-keyword">this</span>));
+            .action(<span class="hljs-keyword">this</span>.listContent);
 
-        <span class="hljs-comment">// e.g create a parent command container</span>
+        <span class="hljs-comment">// create a parent command container</span>
         <span class="hljs-keyword">const</span> parentCommand = <span class="hljs-keyword">this</span>.consoleService.subCommands(
             cli,
             <span class="hljs-string">'new'</span>,
             <span class="hljs-string">'A command to create an item'</span>
         );
 
-        <span class="hljs-comment">// e.g create sub command</span>
+        <span class="hljs-comment">// create sub command</span>
         parentCommand
             .command(<span class="hljs-string">'file &lt;name&gt;'</span>)
             .description(<span class="hljs-string">'Create a file'</span>)
-            .action(<span class="hljs-function">(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
-                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span> at path`</span>);
-                process.exit(<span class="hljs-number">0</span>);
-            });
+            .action(<span class="hljs-keyword">this</span>.createFile);
 
-        <span class="hljs-comment">// e.g why not an other one ?</span>
+        <span class="hljs-comment">// create an other sub command</span>
         parentCommand
             .command(<span class="hljs-string">'directory &lt;name&gt;'</span>)
             .description(<span class="hljs-string">'Create a directory'</span>)
-            .action(<span class="hljs-function">(<span class="hljs-params">name: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
-                <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a direcotry named <span class="hljs-subst">${name}</span>`</span>);
-                process.exit(<span class="hljs-number">0</span>);
-            });
+            .action(<span class="hljs-keyword">this</span>.createDirectory);
     }
 
-    list(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
-        <span class="hljs-comment">// See Ora npm package for details about spinner</span>
-        <span class="hljs-keyword">const</span> spin = <span class="hljs-keyword">this</span>.consoleService.createSpinner();
-        spin.start();
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Listing files at path named <span class="hljs-subst">${directory}</span>`</span>);
-        spin.stop();
-        process.exit(<span class="hljs-number">0</span>);
+    <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+
+    <span class="hljs-keyword">async</span> createFile(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+
+    <span class="hljs-keyword">async</span> createDirectory(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
     }
 }</code></pre>
 				<p>Add scripts in your package.json (if you want to them)</p>
@@ -193,7 +294,7 @@ ts-node -r tsconfig-paths/register src/console.ts --<span class="hljs-built_in">
 npm run console:dev -- --<span class="hljs-built_in">help</span>
 <span class="hljs-comment"># using yarn</span>
 yarn console:dev --<span class="hljs-built_in">help</span></code></pre>
-				<h4 id="response">Response</h4>
+				<h4 id="example-of-response">Example of Response</h4>
 				<pre><code>Usage:<span class="hljs-built_in"> console </span>[options] [command]
 
 Options:
@@ -205,27 +306,14 @@ Commands:
 				<p>You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
 					The Commander provider can be injected using the decorators <code>@InjectCommander()</code>.
 				The decorator can be imported from nestjs-console `import { InjectCommander } from &#39;nestjs-console&#39;;</p>
-				<p>Imagine we want to set the version of the cli for all commands, create a custom class then import it as a provider in your nest module.</p>
 				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
-<span class="hljs-keyword">import</span> {
-    InjectCommander,
-    PatchedCommander,
-    ConsoleService
-} <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { InjectCommander, Command, ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 
+<span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CustomConsole <span class="hljs-keyword">extends</span> ConsoleService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@InjectCommander</span>() <span class="hljs-keyword">protected</span> readonly cli: Command</span>) {
         <span class="hljs-keyword">super</span>(cli);
-    }
-
-    <span class="hljs-comment">/**
-     * My custom version
-     */</span>
-    init() {
-        <span class="hljs-comment">// here we want to set a global version</span>
         <span class="hljs-keyword">this</span>.cli.version(<span class="hljs-string">'1.0.1'</span>, <span class="hljs-string">'-v, --version'</span>);
-
-        <span class="hljs-keyword">super</span>.init();
     }
 }</code></pre>
 				<h3 id="api-documentation"><a href="https://pop-code.github.io/nestjs-console">API DOCUMENTATION</a></h3>
@@ -239,10 +327,10 @@ Commands:
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_commander_.html">"commander"</a>
+						<a href="modules/_bootstrap_.html">"bootstrap"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_console_.html">"console"</a>
+						<a href="modules/_commander_.html">"commander"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_constants_.html">"constants"</a>
@@ -254,7 +342,13 @@ Commands:
 						<a href="modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="modules/_interfaces_.html">"interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="modules/_module_.html">"module"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_scanner_.html">"scanner"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_service_.html">"service"</a>

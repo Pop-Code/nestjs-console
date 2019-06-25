@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ConsoleModule | NestJS Console</title>
+	<title>BootstrapConsole | NestJS Console</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,13 +56,13 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="../modules/_module_.html">&quot;module&quot;</a>
+					<a href="../modules/_bootstrap_.html">&quot;bootstrap&quot;</a>
 				</li>
 				<li>
-					<a href="_module_.consolemodule.html">ConsoleModule</a>
+					<a href="_bootstrap_.bootstrapconsole.html">BootstrapConsole</a>
 				</li>
 			</ul>
-			<h1>Class ConsoleModule</h1>
+			<h1>Class BootstrapConsole</h1>
 		</div>
 	</div>
 </header>
@@ -73,7 +73,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ConsoleModule</span>
+						<span class="target">BootstrapConsole</span>
 					</li>
 				</ul>
 			</section>
@@ -82,117 +82,60 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="_module_.consolemodule.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-private-protected">
-							<h3>Properties</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_module_.consolemodule.html#scanresponse" class="tsd-kind-icon">scan<wbr>Response</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_module_.consolemodule.html#scanner" class="tsd-kind-icon">scanner</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="_module_.consolemodule.html#service" class="tsd-kind-icon">service</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section ">
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_module_.consolemodule.html#scan" class="tsd-kind-icon">scan</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_bootstrap_.bootstrapconsole.html#createappcontext" class="tsd-kind-icon">create<wbr>App<wbr>Context</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><a href="_bootstrap_.bootstrapconsole.html#init" class="tsd-kind-icon">init</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Console<wbr>Module<span class="tsd-signature-symbol">(</span>service<span class="tsd-signature-symbol">: </span><a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_module_.consolemodule.html" class="tsd-signature-type">ConsoleModule</a></li>
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="createappcontext" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> create<wbr>App<wbr>Context</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">create<wbr>App<wbr>Context<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_bootstrap_.bootstrapconsoleoptions.html" class="tsd-signature-type">BootstrapConsoleOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">INestApplicationContext</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/module.ts#L19">module.ts:19</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/bootstrap.ts#L43">bootstrap.ts:43</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>service: <a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></h5>
+									<h5>options: <a href="../interfaces/_bootstrap_.bootstrapconsoleoptions.html" class="tsd-signature-type">BootstrapConsoleOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_module_.consolemodule.html" class="tsd-signature-type">ConsoleModule</a></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">INestApplicationContext</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-private-protected">
-				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="scanresponse" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> scan<wbr>Response</h3>
-					<div class="tsd-signature tsd-kind-icon">scan<wbr>Response<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Set</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_interfaces_.iscanresponse.html" class="tsd-signature-type">IScanResponse</a><span class="tsd-signature-symbol">&gt;</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/module.ts#L19">module.ts:19</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="scanner" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> scanner</h3>
-					<div class="tsd-signature tsd-kind-icon">scanner<span class="tsd-signature-symbol">:</span> <a href="_scanner_.consolescanner.html" class="tsd-signature-type">ConsoleScanner</a><span class="tsd-signature-symbol"> =&nbsp;new ConsoleScanner()</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/module.ts#L18">module.ts:18</a></li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-					<a name="service" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagProtected">Protected</span> service</h3>
-					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/module.ts#L21">module.ts:21</a></li>
-						</ul>
-					</aside>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Methods</h2>
-				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
-					<a name="scan" class="tsd-anchor"></a>
-					<h3>scan</h3>
-					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">scan<span class="tsd-signature-symbol">(</span>app<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, includedModules<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-static">
+					<a name="init" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-static">
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_bootstrap_.bootstrapconsoleoptions.html" class="tsd-signature-type">BootstrapConsoleOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/module.ts#L26">module.ts:26</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/bootstrap.ts#L14">bootstrap.ts:14</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Scan the application to find any @Console Decorators to register with commander</p>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>app: <span class="tsd-signature-type">any</span></h5>
-								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> includedModules: <span class="tsd-signature-type">Function</span><span class="tsd-signature-symbol">[]</span></h5>
+									<h5>options: <a href="../interfaces/_bootstrap_.bootstrapconsoleoptions.html" class="tsd-signature-type">BootstrapConsoleOptions</a></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -204,7 +147,7 @@
 					<li class="globals  ">
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-external-module">
+					<li class="current tsd-kind-external-module">
 						<a href="../modules/_bootstrap_.html">"bootstrap"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -222,7 +165,7 @@
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_interfaces_.html">"interfaces"</a>
 					</li>
-					<li class="current tsd-kind-external-module">
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_module_.html">"module"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -238,29 +181,20 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-class tsd-parent-kind-external-module">
-						<a href="_module_.consolemodule.html" class="tsd-kind-icon">Console<wbr>Module</a>
+						<a href="_bootstrap_.bootstrapconsole.html" class="tsd-kind-icon">Bootstrap<wbr>Console</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-class">
-								<a href="_module_.consolemodule.html#constructor" class="tsd-kind-icon">constructor</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_bootstrap_.bootstrapconsole.html#createappcontext" class="tsd-kind-icon">create<wbr>App<wbr>Context</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_module_.consolemodule.html#scanresponse" class="tsd-kind-icon">scan<wbr>Response</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_module_.consolemodule.html#scanner" class="tsd-kind-icon">scanner</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
-								<a href="_module_.consolemodule.html#service" class="tsd-kind-icon">service</a>
-							</li>
-							<li class=" tsd-kind-method tsd-parent-kind-class">
-								<a href="_module_.consolemodule.html#scan" class="tsd-kind-icon">scan</a>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-static">
+								<a href="_bootstrap_.bootstrapconsole.html#init" class="tsd-kind-icon">init</a>
 							</li>
 						</ul>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-object-literal tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="../modules/_module_.html#cliprovider" class="tsd-kind-icon">cli<wbr>Provider</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_bootstrap_.bootstrapconsoleoptions.html" class="tsd-kind-icon">Bootstrap<wbr>Console<wbr>Options</a>
 					</li>
 				</ul>
 			</nav>

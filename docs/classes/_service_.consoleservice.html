@@ -80,7 +80,7 @@
 			<section class="tsd-panel">
 				<h3>Implements</h3>
 				<ul class="tsd-hierarchy">
-					<li><a href="../interfaces/_service_.withapplicationcontext.html" class="tsd-signature-type">WithApplicationContext</a></li>
+					<li><a href="../interfaces/_interfaces_.iwithapplicationcontext.html" class="tsd-signature-type">IWithApplicationContext</a></li>
 				</ul>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
@@ -104,6 +104,7 @@
 							<h3>Methods</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#getcli" class="tsd-kind-icon">get<wbr>Cli</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#getcontainer" class="tsd-kind-icon">get<wbr>Container</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#init" class="tsd-kind-icon">init</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#setcontainer" class="tsd-kind-icon">set<wbr>Container</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_service_.consoleservice.html#subcommands" class="tsd-kind-icon">sub<wbr>Commands</a></li>
@@ -125,7 +126,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L12">service.ts:12</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L9">service.ts:9</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -147,7 +148,7 @@
 					<div class="tsd-signature tsd-kind-icon">cli<span class="tsd-signature-symbol">:</span> <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L14">service.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L11">service.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -157,7 +158,7 @@
 					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">INestApplicationContext</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L12">service.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L9">service.ts:9</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -174,10 +175,27 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L20">service.ts:20</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L17">service.ts:17</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_commander_.command.html" class="tsd-signature-type">Command</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getcontainer" class="tsd-anchor"></a>
+					<h3>get<wbr>Container</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Container<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">INestApplicationContext</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L26">service.ts:26</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">INestApplicationContext</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -191,7 +209,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L29">service.ts:29</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L30">service.ts:30</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -208,14 +226,14 @@
 					<a name="setcontainer" class="tsd-anchor"></a>
 					<h3>set<wbr>Container</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">set<wbr>Container<span class="tsd-signature-symbol">(</span>container<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">INestApplicationContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_service_.withapplicationcontext.html" class="tsd-signature-type">WithApplicationContext</a></li>
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Container<span class="tsd-signature-symbol">(</span>container<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">INestApplicationContext</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/_interfaces_.iwithapplicationcontext.html" class="tsd-signature-type">IWithApplicationContext</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
-								<p>Implementation of <a href="../interfaces/_service_.withapplicationcontext.html">WithApplicationContext</a>.<a href="../interfaces/_service_.withapplicationcontext.html#setcontainer">setContainer</a></p>
+								<p>Implementation of <a href="../interfaces/_interfaces_.iwithapplicationcontext.html">IWithApplicationContext</a>.<a href="../interfaces/_interfaces_.iwithapplicationcontext.html#setcontainer">setContainer</a></p>
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L24">service.ts:24</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L21">service.ts:21</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -224,7 +242,7 @@
 									<h5>container: <span class="tsd-signature-type">INestApplicationContext</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_service_.withapplicationcontext.html" class="tsd-signature-type">WithApplicationContext</a></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/_interfaces_.iwithapplicationcontext.html" class="tsd-signature-type">IWithApplicationContext</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -238,7 +256,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L41">service.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L42">service.ts:42</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -267,7 +285,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/56d2919/src/service.ts#L16">service.ts:16</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/47f9804/src/service.ts#L13">service.ts:13</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -289,10 +307,10 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_commander_.html">"commander"</a>
+						<a href="../modules/_bootstrap_.html">"bootstrap"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_console_.html">"console"</a>
+						<a href="../modules/_commander_.html">"commander"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_constants_.html">"constants"</a>
@@ -304,7 +322,13 @@
 						<a href="../modules/_index_.html">"index"</a>
 					</li>
 					<li class=" tsd-kind-external-module">
+						<a href="../modules/_interfaces_.html">"interfaces"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
 						<a href="../modules/_module_.html">"module"</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_scanner_.html">"scanner"</a>
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_service_.html">"service"</a>
@@ -331,6 +355,9 @@
 								<a href="_service_.consoleservice.html#getcli" class="tsd-kind-icon">get<wbr>Cli</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_service_.consoleservice.html#getcontainer" class="tsd-kind-icon">get<wbr>Container</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_service_.consoleservice.html#init" class="tsd-kind-icon">init</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
@@ -346,9 +373,6 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_service_.withapplicationcontext.html" class="tsd-kind-icon">With<wbr>Application<wbr>Context</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
