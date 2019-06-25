@@ -1,7 +1,3 @@
-/**
- * @module nestjs-console
- */
-
 import { Test, TestingModule } from '@nestjs/testing';
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';

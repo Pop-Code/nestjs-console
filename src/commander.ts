@@ -19,12 +19,13 @@ function forwardSubCommands(): Command {
         args = args || [];
         unknown = unknown || [];
         const parsed = this.parseOptions(unknown);
+
         if (parsed.args.length) {
             args = parsed.args.concat(args);
         }
 
         // Output help if necessary
-        if (args.length === 0) {
+        if (!args.length) {
             this.help();
             process.exit(0);
         }

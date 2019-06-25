@@ -2,13 +2,10 @@ import { INestApplicationContext, Injectable } from '@nestjs/common';
 import * as ora from 'ora';
 import { Command, forwardSubCommands } from './commander';
 import { InjectCommander } from './decorators';
-
-export interface WithApplicationContext {
-    setContainer(container: INestApplicationContext): WithApplicationContext;
-}
+import { IWithApplicationContext } from './interfaces';
 
 @Injectable()
-export class ConsoleService implements WithApplicationContext {
+export class ConsoleService implements IWithApplicationContext {
     protected container: INestApplicationContext;
 
     constructor(@InjectCommander() protected readonly cli: Command) {}
@@ -21,9 +18,13 @@ export class ConsoleService implements WithApplicationContext {
         return this.cli;
     }
 
-    setContainer(container: INestApplicationContext): WithApplicationContext {
+    setContainer(container: INestApplicationContext): IWithApplicationContext {
         this.container = container;
         return this;
+    }
+
+    getContainer(): INestApplicationContext {
+        return this.container;
     }
 
     init(argv: string[]): Command {

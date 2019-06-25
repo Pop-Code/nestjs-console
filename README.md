@@ -23,7 +23,7 @@ The console service will be accesible inside the container.
 3. nestjs-console invoke commander
 4. commander will do the rest.
 
-### [Install FROM NPM][npm]
+## [Install FROM NPM][npm]
 
 ```bash
 npm install nestjs-console
@@ -31,7 +31,7 @@ npm install nestjs-console
 yarn add nestjs-console
 ```
 
-#### Create a cli endpoint
+## Create a cli endpoint
 
 Create a file at root next to your entry point named console.ts  
 Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
@@ -41,9 +41,9 @@ You can also extend the `BootstrapConsole` class to suit your needs.
 ```ts
 // console.ts - example of entrypoint
 import { BootstrapConsole } from 'nestjs-console';
-import { MyAppModule } from './my.application.module';
+import { MyModule } from './module';
 
-BootstrapConsole.init({ module: MyAppModule })
+BootstrapConsole.init({ module: MyModule })
     .then(({ app, boot }) => {
         // do something with your app container if you need (app)
         // boot the cli
@@ -52,7 +52,7 @@ BootstrapConsole.init({ module: MyAppModule })
     .catch(e => console.log('Error', e));
 ```
 
-#### Import the module
+## Import the ConsoleModule in your main module
 
 ```ts
 // module.ts - your module
@@ -62,7 +62,7 @@ import { MyService } from './service';
 
 @Module({
     imports: [
-        ConsoleModule // import the console module
+        ConsoleModule // import the ConsoleModule
     ],
     providers: [MyService]
     exports: [MyService]
@@ -70,7 +70,141 @@ import { MyService } from './service';
 export class MyModule {}
 ```
 
-You can now inject the ConsoleService inside any nestjs providers, controllers...
+You can now inject the _ConsoleService_ inside any nestjs providers, controllers...
+
+There are 2 ways of registering providers methods to the console.  
+Using decorators (>=v1.1) or using the _ConsoleService_.
+
+At the moment, it's not possible to have more than 2 dimensions in the commands stack using decorators.
+
+Example of possible cli stack Using decorator
+
+```
+Cli -> Command_A -> [
+        Command_A1 -> execution,
+        Command_A2 -> execution
+    ]
+    -> Command_B -> [
+        Command_B1 -> execution,
+        Command_B2 -> execution
+    ]
+```
+
+Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)
+
+```
+Cli -> Command_A -> [
+        Command_A1 -> execution,
+        Command_A2 -> execution
+    ]
+    -> Command_B -> [
+        Command_B1 -> execution,
+        Command_B2 -> [
+            Command_B2_a -> execution
+            ...
+        ]
+    ]
+    -> Command_C -> execution
+```
+
+# Api
+
+As an example, we will define a cli with 2 commands (new and list), one of the command (new) will have 2 sub commands (directory and file)
+
+```
+Cli -> list -> -> execution,
+    -> new -> [
+        directory -> execution,
+        file -> execution
+    ]
+```
+
+## How to use Decorators
+
+Registering methods using class decorators is very easy.
+Each nestjs providers that are decorated with @Console will be scanned and each member methods that are decorated with @Command will be registered on the cli.
+
+```ts
+// service.ts - a nestjs provider using console decorators
+import { Console, Command } from 'nestjs-console';
+
+@Console()
+export class MyService {
+    @Command({
+        command: 'list <directory>',
+        description: 'List content of a directory'
+    })
+    async listContent(directory: string): void | Promise<void> {
+        // See Ora npm package for details about spinner
+        const spin = this.consoleService.createSpinner();
+        spin.start(`Listing files in directory ${directory}`);
+
+        // simulate a long task of 1 seconds
+        const files = await new Promise(done =>
+            setTimeout(() => {
+                done(['fileA', 'fileB']);
+            }, 1000)
+        );
+
+        spin.succeed('Listing done');
+
+        // send the response to the  cli
+        // you could also use process.stdout.write()
+        console.log(JSON.stringify(files));
+
+        process.exit(0);
+    }
+}
+```
+
+#### Register a command with sub commands
+
+By default, the @Console will tell the module to register all decorated methods at root of the cli.  
+`Example of Usage: [options] [command]`
+
+You can name your provider to use it as a parent command container.
+This is usefull when you have a lot of commands and you want to group them as sub command. (git style)
+
+To achieve this, you have to group your methods into class, you can pass options to the @Console decorator to configure your provider as a parent command.
+Each decorated methods of the providers will be registered as a sub command of the provider instead of beeing registered at root.
+
+```ts
+// service.new.ts - a nestjs provider using console decorators (sub commands)
+@Console({
+    name: 'new',
+    description: 'A command to create an item'
+})
+export class MyNewService {
+    @Command({
+        command: 'file <name>',
+        description: 'Create a file'
+    })
+    async createFile(name: string): void | Promise<void> {
+        console.log(`Creating a file named ${name}`);
+        // your code...
+        process.exit(0); // it's important to exit the process.
+    }
+
+    @Command({
+        command: 'directory <name>',
+        description: 'Create a directory'
+    })
+    async createDirectory(name: string): void | Promise<void> {
+        console.log(`Creating a directory named ${name}`);
+        // your code...
+        process.exit(0); // it's important to exit the process.
+    }
+}
+```
+
+`Example of Usage: new [options] [command]`
+
+## How to use the ConsoleService
+
+Registering methods using the ConsoleService is more flexible than decorators.  
+When you use the ConsoleService, you simply bind your methods to the cli manually.  
+This is usefull if you need to create the cli or a part of the cli at runtime, depending on others providers values , you could bind or not specific methods.  
+This way you can also create mutliple commands ans sub commands from the same class.
 
 ```ts
 // service.ts - a nestjs provider
@@ -80,56 +214,52 @@ import { ConsoleService } from 'nestjs-console';
 @Injectable()
 export class MyService {
     constructor(private readonly consoleService: ConsoleService) {
+        this.listContent = this.listContent.bind(this);
+        this.createFile = this.createFile.bind(this);
+
         // get the root cli
         const cli = this.consoleService.getCli();
 
-        // e.g create a single command (See [npm commander for more details])
+        // create a single command (See [npm commander for more details])
         cli.command('list <directory>')
             .description('List content of a directory')
-            .action(this.list.bind(this));
+            .action(this.listContent);
 
-        // e.g create a parent command container
+        // create a parent command container
         const parentCommand = this.consoleService.subCommands(
             cli,
             'new',
             'A command to create an item'
         );
 
-        // e.g create sub command
+        // create sub command
         parentCommand
             .command('file <name>')
             .description('Create a file')
-            .action((name: string) => {
-                console.log(`Creating a file named ${name}`);
-                process.exit(0);
-            });
+            .action(this.createFile);
 
-        // e.g why not an other one ?
+        // create an other sub command
         parentCommand
             .command('directory <name>')
             .description('Create a directory')
-            .action((name: string) => {
-                console.log(`Creating a direcotry named ${name}`);
-                process.exit(0);
-            });
+            .action(this.createDirectory);
     }
 
-    async list(directory: string): void | Promise<void> {
-        // See Ora npm package for details about spinner
-        const spin = this.consoleService.createSpinner();
-        spin.start();
+    async listContent(directory: string): void | Promise<void> {
+        console.log(`Listing files in directory ${directory}`);
+        // your code...
+        process.exit(0); // it's important to exit the process.
+    }
 
-        // simulate a long task of 5 seconds
-        await new Promise(done =>
-            setTimeout(() => {
-                done();
-            }, 5000)
-        );
+    async createFile(name: string): void | Promise<void> {
+        console.log(`Creating a file named ${name}`);
+        process.exit(0); // it's important to exit the process.
+    }
 
-        spin.stop();
-        console.log(`Listing files at path named ${directory}`);
-
-        process.exit(0);
+    async createDirectory(name: string): void | Promise<void> {
+        console.log(`Creating a directory named ${name}`);
+        // your code...
+        process.exit(0); // it's important to exit the process.
     }
 }
 ```
@@ -171,7 +301,7 @@ npm run console:dev -- --help
 yarn console:dev --help
 ```
 
-#### Response
+#### Example of Response
 
 ```
 Usage: console [options] [command]
@@ -189,8 +319,6 @@ Commands:
 You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
 The Commander provider can be injected using the decorators `@InjectCommander()`.
 The decorator can be imported from nestjs-console `import { InjectCommander } from 'nestjs-console';
-
-Imagine we want to set the version of the cli for all commands, create a custom class then import it as a provider in your nest module.
 
 ```ts
 import { Injectable } from '@nestjs/common';

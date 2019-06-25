@@ -1,10 +1,7 @@
-/**
- * @module nestjs-console
- */
-
 import { ConsoleModuleTest } from './module';
-import { BootstrapConsole } from '../console';
+import { BootstrapConsole } from '../bootstrap';
 import { NestApplicationContext } from '@nestjs/core';
+import { ConsoleService } from '../service';
 
 describe('BootstrapConsole', () => {
     it('Should init the application context', async () => {
@@ -12,13 +9,12 @@ describe('BootstrapConsole', () => {
         const mockLog = jest
             .spyOn(process.stdout, 'write')
             .mockImplementation();
-        const mockErrorLog = jest.spyOn(console, 'error').mockImplementation();
+        const mockLogError = jest.spyOn(console, 'error').mockImplementation();
 
         const bootstrap = await BootstrapConsole.init({
             module: ConsoleModuleTest
         });
 
-        expect(bootstrap).toHaveProperty('app');
         expect(bootstrap).toHaveProperty('app');
         expect(bootstrap.app).toBeInstanceOf(NestApplicationContext);
         expect(bootstrap).toHaveProperty('boot');
@@ -31,6 +27,23 @@ describe('BootstrapConsole', () => {
         expect(mockLog.mock.calls[0][0]).toContain('Usage:');
         mockLog.mockRestore();
         mockExit.mockRestore();
-        mockErrorLog.mockRestore();
+        mockLogError.mockRestore();
+    });
+
+    it('Should init the application context with container', async () => {
+        const bootstrap = await BootstrapConsole.init({
+            module: ConsoleModuleTest,
+            withContainer: true
+        });
+
+        expect(bootstrap).toHaveProperty('app');
+        expect(bootstrap.app).toBeInstanceOf(NestApplicationContext);
+        expect(bootstrap).toHaveProperty('boot');
+
+        // get the service
+        const service = bootstrap.app.get(ConsoleService);
+        expect(service).toBeInstanceOf(ConsoleService);
+        expect(service).toHaveProperty('getContainer');
+        expect(service.getContainer()).toBe(bootstrap.app);
     });
 });
