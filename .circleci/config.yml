@@ -17,6 +17,8 @@ jobs:
             - run: yarn cache clean
             - run: yarn install
             - run: yarn test:cov
+            - run: ls ~/repo/
+            - run: ls ~/
             - codecov/upload:
                   file: ~/repo/coverage/lcov.info
             - codecov/upload:
