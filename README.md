@@ -88,6 +88,7 @@ Cli -> Command_A -> [
         Command_B1 -> execution,
         Command_B2 -> execution
     ]
+    -> Command_C -> execution
 ```
 
 Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)
@@ -101,7 +102,7 @@ Cli -> Command_A -> [
         Command_B1 -> execution,
         Command_B2 -> [
             Command_B2_a -> execution
-            ...
+            Command_B2_b -> [... more sub commands ...]
         ]
     ]
     -> Command_C -> execution
