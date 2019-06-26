@@ -6,14 +6,22 @@ export interface IWithApplicationContext {
 }
 
 export interface ICommandOptions {
+    flags: string;
+    description?: string;
+    fn?: ((arg1: any, arg2: any) => void) | RegExp;
+    defaultValue?: any;
+}
+
+export interface ICommandDecoratorOptions {
     command: string;
     description?: string;
-    options?: commander.CommandOptions;
+    options?: ICommandOptions[];
+    commandOptions?: commander.CommandOptions;
 }
 
 export interface IMethodsMetadata {
     name: string;
-    metadata: ICommandOptions;
+    metadata: ICommandDecoratorOptions;
 }
 
 export interface IScanResponse {

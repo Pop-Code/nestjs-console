@@ -35,14 +35,24 @@ export class ConsoleModule {
             }
 
             for (const method of methods) {
-                instance._cli
+                const command = instance._cli
                     .command(
                         method.metadata.command,
                         null,
-                        method.metadata.options
+                        method.metadata.commandOptions
                     )
-                    .description(method.metadata.description)
-                    .action(instance[method.name].bind(instance));
+                    .description(method.metadata.description);
+                if (Symbol.iterator in Object(method.metadata.options)) {
+                    for (const opt of method.metadata.options) {
+                        command.option(
+                            opt.flags,
+                            opt.description,
+                            opt.fn,
+                            opt.defaultValue
+                        );
+                    }
+                }
+                command.action(instance[method.name].bind(instance));
             }
         });
     }

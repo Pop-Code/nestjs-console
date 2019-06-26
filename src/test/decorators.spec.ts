@@ -53,7 +53,7 @@ it('Should display help of an auto registered subcommand', async () => {
         'A complete cli provided by a service class'
     );
     expect(mockLog.mock.calls[0][0]).toContain(
-        'subcommand <myArgument>  A sub command to test decorators'
+        'subcommand [options] <myArgument>  A sub command to test decorators'
     );
     expect(mockExit).toHaveBeenCalled();
     mockExit.mockRestore();
@@ -71,11 +71,14 @@ it('Should execute an auto registered subcommand', async () => {
         'console',
         'mycli',
         'subcommand',
-        'iamasubcommand'
+        '-o',
+        'TEST_OPTIONAL_VALUE',
+        'TEST_ARGUMENT'
     ]);
 
-    expect(mockLog).toHaveBeenCalledTimes(1);
-    expect(mockLog.mock.calls[0][0]).toBe('iamasubcommand');
+    expect(mockLog).toHaveBeenCalledTimes(2);
+    expect(mockLog.mock.calls[0][0]).toBe('TEST_ARGUMENT');
+    expect(mockLog.mock.calls[1][0]).toBe('TEST_OPTIONAL_VALUE');
     expect(mockExit).toHaveBeenCalled();
     mockExit.mockRestore();
     mockLog.mockRestore();

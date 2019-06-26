@@ -4,13 +4,13 @@ import {
     COMMAND_METADATA_NAME,
     CONSOLE_METADATA_NAME
 } from './constants';
-import { ICommandOptions, IConsoleOptions } from './interfaces';
+import { ICommandDecoratorOptions, IConsoleOptions } from './interfaces';
 
 export const InjectCommander = () => {
     return Inject(COMMANDER_SERVICE_TOKEN);
 };
 
-export const Command = (options: ICommandOptions) => {
+export const Command = (options: ICommandDecoratorOptions) => {
     return (target: any, method: string | symbol) =>
         Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 };
