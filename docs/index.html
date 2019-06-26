@@ -121,7 +121,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 				<p>You can now inject the <em>ConsoleService</em> inside any nestjs providers, controllers...</p>
 				<p>There are 2 ways of registering providers methods to the console.<br>Using decorators (&gt;=v1.1) or using the <em>ConsoleService</em>.</p>
 				<p>At the moment, it&#39;s not possible to have more than 2 dimensions in the commands stack using decorators.</p>
-				<p>Example of possible cli stack Using decorator</p>
+				<p>Example of possible cli stack using decorators</p>
 				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
         C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
         C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
@@ -129,7 +129,8 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
     -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_B</span> -&gt;</span> [
         C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
         C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> execution
-    ]</code></pre><p>Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)</p>
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_C</span> -&gt;</span> execution</code></pre><p>Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)</p>
 				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
         C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
         C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
@@ -138,7 +139,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
         C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
         C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> [
             C<span class="hljs-function"><span class="hljs-title">ommand_B2_a</span> -&gt;</span> execution
-            ...
+            C<span class="hljs-function"><span class="hljs-title">ommand_B2_b</span> -&gt;</span> [... more sub commands ...]
         ]
     ]
     -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_C</span> -&gt;</span> execution</code></pre><h1 id="api">Api</h1>
@@ -149,7 +150,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
         <span class="hljs-function"><span class="hljs-title">file</span> -&gt;</span> execution
     ]</code></pre><h2 id="how-to-use-decorators">How to use Decorators</h2>
 				<p>Registering methods using class decorators is very easy.
-				Each nestjs providers that are decorated with @Console will be scanned and each member methods that are decorated with @Command will be registered on the cli.</p>
+				Nestjs providers that are decorated with @Console will be scanned and each member method that is decorated with @Command will be registered on the cli.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider using console decorators</span>
 <span class="hljs-keyword">import</span> { Console, Command } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 
@@ -184,8 +185,8 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 				<p>By default, the @Console will tell the module to register all decorated methods at root of the cli.<br><code>Example of Usage: [options] [command]</code></p>
 				<p>You can name your provider to use it as a parent command container.
 				This is usefull when you have a lot of commands and you want to group them as sub command. (git style)</p>
-				<p>To achieve this, you have to group your methods into class, you can pass options to the @Console decorator to configure your provider as a parent command.
-				Each decorated methods of the providers will be registered as a sub command of the provider instead of beeing registered at root.</p>
+				<p>To achieve this, you have to group your methods into class.<br>You have to pass options to the @Console decorator to configure your provider as a parent command.
+				Decorated methods of the providers will be registered as a sub command instead of beeing registered at root.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.new.ts - a nestjs provider using console decorators (sub commands)</span>
 <span class="hljs-meta">@Console</span>({
     name: <span class="hljs-string">'new'</span>,
@@ -214,7 +215,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 }</code></pre>
 				<p><code>Example of Usage: new [options] [command]</code></p>
 				<h2 id="how-to-use-the-consoleservice">How to use the ConsoleService</h2>
-				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is usefull if you need to create the cli or a part of the cli at runtime, depending on others providers values , you could bind or not specific methods.<br>This way you can also create mutliple commands ans sub commands from the same class.</p>
+				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is usefull if you need to create the cli or a part of the cli at runtime.<br>This way you can also create mutliple commands ans sub commands from the same class.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
 <span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
@@ -271,7 +272,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
         process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
     }
 }</code></pre>
-				<p>Add scripts in your package.json (if you want to them)</p>
+				<p>Add scripts in your package.json (if you want to use them)</p>
 				<pre><code class="language-js">{
     <span class="hljs-string">"scripts"</span>: {
         <span class="hljs-comment">// from sources</span>
@@ -314,7 +315,7 @@ Commands:
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CustomConsole <span class="hljs-keyword">extends</span> ConsoleService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@InjectCommander</span>() <span class="hljs-keyword">protected</span> readonly cli: Command</span>) {
         <span class="hljs-keyword">super</span>(cli);
-        <span class="hljs-keyword">this</span>.cli.version(<span class="hljs-string">'1.0.1'</span>, <span class="hljs-string">'-v, --version'</span>);
+        <span class="hljs-comment">// do something with the cli, instance of npm commander</span>
     }
 }</code></pre>
 				<h3 id="api-documentation"><a href="https://pop-code.github.io/nestjs-console">API DOCUMENTATION</a></h3>
