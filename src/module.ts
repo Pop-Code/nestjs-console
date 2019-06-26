@@ -38,9 +38,10 @@ export class ConsoleModule {
                 instance._cli
                     .command(
                         method.metadata.command,
-                        method.metadata.description,
+                        null,
                         method.metadata.options
                     )
+                    .description(method.metadata.description)
                     .action(instance[method.name].bind(instance));
             }
         });
