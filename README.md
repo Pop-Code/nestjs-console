@@ -77,7 +77,7 @@ Using decorators (>=v1.1) or using the _ConsoleService_.
 
 At the moment, it's not possible to have more than 2 dimensions in the commands stack using decorators.
 
-Example of possible cli stack Using decorator
+Example of possible cli stack using decorators
 
 ```
 Cli -> Command_A -> [
@@ -123,7 +123,7 @@ Cli -> list -> -> execution,
 ## How to use Decorators
 
 Registering methods using class decorators is very easy.
-Each nestjs providers that are decorated with @Console will be scanned and each member methods that are decorated with @Command will be registered on the cli.
+Nestjs providers that are decorated with @Console will be scanned and each member method that is decorated with @Command will be registered on the cli.
 
 ```ts
 // service.ts - a nestjs provider using console decorators
@@ -166,8 +166,9 @@ By default, the @Console will tell the module to register all decorated methods 
 You can name your provider to use it as a parent command container.
 This is usefull when you have a lot of commands and you want to group them as sub command. (git style)
 
-To achieve this, you have to group your methods into class, you can pass options to the @Console decorator to configure your provider as a parent command.
-Each decorated methods of the providers will be registered as a sub command of the provider instead of beeing registered at root.
+To achieve this, you have to group your methods into class.  
+You have to pass options to the @Console decorator to configure your provider as a parent command.
+Decorated methods of the providers will be registered as a sub command instead of beeing registered at root.
 
 ```ts
 // service.new.ts - a nestjs provider using console decorators (sub commands)
@@ -204,7 +205,7 @@ export class MyNewService {
 
 Registering methods using the ConsoleService is more flexible than decorators.  
 When you use the ConsoleService, you simply bind your methods to the cli manually.  
-This is usefull if you need to create the cli or a part of the cli at runtime, depending on others providers values , you could bind or not specific methods.  
+This is usefull if you need to create the cli or a part of the cli at runtime.  
 This way you can also create mutliple commands ans sub commands from the same class.
 
 ```ts
@@ -266,7 +267,7 @@ export class MyService {
 }
 ```
 
-Add scripts in your package.json (if you want to them)
+Add scripts in your package.json (if you want to use them)
 
 ```js
 {
@@ -330,7 +331,7 @@ import { InjectCommander, Command, ConsoleService } from 'nestjs-console';
 export class CustomConsole extends ConsoleService {
     constructor(@InjectCommander() protected readonly cli: Command) {
         super(cli);
-        this.cli.version('1.0.1', '-v, --version');
+        // do something with the cli, instance of npm commander
     }
 }
 ```
