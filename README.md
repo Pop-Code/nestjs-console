@@ -26,9 +26,9 @@ The console service will be accesible inside the container.
 ## [Install FROM NPM][npm]
 
 ```bash
-npm install nestjs-console
+npm install commander nestjs-console
 # or unig yarn
-yarn add nestjs-console
+yarn add commander nestjs-console
 ```
 
 ## Create a cli endpoint
