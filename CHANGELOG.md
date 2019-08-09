@@ -77,8 +77,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 -   Update the dependencies to support nestjs ^6.0.0
 
 [unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.0...HEAD
-[1.1.4]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.3...v1.1.4
-[1.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...v1.0.3
+[1.2.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.1.4...v1.2.0
+[1.1.4]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...v1.1.4
 [1.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.0-alpha.1...v1.0.0
