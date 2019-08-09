@@ -8,7 +8,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
--   Move commander as Peer Dependencies
+-   Move commander as Peer Dependency
 -   Update to support commander@^3.0.0
 
 ## [1.1.4] - 2019-06-25
