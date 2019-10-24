@@ -23,22 +23,22 @@
         "ora": "^3.4.0"
     },
     "devDependencies": {
-        "@nestjs/common": "6.5.3",
-        "@nestjs/core": "6.5.3",
-        "@nestjs/testing": "6.5.3",
+        "@nestjs/common": "6.8.4",
+        "@nestjs/core": "6.8.4",
+        "@nestjs/testing": "6.8.4",
         "@types/jest": "24.0.19",
-        "@types/node": "^12.7.1",
+        "@types/node": "12.7.1",
         "@types/ora": "3.2.0",
         "codecov": "3.6.1",
-        "commander": "3.0.0",
+        "commander": "3.0.2",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
-        "rxjs": "6.5.2",
-        "ts-jest": "24.0.2",
+        "rxjs": "6.5.3",
+        "ts-jest": "24.1.0",
         "ts-node": "8.4.1",
-        "tsconfig-paths": "3.8.0",
+        "tsconfig-paths": "3.9.0",
         "typedoc": "0.15.0",
-        "typescript": "3.5.3"
+        "typescript": "3.6.4"
     },
     "scripts": {
         "build": "rm -Rf ./lib && tsc",
