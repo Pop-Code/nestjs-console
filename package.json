@@ -30,7 +30,7 @@
         "@types/node": "^12.7.1",
         "@types/ora": "3.2.0",
         "codecov": "3.6.1",
-        "commander": "3.0.0",
+        "commander": "3.0.2",
         "jest": "24.8.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.2",
