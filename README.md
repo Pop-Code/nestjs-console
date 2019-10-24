@@ -137,7 +137,7 @@ export class MyService {
     })
     async listContent(directory: string): void | Promise<void> {
         // See Ora npm package for details about spinner
-        const spin = this.consoleService.createSpinner();
+        const spin = this.consoleService.constructor.createSpinner();
         spin.start(`Listing files in directory ${directory}`);
 
         // simulate a long task of 1 seconds
