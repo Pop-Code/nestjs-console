@@ -17,7 +17,7 @@
     "peerDependencies": {
         "@nestjs/common": "^6",
         "@nestjs/core": "^6",
-        "commander": "^3.0.0"
+        "commander": "^3.0.0 || ^4.0.0"
     },
     "dependencies": {
         "ora": "^3.4.0"
@@ -30,7 +30,7 @@
         "@types/node": "12.7.1",
         "@types/ora": "3.2.0",
         "codecov": "3.6.1",
-        "commander": "3.0.2",
+        "commander": "4.0.1",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.3",
