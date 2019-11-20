@@ -1,4 +1,13 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "editor.wordWrapColumn": 150
+    "editor.wordWrapColumn": 125,
+    "javascript.preferences.importModuleSpecifier": "relative",
+    "javascript.preferences.quoteStyle": "single",
+    "typescript.preferences.importModuleSpecifier": "relative",
+    "typescript.preferences.quoteStyle": "single",
+    "javascript.format.enable": false,
+    "typescript.format.enable": true,
+    "editor.formatOnSave": true,
+    "tslint.autoFixOnSave": true,
+    "formatFiles.excludePattern": "**/build/**,**/node_modules,**/.vscode,**/dist/**,**/.chrome"
 }

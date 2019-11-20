@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "1.2.0",
+    "version": "2.0.0-alpha.1",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
@@ -17,36 +17,45 @@
     "peerDependencies": {
         "@nestjs/common": "^6",
         "@nestjs/core": "^6",
-        "commander": "^3.0.0"
+        "commander": "^4.0.1"
     },
     "dependencies": {
-        "ora": "^3.4.0"
+        "lodash": "4.17.15",
+        "ora": "4.0.3",
+        "prettier": "1.19.1"
     },
     "devDependencies": {
-        "@nestjs/common": "6.8.4",
-        "@nestjs/core": "6.8.4",
-        "@nestjs/testing": "6.8.4",
-        "@types/jest": "24.0.19",
-        "@types/node": "12.7.1",
-        "@types/ora": "3.2.0",
+        "@nestjs/common": "6.10.13",
+        "@nestjs/core": "6.10.13",
+        "@nestjs/platform-express": "6.10.13",
+        "@nestjs/testing": "6.10.13",
+        "@types/jest": "24.0.25",
+        "@types/node": "13.1.2",
+        "@types/prettier": "1.19.0",
         "codecov": "3.6.1",
-        "commander": "3.0.2",
+        "commander": "4.0.1",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
-        "rxjs": "6.5.3",
-        "ts-jest": "24.1.0",
-        "ts-node": "8.4.1",
+        "rxjs": "6.5.4",
+        "ts-jest": "24.2.0",
+        "ts-node": "8.5.4",
         "tsconfig-paths": "3.9.0",
-        "typedoc": "0.15.0",
-        "typescript": "3.6.4"
+        "tslint": "5.20.1",
+        "typedoc": "0.15.6",
+        "typescript": "3.7.4"
     },
     "scripts": {
-        "build": "rm -Rf ./lib && tsc",
+        "build": "rm -Rf ./lib && tsc -b",
         "doc": "rm -Rf ./docs && typedoc ./src && touch ./docs/.nojekyll",
+        "console": "node lib/test/console.js",
+        "console:dev": "ts-node -r tsconfig-paths/register src/test/console.ts",
+        "console:server": "node lib/test/console-server.js",
+        "console:server:dev": "ts-node -r tsconfig-paths/register src/test/console-server.ts",
         "test:ci": "jest --runInBand",
         "test": "jest",
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage --runInBand",
-        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+        "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
+        "lint": "tslint -c tslint.json -t verbose 'src/**/*.{ts,js}'"
     }
 }

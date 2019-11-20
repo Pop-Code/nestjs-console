@@ -1,49 +1,46 @@
-import { ConsoleModuleTest } from './module';
-import { BootstrapConsole } from '../bootstrap';
+import { ModuleTest } from './app/module';
+import {
+    BootstrapConsole,
+    BootstrapConsoleOptions
+} from '../bootstrap/console';
 import { NestApplicationContext } from '@nestjs/core';
-import { ConsoleService } from '../service';
+import { TestingModule, Test } from '@nestjs/testing';
+import { AbstractBootstrapConsole } from '../bootstrap/abstract';
+
+export class TestBootstrapConsole extends AbstractBootstrapConsole<
+    TestingModule,
+    BootstrapConsoleOptions
+> {
+    create() {
+        return Test.createTestingModule({
+            imports: [this.options.module]
+        }).compile();
+    }
+}
 
 describe('BootstrapConsole', () => {
+    beforeAll(() => {});
     it('Should init the application context', async () => {
-        const mockExit = jest.spyOn(process, 'exit').mockImplementation();
-        const mockLog = jest
-            .spyOn(process.stdout, 'write')
-            .mockImplementation();
-        const mockLogError = jest.spyOn(console, 'error').mockImplementation();
-
-        const bootstrap = await BootstrapConsole.init({
-            module: ConsoleModuleTest
+        const bootstrap = new TestBootstrapConsole({
+            module: ModuleTest
         });
-
-        expect(bootstrap).toHaveProperty('app');
-        expect(bootstrap.app).toBeInstanceOf(NestApplicationContext);
-        expect(bootstrap).toHaveProperty('boot');
-
-        bootstrap.boot([process.argv0, 'console']);
-
-        // should habe called 2 times cause exit is mocked.
-        expect(mockLog).toHaveBeenCalledTimes(2);
-        expect(mockExit).toHaveBeenCalledTimes(2);
-        expect(mockLog.mock.calls[0][0]).toContain('Usage:');
-        mockLog.mockRestore();
-        mockExit.mockRestore();
-        mockLogError.mockRestore();
+        const app = await bootstrap.init();
+        expect(app).toBeInstanceOf(NestApplicationContext);
     });
 
     it('Should init the application context with container', async () => {
-        const bootstrap = await BootstrapConsole.init({
-            module: ConsoleModuleTest,
-            withContainer: true
+        const bootstrap = new BootstrapConsole({
+            module: ModuleTest,
+            withContainer: true,
+            contextOptions: {
+                logger: false
+            }
         });
+        const app = await bootstrap.init();
+        expect(app).toBeInstanceOf(NestApplicationContext);
 
-        expect(bootstrap).toHaveProperty('app');
-        expect(bootstrap.app).toBeInstanceOf(NestApplicationContext);
-        expect(bootstrap).toHaveProperty('boot');
-
-        // get the service
-        const service = bootstrap.app.get(ConsoleService);
-        expect(service).toBeInstanceOf(ConsoleService);
-        expect(service).toHaveProperty('getContainer');
-        expect(service.getContainer()).toBe(bootstrap.app);
+        // get the service and check the container
+        const service = bootstrap.getService();
+        expect(service.getContainer()).toBe(app);
     });
 });

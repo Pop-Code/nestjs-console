@@ -105,13 +105,11 @@ yarn add commander nestjs-console</code></pre>
 <span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 <span class="hljs-keyword">import</span> { MyModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./module'</span>;
 
-BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
-    .then(({ app, boot }) =&gt; {
-        <span class="hljs-comment">// do something with your app container if you need (app)</span>
-        <span class="hljs-comment">// boot the cli</span>
-        boot(<span class="hljs-comment">/*process.argv*/</span>);
-    })
-    .catch(<span class="hljs-function"><span class="hljs-params">e</span> =&gt;</span> <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Error'</span>, e));</code></pre>
+BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule }).then(({ app, boot }) =&gt; {
+    <span class="hljs-comment">// do something with your app container if you need (app)</span>
+    <span class="hljs-comment">// boot the cli</span>
+    boot(<span class="hljs-comment">/*process.argv*/</span>);
+});</code></pre>
 				<a href="#import-the-consolemodule-in-your-main-module" id="import-the-consolemodule-in-your-main-module" style="color: inherit; text-decoration: none;">
 					<h2>Import the ConsoleModule in your main module</h2>
 				</a>
@@ -129,18 +127,8 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
 				<p>You can now inject the <em>ConsoleService</em> inside any nestjs providers, controllers...</p>
-				<p>There are 2 ways of registering providers methods to the console.<br>Using decorators (&gt;=v1.1) or using the <em>ConsoleService</em>.</p>
-				<p>At the moment, it&#39;s not possible to have more than 2 dimensions in the commands stack using decorators.</p>
-				<p>Example of possible cli stack using decorators</p>
-				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
-        C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
-        C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
-    ]
-    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_B</span> -&gt;</span> [
-        C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
-        C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> execution
-    ]
-    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_C</span> -&gt;</span> execution</code></pre><p>Example of possible cli stack using the ConsoleService (More flexible, Multi dimensions)</p>
+				<p>There are 2 ways of registering providers methods to the console.<br>Using @decorators (&gt;=v1.1 and &gt;=v2 for multi dimensions) or using the <em>ConsoleService</em>.</p>
+				<p>Example of cli stack</p>
 				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
         C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
         C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
@@ -156,7 +144,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
 					<h1>Api</h1>
 				</a>
-				<p>As an example, we will define a cli with 2 commands (new and list), one of the command (new) will have 2 sub commands (directory and file)</p>
+				<p>As a simple example, we will define a cli with 2 commands (new and list), one of the command (new) will have 2 sub commands (directory and file)</p>
 				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> <span class="hljs-function"><span class="hljs-title">list</span> -&gt;</span> -&gt; execution,
     -&gt; <span class="hljs-function"><span class="hljs-title">new</span> -&gt;</span> [
         <span class="hljs-function"><span class="hljs-title">directory</span> -&gt;</span> execution,
@@ -168,7 +156,7 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 				<p>Registering methods using class decorators is very easy.
 				Nestjs providers that are decorated with @Console will be scanned and each member method that is decorated with @Command will be registered on the cli.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider using console decorators</span>
-<span class="hljs-keyword">import</span> { Console, Command } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { Console, Command, createSpinner } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
 
 <span class="hljs-meta">@Console</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
@@ -178,14 +166,12 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
     })
     <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
         <span class="hljs-comment">// See Ora npm package for details about spinner</span>
-        <span class="hljs-keyword">const</span> spin = <span class="hljs-keyword">this</span>.consoleService.createSpinner();
+        <span class="hljs-keyword">const</span> spin = createSpinner();
         spin.start(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
 
         <span class="hljs-comment">// simulate a long task of 1 seconds</span>
         <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">done</span> =&gt;</span>
-            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-                done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]);
-            }, <span class="hljs-number">1000</span>)
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]), <span class="hljs-number">1000</span>)
         );
 
         spin.succeed(<span class="hljs-string">'Listing done'</span>);
@@ -243,10 +229,6 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
-        <span class="hljs-keyword">this</span>.listContent = <span class="hljs-keyword">this</span>.listContent.bind(<span class="hljs-keyword">this</span>);
-        <span class="hljs-keyword">this</span>.createFile = <span class="hljs-keyword">this</span>.createFile.bind(<span class="hljs-keyword">this</span>);
-        <span class="hljs-keyword">this</span>.createDirectory = <span class="hljs-keyword">this</span>.createDirectory.bind(<span class="hljs-keyword">this</span>);
-
         <span class="hljs-comment">// get the root cli</span>
         <span class="hljs-keyword">const</span> cli = <span class="hljs-keyword">this</span>.consoleService.getCli();
 
@@ -275,22 +257,22 @@ BootstrapConsole.init({ <span class="hljs-keyword">module</span>: MyModule })
             .action(<span class="hljs-keyword">this</span>.createDirectory);
     }
 
-    <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+    listContent = <span class="hljs-keyword">async</span> (directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
         <span class="hljs-comment">// your code...</span>
         process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
-    }
+    };
 
-    <span class="hljs-keyword">async</span> createFile(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+    createFile = <span class="hljs-keyword">async</span> (name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
         process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
-    }
+    };
 
-    <span class="hljs-keyword">async</span> createDirectory(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+    createDirectory = <span class="hljs-keyword">async</span> (name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
         <span class="hljs-comment">// your code...</span>
         process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
-    }
+    };
 }</code></pre>
 				<p>Add scripts in your package.json (if you want to use them)</p>
 				<pre><code class="language-js">{
@@ -329,22 +311,6 @@ Options:
 Commands:
   list &lt;directory&gt;      List content of a directory
   new                   A command <span class="hljs-keyword">to</span> create an item</code></pre>
-				<a href="#create-a-custom-consoleservice" id="create-a-custom-consoleservice" style="color: inherit; text-decoration: none;">
-					<h3>Create a Custom ConsoleService</h3>
-				</a>
-				<p>You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
-					The Commander provider can be injected using the decorators <code>@InjectCommander()</code>.
-				The decorator can be imported from nestjs-console `import { InjectCommander } from &#39;nestjs-console&#39;;</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
-<span class="hljs-keyword">import</span> { InjectCommander, Command, ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
-
-<span class="hljs-meta">@Injectable</span>()
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> CustomConsole <span class="hljs-keyword">extends</span> ConsoleService {
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-meta">@InjectCommander</span>() <span class="hljs-keyword">protected</span> readonly cli: Command</span>) {
-        <span class="hljs-keyword">super</span>(cli);
-        <span class="hljs-comment">// do something with the cli, instance of npm commander</span>
-    }
-}</code></pre>
 				<a href="#a-hrefhttpspop-codegithubionestjs-consoleapi-documentationa" id="a-hrefhttpspop-codegithubionestjs-consoleapi-documentationa" style="color: inherit; text-decoration: none;">
 					<h3><a href="https://pop-code.github.io/nestjs-console">API DOCUMENTATION</a></h3>
 				</a>
@@ -360,31 +326,40 @@ Commands:
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_bootstrap_.html">"bootstrap"</a>
+						<a href="modules/_bootstrap_abstract_.html">&quot;bootstrap/abstract&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_commander_.html">"commander"</a>
+						<a href="modules/_bootstrap_console_.html">&quot;bootstrap/console&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_constants_.html">"constants"</a>
+						<a href="modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_decorators_.html">"decorators"</a>
+						<a href="modules/_commander_.html">&quot;commander&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_index_.html">"index"</a>
+						<a href="modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_interfaces_.html">"interfaces"</a>
+						<a href="modules/_constants_.html">&quot;constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_module_.html">"module"</a>
+						<a href="modules/_decorators_.html">&quot;decorators&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_scanner_.html">"scanner"</a>
+						<a href="modules/_helpers_.html">&quot;helpers&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="modules/_service_.html">"service"</a>
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_module_.html">&quot;module&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_scanner_.html">&quot;scanner&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_service_.html">&quot;service&quot;</a>
 					</li>
 				</ul>
 			</nav>
