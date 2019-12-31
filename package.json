@@ -33,7 +33,7 @@
         "commander": "3.0.2",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
-        "rxjs": "6.5.3",
+        "rxjs": "6.5.4",
         "ts-jest": "24.1.0",
         "ts-node": "8.4.1",
         "tsconfig-paths": "3.9.0",
