@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.2.1] - 2020-01-03
+
+### Fixed
+
+-  Fix a type error during the bootstrap scan for decorators [#61](https://github.com/Pop-Code/nestjs-console/pull/61)
+-  Remove implicit lodash dependency [#59](https://github.com/Pop-Code/nestjs-console/issues/59)
+-  Update to support commander@^4 [#58](https://github.com/Pop-Code/nestjs-console/issues/58)
+
 ## [1.2.0] - 2019-08-09
 
 ### Changed
@@ -76,7 +84,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.1.4...v1.2.0
 [1.1.4]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...v1.1.4
 [1.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.1...v1.0.2

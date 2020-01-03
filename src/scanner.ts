@@ -1,18 +1,17 @@
-import { isEmpty } from 'lodash';
 import { CONSOLE_METADATA_NAME, COMMAND_METADATA_NAME } from './constants';
 import { IScanResponse, IConsoleOptions, IMethodsMetadata } from './interfaces';
 
 export class ConsoleScanner {
     private getModules(
         modulesContainer: Map<any, any>,
-        include: Function[]
+        includes: Function[]
     ): any[] {
         const allModules = [...modulesContainer.values()];
-        if (!include || isEmpty(include)) {
+        if (!includes || !Array.isArray(includes)) {
             return allModules;
         }
         return allModules.filter(({ metatype }) =>
-            include.some(item => item === metatype)
+            includes.some(item => item === metatype)
         );
     }
 
