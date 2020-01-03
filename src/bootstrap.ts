@@ -29,7 +29,7 @@ export class BootstrapConsole {
         }
 
         const appModule = app.get(ConsoleModule);
-        appModule.scan(app, options.module);
+        appModule.scan(app, [options.module]);
 
         // create a boot function to be use after init
         return {
