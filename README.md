@@ -1,5 +1,5 @@
 [![nestjs-console](https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png)][npm]
-[![CircleCI](https://circleci.com/gh/Pop-Code/nestjs-console.svg?style=shield)][ci]
+[![Actions Status](https://github.com/Pop-Code/nestjs-console/workflows/Test/badge.svg?branch=master)](https://github.com/Pop-Code/nestjs-acl/actions)
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
 [![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
@@ -317,32 +317,12 @@ Commands:
   new                   A command to create an item
 ```
 
-### Create a Custom ConsoleService
-
-You can create any number of custom ConsoleService and any nummber of entrypoints (BootstrapConsole).
-The Commander provider can be injected using the decorators `@InjectCommander()`.
-The decorator can be imported from nestjs-console `import { InjectCommander } from 'nestjs-console';
-
-```ts
-import { Injectable } from '@nestjs/common';
-import { InjectCommander, Command, ConsoleService } from 'nestjs-console';
-
-@Injectable()
-export class CustomConsole extends ConsoleService {
-    constructor(@InjectCommander() protected readonly cli: Command) {
-        super(cli);
-        // do something with the cli, instance of npm commander
-    }
-}
-```
-
 ### [API DOCUMENTATION][doclink]
 
 ### [CHANGELOG][changelog]
 
 [npm]: https://www.npmjs.com/package/nestjs-console
 [npmchart]: https://npmcharts.com/compare/nestjs-console?minimal=true
-[ci]: https://circleci.com/gh/Pop-Code/nestjs-console
 [codecov]: https://codecov.io/gh/Pop-Code/nestjs-console
 [doclink]: https://pop-code.github.io/nestjs-console
 [commander]: https://www.npmjs.com/package/commander
