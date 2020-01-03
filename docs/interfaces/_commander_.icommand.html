@@ -91,12 +91,6 @@
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section tsd-is-inherited">
-							<h3>Constructors</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-constructor tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#constructor" class="tsd-kind-icon">constructor</a></li>
-							</ul>
-						</section>
-						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#args" class="tsd-kind-icon">args</a></li>
@@ -114,6 +108,7 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#description" class="tsd-kind-icon">description</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#emit" class="tsd-kind-icon">emit</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#exitoverride" class="tsd-kind-icon">exit<wbr>Override</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface"><a href="_commander_.icommand.html#forwardsubcommands" class="tsd-kind-icon">forward<wbr>Sub<wbr>Commands</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#getmaxlisteners" class="tsd-kind-icon">get<wbr>Max<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#help" class="tsd-kind-icon">help</a></li>
@@ -135,44 +130,13 @@
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#rawlisteners" class="tsd-kind-icon">raw<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#removealllisteners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#requiredoption" class="tsd-kind-icon">required<wbr>Option</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#setmaxlisteners" class="tsd-kind-icon">set<wbr>Max<wbr>Listeners</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#usage" class="tsd-kind-icon">usage</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-interface tsd-is-inherited"><a href="_commander_.icommand.html#version" class="tsd-kind-icon">version</a></li>
 							</ul>
 						</section>
 					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
-				<h2>Constructors</h2>
-				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-interface tsd-is-inherited">
-					<a name="constructor" class="tsd-anchor"></a>
-					<h3>constructor</h3>
-					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-interface tsd-is-inherited">
-						<li class="tsd-signature tsd-kind-icon">new ICommand<span class="tsd-signature-symbol">(</span>name<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="_commander_.icommand.html" class="tsd-signature-type">ICommand</a></li>
-					</ul>
-					<ul class="tsd-descriptions">
-						<li class="tsd-description">
-							<aside class="tsd-sources">
-								<p>Inherited from Command.__constructor</p>
-								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:31</li>
-								</ul>
-							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<p>Initialize a new <code>Command</code>.</p>
-								</div>
-							</div>
-							<h4 class="tsd-parameters-title">Parameters</h4>
-							<ul class="tsd-parameters">
-								<li>
-									<h5><span class="tsd-flag ts-flagOptional">Optional</span> name: <span class="tsd-signature-type">string</span></h5>
-								</li>
-							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="_commander_.icommand.html" class="tsd-signature-type">ICommand</a></h4>
-						</li>
-					</ul>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
@@ -184,7 +148,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from Command.args</p>
 						<ul>
-							<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:31</li>
+							<li>Defined in node_modules/commander/typings/index.d.ts:33</li>
 						</ul>
 					</aside>
 				</section>
@@ -202,7 +166,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.action</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:124</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:124</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -259,7 +223,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.addListener</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:611</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:541</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -305,7 +269,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.alias</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:222</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:231</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -325,7 +289,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.alias</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:223</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:232</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -343,7 +307,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.allowUnknownOption</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:181</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:190</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -373,7 +337,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.arguments</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:98</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:93</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -404,7 +368,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.command</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:71</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:66</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -447,7 +411,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.command</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:90</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:85</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -503,7 +467,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.description</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:213</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:222</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -531,7 +495,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.description</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:214</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:223</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -549,7 +513,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.emit</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:621</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:551</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -576,10 +540,60 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.eventNames</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:626</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:556</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Array</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a name="exitoverride" class="tsd-anchor"></a>
+					<h3>exit<wbr>Override</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">exit<wbr>Override<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Command.exitOverride</p>
+								<ul>
+									<li>Defined in node_modules/commander/typings/index.d.ts:108</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Register callback to use as replacement for calling process.exit.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <span class="tsd-signature-type">function</span></h5>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>err<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">CommanderError</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">never</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-parameters-title">Parameters</h4>
+													<ul class="tsd-parameters">
+														<li>
+															<h5>err: <span class="tsd-signature-type">CommanderError</span></h5>
+														</li>
+													</ul>
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">never</span>
+														<span class="tsd-signature-symbol"> | </span>
+														<span class="tsd-signature-type">void</span>
+													</h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -593,7 +607,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/d99f94c/src/commander.ts#L4">commander.ts:4</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/08e37a8/src/commander.ts#L4">src/commander.ts:4</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <a href="_commander_.icommand.html" class="tsd-signature-type">ICommand</a></h4>
@@ -611,7 +625,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.getMaxListeners</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:618</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:548</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
@@ -629,7 +643,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.help</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:268</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:277</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -676,7 +690,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.helpOption</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:263</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:272</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -709,7 +723,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.listenerCount</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:622</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:552</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -733,7 +747,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.listeners</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:619</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:549</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -758,7 +772,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.name</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:240</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:249</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -778,7 +792,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.name</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:247</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:256</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -801,7 +815,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.off</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:615</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:545</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -846,7 +860,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.on</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:612</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:542</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -891,7 +905,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.once</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:613</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:543</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -937,7 +951,7 @@
 							<aside class="tsd-sources">
 								<p>Inherited from Command.option</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:172</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:172</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1003,7 +1017,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.option</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:173</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:173</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1033,7 +1047,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.opts</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:204</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:213</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1061,7 +1075,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.outputHelp</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:257</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:266</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1110,7 +1124,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.parse</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:189</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:198</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1140,7 +1154,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.parseExpectedArgs</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:108</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:103</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1171,7 +1185,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.parseOptions</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:197</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:206</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1200,7 +1214,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.prependListener</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:624</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:554</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1245,7 +1259,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.prependOnceListener</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:625</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:555</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1290,7 +1304,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.rawListeners</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:620</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:550</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1314,7 +1328,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.removeAllListeners</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:616</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:546</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1338,7 +1352,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.removeListener</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:614</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:544</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1373,6 +1387,68 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+					<a name="requiredoption" class="tsd-anchor"></a>
+					<h3>required<wbr>Option</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">required<wbr>Option<span class="tsd-signature-symbol">(</span>flags<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, fn<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span></li>
+						<li class="tsd-signature tsd-kind-icon">required<wbr>Option<span class="tsd-signature-symbol">(</span>flags<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, description<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span>, defaultValue<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Command</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Command.requiredOption</p>
+								<ul>
+									<li>Defined in node_modules/commander/typings/index.d.ts:181</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Define a required option, which must have a value after parsing. This usually means
+									the option must be specified on the command line. (Otherwise the same as .option().)</p>
+								</div>
+								<p>The <code>flags</code> string should contain both the short and long flags, separated by comma, a pipe or space.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>flags: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fn: <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> defaultValue: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Command.requiredOption</p>
+								<ul>
+									<li>Defined in node_modules/commander/typings/index.d.ts:182</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>flags: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> description: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> defaultValue: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 					<a name="setmaxlisteners" class="tsd-anchor"></a>
 					<h3>set<wbr>Max<wbr>Listeners</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
@@ -1383,7 +1459,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from EventEmitter.setMaxListeners</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/@types/node/globals.d.ts:617</li>
+									<li>Defined in node_modules/@types/node/globals.d.ts:547</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1408,7 +1484,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.usage</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:231</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:240</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1428,7 +1504,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.usage</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:232</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:241</li>
 								</ul>
 							</aside>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
@@ -1446,7 +1522,7 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							<aside class="tsd-sources">
 								<p>Inherited from Command.version</p>
 								<ul>
-									<li>Defined in /Users/alexandrehermann/Dev/nestjs/nestjs-console/node_modules/commander/typings/index.d.ts:49</li>
+									<li>Defined in node_modules/commander/typings/index.d.ts:44</li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1482,31 +1558,31 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_bootstrap_.html">"bootstrap"</a>
+						<a href="../modules/_bootstrap_.html">&quot;bootstrap&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="../modules/_commander_.html">"commander"</a>
+						<a href="../modules/_commander_.html">&quot;commander&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_constants_.html">"constants"</a>
+						<a href="../modules/_constants_.html">&quot;constants&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_decorators_.html">"decorators"</a>
+						<a href="../modules/_decorators_.html">&quot;decorators&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_index_.html">"index"</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_interfaces_.html">"interfaces"</a>
+						<a href="../modules/_interfaces_.html">&quot;interfaces&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_module_.html">"module"</a>
+						<a href="../modules/_module_.html">&quot;module&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_scanner_.html">"scanner"</a>
+						<a href="../modules/_scanner_.html">&quot;scanner&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="../modules/_service_.html">"service"</a>
+						<a href="../modules/_service_.html">&quot;service&quot;</a>
 					</li>
 				</ul>
 			</nav>
@@ -1517,9 +1593,6 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_commander_.icommand.html" class="tsd-kind-icon">ICommand</a>
 						<ul>
-							<li class=" tsd-kind-constructor tsd-parent-kind-interface tsd-is-inherited">
-								<a href="_commander_.icommand.html#constructor" class="tsd-kind-icon">constructor</a>
-							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_commander_.icommand.html#args" class="tsd-kind-icon">args</a>
 							</li>
@@ -1549,6 +1622,9 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_commander_.icommand.html#eventnames" class="tsd-kind-icon">event<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_commander_.icommand.html#exitoverride" class="tsd-kind-icon">exit<wbr>Override</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface">
 								<a href="_commander_.icommand.html#forwardsubcommands" class="tsd-kind-icon">forward<wbr>Sub<wbr>Commands</a>
@@ -1612,6 +1688,9 @@ program.<span class="hljs-keyword">option</span>(<span class="hljs-string">'-c, 
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_commander_.icommand.html#removelistener" class="tsd-kind-icon">remove<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
+								<a href="_commander_.icommand.html#requiredoption" class="tsd-kind-icon">required<wbr>Option</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_commander_.icommand.html#setmaxlisteners" class="tsd-kind-icon">set<wbr>Max<wbr>Listeners</a>
