@@ -51,7 +51,6 @@ export abstract class AbstractBootstrapConsole<
      */
     async init() {
         this.container = await this.create();
-        await this.container.init();
         this.service = this.container.get(ConsoleService);
         if (
             this.options.withContainer &&

@@ -1,14 +1,15 @@
 import { BootstrapConsole } from '../bootstrap/console';
 import { ModuleWithDecoratorsTest } from './app/decorator/module';
 
-const bootrap = new BootstrapConsole({
+const bootstrap = new BootstrapConsole({
     module: ModuleWithDecoratorsTest,
     withContainer: true,
     useDecorators: true
 });
-bootrap.init().then(async app => {
+bootstrap.init().then(async app => {
     try {
-        await bootrap.boot();
+        await app.init();
+        await bootstrap.boot();
         process.exit(0);
     } catch (e) {
         process.exit(1);

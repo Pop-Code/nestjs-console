@@ -1,6 +1,7 @@
 export * from './bootstrap/abstract';
 export * from './bootstrap/console';
 export * from './bootstrap/server';
+export * from './commander';
 export * from './commands/application-manager';
 export * from './constants';
 export * from './decorators';
