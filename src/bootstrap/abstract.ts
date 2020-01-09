@@ -9,7 +9,7 @@ export interface CommonBootstrapConsoleOptions {
     module: any;
     withContainer?: boolean;
     useDecorators?: boolean;
-    includeModules: any[];
+    includeModules?: any[];
     contextOptions?: any;
 }
 
