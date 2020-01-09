@@ -9,6 +9,7 @@ export interface CommonBootstrapConsoleOptions {
     module: any;
     withContainer?: boolean;
     useDecorators?: boolean;
+    includeModules: any[];
     contextOptions?: any;
 }
 
@@ -42,7 +43,7 @@ export abstract class AbstractBootstrapConsole<
      */
     protected useDecorators() {
         const consoleModule = this.container.get(ConsoleModule);
-        consoleModule.scan(this.container, [this.options.module]);
+        consoleModule.scan(this.container, this.options.includeModules);
         return this;
     }
 
