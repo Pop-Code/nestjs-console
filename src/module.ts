@@ -1,5 +1,4 @@
 import { INestApplicationContext, Module } from '@nestjs/common';
-import { createCli } from './commander';
 import { COMMANDER_SERVICE_TOKEN } from './constants';
 import { ConsoleScanner } from './scanner';
 import { ConsoleService } from './service';
@@ -7,7 +6,7 @@ import { ConsoleService } from './service';
 const cliProvider = {
     provide: COMMANDER_SERVICE_TOKEN,
     useFactory: () => {
-        return createCli();
+        return ConsoleService.create();
     }
 };
 
@@ -28,7 +27,7 @@ export class ConsoleModule {
             if (metadata.name) {
                 parent = this.service.getCli(metadata.name);
                 if (!parent) {
-                    parent = this.service.createSubCommand(metadata, cli);
+                    parent = this.service.createGroupCommand(metadata, cli);
                 }
             }
             for (const method of methods) {

@@ -3,7 +3,6 @@ import { ModuleWithDecoratorsTest } from './app/decorator/module';
 
 const bootstrap = new BootstrapConsole({
     module: ModuleWithDecoratorsTest,
-    withContainer: true,
     useDecorators: true
 });
 bootstrap.init().then(async app => {

@@ -1,0 +1,469 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>NestJS Console</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">NestJS Console</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> NestJS Console</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<div align="center">
+					<p><a href="https://www.npmjs.com/package/nestjs-console"><img src="https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png" alt="nestjs-console"></a>
+						<a href="https://github.com/Pop-Code/nestjs-acl/actions"><img src="https://github.com/Pop-Code/nestjs-acl/workflows/CI/badge.svg" alt="Actions Status"></a>
+						<a href="https://codecov.io/gh/Pop-Code/nestjs-console"><img src="https://codecov.io/gh/Pop-Code/nestjs-console/branch/v2/graph/badge.svg" alt="codecov"></a>
+						<a href="https://npmcharts.com/compare/nestjs-console?minimal=true"><img src="https://img.shields.io/npm/dm/nestjs-console.svg?style=flat" alt="NPM Downloads"></a>
+					<a href="https://www.npmjs.com/package/nestjs-console"><img src="https://img.shields.io/node/v/carbon.svg?style=flat" alt="npm"></a></p>
+				</div>
+				<p><a href="https://www.npmjs.com/package/nestjs-console">nestjs-console</a> is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the <a href="https://www.npmjs.com/package/commander">npm package commander</a></p>
+				<a href="#why" id="why" style="color: inherit; text-decoration: none;">
+					<h2>Why</h2>
+				</a>
+				<p>The nestjs framework is missing a cli to access the application context.<br>Common use case : Headless application, cront task, export data, etc...
+				<a href="https://www.npmjs.com/package/nestjs-console">nestjs-console</a> provide a way to bind cli command and subcommands to providers&#39;s methods.</p>
+				<a href="#how-it-works" id="how-it-works" style="color: inherit; text-decoration: none;">
+					<h2>How it works</h2>
+				</a>
+				<p>The console service works as a standalone process, like the classic entry point, and will initialize a NestApplicationContext (headless) instead a NestApplication.
+				The console service will be accesible inside the container.</p>
+				<ol>
+					<li>Bootstrap (entry point e.g console.ts) is invoked by cli.</li>
+					<li>Create a headless nest app<ul>
+							<li>Any module inside the app can create command and subcommands using nestjs-console with <a href="https://www.npmjs.com/package/commander">commander</a></li>
+						</ul>
+					</li>
+					<li>nestjs-console invoke commander</li>
+					<li>commander will do the rest.</li>
+				</ol>
+				<a href="#a-hrefhttpswwwnpmjscompackagenestjs-consoleinstall-from-npma" id="a-hrefhttpswwwnpmjscompackagenestjs-consoleinstall-from-npma" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://www.npmjs.com/package/nestjs-console">Install FROM NPM</a></h2>
+				</a>
+				<pre><code class="language-bash">npm install commander nestjs-console
+<span class="hljs-comment"># or unig yarn</span>
+yarn add commander nestjs-console</code></pre>
+				<a href="#create-a-cli-endpoint" id="create-a-cli-endpoint" style="color: inherit; text-decoration: none;">
+					<h2>Create a cli endpoint</h2>
+				</a>
+				<p>Create a file at root next to your entry point named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
+					You can create as many entry points as you want.
+				You can also extend the <code>BootstrapConsole</code> class to suit your needs.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// console.ts - example of entrypoint</span>
+<span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { MyModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./module'</span>;
+
+<span class="hljs-keyword">const</span> bootstrap = <span class="hljs-keyword">new</span> BootstrapConsole({
+    <span class="hljs-keyword">module</span>: MyModule,
+    useDecorators: true
+});
+bootstrap.init().then(async app =&gt; {
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-comment">// init your app</span>
+        <span class="hljs-keyword">await</span> app.init();
+        <span class="hljs-comment">// boot the cli</span>
+        <span class="hljs-keyword">await</span> bootstrap.boot();
+        process.exit(<span class="hljs-number">0</span>);
+    } <span class="hljs-keyword">catch</span> (e) {
+        process.exit(<span class="hljs-number">1</span>);
+    }
+});</code></pre>
+				<a href="#import-the-consolemodule-in-your-main-module" id="import-the-consolemodule-in-your-main-module" style="color: inherit; text-decoration: none;">
+					<h2>Import the ConsoleModule in your main module</h2>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-comment">// module.ts - your module</span>
+<span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
+<span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./service'</span>;
+
+<span class="hljs-meta">@Module</span>({
+    imports: [
+        ConsoleModule <span class="hljs-comment">// import the ConsoleModule</span>
+    ],
+    providers: [MyService]
+    exports: [MyService]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
+				<p>You can now inject the <em>ConsoleService</em> inside any nestjs providers, controllers...</p>
+				<p>There are 2 ways of registering providers methods to the console.<br>Using @decorators or using the <em>ConsoleService</em>.</p>
+				<p>Example of cli stack</p>
+				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> C<span class="hljs-function"><span class="hljs-title">ommand_A</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_A1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_A2</span> -&gt;</span> execution
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_B</span> -&gt;</span> [
+        C<span class="hljs-function"><span class="hljs-title">ommand_B1</span> -&gt;</span> execution,
+        C<span class="hljs-function"><span class="hljs-title">ommand_B2</span> -&gt;</span> [
+            C<span class="hljs-function"><span class="hljs-title">ommand_B2_a</span> -&gt;</span> execution
+            C<span class="hljs-function"><span class="hljs-title">ommand_B2_b</span> -&gt;</span> [... more sub commands ...]
+        ]
+    ]
+    -&gt; C<span class="hljs-function"><span class="hljs-title">ommand_C</span> -&gt;</span> execution</code></pre>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h1>Api</h1>
+				</a>
+				<p>As a simple example, we will define a cli with 2 commands (new and list), one of the command (new) will have 2 sub commands (directory and file)</p>
+				<pre><code>C<span class="hljs-function"><span class="hljs-title">li</span> -&gt;</span> <span class="hljs-function"><span class="hljs-title">list</span> -&gt;</span> -&gt; execution,
+    -&gt; <span class="hljs-function"><span class="hljs-title">new</span> -&gt;</span> [
+        <span class="hljs-function"><span class="hljs-title">directory</span> -&gt;</span> execution,
+        <span class="hljs-function"><span class="hljs-title">file</span> -&gt;</span> execution
+    ]</code></pre>
+				<a href="#how-to-use-decorators" id="how-to-use-decorators" style="color: inherit; text-decoration: none;">
+					<h2>How to use Decorators</h2>
+				</a>
+				<p>Registering methods using class decorators is very easy.
+				Nestjs providers that are decorated with @Console will be scanned and each member method that is decorated with @Command will be registered on the cli.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider using console decorators</span>
+<span class="hljs-keyword">import</span> { Console, Command, createSpinner } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+
+<span class="hljs-meta">@Console</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'list &lt;directory&gt;'</span>,
+        description: <span class="hljs-string">'List content of a directory'</span>
+    })
+    <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-comment">// See Ora npm package for details about spinner</span>
+        <span class="hljs-keyword">const</span> spin = createSpinner();
+        spin.start(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
+
+        <span class="hljs-comment">// simulate a long task of 1 seconds</span>
+        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">done</span> =&gt;</span>
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]), <span class="hljs-number">1000</span>)
+        );
+
+        spin.succeed(<span class="hljs-string">'Listing done'</span>);
+
+        <span class="hljs-comment">// send the response to the  cli</span>
+        <span class="hljs-comment">// you could also use process.stdout.write()</span>
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(files));
+    }
+}</code></pre>
+				<a href="#register-a-command-with-sub-commands" id="register-a-command-with-sub-commands" style="color: inherit; text-decoration: none;">
+					<h4>Register a command with sub commands</h4>
+				</a>
+				<p>By default, the @Console will tell the module to register all decorated methods at root of the cli.<br><code>Example of Usage: [options] [command]</code></p>
+				<p>You can name your provider to be registered in a group command container.
+				This is usefull when you have a lot of commands and you want to group them as sub command. (git style)</p>
+				<p>To achieve this, you have to group your methods into class.
+					You have to pass options to the @Console decorator to configure the name of the parent cli.
+				Decorated methods of the providers will be registered as a sub command instead of being registered at root.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.new.ts - a nestjs provider using console decorators (sub commands)</span>
+<span class="hljs-meta">@Console</span>({
+    name: <span class="hljs-string">'new'</span>,
+    description: <span class="hljs-string">'A command to create an item'</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyNewService {
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'file &lt;name&gt;'</span>,
+        description: <span class="hljs-string">'Create a file'</span>
+    })
+    <span class="hljs-keyword">async</span> createFile(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+
+    <span class="hljs-meta">@Command</span>({
+        command: <span class="hljs-string">'directory &lt;name&gt;'</span>,
+        description: <span class="hljs-string">'Create a directory'</span>
+    })
+    <span class="hljs-keyword">async</span> createDirectory(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    }
+}</code></pre>
+				<p>If you need to register other sub commands from other Class to the same cli container, you have to decorate your class using the @Console decorator with the same name.</p>
+				<pre><code class="language-ts"><span class="hljs-meta">@Console</span>({
+    name: <span class="hljs-string">'new'</span> <span class="hljs-comment">// here the name is the same as the one from MyNewService, grouping all commands</span>
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyOtherService {...}</code></pre>
+				<p><code>Example of Usage: new [options] [command]</code></p>
+				<a href="#how-to-use-the-consoleservice" id="how-to-use-the-consoleservice" style="color: inherit; text-decoration: none;">
+					<h2>How to use the ConsoleService</h2>
+				</a>
+				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is usefull if you need to create the cli or a part of the cli at runtime.<br>This way you can also create mutliple commands ans sub commands from the same context.</p>
+				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
+<span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
+        <span class="hljs-comment">// get the root cli</span>
+        <span class="hljs-keyword">const</span> cli = <span class="hljs-keyword">this</span>.consoleService.getCli();
+
+        <span class="hljs-comment">// create a single command (See [npm commander arguments/options for more details])</span>
+        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+            {
+                command: <span class="hljs-string">'list &lt;directory&gt;'</span>,
+                description: <span class="hljs-string">'description'</span>,
+                options: [{ flags: <span class="hljs-string">'-o, --optional [value]'</span> }]
+            },
+            <span class="hljs-keyword">this</span>.listContent,
+            cli <span class="hljs-comment">// attach the command to the cli</span>
+        );
+
+        <span class="hljs-comment">// create a parent command container</span>
+        <span class="hljs-keyword">const</span> groupCommand = <span class="hljs-keyword">this</span>.consoleService.createGroupCommand(
+            {
+                name: <span class="hljs-string">'new'</span>,
+                description: <span class="hljs-string">'A command to create an item'</span>
+            },
+            cli <span class="hljs-comment">// attach the command to the root cli</span>
+        );
+
+        <span class="hljs-comment">// create command</span>
+        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+            {
+                command: <span class="hljs-string">'file &lt;name&gt;'</span>,
+                description: <span class="hljs-string">'Create a file'</span>
+            },
+            <span class="hljs-keyword">this</span>.createFile,
+            groupCommand <span class="hljs-comment">// attach the command to the group</span>
+        );
+
+        <span class="hljs-comment">// create an other sub command</span>
+        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+            {
+                command: <span class="hljs-string">'directory &lt;name&gt;'</span>,
+                description: <span class="hljs-string">'Create a directory'</span>
+            },
+            <span class="hljs-keyword">this</span>.createDirectory,
+            groupCommand <span class="hljs-comment">// attach the command to the group</span>
+        );
+    }
+
+    listContent = <span class="hljs-keyword">async</span> (directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    };
+
+    createFile = <span class="hljs-keyword">async</span> (name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    };
+
+    createDirectory = <span class="hljs-keyword">async</span> (name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; =&gt; {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
+        <span class="hljs-comment">// your code...</span>
+        process.exit(<span class="hljs-number">0</span>); <span class="hljs-comment">// it's important to exit the process.</span>
+    };
+}</code></pre>
+				<p>Add scripts in your package.json (if you want to use them)</p>
+				<pre><code class="language-js">{
+    <span class="hljs-string">"scripts"</span>: {
+        <span class="hljs-comment">// from sources</span>
+        <span class="hljs-string">"console:dev"</span>: <span class="hljs-string">"ts-node -r tsconfig-paths/register src/console.ts"</span>,
+        <span class="hljs-comment">// from build (we suppose your app was built in the lib forlder)</span>
+        <span class="hljs-string">"console"</span>: <span class="hljs-string">"node lib/console.js"</span>
+    }
+}</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p>Call the cli (production)</p>
+				<pre><code class="language-bash"><span class="hljs-comment"># using node</span>
+node lib/console.js --<span class="hljs-built_in">help</span>
+<span class="hljs-comment"># using npm</span>
+npm run console -- --<span class="hljs-built_in">help</span>
+<span class="hljs-comment"># using yarn</span>
+yarn console --<span class="hljs-built_in">help</span></code></pre>
+				<p>Call the cli from sources (dev)</p>
+				<pre><code class="language-bash"><span class="hljs-comment"># using ts-node</span>
+ts-node -r tsconfig-paths/register src/console.ts --<span class="hljs-built_in">help</span>
+<span class="hljs-comment"># using npm</span>
+npm run console:dev -- --<span class="hljs-built_in">help</span>
+<span class="hljs-comment"># using yarn</span>
+yarn console:dev --<span class="hljs-built_in">help</span></code></pre>
+				<a href="#example-of-response" id="example-of-response" style="color: inherit; text-decoration: none;">
+					<h4>Example of Response</h4>
+				</a>
+				<pre><code>Usage:<span class="hljs-built_in"> console </span>[options] [command]
+
+Options:
+  -h, --help            output usage information
+
+Commands:
+  list &lt;directory&gt;      List content of a directory
+  new                   A command <span class="hljs-keyword">to</span> create an item</code></pre>
+				<a href="#a-hrefhttpspop-codegithubionestjs-consoleapi-documentationa" id="a-hrefhttpspop-codegithubionestjs-consoleapi-documentationa" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://pop-code.github.io/nestjs-console">API DOCUMENTATION</a></h3>
+				</a>
+				<a href="#a-hrefhttpsgithubcompop-codenestjs-consoleblobmasterchangelogmdchangeloga" id="a-hrefhttpsgithubcompop-codenestjs-consoleblobmasterchangelogmdchangeloga" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://github.com/Pop-Code/nestjs-console/blob/master/CHANGELOG.md">CHANGELOG</a></h3>
+				</a>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bootstrap_abstract_.html">&quot;bootstrap/abstract&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bootstrap_console_.html">&quot;bootstrap/console&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commander_.html">&quot;commander&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_constants_.html">&quot;constants&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_decorators_.html">&quot;decorators&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_helpers_.html">&quot;helpers&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_index_.html">&quot;index&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_module_.html">&quot;module&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_scanner_.html">&quot;scanner&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="modules/_service_.html">&quot;service&quot;</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer>
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

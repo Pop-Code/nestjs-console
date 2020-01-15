@@ -1,8 +1,12 @@
+<div align="center">
+
 [![nestjs-console](https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png)][npm]
 [![Actions Status](https://github.com/Pop-Code/nestjs-acl/workflows/CI/badge.svg)](https://github.com/Pop-Code/nestjs-acl/actions)
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/v2/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
 [![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
+
+</div>
 
 [nestjs-console][npm] is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the [npm package commander][commander]
 
@@ -18,7 +22,7 @@ The console service works as a standalone process, like the classic entry point,
 The console service will be accesible inside the container.
 
 1. Bootstrap (entry point e.g console.ts) is invoked by cli.
-2. Init a headless nest app
+2. Create a headless nest app
     - Any module inside the app can create command and subcommands using nestjs-console with [commander][commander]
 3. nestjs-console invoke commander
 4. commander will do the rest.
@@ -43,10 +47,20 @@ You can also extend the `BootstrapConsole` class to suit your needs.
 import { BootstrapConsole } from 'nestjs-console';
 import { MyModule } from './module';
 
-BootstrapConsole.init({ module: MyModule }).then(({ app, boot }) => {
-    // do something with your app container if you need (app)
-    // boot the cli
-    boot(/*process.argv*/);
+const bootstrap = new BootstrapConsole({
+    module: MyModule,
+    useDecorators: true
+});
+bootstrap.init().then(async app => {
+    try {
+        // init your app
+        await app.init();
+        // boot the cli
+        await bootstrap.boot();
+        process.exit(0);
+    } catch (e) {
+        process.exit(1);
+    }
 });
 ```
 
@@ -71,7 +85,7 @@ export class MyModule {}
 You can now inject the _ConsoleService_ inside any nestjs providers, controllers...
 
 There are 2 ways of registering providers methods to the console.  
-Using @decorators (>=v1.1 and >=v2 for multi dimensions) or using the _ConsoleService_.
+Using @decorators or using the _ConsoleService_.
 
 Example of cli stack
 
@@ -117,7 +131,7 @@ export class MyService {
         command: 'list <directory>',
         description: 'List content of a directory'
     })
-    async listContent(directory: string): void | Promise<void> {
+    async listContent(directory: string): Promise<void> {
         // See Ora npm package for details about spinner
         const spin = createSpinner();
         spin.start(`Listing files in directory ${directory}`);
@@ -132,8 +146,6 @@ export class MyService {
         // send the response to the  cli
         // you could also use process.stdout.write()
         console.log(JSON.stringify(files));
-
-        process.exit(0);
     }
 }
 ```
@@ -143,12 +155,12 @@ export class MyService {
 By default, the @Console will tell the module to register all decorated methods at root of the cli.  
 `Example of Usage: [options] [command]`
 
-You can name your provider to use it as a parent command container.
+You can name your provider to be registered in a group command container.
 This is usefull when you have a lot of commands and you want to group them as sub command. (git style)
 
-To achieve this, you have to group your methods into class.  
-You have to pass options to the @Console decorator to configure your provider as a parent command.
-Decorated methods of the providers will be registered as a sub command instead of beeing registered at root.
+To achieve this, you have to group your methods into class.
+You have to pass options to the @Console decorator to configure the name of the parent cli.
+Decorated methods of the providers will be registered as a sub command instead of being registered at root.
 
 ```ts
 // service.new.ts - a nestjs provider using console decorators (sub commands)
@@ -179,6 +191,15 @@ export class MyNewService {
 }
 ```
 
+If you need to register other sub commands from other Class to the same cli container, you have to decorate your class using the @Console decorator with the same name.
+
+```ts
+@Console({
+    name: 'new' // here the name is the same as the one from MyNewService, grouping all commands
+})
+export class MyOtherService {...}
+```
+
 `Example of Usage: new [options] [command]`
 
 ## How to use the ConsoleService
@@ -186,7 +207,7 @@ export class MyNewService {
 Registering methods using the ConsoleService is more flexible than decorators.  
 When you use the ConsoleService, you simply bind your methods to the cli manually.  
 This is usefull if you need to create the cli or a part of the cli at runtime.  
-This way you can also create mutliple commands ans sub commands from the same class.
+This way you can also create mutliple commands ans sub commands from the same context.
 
 ```ts
 // service.ts - a nestjs provider
@@ -199,29 +220,45 @@ export class MyService {
         // get the root cli
         const cli = this.consoleService.getCli();
 
-        // create a single command (See [npm commander for more details])
-        cli.command('list <directory>')
-            .description('List content of a directory')
-            .action(this.listContent);
-
-        // create a parent command container
-        const parentCommand = this.consoleService.subCommands(
-            cli,
-            'new',
-            'A command to create an item'
+        // create a single command (See [npm commander arguments/options for more details])
+        this.consoleService.createCommand(
+            {
+                command: 'list <directory>',
+                description: 'description',
+                options: [{ flags: '-o, --optional [value]' }]
+            },
+            this.listContent,
+            cli // attach the command to the cli
         );
 
-        // create sub command
-        parentCommand
-            .command('file <name>')
-            .description('Create a file')
-            .action(this.createFile);
+        // create a parent command container
+        const groupCommand = this.consoleService.createGroupCommand(
+            {
+                name: 'new',
+                description: 'A command to create an item'
+            },
+            cli // attach the command to the root cli
+        );
+
+        // create command
+        this.consoleService.createCommand(
+            {
+                command: 'file <name>',
+                description: 'Create a file'
+            },
+            this.createFile,
+            groupCommand // attach the command to the group
+        );
 
         // create an other sub command
-        parentCommand
-            .command('directory <name>')
-            .description('Create a directory')
-            .action(this.createDirectory);
+        this.consoleService.createCommand(
+            {
+                command: 'directory <name>',
+                description: 'Create a directory'
+            },
+            this.createDirectory,
+            groupCommand // attach the command to the group
+        );
     }
 
     listContent = async (directory: string): void | Promise<void> => {

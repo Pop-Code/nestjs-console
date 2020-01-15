@@ -53,7 +53,7 @@ export class ServiceTest {
             cli
         );
 
-        const subCommand = this.consoleService.createSubCommand(
+        const subCommand = this.consoleService.createGroupCommand(
             {
                 name: 'subCommand',
                 alias: 'sc',

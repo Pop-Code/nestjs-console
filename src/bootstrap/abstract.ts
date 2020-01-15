@@ -54,7 +54,7 @@ export abstract class AbstractBootstrapConsole<
         this.container = await this.create();
         this.service = this.container.get(ConsoleService);
         if (
-            this.options.withContainer &&
+            (this.options.withContainer || this.options.useDecorators) &&
             typeof this.service.setContainer === 'function'
         ) {
             this.service.setContainer(this.container);

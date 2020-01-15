@@ -1,13 +1,12 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import { Command, CommanderError } from 'commander';
-import { CommandError, onSubCommand, createCli } from './commander';
+import { EventEmitter } from 'events';
 import {
+    ICommandDecoratorOptions,
     IConsoleOptions,
-    InjectCommander,
-    ICommandDecoratorOptions
+    InjectCommander
 } from './decorators';
 import { formatResponse } from './helpers';
-import { EventEmitter } from 'events';
 
 @Injectable()
 export class ConsoleService {
@@ -17,11 +16,20 @@ export class ConsoleService {
 
     constructor(@InjectCommander() protected cli: Command) {}
 
+    static create() {
+        const cli = new Command();
+        // listen for root not found
+        cli.on('command:*', (args: string[], unknown: string[]) => {
+            throw new Error(`"${args[0]}" command not found`);
+        });
+        return cli;
+    }
+
     /**
      * Reset the cli stack (for testing purpose only)
      */
     resetCli() {
-        this.cli = createCli();
+        this.cli = ConsoleService.create();
     }
 
     /**
@@ -29,7 +37,7 @@ export class ConsoleService {
      * @param command The command related to the error
      * @param error The error to format
      */
-    logError(command: Command, error: Error) {
+    logError(error: Error) {
         // tslint:disable-next-line:no-console
         return console.error(formatResponse(error));
     }
@@ -102,9 +110,8 @@ export class ConsoleService {
             });
             return response;
         } catch (e) {
-            // console.log('Err', e);
-            // if commander throws a CommanderError async event or help has been executed
             if (e instanceof CommanderError) {
+                // if commander throws a CommanderError async event or help has been executed
                 // ignore response and error for help display
                 if (/(helpDisplayed|commander\.help)/.test(e.code)) {
                     return;
@@ -114,10 +121,10 @@ export class ConsoleService {
                 }
                 // display others errors
                 if (displayErrors && e.exitCode === 1) {
-                    this.logError(cli, e);
+                    this.logError(e);
                 }
             } else if (displayErrors) {
-                this.logError(cli, e);
+                this.logError(e);
             }
             // always throw for promise
             throw e;
@@ -153,10 +160,10 @@ export class ConsoleService {
     }
 
     /**
-     * Create a sub command.
+     * Create a group of command.
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
-    createSubCommand(options: IConsoleOptions, parent: Command): Command {
+    createGroupCommand(options: IConsoleOptions, parent: Command): Command {
         if (parent._args.length > 0) {
             throw new Error(
                 'Sub commands cannot be applied to command with explicit args'
@@ -179,7 +186,19 @@ export class ConsoleService {
 
         // register all named events now this will prevent commander to call the event command:*
         const _onSubCommand = (args: string[], unknown: string[]) => {
-            onSubCommand(command, args, unknown);
+            // Trigger any releated sub command events passing the unknown args from parent
+            // if command has not parent, args are the unknown args
+            const commandArgs = command.parseOptions(args.concat(unknown));
+            command.parseArgs(commandArgs.args, commandArgs.unknown);
+
+            // Finally, throw an error if nothing has been done,
+            // Remeber that the client must exit the process to prevent this not found to be called
+            if (
+                commandArgs.unknown.length === 0 &&
+                commandArgs.args.length === 0
+            ) {
+                command.help();
+            }
         };
         parent.on('command:' + name, _onSubCommand);
         if (options.alias) {

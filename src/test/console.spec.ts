@@ -36,6 +36,7 @@ function testCommands(moduleType: any) {
             useDecorators: true
         });
         app = await bootstrap.init();
+        await app.init();
         consoleService = app.get<ConsoleService>(ConsoleService);
     });
 
@@ -280,7 +281,7 @@ function testCommands(moduleType: any) {
 
                 expect.assertions(2);
                 try {
-                    consoleService.createSubCommand(
+                    consoleService.createGroupCommand(
                         {
                             name: 'subCommand3',
                             description: 'description'
