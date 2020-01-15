@@ -16,7 +16,7 @@ export class ApplicationManager {
     protected checkContainerInterface(container: any): NestApplication {
         if (!(container instanceof NestApplication)) {
             throw new Error(
-                'The ApplicationManager can not start an instance that does is not a NestApplication'
+                'The ApplicationManager can not start an instance that is not a NestApplication'
             );
         }
         return container;
