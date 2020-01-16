@@ -67,9 +67,14 @@ export class ConsoleScanner {
                     return;
                 }
 
+                // ignore providers without instance
+                if (!p.instance) {
+                    return;
+                }
+
                 const consoleMetadata: IConsoleOptions = Reflect.getMetadata(
                     CONSOLE_METADATA_NAME,
-                    metatype
+                    p.instance.constructor
                 );
 
                 // ignore providers without the console decorator

@@ -39,8 +39,6 @@ yarn add commander nestjs-console
 
 Create a file at root next to your entry point named console.ts  
 Import your app module or any module you want to be loaded. Usually this is your main nestjs module.
-You can create as many entry points as you want.
-You can also extend the `BootstrapConsole` class to suit your needs.
 
 ```ts
 // console.ts - example of entrypoint

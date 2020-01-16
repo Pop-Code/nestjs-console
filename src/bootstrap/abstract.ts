@@ -9,7 +9,7 @@ import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-ap
 export interface CommonBootstrapConsoleOptions {
     /**
      * Any static module to load.
-     * If your are using a dynamic module you must create a module that imports your dynamic module.
+     * If you are using a dynamic module as a root module, you must create a module that imports your dynamic module first.
      * "@Module({imports: [MyDynamicModule.register()]})"
      */
     module: any;

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.1] - 2020-01-16
+
+### Fixed
+
+-   Fix the app scanner register commands using decorators. Scanner now works with external and dynamic modules
+
 ## [2.0.0] - 2020-01-15
 
 ### Changed
@@ -99,7 +105,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.1...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.1...HEAD
+[2.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.0...v2.0.1
+[2.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.2...v2.0.0
+[1.2.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.1...v1.2.2
 [1.2.1]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.1.4...v1.2.0
 [1.1.4]: https://github.com/Pop-Code/nestjs-console/compare/v1.0.2...v1.1.4
