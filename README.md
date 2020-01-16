@@ -222,8 +222,7 @@ export class MyService {
         this.consoleService.createCommand(
             {
                 command: 'list <directory>',
-                description: 'description',
-                options: [{ flags: '-o, --optional [value]' }]
+                description: 'description'
             },
             this.listContent,
             cli // attach the command to the cli
