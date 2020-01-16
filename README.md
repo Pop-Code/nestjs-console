@@ -176,7 +176,6 @@ export class MyNewService {
     async createFile(name: string): void | Promise<void> {
         console.log(`Creating a file named ${name}`);
         // your code...
-        process.exit(0); // it's important to exit the process.
     }
 
     @Command({
@@ -186,7 +185,6 @@ export class MyNewService {
     async createDirectory(name: string): void | Promise<void> {
         console.log(`Creating a directory named ${name}`);
         // your code...
-        process.exit(0); // it's important to exit the process.
     }
 }
 ```
@@ -264,18 +262,16 @@ export class MyService {
     listContent = async (directory: string): void | Promise<void> => {
         console.log(`Listing files in directory ${directory}`);
         // your code...
-        process.exit(0); // it's important to exit the process.
     };
 
     createFile = async (name: string): void | Promise<void> => {
         console.log(`Creating a file named ${name}`);
-        process.exit(0); // it's important to exit the process.
+        // your code...
     };
 
     createDirectory = async (name: string): void | Promise<void> => {
         console.log(`Creating a directory named ${name}`);
         // your code...
-        process.exit(0); // it's important to exit the process.
     };
 }
 ```
