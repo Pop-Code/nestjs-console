@@ -1,20 +1,45 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';
+import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
 /**
  * The Common options of the AbstractBootstrapConsole
  */
 export interface CommonBootstrapConsoleOptions {
+    /**
+     * Any static module to load.
+     * If your are using a dynamic module you must create a module that imports your dynamic module.
+     * "@Module({imports: [MyDynamicModule.register()]})"
+     */
     module: any;
+
+    /**
+     * If true the ConsoleService will hold an instance of the application.
+     * This is true if useDecorators is true.
+     */
     withContainer?: boolean;
+
+    /**
+     * If true the BootstrapConsole will scan the application to find Console and Command decorators
+     */
     useDecorators?: boolean;
+
+    /**
+     * An optional list of Nest Modules to scan. If set, only listed modules will be scanned.
+     */
     includeModules?: any[];
-    contextOptions?: any;
+
+    /**
+     * The nest application context options
+     */
+    contextOptions?: NestApplicationContextOptions;
 }
 
 /**
  * An abstract class to boot a nest application
+ * @param A The type of nest application
+ * @param O The options
  */
 export abstract class AbstractBootstrapConsole<
     A extends INestApplicationContext,
@@ -30,11 +55,19 @@ export abstract class AbstractBootstrapConsole<
      */
     protected container: A;
 
-    constructor(protected readonly options: O) {
+    /**
+     * The options to bootstrap
+     */
+    protected readonly options: O;
+
+    constructor(options: O) {
+        this.options = options;
+
         if (!this.options.contextOptions) {
-            this.options.contextOptions = {
-                logger: false
-            };
+            this.options.contextOptions = {};
+        }
+        if (!this.options.contextOptions.logger) {
+            this.options.contextOptions.logger = false;
         }
     }
 
@@ -76,10 +109,8 @@ export abstract class AbstractBootstrapConsole<
      * Boot the console
      * @param argv The list of arguments to pass to the cli, default are process.argv
      */
-    boot(argv?: string[], displayErrors: boolean = true) {
-        /* istanbul ignore next */
-        const args = argv || process.argv;
-        return this.service.init(args, displayErrors);
+    boot(argv: string[] = process.argv, displayErrors: boolean = true) {
+        return this.service.init(argv, displayErrors);
     }
 
     /**

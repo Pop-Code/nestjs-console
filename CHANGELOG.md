@@ -68,7 +68,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
--   A decorator `InjectCommander` to inject commander instance (patched for sub commands) as nestjs provider
+-   A decorator `InjectCli` to inject commander instance (patched for sub commands) as nestjs provider
 -   A new methods `subCommands() => Command` in the class `ConsoleService` to get sub commands from a non patched commander instance.
 -   Tests
 

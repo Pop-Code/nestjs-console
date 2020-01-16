@@ -11,7 +11,14 @@ import { BootstrapConsoleOptions } from './console';
  * The options of the BootstrapConsoleServer
  */
 export interface BootstrapConsoleServerOptions extends BootstrapConsoleOptions {
+    /**
+     * The nest application options
+     */
     contextOptions?: NestApplicationOptions;
+
+    /**
+     * The Http Adapter to use to start the app
+     */
     httpAdapter?: AbstractHttpAdapter;
 }
 

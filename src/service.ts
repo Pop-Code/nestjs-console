@@ -2,9 +2,9 @@ import { INestApplicationContext, Injectable } from '@nestjs/common';
 import { Command, CommanderError } from 'commander';
 import { EventEmitter } from 'events';
 import {
-    ICommandDecoratorOptions,
+    ICreateCommandOptions,
     IConsoleOptions,
-    InjectCommander
+    InjectCli
 } from './decorators';
 import { formatResponse } from './helpers';
 
@@ -14,8 +14,11 @@ export class ConsoleService {
     protected commands: Map<string, Command> = new Map();
     protected eventManager: EventEmitter = new EventEmitter();
 
-    constructor(@InjectCommander() protected cli: Command) {}
+    constructor(@InjectCli() protected cli: Command) {}
 
+    /**
+     * Create an instance of root cli
+     */
     static create() {
         const cli = new Command();
         // listen for root not found
@@ -65,6 +68,9 @@ export class ConsoleService {
         return this.container;
     }
 
+    /**
+     * Wrap an action handler to work with promise.
+     */
     createHandler(action: (...args: any[]) => any) {
         return async (...args: any[]) => {
             try {
@@ -131,9 +137,16 @@ export class ConsoleService {
         }
     }
 
+    /**
+     * Create a Command
+     *
+     * @param options The options to create the commands
+     * @param handler The handler of the command
+     * @param parent The command to use as a parent
+     */
     createCommand(
-        options: ICommandDecoratorOptions,
-        handler: (...args: any[]) => any,
+        options: ICreateCommandOptions,
+        handler: (...args: any[]) => any | Promise<any>,
         parent: Command
     ) {
         const command = parent
@@ -161,6 +174,8 @@ export class ConsoleService {
 
     /**
      * Create a group of command.
+     * @param options The options to create the grouped command
+     * @param parent The command to use as a parent
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
     createGroupCommand(options: IConsoleOptions, parent: Command): Command {

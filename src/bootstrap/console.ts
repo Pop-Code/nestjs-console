@@ -9,9 +9,8 @@ import {
 /**
  * The options of the BootstrapConsoleOptions
  */
-export interface BootstrapConsoleOptions extends CommonBootstrapConsoleOptions {
-    contextOptions?: NestApplicationContextOptions;
-}
+export interface BootstrapConsoleOptions
+    extends CommonBootstrapConsoleOptions {}
 
 /**
  * A class to boot a nestjs application context from cli

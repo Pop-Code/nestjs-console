@@ -1,10 +1,10 @@
 import { INestApplicationContext, Module } from '@nestjs/common';
-import { COMMANDER_SERVICE_TOKEN } from './constants';
+import { CLI_SERVICE_TOKEN } from './constants';
 import { ConsoleScanner } from './scanner';
 import { ConsoleService } from './service';
 
 const cliProvider = {
-    provide: COMMANDER_SERVICE_TOKEN,
+    provide: CLI_SERVICE_TOKEN,
     useFactory: () => {
         return ConsoleService.create();
     }

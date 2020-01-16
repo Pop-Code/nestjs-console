@@ -73,9 +73,9 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_decorators_.icommanddecoratoroptions.html" class="tsd-kind-icon">ICommand<wbr>Decorator<wbr>Options</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_decorators_.icommandoptions.html" class="tsd-kind-icon">ICommand<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_decorators_.icommandoption.html" class="tsd-kind-icon">ICommand<wbr>Option</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_decorators_.iconsoleoptions.html" class="tsd-kind-icon">IConsole<wbr>Options</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-external-module"><a href="../interfaces/_decorators_.icreatecommandoptions.html" class="tsd-kind-icon">ICreate<wbr>Command<wbr>Options</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -83,7 +83,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_.html#command" class="tsd-kind-icon">Command</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_.html#console" class="tsd-kind-icon">Console</a></li>
-								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_.html#injectcommander" class="tsd-kind-icon">Inject<wbr>Commander</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_decorators_.html#injectcli" class="tsd-kind-icon">Inject<wbr>Cli</a></li>
 							</ul>
 						</section>
 					</div>
@@ -95,19 +95,25 @@
 					<a name="command" class="tsd-anchor"></a>
 					<h3>Command</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Command<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_decorators_.icommanddecoratoroptions.html" class="tsd-signature-type">ICommandDecoratorOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
+						<li class="tsd-signature tsd-kind-icon">Command<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">: </span><a href="../interfaces/_decorators_.icreatecommandoptions.html" class="tsd-signature-type">ICreateCommandOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">(Anonymous function)</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/decorators.ts#L27">src/decorators.ts:27</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/decorators.ts#L73">src/decorators.ts:73</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The Command decorator is used to decorate a method in a class
+									You can use it in a class that is deecorated by a &quot;@Console&quot; decorator</p>
+								</div>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
-									<h5>options: <a href="../interfaces/_decorators_.icommanddecoratoroptions.html" class="tsd-signature-type">ICommandDecoratorOptions</a></h5>
+									<h5>options: <a href="../interfaces/_decorators_.icreatecommandoptions.html" class="tsd-signature-type">ICreateCommandOptions</a></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">(Anonymous function)</span></h4>
@@ -124,9 +130,16 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/decorators.ts#L37">src/decorators.ts:37</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/decorators.ts#L104">src/decorators.ts:104</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The Console decorator is used to decorate a class
+									All commands in class that are decorated by a &quot;@Console&quot; with identical name will be grouped</p>
+								</div>
+								<p>eg &quot;@Console({name: &quot;mycommand&quot;})&quot;</p>
+							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
@@ -138,18 +151,23 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-external-module">
-					<a name="injectcommander" class="tsd-anchor"></a>
-					<h3>Inject<wbr>Commander</h3>
+					<a name="injectcli" class="tsd-anchor"></a>
+					<h3>Inject<wbr>Cli</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-external-module">
-						<li class="tsd-signature tsd-kind-icon">Inject<wbr>Commander<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
+						<li class="tsd-signature tsd-kind-icon">Inject<wbr>Cli<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">function</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/decorators.ts#L9">src/decorators.ts:9</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/decorators.ts#L11">src/decorators.ts:11</a></li>
 								</ul>
 							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>A Param decorator to inject the root cli</p>
+								</div>
+							</div>
 							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">function</span></h4>
 							<ul class="tsd-parameters">
 								<li class="tsd-parameter-siganture">
@@ -196,9 +214,6 @@
 						<a href="_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_commander_.html">&quot;commander&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
 						<a href="_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
@@ -227,13 +242,13 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_decorators_.icommanddecoratoroptions.html" class="tsd-kind-icon">ICommand<wbr>Decorator<wbr>Options</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
-						<a href="../interfaces/_decorators_.icommandoptions.html" class="tsd-kind-icon">ICommand<wbr>Options</a>
+						<a href="../interfaces/_decorators_.icommandoption.html" class="tsd-kind-icon">ICommand<wbr>Option</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="../interfaces/_decorators_.iconsoleoptions.html" class="tsd-kind-icon">IConsole<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="../interfaces/_decorators_.icreatecommandoptions.html" class="tsd-kind-icon">ICreate<wbr>Command<wbr>Options</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_decorators_.html#command" class="tsd-kind-icon">Command</a>
@@ -242,7 +257,7 @@
 						<a href="_decorators_.html#console" class="tsd-kind-icon">Console</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
-						<a href="_decorators_.html#injectcommander" class="tsd-kind-icon">Inject<wbr>Commander</a>
+						<a href="_decorators_.html#injectcli" class="tsd-kind-icon">Inject<wbr>Cli</a>
 					</li>
 				</ul>
 			</nav>

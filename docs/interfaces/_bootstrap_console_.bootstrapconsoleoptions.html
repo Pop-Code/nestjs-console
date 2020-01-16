@@ -98,10 +98,10 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section ">
+						<section class="tsd-index-section tsd-is-inherited">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite"><a href="_bootstrap_console_.bootstrapconsoleoptions.html#contextoptions" class="tsd-kind-icon">context<wbr>Options</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_bootstrap_console_.bootstrapconsoleoptions.html#contextoptions" class="tsd-kind-icon">context<wbr>Options</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_bootstrap_console_.bootstrapconsoleoptions.html#includemodules" class="tsd-kind-icon">include<wbr>Modules</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_bootstrap_console_.bootstrapconsoleoptions.html#module" class="tsd-kind-icon">module</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="_bootstrap_console_.bootstrapconsoleoptions.html#usedecorators" class="tsd-kind-icon">use<wbr>Decorators</a></li>
@@ -111,18 +111,23 @@
 					</div>
 				</section>
 			</section>
-			<section class="tsd-panel-group tsd-member-group ">
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="contextoptions" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> context<wbr>Options</h3>
 					<div class="tsd-signature tsd-kind-icon">context<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NestApplicationContextOptions</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#contextoptions">contextOptions</a></p>
+						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#contextoptions">contextOptions</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/console.ts#L13">src/bootstrap/console.ts:13</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L36">src/bootstrap/abstract.ts:36</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The nest application context options</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="includemodules" class="tsd-anchor"></a>
@@ -131,9 +136,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#includemodules">includeModules</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L12">src/bootstrap/abstract.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L31">src/bootstrap/abstract.ts:31</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An optional list of Nest Modules to scan. If set, only listed modules will be scanned.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="module" class="tsd-anchor"></a>
@@ -142,9 +152,16 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#module">module</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L9">src/bootstrap/abstract.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L15">src/bootstrap/abstract.ts:15</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Any static module to load.
+								If your are using a dynamic module you must create a module that imports your dynamic module.
+							&quot;@Module({imports: [MyDynamicModule.register()]})&quot;</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="usedecorators" class="tsd-anchor"></a>
@@ -153,9 +170,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#usedecorators">useDecorators</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L11">src/bootstrap/abstract.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L26">src/bootstrap/abstract.ts:26</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true the BootstrapConsole will scan the application to find Console and Command decorators</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="withcontainer" class="tsd-anchor"></a>
@@ -164,9 +186,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#withcontainer">withContainer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L10">src/bootstrap/abstract.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L21">src/bootstrap/abstract.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true the ConsoleService will hold an instance of the application.
+							This is true if useDecorators is true.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -184,9 +212,6 @@
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_commander_.html">&quot;commander&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
@@ -224,7 +249,7 @@
 					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
 						<a href="_bootstrap_console_.bootstrapconsoleoptions.html" class="tsd-kind-icon">Bootstrap<wbr>Console<wbr>Options</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-overwrite">
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="_bootstrap_console_.bootstrapconsoleoptions.html#contextoptions" class="tsd-kind-icon">context<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">

@@ -114,11 +114,16 @@
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> context<wbr>Options</h3>
 					<div class="tsd-signature tsd-kind-icon">context<wbr>Options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">NestApplicationOptions</span></div>
 					<aside class="tsd-sources">
-						<p>Overrides <a href="_bootstrap_console_.bootstrapconsoleoptions.html">BootstrapConsoleOptions</a>.<a href="_bootstrap_console_.bootstrapconsoleoptions.html#contextoptions">contextOptions</a></p>
+						<p>Overrides <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#contextoptions">contextOptions</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/server.ts#L14">src/bootstrap/server.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/server.ts#L17">src/bootstrap/server.ts:17</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The nest application options</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="httpadapter" class="tsd-anchor"></a>
@@ -126,9 +131,14 @@
 					<div class="tsd-signature tsd-kind-icon">http<wbr>Adapter<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">AbstractHttpAdapter</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/server.ts#L15">src/bootstrap/server.ts:15</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/server.ts#L22">src/bootstrap/server.ts:22</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The Http Adapter to use to start the app</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="includemodules" class="tsd-anchor"></a>
@@ -137,9 +147,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#includemodules">includeModules</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L12">src/bootstrap/abstract.ts:12</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L31">src/bootstrap/abstract.ts:31</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An optional list of Nest Modules to scan. If set, only listed modules will be scanned.</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="module" class="tsd-anchor"></a>
@@ -148,9 +163,16 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#module">module</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L9">src/bootstrap/abstract.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L15">src/bootstrap/abstract.ts:15</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Any static module to load.
+								If your are using a dynamic module you must create a module that imports your dynamic module.
+							&quot;@Module({imports: [MyDynamicModule.register()]})&quot;</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="usedecorators" class="tsd-anchor"></a>
@@ -159,9 +181,14 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#usedecorators">useDecorators</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L11">src/bootstrap/abstract.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L26">src/bootstrap/abstract.ts:26</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true the BootstrapConsole will scan the application to find Console and Command decorators</p>
+						</div>
+					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="withcontainer" class="tsd-anchor"></a>
@@ -170,9 +197,15 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html">CommonBootstrapConsoleOptions</a>.<a href="_bootstrap_abstract_.commonbootstrapconsoleoptions.html#withcontainer">withContainer</a></p>
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/b9dc3e2/src/bootstrap/abstract.ts#L10">src/bootstrap/abstract.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/21c8b75/src/bootstrap/abstract.ts#L21">src/bootstrap/abstract.ts:21</a></li>
 						</ul>
 					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If true the ConsoleService will hold an instance of the application.
+							This is true if useDecorators is true.</p>
+						</div>
+					</div>
 				</section>
 			</section>
 		</div>
@@ -190,9 +223,6 @@
 					</li>
 					<li class="current tsd-kind-external-module">
 						<a href="../modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="../modules/_commander_.html">&quot;commander&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="../modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>

@@ -1,6 +1,6 @@
 import { isEmpty } from 'lodash';
 import { CONSOLE_METADATA_NAME, COMMAND_METADATA_NAME } from './constants';
-import { IConsoleOptions, ICommandDecoratorOptions } from './decorators';
+import { IConsoleOptions, ICreateCommandOptions } from './decorators';
 import { INestApplicationContext } from '@nestjs/common';
 
 /**
@@ -8,7 +8,7 @@ import { INestApplicationContext } from '@nestjs/common';
  */
 export interface IMethodsMetadata {
     name: string;
-    metadata: ICommandDecoratorOptions;
+    metadata: ICreateCommandOptions;
 }
 
 /**
