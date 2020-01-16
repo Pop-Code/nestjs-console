@@ -286,19 +286,19 @@
     "@types/istanbul-reports" "^1.1.1"
     "@types/yargs" "^13.0.0"
 
-"@nestjs/common@6.10.13":
-  version "6.10.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.10.13.tgz#7b0adfe65a8b289e1544eb1d68e5bce4ecd6d441"
-  integrity sha512-x4pQGe30FZd/CcbvOJy130nv9RDSLamBGKqIzRhH6x7lrHEn99wferFGzbW2Ti5pwKoOfwquhh+9Loc/AquozA==
+"@nestjs/common@6.10.14":
+  version "6.10.14"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.10.14.tgz#559d513a7ad1765f8516abac9754af80674cfefc"
+  integrity sha512-3msjd03BAIVV0hIrAUrB1KZFHBXLQFEg1i7mAdFbXzMQDoKzI8s0gRvFwlHnEAcMLvk3fKdYenrVkYJKC2dMBg==
   dependencies:
     axios "0.19.0"
     cli-color "2.0.0"
     uuid "3.3.3"
 
-"@nestjs/core@6.10.13":
-  version "6.10.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.10.13.tgz#5c31f46201e527fbc44889fa92a42c87fd389e4b"
-  integrity sha512-NQX4GvIL9sEt3pYpspiBqg3tu+QGN8Nvodr8fp0DYFBhNZWLOoDHr7PfV7dQ9BS4YOfcmBDpBPn6VorQOLSR2A==
+"@nestjs/core@6.10.14":
+  version "6.10.14"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.10.14.tgz#0e8ec47c3077f0fa7ed4df181a9e455fdd51972d"
+  integrity sha512-zjL7o9xuYXCCgkelt2xlCUGkd3XGlYFgj8D64owKMk2Rbj5kYUazdmf5DphZrn5N4qTgNh8UHAalNhdGX6mEqg==
   dependencies:
     "@nuxtjs/opencollective" "0.2.2"
     fast-safe-stringify "2.0.7"
@@ -306,20 +306,20 @@
     object-hash "2.0.1"
     uuid "3.3.3"
 
-"@nestjs/platform-express@6.10.13":
-  version "6.10.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.10.13.tgz#8fb475fe3a906b24fd1376f4e7e5bf433fd8600f"
-  integrity sha512-eT/BmJOl/No1fJuW5GvoufxPofrmLVtrbyqiR05Dd1u24r4g5j7sU8WbA5jqetqRM5Jxtz+tqCH1Ketp5J2SFA==
+"@nestjs/platform-express@6.10.14":
+  version "6.10.14"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.10.14.tgz#1ae544c8668545c2707c094d2de7c4ca98c2ea48"
+  integrity sha512-0E31f9FeKhcbhNZaUh4IrkJt06uGR3PnWVBya8yewlsWBtpXORVOE5yJZnw5Q5QZhdUcN79gZeVZn2WOoViE3Q==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
     express "4.17.1"
     multer "1.4.2"
 
-"@nestjs/testing@6.10.13":
-  version "6.10.13"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.10.13.tgz#bbe3d30130c78030c33a3c7ff9d51add33af1cf4"
-  integrity sha512-aQKGkXEB1fMDs3gvta9w037il73sWU7giNHIh3jtr6c4olVmIwffsZmZs+CMyESb+kOQRMn77V6nu8NNfywdlQ==
+"@nestjs/testing@6.10.14":
+  version "6.10.14"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.10.14.tgz#f78b92821a35fc1f3acd96e734994856bb15a185"
+  integrity sha512-jKzT9eAIJ6xeYXd/Jxtr7lgcixqq6ArNFnzhlM7FeHe/24wFBfWLfTCHe1GJoUo381Y5tPYw3pDr4yELp/Vo9Q==
   dependencies:
     optional "0.1.4"
 
