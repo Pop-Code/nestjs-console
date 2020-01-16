@@ -1,5 +1,4 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 import { NestFactory } from '@nestjs/core';
 import {
     AbstractBootstrapConsole,
