@@ -10,11 +10,30 @@ import { formatResponse } from './helpers';
 
 @Injectable()
 export class ConsoleService {
-    protected container: INestApplicationContext;
+    /**
+     * An optional instance of the application.
+     * Required to scan the application
+     */
+    protected container?: INestApplicationContext;
+
+    /**
+     * A Map holding group commands by name
+     */
     protected commands: Map<string, Command> = new Map();
+
+    /**
+     * The event manager used to emit data and errors from command handler
+     */
     protected eventManager: EventEmitter = new EventEmitter();
 
-    constructor(@InjectCli() protected cli: Command) {}
+    /**
+     * The root cli
+     */
+    protected cli: Command;
+
+    constructor(@InjectCli() cli: Command) {
+        this.cli = cli;
+    }
 
     /**
      * Create an instance of root cli
