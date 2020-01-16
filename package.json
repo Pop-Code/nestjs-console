@@ -37,7 +37,7 @@
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.4",
-        "ts-jest": "24.2.0",
+        "ts-jest": "24.3.0",
         "ts-node": "8.6.2",
         "tsconfig-paths": "3.9.0",
         "tslint": "5.20.1",
