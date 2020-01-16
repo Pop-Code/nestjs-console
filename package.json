@@ -33,7 +33,7 @@
         "@types/node": "13.1.2",
         "@types/prettier": "1.19.0",
         "codecov": "3.6.1",
-        "commander": "4.0.1",
+        "commander": "4.1.0",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.4",
