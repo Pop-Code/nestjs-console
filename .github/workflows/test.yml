@@ -19,6 +19,7 @@ jobs:
             - name: npm install, build, and test
               run: |
                   yarn install
+                  yarn run lint
                   yarn run build
                   yarn run test:cov
             - name: Codecov

@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>&quot;constants&quot; | NestJS Console</title>
+	<title>ICommandOption | NestJS Console</title>
 	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,75 +56,114 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="_constants_.html">&quot;constants&quot;</a>
+					<a href="../modules/_decorators_.html">&quot;decorators&quot;</a>
+				</li>
+				<li>
+					<a href="_decorators_.icommandoption.html">ICommandOption</a>
 				</li>
 			</ul>
-			<h1>External module &quot;constants&quot;</h1>
+			<h1>Interface ICommandOption</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>The options of the command</p>
+					</div>
+					<dl class="tsd-comment-tags">
+						<dt>see</dt>
+						<dd><p>commander .option() to learn more</p>
+						</dd>
+					</dl>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">ICommandOption</span>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
 						<section class="tsd-index-section ">
-							<h3>Variables</h3>
+							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_constants_.html#cli_service_token" class="tsd-kind-icon">CLI_<wbr>SERVICE_<wbr>TOKEN</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_constants_.html#command_metadata_name" class="tsd-kind-icon">COMMAND_<wbr>METADATA_<wbr>NAME</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-external-module"><a href="_constants_.html#console_metadata_name" class="tsd-kind-icon">CONSOLE_<wbr>METADATA_<wbr>NAME</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_.icommandoption.html#defaultvalue" class="tsd-kind-icon">default<wbr>Value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_.icommandoption.html#description" class="tsd-kind-icon">description</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_.icommandoption.html#flags" class="tsd-kind-icon">flags</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="_decorators_.icommandoption.html#fn" class="tsd-kind-icon">fn</a></li>
 							</ul>
 						</section>
 					</div>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="cli_service_token" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> CLI_<wbr>SERVICE_<wbr>TOKEN</h3>
-					<div class="tsd-signature tsd-kind-icon">CLI_<wbr>SERVICE_<wbr>TOKEN<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"nests-console.Cli"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;nests-console.Cli&quot;</span></div>
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="defaultvalue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> default<wbr>Value</h3>
+					<div class="tsd-signature tsd-kind-icon">default<wbr>Value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/constants.ts#L4">src/constants.ts:4</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/decorators.ts#L38">src/decorators.ts:38</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The token to store the root instance of commander</p>
+							<p>The default value</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="command_metadata_name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> COMMAND_<wbr>METADATA_<wbr>NAME</h3>
-					<div class="tsd-signature tsd-kind-icon">COMMAND_<wbr>METADATA_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"nests-console.Command:"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;nests-console.Command:&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="description" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> description</h3>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/constants.ts#L14">src/constants.ts:14</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/decorators.ts#L28">src/decorators.ts:28</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The key to store metadata of a Command decorator</p>
+							<p>The description of the option</p>
 						</div>
 					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module">
-					<a name="console_metadata_name" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagConst">Const</span> CONSOLE_<wbr>METADATA_<wbr>NAME</h3>
-					<div class="tsd-signature tsd-kind-icon">CONSOLE_<wbr>METADATA_<wbr>NAME<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"nests-console.Console"</span><span class="tsd-signature-symbol"> =&nbsp;&quot;nests-console.Console&quot;</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="flags" class="tsd-anchor"></a>
+					<h3>flags</h3>
+					<div class="tsd-signature tsd-kind-icon">flags<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/constants.ts#L9">src/constants.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/decorators.ts#L23">src/decorators.ts:23</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
 						<div class="lead">
-							<p>The key to store metadata of a Console decorator</p>
+							<p>The flags the command uses eg &#39;-p,--port&#39;</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="fn" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> fn</h3>
+					<div class="tsd-signature tsd-kind-icon">fn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">RegExp</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/e66f5e2/src/decorators.ts#L33">src/decorators.ts:33</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The function to parse the value</p>
 						</div>
 					</div>
 				</section>
@@ -137,50 +176,77 @@
 						<a href="../globals.html"><em>Globals</em></a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_bootstrap_abstract_.html">&quot;bootstrap/abstract&quot;</a>
+						<a href="../modules/_bootstrap_abstract_.html">&quot;bootstrap/abstract&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_bootstrap_console_.html">&quot;bootstrap/console&quot;</a>
+						<a href="../modules/_bootstrap_console_.html">&quot;bootstrap/console&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
+						<a href="../modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
+						<a href="../modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
+					</li>
+					<li class=" tsd-kind-external-module">
+						<a href="../modules/_constants_.html">&quot;constants&quot;</a>
 					</li>
 					<li class="current tsd-kind-external-module">
-						<a href="_constants_.html">&quot;constants&quot;</a>
+						<a href="../modules/_decorators_.html">&quot;decorators&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_decorators_.html">&quot;decorators&quot;</a>
+						<a href="../modules/_helpers_.html">&quot;helpers&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_helpers_.html">&quot;helpers&quot;</a>
+						<a href="../modules/_index_.html">&quot;index&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_index_.html">&quot;index&quot;</a>
+						<a href="../modules/_module_.html">&quot;module&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_module_.html">&quot;module&quot;</a>
+						<a href="../modules/_scanner_.html">&quot;scanner&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
-						<a href="_scanner_.html">&quot;scanner&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="_service_.html">&quot;service&quot;</a>
+						<a href="../modules/_service_.html">&quot;service&quot;</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="_constants_.html#cli_service_token" class="tsd-kind-icon">CLI_<wbr>SERVICE_<wbr>TOKEN</a>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_decorators_.icommandoption.html" class="tsd-kind-icon">ICommand<wbr>Option</a>
+						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_.icommandoption.html#defaultvalue" class="tsd-kind-icon">default<wbr>Value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_.icommandoption.html#description" class="tsd-kind-icon">description</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_.icommandoption.html#flags" class="tsd-kind-icon">flags</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="_decorators_.icommandoption.html#fn" class="tsd-kind-icon">fn</a>
+							</li>
+						</ul>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="_constants_.html#command_metadata_name" class="tsd-kind-icon">COMMAND_<wbr>METADATA_<wbr>NAME</a>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_decorators_.iconsoleoptions.html" class="tsd-kind-icon">IConsole<wbr>Options</a>
 					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module">
-						<a href="_constants_.html#console_metadata_name" class="tsd-kind-icon">CONSOLE_<wbr>METADATA_<wbr>NAME</a>
+					<li class=" tsd-kind-interface tsd-parent-kind-external-module">
+						<a href="_decorators_.icreatecommandoptions.html" class="tsd-kind-icon">ICreate<wbr>Command<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_decorators_.html#command" class="tsd-kind-icon">Command</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_decorators_.html#console" class="tsd-kind-icon">Console</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-external-module">
+						<a href="../modules/_decorators_.html#injectcli" class="tsd-kind-icon">Inject<wbr>Cli</a>
 					</li>
 				</ul>
 			</nav>

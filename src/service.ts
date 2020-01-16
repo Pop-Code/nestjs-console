@@ -1,50 +1,252 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
-import * as ora from 'ora';
-import { ICommand, forwardSubCommands } from './commander';
-import { InjectCommander } from './decorators';
-import { IWithApplicationContext } from './interfaces';
+import { Command, CommanderError } from 'commander';
+import { EventEmitter } from 'events';
+import {
+    ICreateCommandOptions,
+    IConsoleOptions,
+    InjectCli
+} from './decorators';
+import { formatResponse } from './helpers';
 
 @Injectable()
-export class ConsoleService implements IWithApplicationContext {
-    protected container: INestApplicationContext;
+export class ConsoleService {
+    /**
+     * An optional instance of the application.
+     * Required to scan the application
+     */
+    protected container?: INestApplicationContext;
 
-    constructor(@InjectCommander() protected readonly cli: ICommand) {}
+    /**
+     * A Map holding group commands by name
+     */
+    protected commands: Map<string, Command> = new Map();
 
-    static createSpinner(text?: string) {
-        return ora.default(text);
+    /**
+     * The event manager used to emit data and errors from command handler
+     */
+    protected eventManager: EventEmitter = new EventEmitter();
+
+    /**
+     * The root cli
+     */
+    protected cli: Command;
+
+    constructor(@InjectCli() cli: Command) {
+        this.cli = cli;
     }
 
-    getCli() {
-        return this.cli;
+    /**
+     * Create an instance of root cli
+     */
+    static create() {
+        const cli = new Command();
+        // listen for root not found
+        cli.on('command:*', (args: string[], unknown: string[]) => {
+            throw new Error(`"${args[0]}" command not found`);
+        });
+        return cli;
     }
 
-    setContainer(container: INestApplicationContext): IWithApplicationContext {
+    /**
+     * Reset the cli stack (for testing purpose only)
+     */
+    resetCli() {
+        this.cli = ConsoleService.create();
+    }
+
+    /**
+     * Log an error
+     * @param command The command related to the error
+     * @param error The error to format
+     */
+    logError(error: Error) {
+        // tslint:disable-next-line:no-console
+        return console.error(formatResponse(error));
+    }
+
+    /**
+     * Get a cli
+     * @param name Get a cli by name, if not set, the root cli is used
+     */
+    getCli(name?: string) {
+        return name ? this.commands.get(name) : this.cli;
+    }
+
+    /**
+     * Set the container
+     */
+    setContainer(container: INestApplicationContext): ConsoleService {
         this.container = container;
         return this;
     }
 
+    /**
+     * Get the container
+     */
     getContainer(): INestApplicationContext {
         return this.container;
     }
 
-    init(argv: string[]): ICommand {
-        this.cli.on('command:*', () => {
-            this.cli.help();
-        });
-        const args = this.cli.parse(argv) as ICommand;
-        if (argv.length === 2) {
-            this.cli.help();
-        }
-
-        return args;
+    /**
+     * Wrap an action handler to work with promise.
+     */
+    createHandler(action: (...args: any[]) => any) {
+        return async (...args: any[]) => {
+            try {
+                let response = await action(...args);
+                if (response instanceof Promise) {
+                    response = await response;
+                }
+                this.eventManager.emit('data', response);
+            } catch (e) {
+                this.eventManager.emit('error', e);
+            }
+        };
     }
 
-    subCommands(
-        parent: ICommand,
-        command: string,
-        description: string
-    ): ICommand {
-        const subCommand = parent.command(command).description(description);
-        return forwardSubCommands.bind(subCommand)();
+    /**
+     * Execute the cli
+     */
+    async init(argv: string[], displayErrors: boolean): Promise<any> {
+        const cli = this.getCli();
+        try {
+            // if nothing was provided, display an error
+            if (cli.commands.length === 0) {
+                throw new CommanderError(
+                    1,
+                    'empty',
+                    `The cli does not contain sub command`
+                );
+            }
+            const response = await new Promise((ok, fail) => {
+                this.eventManager.once('data', data => {
+                    ok(data);
+                });
+                this.eventManager.once('error', e => {
+                    fail(e);
+                });
+                cli.exitOverride(e => {
+                    throw e;
+                });
+                cli.parse(argv);
+                if (argv.length === 2) {
+                    cli.help();
+                }
+            });
+            return response;
+        } catch (e) {
+            if (e instanceof CommanderError) {
+                // if commander throws a CommanderError async event or help has been executed
+                // ignore response and error for help display
+                if (/(helpDisplayed|commander\.help)/.test(e.code)) {
+                    return;
+                }
+                if (/missingArgument/.test(e.code)) {
+                    throw e;
+                }
+                // display others errors
+                if (displayErrors && e.exitCode === 1) {
+                    this.logError(e);
+                }
+            } else if (displayErrors) {
+                this.logError(e);
+            }
+            // always throw for promise
+            throw e;
+        }
+    }
+
+    /**
+     * Create a Command
+     *
+     * @param options The options to create the commands
+     * @param handler The handler of the command
+     * @param parent The command to use as a parent
+     */
+    createCommand(
+        options: ICreateCommandOptions,
+        handler: (...args: any[]) => any | Promise<any>,
+        parent: Command
+    ) {
+        const command = parent
+            .command(options.command)
+            .exitOverride((...args) => parent._exitCallback(...args));
+
+        if (options.description) {
+            command.description(options.description);
+        }
+        if (options.alias) {
+            command.alias(options.alias);
+        }
+        if (Symbol.iterator in Object(options.options)) {
+            for (const opt of options.options) {
+                command.option(
+                    opt.flags,
+                    opt.description,
+                    opt.fn,
+                    opt.defaultValue
+                );
+            }
+        }
+        return command.action(this.createHandler(handler));
+    }
+
+    /**
+     * Create a group of command.
+     * @param options The options to create the grouped command
+     * @param parent The command to use as a parent
+     * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
+     */
+    createGroupCommand(options: IConsoleOptions, parent: Command): Command {
+        if (parent._args.length > 0) {
+            throw new Error(
+                'Sub commands cannot be applied to command with explicit args'
+            );
+        }
+        const command = parent
+            .command(options.name)
+            .exitOverride((...args) => parent._exitCallback(...args));
+        if (options.description) {
+            command.description(options.description);
+        }
+        if (options.alias) {
+            command.alias(options.alias);
+        }
+        // .description(options.description)
+
+        // .alias(options.alias);
+
+        const name = command.name();
+
+        // register all named events now this will prevent commander to call the event command:*
+        const _onSubCommand = (args: string[], unknown: string[]) => {
+            // Trigger any releated sub command events passing the unknown args from parent
+            // if command has not parent, args are the unknown args
+            const commandArgs = command.parseOptions(args.concat(unknown));
+            command.parseArgs(commandArgs.args, commandArgs.unknown);
+
+            // Finally, throw an error if nothing has been done,
+            // Remeber that the client must exit the process to prevent this not found to be called
+            if (
+                commandArgs.unknown.length === 0 &&
+                commandArgs.args.length === 0
+            ) {
+                command.help();
+            }
+        };
+        parent.on('command:' + name, _onSubCommand);
+        if (options.alias) {
+            parent.on('command:' + options.alias, _onSubCommand);
+        }
+
+        // listen for not found on child
+        command.on('command:*', (args: string[]) => {
+            throw new Error(`"${args[0]}" command not found`);
+        });
+
+        // add the command to the command Map. this will help us to manipulate parent commands
+        this.commands.set(name, command);
+
+        return command;
     }
 }

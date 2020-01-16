@@ -4,13 +4,28 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.0] - 2020-01-15
+
+### Changed
+
+-   BootstrapConsole method are not any more static. You must create an instance to boot.
+-   ConsoleService new methods `createCommand` and `createGroupCommand`
+-   Update dependencies versions
+-   Update to support commander ^4.0.1
+
+### Added
+
+-   Possiblity to register multi dimensions commands and sub commands using decorators. (@Console({name: 'cliName'})). If two or more Console decorators with the same name are found, they will be grouped.
+-   Fix Command lifecycle to be able to resolve command's return or to catch errors
+-   BootstrapConsole.boot() return a promise resolving the command's return or throwing an error. This is usefull for testing.
+
 ## [1.2.1] - 2020-01-03
 
 ### Fixed
 
--  Fix a type error during the bootstrap scan for decorators [#61](https://github.com/Pop-Code/nestjs-console/pull/61)
--  Remove implicit lodash dependency [#59](https://github.com/Pop-Code/nestjs-console/issues/59)
--  Update to support commander@^4 [#58](https://github.com/Pop-Code/nestjs-console/issues/58)
+-   Fix a type error during the bootstrap scan for decorators [#61](https://github.com/Pop-Code/nestjs-console/pull/61)
+-   Remove implicit lodash dependency [#59](https://github.com/Pop-Code/nestjs-console/issues/59)
+-   Update to support commander@^4 [#58](https://github.com/Pop-Code/nestjs-console/issues/58)
 
 ## [1.2.0] - 2019-08-09
 
@@ -53,7 +68,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Added
 
--   A decorator `InjectCommander` to inject commander instance (patched for sub commands) as nestjs provider
+-   A decorator `InjectCli` to inject commander instance (patched for sub commands) as nestjs provider
 -   A new methods `subCommands() => Command` in the class `ConsoleService` to get sub commands from a non patched commander instance.
 -   Tests
 

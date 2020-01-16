@@ -9,6 +9,7 @@ tsconfig.json
 typedoc.js
 jest.config.js
 yarn.lock
-.circleci
 .vscode
 renovate.json
+tslint.json
+.github

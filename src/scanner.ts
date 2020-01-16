@@ -1,20 +1,42 @@
+import { isEmpty } from 'lodash';
 import { CONSOLE_METADATA_NAME, COMMAND_METADATA_NAME } from './constants';
-import { IScanResponse, IConsoleOptions, IMethodsMetadata } from './interfaces';
+import { IConsoleOptions, ICreateCommandOptions } from './decorators';
+import { INestApplicationContext } from '@nestjs/common';
+
+/**
+ * The interface for command method metadata
+ */
+export interface IMethodsMetadata {
+    name: string;
+    metadata: ICreateCommandOptions;
+}
+
+/**
+ * The response of the scanner
+ */
+export interface IScanResponse {
+    instance: any;
+    metadata: IConsoleOptions;
+    methods: IMethodsMetadata[];
+}
 
 export class ConsoleScanner {
-    private getModules(
-        modulesContainer: Map<any, any>,
-        includes: Function[]
-    ): any[] {
+    /**
+     * Get all the modules
+     */
+    private getModules(modulesContainer: Map<any, any>, include: any[]): any[] {
         const allModules = [...modulesContainer.values()];
-        if (!includes || !Array.isArray(includes)) {
+        if (!include || isEmpty(include)) {
             return allModules;
         }
         return allModules.filter(({ metatype }) =>
-            includes.some(item => item === metatype)
+            include.some(item => item === metatype)
         );
     }
 
+    /**
+     * Get a list of classes methods
+     */
     private getInstanceMethods(instance: any) {
         return Object.getOwnPropertyNames(instance)
             .concat(Object.getOwnPropertyNames(instance.__proto__))
@@ -23,9 +45,17 @@ export class ConsoleScanner {
             );
     }
 
-    public scan(app, includedModules?: Function[]): Set<IScanResponse> {
+    /**
+     * Scan an application
+     * @param app
+     * @param includedModules
+     */
+    public scan(
+        app: INestApplicationContext,
+        includedModules?: any[]
+    ): Set<IScanResponse> {
         const set = new Set<IScanResponse>();
-        const { container } = app;
+        const { container } = app as any;
         const modules = this.getModules(
             container.getModules(),
             includedModules
@@ -33,7 +63,9 @@ export class ConsoleScanner {
         modules.forEach(m => {
             m._providers.forEach(p => {
                 const { metatype, name } = p;
-                if (typeof metatype !== 'function') return;
+                if (typeof metatype !== 'function') {
+                    return;
+                }
 
                 const consoleMetadata: IConsoleOptions = Reflect.getMetadata(
                     CONSOLE_METADATA_NAME,
@@ -50,14 +82,16 @@ export class ConsoleScanner {
                 const methods = this.getInstanceMethods(instance);
 
                 // get the metadata of the methods
-                const methodsMetadata = methods.map<IMethodsMetadata>(m => ({
-                    name: m,
-                    metadata: Reflect.getMetadata(
-                        COMMAND_METADATA_NAME,
-                        instance,
-                        m
-                    )
-                }));
+                const methodsMetadata = methods.map<IMethodsMetadata>(
+                    methodMetadata => ({
+                        name: methodMetadata,
+                        metadata: Reflect.getMetadata(
+                            COMMAND_METADATA_NAME,
+                            instance,
+                            methodMetadata
+                        )
+                    })
+                );
 
                 set.add({
                     instance,

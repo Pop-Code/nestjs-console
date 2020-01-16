@@ -4,7 +4,7 @@
         {
             "type": "node",
             "request": "attach",
-            "name": "Tests unit",
+            "name": "Tests",
             "localRoot": "${workspaceFolder}",
             "skipFiles": ["${workspaceFolder}<node_internals>/**/*.js"],
             "port": 9229,
