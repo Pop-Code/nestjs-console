@@ -30,7 +30,7 @@
         "@nestjs/platform-express": "6.10.14",
         "@nestjs/testing": "6.10.14",
         "@types/jest": "24.9.0",
-        "@types/node": "13.1.2",
+        "@types/node": "13.1.7",
         "@types/prettier": "1.19.0",
         "codecov": "3.6.1",
         "commander": "4.1.0",
