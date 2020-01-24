@@ -32,8 +32,14 @@
         "@types/jest": "24.9.0",
         "@types/node": "13.1.7",
         "@types/prettier": "1.19.0",
+        "@typescript-eslint/eslint-plugin": "2.16.0",
+        "@typescript-eslint/eslint-plugin-tslint": "^2.17.0",
+        "@typescript-eslint/parser": "2.16.0",
         "codecov": "3.6.1",
         "commander": "4.1.0",
+        "eslint": "6.8.0",
+        "eslint-plugin-import": "^2.20.0",
+        "eslint-plugin-prefer-arrow": "^1.1.7",
         "jest": "24.9.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.4",
@@ -56,6 +62,6 @@
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage --runInBand",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-        "lint": "tslint -c tslint.json -t verbose 'src/**/*.{ts,js}'"
+        "lint": "yarn run  eslint ./src/**/*.ts"
     }
 }
