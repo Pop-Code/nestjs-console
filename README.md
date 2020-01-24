@@ -2,7 +2,7 @@
 
 [![nestjs-console](https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png)][npm]
 [![Actions Status](https://github.com/Pop-Code/nestjs-acl/workflows/CI/badge.svg)](https://github.com/Pop-Code/nestjs-acl/actions)
-[![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/v2/graph/badge.svg)][codecov]
+[![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
 [![npm](https://img.shields.io/node/v/carbon.svg?style=flat)][npm]
 
