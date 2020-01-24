@@ -1,16 +1,11 @@
 import { Inject } from '@nestjs/common';
-import {
-    CLI_SERVICE_TOKEN,
-    COMMAND_METADATA_NAME,
-    CONSOLE_METADATA_NAME
-} from './constants';
+
+import { CLI_SERVICE_TOKEN, COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 
 /**
  * A Param decorator to inject the root cli
  */
-export function InjectCli() {
-    return Inject(CLI_SERVICE_TOKEN);
-}
+export const InjectCli = (): ParameterDecorator => Inject(CLI_SERVICE_TOKEN);
 
 /**
  * The options of the command
@@ -70,10 +65,8 @@ export interface ICreateCommandOptions {
  * The Command decorator is used to decorate a method in a class
  * You can use it in a class that is deecorated by a "@Console" decorator
  */
-export function Command(options: ICreateCommandOptions) {
-    return (target: any, method: string | symbol) =>
-        Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
-}
+export const Command = (options: ICreateCommandOptions): MethodDecorator => (target: any, method: string | symbol): void =>
+    Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 
 /**
  * The interface to define a console with sub commands
@@ -101,7 +94,6 @@ export interface IConsoleOptions {
  *
  * eg "@Console({name: "mycommand"})"
  */
-export function Console(options?: IConsoleOptions) {
-    return (target: any) =>
-        Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
-}
+export const Console = (options?: IConsoleOptions): ClassDecorator =>
+    (target: any): void => Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
+

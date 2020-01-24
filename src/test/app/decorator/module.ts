@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { ConsoleModule } from '../../../module';
 import { CliWithDecorator } from './cli';
 import { CliMergedWithNamedDecorator } from './cli.merged';
@@ -14,4 +15,4 @@ import { CliWithNamedDecorator2 } from './cli.named.2';
         CliMergedWithNamedDecorator
     ]
 })
-export class ModuleWithDecoratorsTest {}
+export class ModuleWithDecoratorsTest { }

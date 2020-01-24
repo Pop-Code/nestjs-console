@@ -1,7 +1,8 @@
-import { isEmpty } from 'lodash';
-import { CONSOLE_METADATA_NAME, COMMAND_METADATA_NAME } from './constants';
-import { IConsoleOptions, ICreateCommandOptions } from './decorators';
 import { INestApplicationContext } from '@nestjs/common';
+import { isEmpty } from 'lodash';
+
+import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
+import { IConsoleOptions, ICreateCommandOptions } from './decorators';
 
 /**
  * The interface for command method metadata
@@ -37,7 +38,7 @@ export class ConsoleScanner {
     /**
      * Get a list of classes methods
      */
-    private getInstanceMethods(instance: any) {
+    private getInstanceMethods(instance: any): string[] {
         return Object.getOwnPropertyNames(instance)
             .concat(Object.getOwnPropertyNames(instance.__proto__))
             .filter(m =>

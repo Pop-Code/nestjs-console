@@ -5,11 +5,8 @@ import { AbstractBootstrapConsole } from '../bootstrap/abstract';
 import { BootstrapConsole, BootstrapConsoleOptions } from '../bootstrap/console';
 import { ModuleTest } from './app/module';
 
-export class TestBootstrapConsole extends AbstractBootstrapConsole<
-    TestingModule,
-    BootstrapConsoleOptions
-> {
-    create() {
+export class TestBootstrapConsole extends AbstractBootstrapConsole<TestingModule, BootstrapConsoleOptions> {
+    create(): Promise<TestingModule> {
         return Test.createTestingModule({
             imports: [this.options.module]
         }).compile();
@@ -17,7 +14,6 @@ export class TestBootstrapConsole extends AbstractBootstrapConsole<
 }
 
 describe('BootstrapConsole', () => {
-    beforeAll(() => {});
     it('Should init the application context', async () => {
         const bootstrap = new TestBootstrapConsole({
             module: ModuleTest

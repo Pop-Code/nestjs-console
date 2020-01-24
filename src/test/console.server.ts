@@ -1,8 +1,9 @@
-import { BootstrapConsoleServer } from '../bootstrap/server';
-import { ModuleWithDecoratorsTest } from './app/decorator/module';
-// tslint:disable-next-line:no-implicit-dependencies
 import { ExpressAdapter } from '@nestjs/platform-express';
 
+import { BootstrapConsoleServer } from '../bootstrap/server';
+import { ModuleWithDecoratorsTest } from './app/decorator/module';
+
+// tslint:disable-next-line:no-implicit-dependencies
 const bootstrap = new BootstrapConsoleServer({
     module: ModuleWithDecoratorsTest,
     withContainer: true,

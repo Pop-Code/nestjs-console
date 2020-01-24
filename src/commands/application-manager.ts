@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { NestApplication } from '@nestjs/core/nest-application';
+import { Command } from 'commander';
+
 import { Command as CommandDecorator, Console } from '../decorators';
 import { createSpinner } from '../helpers';
 import { ConsoleService } from '../service';
-import { Command } from 'commander';
 
 /**
  * The ApplicationManager is a class binded to a command that can start a the app server
@@ -11,7 +12,7 @@ import { Command } from 'commander';
 @Console()
 @Injectable()
 export class ApplicationManager {
-    constructor(private consoleService: ConsoleService) {}
+    constructor(private consoleService: ConsoleService) { }
 
     protected checkContainerInterface(container: any): NestApplication {
         if (!(container instanceof NestApplication)) {
@@ -47,7 +48,7 @@ export class ApplicationManager {
             }
         ]
     })
-    async start(command: Command) {
+    async start(command: Command): Promise<NestApplication> {
         const spinner = createSpinner({ text: 'Server starting...' });
         try {
             if (!command.quiet) {
@@ -62,7 +63,7 @@ export class ApplicationManager {
             if (!command.quiet) {
                 spinner.succeed(`Server listening on port ${command.port}`);
             }
-            return command;
+            return container;
         } catch (e) {
             if (!command.quiet && !command.trowError) {
                 spinner.fail(e.message);

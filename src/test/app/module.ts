@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+
 import { ConsoleModule } from '../../module';
 import { ServiceTest } from './service';
 
@@ -6,4 +7,4 @@ import { ServiceTest } from './service';
     imports: [ConsoleModule],
     providers: [ServiceTest]
 })
-export class ModuleTest {}
+export class ModuleTest { }

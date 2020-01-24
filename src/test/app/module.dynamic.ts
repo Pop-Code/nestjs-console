@@ -1,4 +1,5 @@
-import { Module, DynamicModule } from '@nestjs/common';
+import { DynamicModule, Module } from '@nestjs/common';
+
 import { ModuleWithDecoratorsTest } from './decorator/module';
 
 @Module({})

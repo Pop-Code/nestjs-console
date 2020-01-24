@@ -11,7 +11,7 @@ let mockStdout: jest.SpyInstance;
 let mockLog: jest.SpyInstance;
 let mockError: jest.SpyInstance;
 
-beforeEach(async () => {
+beforeEach(() => {
     mockStdout = jest.spyOn(process.stdout, 'write').mockImplementation();
     mockLog = jest.spyOn(console, 'log').mockImplementation();
     mockError = jest.spyOn(console, 'error').mockImplementation();
@@ -23,7 +23,7 @@ afterEach(() => {
     mockError.mockRestore();
 });
 
-function testCommands(moduleType: any) {
+const testCommands = (moduleType: any): void => {
     let app: INestApplicationContext;
     let bootstrap: BootstrapConsole;
     let consoleService: ConsoleService;
@@ -104,7 +104,7 @@ function testCommands(moduleType: any) {
                     await bootstrap.boot([process.argv0, 'console', 'command']);
                 } catch (e) {
                     expect(e.message).toEqual(
-                        "error: missing required argument 'myArgument'"
+                        'error: missing required argument \'myArgument\''
                     );
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0].trim()).toEqual(
@@ -416,7 +416,7 @@ function testCommands(moduleType: any) {
                     ]);
                 } catch (e) {
                     expect(e.message).toEqual(
-                        "error: missing required argument 'myArgument'"
+                        'error: missing required argument \'myArgument\''
                     );
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0].trim()).toEqual(
@@ -673,7 +673,7 @@ function testCommands(moduleType: any) {
             });
         });
     });
-}
+};
 
 describe('CommandWithService', () => {
     testCommands(ModuleTest);

@@ -7,7 +7,7 @@ import { ModuleWithDecoratorsTest } from './app/decorator/module';
 import { ModuleTest } from './app/module';
 import { DynamicModuleTest } from './app/module.dynamic';
 
-function testScanCliDecorator(value: any) {
+const testScanCliDecorator = (value: any): void => {
     expect(value.instance).toBeInstanceOf(CliWithDecorator);
     expect(value.methods).toHaveLength(6);
 
@@ -29,8 +29,8 @@ function testScanCliDecorator(value: any) {
     expect(value.methods[4].metadata.alias).toBe('cErr');
     expect(value.methods[4].metadata.description).toBe('description');
 
-    //TODO Test options
-}
+    // TODO Test options
+};
 
 describe('Scanner', () => {
     it('Should scan a nest application and returns empty response', async () => {
