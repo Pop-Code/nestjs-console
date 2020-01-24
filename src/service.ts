@@ -1,12 +1,9 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import { Command, CommanderError } from 'commander';
-import { EventEmitter } from 'events';
-import {
-    ICreateCommandOptions,
-    IConsoleOptions,
-    InjectCli
-} from './decorators';
+
+import { IConsoleOptions, ICreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
+import { CommandActionHandler, CommandActionWrapper, ICommandResponse } from './interfaces';
 
 @Injectable()
 export class ConsoleService {
@@ -22,11 +19,6 @@ export class ConsoleService {
     protected commands: Map<string, Command> = new Map();
 
     /**
-     * The event manager used to emit data and errors from command handler
-     */
-    protected eventManager: EventEmitter = new EventEmitter();
-
-    /**
      * The root cli
      */
     protected cli: Command;
@@ -38,10 +30,10 @@ export class ConsoleService {
     /**
      * Create an instance of root cli
      */
-    static create() {
+    static create(): Command {
         const cli = new Command();
         // listen for root not found
-        cli.on('command:*', (args: string[], unknown: string[]) => {
+        cli.on('command:*', (args: string[]) => {
             throw new Error(`"${args[0]}" command not found`);
         });
         return cli;
@@ -50,7 +42,7 @@ export class ConsoleService {
     /**
      * Reset the cli stack (for testing purpose only)
      */
-    resetCli() {
+    resetCli(): void {
         this.cli = ConsoleService.create();
     }
 
@@ -59,16 +51,16 @@ export class ConsoleService {
      * @param command The command related to the error
      * @param error The error to format
      */
-    logError(error: Error) {
-        // tslint:disable-next-line:no-console
-        return console.error(formatResponse(error));
+    logError(error: Error): void {
+        // eslint-disable-next-line no-console
+        console.error(formatResponse(error));
     }
 
     /**
      * Get a cli
      * @param name Get a cli by name, if not set, the root cli is used
      */
-    getCli(name?: string) {
+    getCli(name?: string): Command {
         return name ? this.commands.get(name) : this.cli;
     }
 
@@ -90,24 +82,25 @@ export class ConsoleService {
     /**
      * Wrap an action handler to work with promise.
      */
-    createHandler(action: (...args: any[]) => any) {
-        return async (...args: any[]) => {
-            try {
-                let response = await action(...args);
-                if (response instanceof Promise) {
-                    response = await response;
-                }
-                this.eventManager.emit('data', response);
-            } catch (e) {
-                this.eventManager.emit('error', e);
+    createHandler(
+        action: CommandActionHandler
+    ): CommandActionWrapper {
+        return async (...args: any[]): Promise<ICommandResponse> => {
+            const command = args[args.length - 1];
+
+            let data = action(...args);
+            if (data instanceof Promise) {
+                data = await data;
             }
+
+            return { data, command };
         };
     }
 
     /**
      * Execute the cli
      */
-    async init(argv: string[], displayErrors: boolean): Promise<any> {
+    async init(argv: string[]): Promise<ICommandResponse | undefined> {
         const cli = this.getCli();
         try {
             // if nothing was provided, display an error
@@ -115,25 +108,29 @@ export class ConsoleService {
                 throw new CommanderError(
                     1,
                     'empty',
-                    `The cli does not contain sub command`
+                    'The cli does not contain sub command'
                 );
             }
-            const response = await new Promise((ok, fail) => {
-                this.eventManager.once('data', data => {
-                    ok(data);
-                });
-                this.eventManager.once('error', e => {
-                    fail(e);
-                });
-                cli.exitOverride(e => {
-                    throw e;
-                });
-                cli.parse(argv);
-                if (argv.length === 2) {
-                    cli.help();
-                }
+            cli.exitOverride(e => {
+                throw e;
             });
-            return response;
+
+            const results: [ICommandResponse] = await cli.parseAsync(
+                argv
+            );
+
+            if (!results.length) {
+                const command: Command = cli.commands.find((c: Command) => {
+                    const commandName = argv[argv.length - 1];
+                    return c._name === commandName || c._alias === commandName;
+                });
+                if (!command) {
+                    cli.help();
+                } else {
+                    command.help();
+                }
+            }
+            return results[0];
         } catch (e) {
             if (e instanceof CommanderError) {
                 // if commander throws a CommanderError async event or help has been executed
@@ -141,16 +138,12 @@ export class ConsoleService {
                 if (/(helpDisplayed|commander\.help)/.test(e.code)) {
                     return;
                 }
-                if (/missingArgument/.test(e.code)) {
+                if (e.code.includes('missingArgument')) {
                     throw e;
                 }
                 // display others errors
-                if (displayErrors && e.exitCode === 1) {
-                    this.logError(e);
-                }
-            } else if (displayErrors) {
-                this.logError(e);
             }
+            this.logError(e);
             // always throw for promise
             throw e;
         }
@@ -167,7 +160,7 @@ export class ConsoleService {
         options: ICreateCommandOptions,
         handler: (...args: any[]) => any | Promise<any>,
         parent: Command
-    ) {
+    ): Command {
         const command = parent
             .command(options.command)
             .exitOverride((...args) => parent._exitCallback(...args));
@@ -188,7 +181,8 @@ export class ConsoleService {
                 );
             }
         }
-        return command.action(this.createHandler(handler));
+        // here as any is reequired cause commander bad typing on action for promise
+        return command.action(this.createHandler(handler) as any);
     }
 
     /**
@@ -212,27 +206,15 @@ export class ConsoleService {
         if (options.alias) {
             command.alias(options.alias);
         }
-        // .description(options.description)
-
-        // .alias(options.alias);
 
         const name = command.name();
 
         // register all named events now this will prevent commander to call the event command:*
-        const _onSubCommand = (args: string[], unknown: string[]) => {
+        const _onSubCommand = (args: string[], unknown: string[]): void => {
             // Trigger any releated sub command events passing the unknown args from parent
-            // if command has not parent, args are the unknown args
+            // args are the unknown args
             const commandArgs = command.parseOptions(args.concat(unknown));
             command.parseArgs(commandArgs.args, commandArgs.unknown);
-
-            // Finally, throw an error if nothing has been done,
-            // Remeber that the client must exit the process to prevent this not found to be called
-            if (
-                commandArgs.unknown.length === 0 &&
-                commandArgs.args.length === 0
-            ) {
-                command.help();
-            }
         };
         parent.on('command:' + name, _onSubCommand);
         if (options.alias) {

@@ -1,7 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { Command } from 'commander';
+
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';
-import { Command } from 'commander';
 
 let mod: TestingModule;
 let service: ConsoleService;
@@ -12,7 +13,7 @@ beforeAll(async () => {
     }).compile();
 });
 
-beforeEach(async () => {
+beforeEach(() => {
     service = mod.get<ConsoleService>(ConsoleService);
 });
 

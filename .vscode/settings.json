@@ -1,6 +1,5 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "editor.wordWrapColumn": 125,
     "javascript.preferences.importModuleSpecifier": "relative",
     "javascript.preferences.quoteStyle": "single",
     "typescript.preferences.importModuleSpecifier": "relative",
@@ -9,5 +8,9 @@
     "typescript.format.enable": true,
     "editor.formatOnSave": true,
     "tslint.autoFixOnSave": true,
-    "formatFiles.excludePattern": "**/build/**,**/node_modules,**/.vscode,**/dist/**,**/.chrome"
+    "formatFiles.excludePattern": "**/build/**,**/node_modules,**/.vscode,**/dist/**,**/.chrome",
+    "eslint.alwaysShowStatus": true,
+    "eslint.format.enable": true,
+    "eslint.lintTask.enable": true,
+    "editor.wordWrap": "on"
 }

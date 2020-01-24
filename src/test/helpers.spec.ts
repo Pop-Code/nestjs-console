@@ -7,6 +7,6 @@ describe('Helpers', () => {
     });
     it('should format the response ', () => {
         const formated = formatResponse('{foo: ["bar"]}', { parser: 'json' });
-        expect(formated).toContain(`{ "foo": ["bar"] }`);
+        expect(formated).toContain('{ "foo": ["bar"] }');
     });
 });

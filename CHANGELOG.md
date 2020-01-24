@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.0.2] - 2020-01-24
+
+### Fixed
+
+-   Fix the return of the service's command. Updating the service to use `commander.parseAsync()` instead of `commander.parse()`. Promise are now handled without event listener. Tests were improved.
+
 ## [2.0.1] - 2020-01-16
 
 ### Fixed
@@ -105,7 +111,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.1...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.2...HEAD
+[2.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.1...v2.0.é
 [2.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.2...v2.0.0
 [1.2.2]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.1...v1.2.2

@@ -1,13 +1,13 @@
 import { INestApplicationContext, Module } from '@nestjs/common';
+import { Command } from 'commander';
+
 import { CLI_SERVICE_TOKEN } from './constants';
 import { ConsoleScanner } from './scanner';
 import { ConsoleService } from './service';
 
 const cliProvider = {
     provide: CLI_SERVICE_TOKEN,
-    useFactory: () => {
-        return ConsoleService.create();
-    }
+    useFactory: (): Command => ConsoleService.create()
 };
 
 @Module({
@@ -17,9 +17,9 @@ const cliProvider = {
 export class ConsoleModule {
     protected scanner: ConsoleScanner = new ConsoleScanner();
 
-    constructor(protected readonly service: ConsoleService) {}
+    constructor(protected readonly service: ConsoleService) { }
 
-    public scan(app: INestApplicationContext, includedModules?: any[]) {
+    public scan(app: INestApplicationContext, includedModules?: any[]): void {
         const scanResponse = this.scanner.scan(app, includedModules);
         const cli = this.service.getCli();
         scanResponse.forEach(({ methods, instance, metadata }) => {

@@ -1,14 +1,15 @@
 import { Test } from '@nestjs/testing';
-import { ModuleWithDecoratorsTest } from './app/decorator/module';
+
 import { ConsoleModule } from '../module';
 import { ConsoleScanner } from '../scanner';
-import { ModuleTest } from './app/module';
 import { CliWithDecorator } from './app/decorator/cli';
+import { ModuleWithDecoratorsTest } from './app/decorator/module';
+import { ModuleTest } from './app/module';
 import { DynamicModuleTest } from './app/module.dynamic';
 
-function testScanCliDecorator(value: any) {
+const testScanCliDecorator = (value: any): void => {
     expect(value.instance).toBeInstanceOf(CliWithDecorator);
-    expect(value.methods).toHaveLength(4);
+    expect(value.methods).toHaveLength(6);
 
     expect(value.methods[0]).toHaveProperty('name');
     expect(value.methods[0].name).toBe('command');
@@ -18,16 +19,18 @@ function testScanCliDecorator(value: any) {
     expect(value.methods[0].metadata.alias).toBe('c');
     expect(value.methods[0].metadata.description).toBe('description');
 
-    expect(value.methods[2]).toHaveProperty('name');
-    expect(value.methods[2].name).toBe('commandWithError');
-    expect(value.methods[2]).toHaveProperty('metadata');
-    expect(value.methods[2].metadata).toHaveProperty('command');
-    expect(value.methods[2].metadata.command).toBe(
+    expect(value.methods[4]).toHaveProperty('name');
+    expect(value.methods[4].name).toBe('commandWithError');
+    expect(value.methods[4]).toHaveProperty('metadata');
+    expect(value.methods[4].metadata).toHaveProperty('command');
+    expect(value.methods[4].metadata.command).toBe(
         'commandWithError <myArgument>'
     );
-    expect(value.methods[2].metadata.alias).toBe('cErr');
-    expect(value.methods[2].metadata.description).toBe('description');
-}
+    expect(value.methods[4].metadata.alias).toBe('cErr');
+    expect(value.methods[4].metadata.description).toBe('description');
+
+    // TODO Test options
+};
 
 describe('Scanner', () => {
     it('Should scan a nest application and returns empty response', async () => {

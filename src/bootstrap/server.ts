@@ -1,9 +1,6 @@
 import { NestApplicationOptions } from '@nestjs/common';
-import {
-    AbstractHttpAdapter,
-    NestApplication,
-    NestFactory
-} from '@nestjs/core';
+import { AbstractHttpAdapter, NestApplication, NestFactory } from '@nestjs/core';
+
 import { AbstractBootstrapConsole } from './abstract';
 import { BootstrapConsoleOptions } from './console';
 
@@ -25,10 +22,7 @@ export interface BootstrapConsoleServerOptions extends BootstrapConsoleOptions {
 /**
  * A class to boot a nestjs application from cli
  */
-export class BootstrapConsoleServer extends AbstractBootstrapConsole<
-    NestApplication,
-    BootstrapConsoleServerOptions
-> {
+export class BootstrapConsoleServer extends AbstractBootstrapConsole<NestApplication, BootstrapConsoleServerOptions> {
     create(): Promise<NestApplication> {
         if (this.options.httpAdapter) {
             return NestFactory.create(

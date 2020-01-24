@@ -1,7 +1,9 @@
 import { INestApplicationContext } from '@nestjs/common';
+import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
+
+import { ICommandResponse } from '../interfaces';
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
 /**
  * The Common options of the AbstractBootstrapConsole
@@ -41,10 +43,7 @@ export interface CommonBootstrapConsoleOptions {
  * @param A The type of nest application
  * @param O The options
  */
-export abstract class AbstractBootstrapConsole<
-    A extends INestApplicationContext,
-    O extends CommonBootstrapConsoleOptions = CommonBootstrapConsoleOptions
-> {
+export abstract class AbstractBootstrapConsole<A extends INestApplicationContext, O extends CommonBootstrapConsoleOptions = CommonBootstrapConsoleOptions> {
     /**
      * The console service
      */
@@ -67,14 +66,14 @@ export abstract class AbstractBootstrapConsole<
             this.options.contextOptions = {};
         }
         if (!this.options.contextOptions.logger) {
-            this.options.contextOptions.logger = false;
+            this.options.contextOptions.logger = ['error'];
         }
     }
 
     /**
      * Activate the decorators scanner
      */
-    protected useDecorators() {
+    protected useDecorators(): this {
         const consoleModule = this.container.get(ConsoleModule);
         consoleModule.scan(this.container, this.options.includeModules);
         return this;
@@ -83,7 +82,7 @@ export abstract class AbstractBootstrapConsole<
     /**
      * Init the console application
      */
-    async init() {
+    async init(): Promise<A> {
         this.container = await this.create();
         this.service = this.container.get(ConsoleService);
         if (
@@ -101,16 +100,23 @@ export abstract class AbstractBootstrapConsole<
     /**
      * Get the console service
      */
-    getService() {
+    getService(): ConsoleService {
         return this.service;
+    }
+
+    /**
+     * Get the options
+     */
+    getOptions(): O {
+        return this.options;
     }
 
     /**
      * Boot the console
      * @param argv The list of arguments to pass to the cli, default are process.argv
      */
-    boot(argv: string[] = process.argv, displayErrors: boolean = true) {
-        return this.service.init(argv, displayErrors);
+    boot(argv: string[] = process.argv): Promise<ICommandResponse> {
+        return this.service.init(argv);
     }
 
     /**

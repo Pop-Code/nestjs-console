@@ -75,7 +75,7 @@ module.exports = {
         'max-len': [
             'error',
             {
-                code: 150
+                code: 200
             }
         ],
         'new-parens': 'error',

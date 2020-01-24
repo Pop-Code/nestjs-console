@@ -1,5 +1,6 @@
 // tslint:disable: no-console
 import { Injectable } from '@nestjs/common';
+
 import { ConsoleService } from '../../service';
 
 @Injectable()
@@ -35,6 +36,26 @@ export class ServiceTest {
 
         this.consoleService.createCommand(
             {
+                command: 'commandWithNoArg',
+                description: 'description',
+                alias: 'cNoArg'
+            },
+            this.commandWithNoArg,
+            cli
+        );
+
+        this.consoleService.createCommand(
+            {
+                command: 'asyncCommandWithNoArg',
+                description: 'description',
+                alias: 'acNoArg'
+            },
+            this.asyncCommandWithNoArg,
+            cli
+        );
+
+        this.consoleService.createCommand(
+            {
                 command: 'commandWithError <myArgument>',
                 description: 'description',
                 alias: 'cErr'
@@ -55,8 +76,8 @@ export class ServiceTest {
 
         const subCommand = this.consoleService.createGroupCommand(
             {
-                name: 'subCommand',
-                alias: 'sc',
+                name: 'groupCommand',
+                alias: 'gc',
                 description: 'description'
             },
             cli
@@ -110,6 +131,26 @@ export class ServiceTest {
             this.command,
             subCommand
         );
+
+        this.consoleService.createCommand(
+            {
+                command: 'subCommandWithNoArg',
+                description: 'description',
+                alias: 'subNoArg'
+            },
+            this.subCommandWithNoArg,
+            subCommand
+        );
+
+        this.consoleService.createCommand(
+            {
+                command: 'asyncSubCommandWithNoArg',
+                description: 'description',
+                alias: 'acSubNoArg'
+            },
+            this.asyncSubCommandWithNoArg,
+            subCommand
+        );
     }
 
     command = (myArgument: string, options: any) => {
@@ -118,11 +159,41 @@ export class ServiceTest {
             console.log(options.optional);
         }
         return myArgument;
+    };
+
+    commandWithNoArg() {
+        const res = 'commandWithNoArg executed';
+        console.log(res);
     }
+
+    subCommandWithNoArg() {
+        const res = 'subCommandWithNoArg executed';
+        console.log(res);
+    }
+
+    asyncCommandWithNoArg = async () => {
+        // wait 1 second simulating async task
+        await new Promise((ok, fail) =>
+            setTimeout(() => {
+                ok();
+            }, 1000)
+        );
+        console.log('asyncCommandWithNoArg executed');
+    };
+
+    asyncSubCommandWithNoArg = async () => {
+        // wait 1 second simulating async task
+        await new Promise((ok, fail) =>
+            setTimeout(() => {
+                ok();
+            }, 1000)
+        );
+        console.log('asyncSubCommandWithNoArg executed');
+    };
 
     commandWithError = (myArgument: string) => {
         throw new Error(myArgument);
-    }
+    };
 
     asyncCommand = async (myArgument: string) => {
         // wait 1 second simulating async task
@@ -132,7 +203,7 @@ export class ServiceTest {
                 ok(myArgument);
             }, 1000)
         );
-    }
+    };
 
     asyncCommandWithError = async (myArgument: string) => {
         // wait 1 second simulating async task
@@ -141,5 +212,5 @@ export class ServiceTest {
                 fail(new Error(myArgument));
             }, 1000)
         );
-    }
+    };
 }
