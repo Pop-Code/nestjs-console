@@ -1,5 +1,5 @@
 // tslint:disable:no-console
-import { Console, Command } from '../../../decorators';
+import { Command, Console } from '../../../decorators';
 
 @Console()
 export class CliWithDecorator {
@@ -26,6 +26,25 @@ export class CliWithDecorator {
                 ok(myArgument);
             }, 0);
         });
+    }
+
+    @Command({
+        command: 'commandWithNoArg',
+        alias: 'cNoArg',
+        description: 'description'
+    })
+    commandWithNoArg() {
+        const res = 'commandWithNoArg executed';
+        console.log(res);
+    }
+
+    @Command({
+        command: 'asyncCommandWithNoArg',
+        alias: 'acNoArg',
+        description: 'description'
+    })
+    async asyncCommandWithNoArg() {
+        console.log('asyncCommandWithNoArg executed');
     }
 
     @Command({

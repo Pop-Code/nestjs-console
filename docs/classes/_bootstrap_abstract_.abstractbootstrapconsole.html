@@ -136,6 +136,7 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#boot" class="tsd-kind-icon">boot</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#create" class="tsd-kind-icon">create</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#getoptions" class="tsd-kind-icon">get<wbr>Options</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#getservice" class="tsd-kind-icon">get<wbr>Service</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#init" class="tsd-kind-icon">init</a></li>
 								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="_bootstrap_abstract_.abstractbootstrapconsole.html#usedecorators" class="tsd-kind-icon">use<wbr>Decorators</a></li>
@@ -156,7 +157,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L61">src/bootstrap/abstract.ts:61</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L62">src/bootstrap/abstract.ts:62</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -178,7 +179,7 @@
 					<div class="tsd-signature tsd-kind-icon">container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">A</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L56">src/bootstrap/abstract.ts:56</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L57">src/bootstrap/abstract.ts:57</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -193,7 +194,7 @@
 					<div class="tsd-signature tsd-kind-icon">options<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">O</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L61">src/bootstrap/abstract.ts:61</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L62">src/bootstrap/abstract.ts:62</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -208,7 +209,7 @@
 					<div class="tsd-signature tsd-kind-icon">service<span class="tsd-signature-symbol">:</span> <a href="_service_.consoleservice.html" class="tsd-signature-type">ConsoleService</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L51">src/bootstrap/abstract.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L52">src/bootstrap/abstract.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -224,13 +225,13 @@
 					<a name="boot" class="tsd-anchor"></a>
 					<h3>boot</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">boot<span class="tsd-signature-symbol">(</span>argv<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, displayErrors<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">boot<span class="tsd-signature-symbol">(</span>argv<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_service_.icommandactionresponse.html" class="tsd-signature-type">ICommandActionResponse</a><span class="tsd-signature-symbol">&gt;</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L112">src/bootstrap/abstract.ts:112</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L120">src/bootstrap/abstract.ts:120</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -246,11 +247,8 @@
 										<p>The list of arguments to pass to the cli, default are process.argv</p>
 									</div>
 								</li>
-								<li>
-									<h5><span class="tsd-flag ts-flagDefault value">Default value</span> displayErrors: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = true</span></h5>
-								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/_service_.icommandactionresponse.html" class="tsd-signature-type">ICommandActionResponse</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 					</ul>
 				</section>
@@ -264,7 +262,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L120">src/bootstrap/abstract.ts:120</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L128">src/bootstrap/abstract.ts:128</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -278,6 +276,28 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getoptions" class="tsd-anchor"></a>
+					<h3>get<wbr>Options</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Options<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">O</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L112">src/bootstrap/abstract.ts:112</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get the options</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">O</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
 					<a name="getservice" class="tsd-anchor"></a>
 					<h3>get<wbr>Service</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
@@ -287,7 +307,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L104">src/bootstrap/abstract.ts:104</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L105">src/bootstrap/abstract.ts:105</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -309,7 +329,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L86">src/bootstrap/abstract.ts:86</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L87">src/bootstrap/abstract.ts:87</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -331,7 +351,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/4cb4cdc/src/bootstrap/abstract.ts#L77">src/bootstrap/abstract.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/cd2d52d/src/bootstrap/abstract.ts#L78">src/bootstrap/abstract.ts:78</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -410,6 +430,9 @@
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_bootstrap_abstract_.abstractbootstrapconsole.html#create" class="tsd-kind-icon">create</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="_bootstrap_abstract_.abstractbootstrapconsole.html#getoptions" class="tsd-kind-icon">get<wbr>Options</a>
 							</li>
 							<li class=" tsd-kind-method tsd-parent-kind-class">
 								<a href="_bootstrap_abstract_.abstractbootstrapconsole.html#getservice" class="tsd-kind-icon">get<wbr>Service</a>

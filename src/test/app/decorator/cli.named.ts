@@ -1,9 +1,9 @@
 // tslint:disable:no-console
-import { Console, Command } from '../../../decorators';
+import { Command, Console } from '../../../decorators';
 
 @Console({
-    name: 'subCommand',
-    alias: 'sc',
+    name: 'groupCommand',
+    alias: 'gc',
     description: 'description'
 })
 export class CliWithNamedDecorator {
@@ -61,5 +61,29 @@ export class CliWithNamedDecorator {
                 fail(new Error(myArgument));
             }, 1000)
         );
+    }
+
+    @Command({
+        command: 'subCommandWithNoArg',
+        alias: 'subNoArg',
+        description: 'description'
+    })
+    subCommandWithNoArg() {
+        console.log('subCommandWithNoArg executed');
+    }
+
+    @Command({
+        command: 'asyncSubCommandWithNoArg',
+        alias: 'acSubNoArg',
+        description: 'description'
+    })
+    async asyncSubCommandWithNoArg() {
+        // wait 1 second simulating async task
+        await new Promise((ok, fail) =>
+            setTimeout(() => {
+                ok();
+            }, 3000)
+        );
+        console.log('asyncSubCommandWithNoArg executed');
     }
 }

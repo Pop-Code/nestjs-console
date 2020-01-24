@@ -1,12 +1,23 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import { Command, CommanderError } from 'commander';
 import { EventEmitter } from 'events';
-import {
-    ICreateCommandOptions,
-    IConsoleOptions,
-    InjectCli
-} from './decorators';
+
+import { IConsoleOptions, ICreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
+
+/**
+ * The Command action handler type
+ * Note: The last argument is always the command
+ */
+export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
+
+/**
+ * The response of the
+ */
+export interface ICommandActionResponse {
+    data: any;
+    command: Command;
+}
 
 @Injectable()
 export class ConsoleService {
@@ -20,11 +31,6 @@ export class ConsoleService {
      * A Map holding group commands by name
      */
     protected commands: Map<string, Command> = new Map();
-
-    /**
-     * The event manager used to emit data and errors from command handler
-     */
-    protected eventManager: EventEmitter = new EventEmitter();
 
     /**
      * The root cli
@@ -90,24 +96,25 @@ export class ConsoleService {
     /**
      * Wrap an action handler to work with promise.
      */
-    createHandler(action: (...args: any[]) => any) {
+    createHandler(
+        action: CommandActionHandler
+    ): (...args: any[]) => Promise<ICommandActionResponse> {
         return async (...args: any[]) => {
-            try {
-                let response = await action(...args);
-                if (response instanceof Promise) {
-                    response = await response;
-                }
-                this.eventManager.emit('data', response);
-            } catch (e) {
-                this.eventManager.emit('error', e);
+            const command = args[args.length - 1];
+
+            let data = action(...args);
+            if (data instanceof Promise) {
+                data = await data;
             }
+
+            return { data, command };
         };
     }
 
     /**
      * Execute the cli
      */
-    async init(argv: string[], displayErrors: boolean): Promise<any> {
+    async init(argv: string[]): Promise<ICommandActionResponse | undefined> {
         const cli = this.getCli();
         try {
             // if nothing was provided, display an error
@@ -118,22 +125,26 @@ export class ConsoleService {
                     `The cli does not contain sub command`
                 );
             }
-            const response = await new Promise((ok, fail) => {
-                this.eventManager.once('data', data => {
-                    ok(data);
-                });
-                this.eventManager.once('error', e => {
-                    fail(e);
-                });
-                cli.exitOverride(e => {
-                    throw e;
-                });
-                cli.parse(argv);
-                if (argv.length === 2) {
-                    cli.help();
-                }
+            cli.exitOverride(e => {
+                throw e;
             });
-            return response;
+
+            const results: [ICommandActionResponse] = await cli.parseAsync(
+                argv
+            );
+
+            if (!results.length) {
+                let command: Command = cli.commands.find((c: Command) => {
+                    const commandName = argv[argv.length - 1];
+                    return c._name === commandName || c._alias === commandName;
+                });
+                if (!command) {
+                    cli.help();
+                } else {
+                    command.help();
+                }
+            }
+            return results[0];
         } catch (e) {
             if (e instanceof CommanderError) {
                 // if commander throws a CommanderError async event or help has been executed
@@ -145,12 +156,8 @@ export class ConsoleService {
                     throw e;
                 }
                 // display others errors
-                if (displayErrors && e.exitCode === 1) {
-                    this.logError(e);
-                }
-            } else if (displayErrors) {
-                this.logError(e);
             }
+            this.logError(e);
             // always throw for promise
             throw e;
         }
@@ -212,28 +219,16 @@ export class ConsoleService {
         if (options.alias) {
             command.alias(options.alias);
         }
-        // .description(options.description)
-
-        // .alias(options.alias);
 
         const name = command.name();
 
         // register all named events now this will prevent commander to call the event command:*
-        const _onSubCommand = (args: string[], unknown: string[]) => {
+        function _onSubCommand(args: string[], unknown: string[]) {
             // Trigger any releated sub command events passing the unknown args from parent
-            // if command has not parent, args are the unknown args
+            // args are the unknown args
             const commandArgs = command.parseOptions(args.concat(unknown));
             command.parseArgs(commandArgs.args, commandArgs.unknown);
-
-            // Finally, throw an error if nothing has been done,
-            // Remeber that the client must exit the process to prevent this not found to be called
-            if (
-                commandArgs.unknown.length === 0 &&
-                commandArgs.args.length === 0
-            ) {
-                command.help();
-            }
-        };
+        }
         parent.on('command:' + name, _onSubCommand);
         if (options.alias) {
             parent.on('command:' + options.alias, _onSubCommand);

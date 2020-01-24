@@ -1,7 +1,8 @@
 import { INestApplicationContext } from '@nestjs/common';
+import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
+
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
 /**
  * The Common options of the AbstractBootstrapConsole
@@ -67,7 +68,7 @@ export abstract class AbstractBootstrapConsole<
             this.options.contextOptions = {};
         }
         if (!this.options.contextOptions.logger) {
-            this.options.contextOptions.logger = false;
+            this.options.contextOptions.logger = ['error'];
         }
     }
 
@@ -106,11 +107,18 @@ export abstract class AbstractBootstrapConsole<
     }
 
     /**
+     * Get the options
+     */
+    getOptions(): O {
+        return this.options;
+    }
+
+    /**
      * Boot the console
      * @param argv The list of arguments to pass to the cli, default are process.argv
      */
-    boot(argv: string[] = process.argv, displayErrors: boolean = true) {
-        return this.service.init(argv, displayErrors);
+    boot(argv: string[] = process.argv) {
+        return this.service.init(argv);
     }
 
     /**

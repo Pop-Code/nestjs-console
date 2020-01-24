@@ -1,8 +1,8 @@
 // tslint:disable:no-console
-import { Console, Command } from '../../../decorators';
+import { Command, Console } from '../../../decorators';
 
 @Console({
-    name: 'subCommand'
+    name: 'groupCommand'
 })
 export class CliMergedWithNamedDecorator {
     @Command({
