@@ -19,7 +19,7 @@ Common use case : Headless application, cront task, export data, etc...
 ## How it works
 
 The console service works as a standalone process, like the classic entry point, and will initialize a NestApplicationContext (headless) instead a NestApplication.
-The console service will be accesible inside the container.
+The console service will be accessible inside the container.
 
 1. Bootstrap (entry point e.g console.ts) is invoked by cli.
 2. Create a headless nest app
@@ -154,7 +154,7 @@ By default, the @Console will tell the module to register all decorated methods 
 `Example of Usage: [options] [command]`
 
 You can name your provider to be registered in a group command container.
-This is usefull when you have a lot of commands and you want to group them as sub command. (git style)
+This is useful when you have a lot of commands and you want to group them as sub command. (git style)
 
 To achieve this, you have to group your methods into class.
 You have to pass options to the @Console decorator to configure the name of the parent cli.
@@ -202,8 +202,8 @@ export class MyOtherService {...}
 
 Registering methods using the ConsoleService is more flexible than decorators.  
 When you use the ConsoleService, you simply bind your methods to the cli manually.  
-This is usefull if you need to create the cli or a part of the cli at runtime.  
-This way you can also create mutliple commands ans sub commands from the same context.
+This is useful if you need to create the cli or a part of the cli at runtime.  
+This way you can also create multiple commands ans sub commands from the same context.
 
 ```ts
 // service.ts - a nestjs provider
@@ -280,7 +280,7 @@ Add scripts in your package.json (if you want to use them)
     "scripts": {
         // from sources
         "console:dev": "ts-node -r tsconfig-paths/register src/console.ts",
-        // from build (we suppose your app was built in the lib forlder)
+        // from build (we suppose your app was built in the lib folder)
         "console": "node lib/console.js"
     }
 }
