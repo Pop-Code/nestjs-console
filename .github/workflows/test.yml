@@ -26,6 +26,6 @@ jobs:
               uses: codecov/codecov-action@v1.0.5
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
-                  file: ./coverage/clover.xml
+                  file: ./coverage/coverage-final.json
                   fail_ci_if_error: true
                   CI: true
