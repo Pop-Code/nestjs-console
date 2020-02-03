@@ -2,23 +2,23 @@ import { INestApplicationContext } from '@nestjs/common';
 import { isEmpty } from 'lodash';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
-import { IConsoleOptions, ICreateCommandOptions } from './decorators';
+import { ConsoleOptions, CreateCommandOptions } from './decorators';
 
 /**
  * The interface for command method metadata
  */
-export interface IMethodsMetadata {
+export interface MethodsMetadata {
     name: string;
-    metadata: ICreateCommandOptions;
+    metadata: CreateCommandOptions;
 }
 
 /**
  * The response of the scanner
  */
-export interface IScanResponse {
+export interface ScanResponse {
     instance: any;
-    metadata: IConsoleOptions;
-    methods: IMethodsMetadata[];
+    metadata: ConsoleOptions;
+    methods: MethodsMetadata[];
 }
 
 export class ConsoleScanner {
@@ -54,8 +54,8 @@ export class ConsoleScanner {
     public scan(
         app: INestApplicationContext,
         includedModules?: any[]
-    ): Set<IScanResponse> {
-        const set = new Set<IScanResponse>();
+    ): Set<ScanResponse> {
+        const set = new Set<ScanResponse>();
         const { container } = app as any;
         const modules = this.getModules(
             container.getModules(),
@@ -73,7 +73,7 @@ export class ConsoleScanner {
                     return;
                 }
 
-                const consoleMetadata: IConsoleOptions = Reflect.getMetadata(
+                const consoleMetadata: ConsoleOptions = Reflect.getMetadata(
                     CONSOLE_METADATA_NAME,
                     p.instance.constructor
                 );
@@ -88,7 +88,7 @@ export class ConsoleScanner {
                 const methods = this.getInstanceMethods(instance);
 
                 // get the metadata of the methods
-                const methodsMetadata = methods.map<IMethodsMetadata>(
+                const methodsMetadata = methods.map<MethodsMetadata>(
                     methodMetadata => ({
                         name: methodMetadata,
                         metadata: Reflect.getMetadata(

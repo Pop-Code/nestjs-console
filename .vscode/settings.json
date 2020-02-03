@@ -7,7 +7,6 @@
     "javascript.format.enable": false,
     "typescript.format.enable": true,
     "editor.formatOnSave": true,
-    "tslint.autoFixOnSave": true,
     "formatFiles.excludePattern": "**/build/**,**/node_modules,**/.vscode,**/dist/**,**/.chrome",
     "eslint.alwaysShowStatus": true,
     "eslint.format.enable": true,

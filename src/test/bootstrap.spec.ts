@@ -2,10 +2,10 @@ import { NestApplicationContext } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
 import { AbstractBootstrapConsole } from '../bootstrap/abstract';
-import { BootstrapConsole, BootstrapConsoleOptions } from '../bootstrap/console';
+import { BootstrapConsole } from '../bootstrap/console';
 import { ModuleTest } from './app/module';
 
-export class TestBootstrapConsole extends AbstractBootstrapConsole<TestingModule, BootstrapConsoleOptions> {
+export class TestBootstrapConsole extends AbstractBootstrapConsole<TestingModule> {
     create(): Promise<TestingModule> {
         return Test.createTestingModule({
             imports: [this.options.module]
@@ -38,7 +38,7 @@ describe('BootstrapConsole', () => {
         expect(service.getContainer()).toBe(app);
     });
 
-    it('Should init the application context with an logger level', async () => {
+    it('Should init the application context with a logger level', async () => {
         const bootstrap = new BootstrapConsole({
             module: ModuleTest,
             withContainer: true,
@@ -57,5 +57,19 @@ describe('BootstrapConsole', () => {
         expect(options.contextOptions.logger).toHaveLength(2);
         expect(options.contextOptions.logger[0]).toBe('error');
         expect(options.contextOptions.logger[1]).toBe('warn');
+    });
+
+    it('Should boot the cli with process argv', async () => {
+        const bootstrap = new TestBootstrapConsole({
+            module: ModuleTest
+        });
+
+        await bootstrap.init();
+        // get the service and check the container
+        const service = bootstrap.getService();
+        const mockServiceBoot = jest.spyOn(service, 'init').mockImplementation();
+
+        await bootstrap.boot();
+        expect(mockServiceBoot).toHaveBeenCalledWith(process.argv);
     });
 });

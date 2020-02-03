@@ -1,9 +1,9 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import { Command, CommanderError } from 'commander';
 
-import { IConsoleOptions, ICreateCommandOptions, InjectCli } from './decorators';
+import { ConsoleOptions, CreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
-import { CommandActionHandler, CommandActionWrapper, ICommandResponse } from './interfaces';
+import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
 
 @Injectable()
 export class ConsoleService {
@@ -85,7 +85,8 @@ export class ConsoleService {
     createHandler(
         action: CommandActionHandler
     ): CommandActionWrapper {
-        return async (...args: any[]): Promise<ICommandResponse> => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        return async (...args: any[]): Promise<CommandResponse> => {
             const command = args[args.length - 1];
 
             let data = action(...args);
@@ -100,7 +101,7 @@ export class ConsoleService {
     /**
      * Execute the cli
      */
-    async init(argv: string[]): Promise<ICommandResponse | undefined> {
+    async init(argv: string[]): Promise<CommandResponse | undefined> {
         const cli = this.getCli();
         try {
             // if nothing was provided, display an error
@@ -115,7 +116,7 @@ export class ConsoleService {
                 throw e;
             });
 
-            const results: [ICommandResponse] = await cli.parseAsync(
+            const results: [CommandResponse] = await cli.parseAsync(
                 argv
             );
 
@@ -157,8 +158,8 @@ export class ConsoleService {
      * @param parent The command to use as a parent
      */
     createCommand(
-        options: ICreateCommandOptions,
-        handler: (...args: any[]) => any | Promise<any>,
+        options: CreateCommandOptions,
+        handler: CommandActionHandler,
         parent: Command
     ): Command {
         const command = parent
@@ -182,6 +183,7 @@ export class ConsoleService {
             }
         }
         // here as any is reequired cause commander bad typing on action for promise
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return command.action(this.createHandler(handler) as any);
     }
 
@@ -191,7 +193,7 @@ export class ConsoleService {
      * @param parent The command to use as a parent
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
-    createGroupCommand(options: IConsoleOptions, parent: Command): Command {
+    createGroupCommand(options: ConsoleOptions, parent: Command): Command {
         if (parent._args.length > 0) {
             throw new Error(
                 'Sub commands cannot be applied to command with explicit args'

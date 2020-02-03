@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
         "module": "commonjs",
+        "esModuleInterop": true,
         "declaration": true,
         "noImplicitAny": false,
         "removeComments": true,
@@ -9,9 +10,11 @@
         "experimentalDecorators": true,
         "target": "es6",
         "sourceMap": true,
+        "declarationMap": true,
         "outDir": "./lib",
-        "baseUrl": "./",
-        "allowSyntheticDefaultImports": true
+        "baseUrl": ".",
+        "allowSyntheticDefaultImports": true,
+        "resolveJsonModule": true
     },
-    "include": ["src/**/*", "test"]
+    "include": ["src/**/*","./**/*.json"]
 }

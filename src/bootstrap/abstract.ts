@@ -1,7 +1,7 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
-import { ICommandResponse } from '../interfaces';
+import { CommandResponse } from '../interfaces';
 import { ConsoleModule } from '../module';
 import { ConsoleService } from '../service';
 
@@ -14,6 +14,7 @@ export interface CommonBootstrapConsoleOptions {
      * If you are using a dynamic module as a root module, you must create a module that imports your dynamic module first.
      * "@Module({imports: [MyDynamicModule.register()]})"
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     module: any;
 
     /**
@@ -30,6 +31,7 @@ export interface CommonBootstrapConsoleOptions {
     /**
      * An optional list of Nest Modules to scan. If set, only listed modules will be scanned.
      */
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     includeModules?: any[];
 
     /**
@@ -115,7 +117,7 @@ export abstract class AbstractBootstrapConsole<A extends INestApplicationContext
      * Boot the console
      * @param argv The list of arguments to pass to the cli, default are process.argv
      */
-    boot(argv: string[] = process.argv): Promise<ICommandResponse> {
+    boot(argv: string[] = process.argv): Promise<CommandResponse> {
         return this.service.init(argv);
     }
 

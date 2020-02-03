@@ -11,7 +11,7 @@ export const InjectCli = (): ParameterDecorator => Inject(CLI_SERVICE_TOKEN);
  * The options of the command
  * @see commander .option() to learn more
  */
-export interface ICommandOption {
+export interface CommandOption {
     /**
      * The flags the command uses eg '-p,--port'
      */
@@ -36,7 +36,7 @@ export interface ICommandOption {
 /**
  * The interface to create a command
  */
-export interface ICreateCommandOptions {
+export interface CreateCommandOptions {
     /**
      * The command with arguments
      *
@@ -58,20 +58,20 @@ export interface ICreateCommandOptions {
     /**
      * A list of command options
      */
-    options?: ICommandOption[];
+    options?: CommandOption[];
 }
 
 /**
  * The Command decorator is used to decorate a method in a class
  * You can use it in a class that is deecorated by a "@Console" decorator
  */
-export const Command = (options: ICreateCommandOptions): MethodDecorator => (target: any, method: string | symbol): void =>
+export const Command = (options: CreateCommandOptions): MethodDecorator => (target: any, method: string | symbol): void =>
     Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 
 /**
  * The interface to define a console with sub commands
  */
-export interface IConsoleOptions {
+export interface ConsoleOptions {
     /**
      * The name of the group. If set, this name will be used as a parent command.
      */
@@ -94,6 +94,6 @@ export interface IConsoleOptions {
  *
  * eg "@Console({name: "mycommand"})"
  */
-export const Console = (options?: IConsoleOptions): ClassDecorator =>
+export const Console = (options?: ConsoleOptions): ClassDecorator =>
     (target: any): void => Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
 

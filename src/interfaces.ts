@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Command } from 'commander';
 
 /**
@@ -10,13 +11,13 @@ export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
  * The wrapper type of a Command action handler
  * Note: The last argument is always the command
  */
-export type CommandActionWrapper = (...args: any[]) => Promise<ICommandResponse>;
+export type CommandActionWrapper = (...args: any[]) => Promise<CommandResponse>;
 
 
 /**
  * The response of the
  */
-export interface ICommandResponse {
+export interface CommandResponse {
     data: any;
     command: Command;
 }
