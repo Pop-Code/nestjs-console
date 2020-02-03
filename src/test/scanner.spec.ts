@@ -1,13 +1,13 @@
 import { Test } from '@nestjs/testing';
 
 import { ConsoleModule } from '../module';
-import { ConsoleScanner } from '../scanner';
+import { ConsoleScanner, ScanResponse } from '../scanner';
 import { CliWithDecorator } from './app/decorator/cli';
 import { ModuleWithDecoratorsTest } from './app/decorator/module';
 import { ModuleTest } from './app/module';
 import { DynamicModuleTest } from './app/module.dynamic';
 
-const testScanCliDecorator = (value: any): void => {
+const testScanCliDecorator = (value: ScanResponse): void => {
     expect(value.instance).toBeInstanceOf(CliWithDecorator);
     expect(value.methods).toHaveLength(6);
 

@@ -23,7 +23,7 @@ afterEach(() => {
     mockError.mockRestore();
 });
 
-const testCommands = (moduleType: any): void => {
+const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void => {
     let app: INestApplicationContext;
     let bootstrap: BootstrapConsole;
     let consoleService: ConsoleService;
