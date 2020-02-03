@@ -81,7 +81,7 @@
 					<h2>How it works</h2>
 				</a>
 				<p>The console service works as a standalone process, like the classic entry point, and will initialize a NestApplicationContext (headless) instead a NestApplication.
-				The console service will be accesible inside the container.</p>
+				The console service will be accessible inside the container.</p>
 				<ol>
 					<li>Bootstrap (entry point e.g console.ts) is invoked by cli.</li>
 					<li>Create a headless nest app<ul>
@@ -196,7 +196,7 @@ bootstrap.init().then(async app =&gt; {
 				</a>
 				<p>By default, the @Console will tell the module to register all decorated methods at root of the cli.<br><code>Example of Usage: [options] [command]</code></p>
 				<p>You can name your provider to be registered in a group command container.
-				This is usefull when you have a lot of commands and you want to group them as sub command. (git style)</p>
+				This is useful when you have a lot of commands and you want to group them as sub command. (git style)</p>
 				<p>To achieve this, you have to group your methods into class.
 					You have to pass options to the @Console decorator to configure the name of the parent cli.
 				Decorated methods of the providers will be registered as a sub command instead of being registered at root.</p>
@@ -233,7 +233,7 @@ bootstrap.init().then(async app =&gt; {
 				<a href="#how-to-use-the-consoleservice" id="how-to-use-the-consoleservice" style="color: inherit; text-decoration: none;">
 					<h2>How to use the ConsoleService</h2>
 				</a>
-				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is usefull if you need to create the cli or a part of the cli at runtime.<br>This way you can also create mutliple commands ans sub commands from the same context.</p>
+				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is useful if you need to create the cli or a part of the cli at runtime.<br>This way you can also create multiple commands ans sub commands from the same context.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
 <span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
 <span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
@@ -304,7 +304,7 @@ bootstrap.init().then(async app =&gt; {
     <span class="hljs-string">"scripts"</span>: {
         <span class="hljs-comment">// from sources</span>
         <span class="hljs-string">"console:dev"</span>: <span class="hljs-string">"ts-node -r tsconfig-paths/register src/console.ts"</span>,
-        <span class="hljs-comment">// from build (we suppose your app was built in the lib forlder)</span>
+        <span class="hljs-comment">// from build (we suppose your app was built in the lib folder)</span>
         <span class="hljs-string">"console"</span>: <span class="hljs-string">"node lib/console.js"</span>
     }
 }</code></pre>
@@ -355,12 +355,6 @@ Commands:
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_bootstrap_console_.html">&quot;bootstrap/console&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_bootstrap_server_.html">&quot;bootstrap/server&quot;</a>
-					</li>
-					<li class=" tsd-kind-external-module">
-						<a href="modules/_commands_application_manager_.html">&quot;commands/application-<wbr>manager&quot;</a>
 					</li>
 					<li class=" tsd-kind-external-module">
 						<a href="modules/_constants_.html">&quot;constants&quot;</a>
