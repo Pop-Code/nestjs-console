@@ -1,3 +1,4 @@
+.DS_Store
 coverage/
 docs/
 src/
@@ -11,5 +12,6 @@ jest.config.js
 yarn.lock
 .vscode
 renovate.json
-tslint.json
+.eslintrc.js
 .github
+*.tgz
