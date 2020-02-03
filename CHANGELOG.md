@@ -4,17 +4,22 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.1.0] - 2020-02-03
+
+### Changed
+
+-  Update dependencies
 
 ### Breaking
 
 -  Node 8 (carbon) is now deprecated (jest > v25)
+-  Update to Commander >= 4.1.1
 
 ### Added
 
 -  add badges in readme
 
-## [2.0.2] - 2020-02-03
+## [2.0.3] - 2020-02-03
 
 ### Fixed
 
@@ -127,7 +132,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.2...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.0...HEAD
+[2.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.3...v2.1.0
+[2.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.1...v2.0.2
 [2.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.0...v2.0.1
 [2.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v1.2.2...v2.0.0
