@@ -6,8 +6,8 @@
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
 ![node](https://img.shields.io/node/v/nestjs-console)
 ![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
-![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/dev/@nestjs/core)
-![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/dev/commander)
+![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
+![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/commander)
 </div>
 
 [nestjs-console][npm] is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the [npm package commander][commander]
