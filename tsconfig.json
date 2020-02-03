@@ -16,5 +16,5 @@
         "allowSyntheticDefaultImports": true,
         "resolveJsonModule": true
     },
-    "include": ["src/**/*","./**/*.json"]
+    "include": ["src/**/*"]
 }
