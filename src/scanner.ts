@@ -1,5 +1,4 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { isEmpty } from 'lodash';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 import { ConsoleOptions, CreateCommandOptions } from './decorators';
@@ -25,9 +24,9 @@ export class ConsoleScanner {
     /**
      * Get all the modules
      */
-    private getModules(modulesContainer: Map<any, any>, include: any[]): any[] {
+    private getModules(modulesContainer: Map<any, any>, include: any[] = []): any[] {
         const allModules = [...modulesContainer.values()];
-        if (!include || isEmpty(include)) {
+        if (!include.length) {
             return allModules;
         }
         return allModules.filter(({ metatype }) =>
