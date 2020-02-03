@@ -20,7 +20,6 @@
         "commander": "^4.1.1"
     },
     "dependencies": {
-        "lodash": "4.17.15",
         "ora": "4.0.3",
         "prettier": "1.19.1"
     },
