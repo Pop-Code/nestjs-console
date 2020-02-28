@@ -44,7 +44,7 @@
         "ts-node": "8.6.2",
         "tsconfig-paths": "3.9.0",
         "typedoc": "0.16.9",
-        "typescript": "3.7.5"
+        "typescript": "3.8.3"
     },
     "scripts": {
         "build": "rm -Rf ./lib && tsc -b",
