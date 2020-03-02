@@ -8,9 +8,6 @@ import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './abstr
  */
 export class BootstrapConsole extends AbstractBootstrapConsole<INestApplicationContext, CommonBootstrapConsoleOptions> {
     create(): Promise<INestApplicationContext> {
-        return NestFactory.createApplicationContext(
-            this.options.module,
-            this.options.contextOptions
-        );
+        return NestFactory.createApplicationContext(this.options.module, this.options.contextOptions);
     }
 }

@@ -23,9 +23,7 @@ const testScanCliDecorator = (value: ScanResponse): void => {
     expect(value.methods[4].name).toBe('commandWithError');
     expect(value.methods[4]).toHaveProperty('metadata');
     expect(value.methods[4].metadata).toHaveProperty('command');
-    expect(value.methods[4].metadata.command).toBe(
-        'commandWithError <myArgument>'
-    );
+    expect(value.methods[4].metadata.command).toBe('commandWithError <myArgument>');
     expect(value.methods[4].metadata.alias).toBe('cErr');
     expect(value.methods[4].metadata.description).toBe('description');
 

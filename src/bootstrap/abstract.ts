@@ -45,7 +45,10 @@ export interface CommonBootstrapConsoleOptions {
  * @param A The type of nest application
  * @param O The options
  */
-export abstract class AbstractBootstrapConsole<A extends INestApplicationContext, O extends CommonBootstrapConsoleOptions = CommonBootstrapConsoleOptions> {
+export abstract class AbstractBootstrapConsole<
+    A extends INestApplicationContext,
+    O extends CommonBootstrapConsoleOptions = CommonBootstrapConsoleOptions
+> {
     /**
      * The console service
      */
