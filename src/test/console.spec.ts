@@ -64,7 +64,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'unknowcommand']);
                 } catch (e) {
-                    expect(e.message).toEqual('"unknowcommand" command not found');
+                    expect(e.message).toEqual("error: unknown command 'unknowcommand'. See 'console --help'.");
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0]).toContain(e.message);
                     expect(mockStdout).not.toHaveBeenCalled();
@@ -76,7 +76,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'unknowcommand', 'argument']);
                 } catch (e) {
-                    expect(e.message).toEqual('"unknowcommand" command not found');
+                    expect(e.message).toEqual("error: unknown command 'unknowcommand'. See 'console --help'.");
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0].trim()).toEqual(e.message);
                     expect(mockStdout).not.toHaveBeenCalled();
@@ -262,7 +262,9 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'unknowcommand']);
                 } catch (e) {
-                    expect(e.message).toEqual('"unknowcommand" command not found');
+                    expect(e.message).toEqual(
+                        "error: unknown command 'unknowcommand'. See 'console groupCommand --help'."
+                    );
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0].trim()).toEqual(e.message);
                     expect(mockStdout).not.toHaveBeenCalled();
@@ -274,7 +276,9 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'unknowcommand', 'argument']);
                 } catch (e) {
-                    expect(e.message).toEqual('"unknowcommand" command not found');
+                    expect(e.message).toEqual(
+                        "error: unknown command 'unknowcommand'. See 'console groupCommand --help'."
+                    );
                     expect(mockError).toHaveBeenCalledTimes(1);
                     expect(mockError.mock.calls[0][0].trim()).toEqual(e.message);
                     expect(mockStdout).not.toHaveBeenCalled();

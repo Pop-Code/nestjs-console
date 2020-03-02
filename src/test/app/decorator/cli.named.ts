@@ -13,11 +13,12 @@ export class CliWithNamedDecorator {
         description: 'description',
         options: [
             {
-                flags: '-o, --optional [value]'
+                flags: '-o, --optional [value]',
+                fn: (v): boolean => (v ? true : false)
             }
         ]
     })
-    public subCommand1(myArgument: string, options: any) {
+    public subCommand1(myArgument: string, options: { optional?: boolean }): string {
         console.log(myArgument);
         if (options.optional) {
             console.log(options.optional);
@@ -30,9 +31,9 @@ export class CliWithNamedDecorator {
         alias: 'acSub1',
         description: 'description'
     })
-    async asyncSubCommand1(myArgument: string) {
+    async asyncSubCommand1(myArgument: string): Promise<string> {
         // wait 1 second simulating async task
-        return new Promise((ok, fail) => {
+        return new Promise(ok => {
             setTimeout(() => {
                 console.log(myArgument);
                 ok(myArgument);
@@ -45,7 +46,7 @@ export class CliWithNamedDecorator {
         alias: 'subErr',
         description: 'description'
     })
-    subCommandWithError(myArgument: string) {
+    subCommandWithError(myArgument: string): string {
         throw new Error(myArgument);
     }
 
@@ -54,7 +55,7 @@ export class CliWithNamedDecorator {
         alias: 'acSubErr',
         description: 'description'
     })
-    async asyncSubCommandWithError(myArgument: string) {
+    async asyncSubCommandWithError(myArgument: string): Promise<void> {
         // wait 1 second simulating async task
         await new Promise((ok, fail) =>
             setTimeout(() => {
@@ -68,7 +69,7 @@ export class CliWithNamedDecorator {
         alias: 'subNoArg',
         description: 'description'
     })
-    subCommandWithNoArg() {
+    subCommandWithNoArg(): void {
         console.log('subCommandWithNoArg executed');
     }
 
@@ -77,9 +78,9 @@ export class CliWithNamedDecorator {
         alias: 'acSubNoArg',
         description: 'description'
     })
-    async asyncSubCommandWithNoArg() {
+    async asyncSubCommandWithNoArg(): Promise<void> {
         // wait 1 second simulating async task
-        await new Promise((ok, fail) =>
+        await new Promise(ok =>
             setTimeout(() => {
                 ok();
             }, 3000)

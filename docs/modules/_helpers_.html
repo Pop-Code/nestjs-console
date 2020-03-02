@@ -70,12 +70,6 @@
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
 					<div class="tsd-index-content">
-						<section class="tsd-index-section tsd-is-not-exported">
-							<h3>Variables</h3>
-							<ul class="tsd-index-list">
-								<li class="tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported"><a href="_helpers_.html#ora" class="tsd-kind-icon">ora</a></li>
-							</ul>
-						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
@@ -83,96 +77,6 @@
 								<li class="tsd-kind-function tsd-parent-kind-external-module"><a href="_helpers_.html#formatresponse" class="tsd-kind-icon">format<wbr>Response</a></li>
 							</ul>
 						</section>
-					</div>
-				</section>
-			</section>
-			<section class="tsd-panel-group tsd-member-group tsd-is-not-exported">
-				<h2>Variables</h2>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-					<a name="ora" class="tsd-anchor"></a>
-					<h3>ora</h3>
-					<div class="tsd-signature tsd-kind-icon">ora<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>promise<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol"> }</span></div>
-					<aside class="tsd-sources">
-						<ul>
-							<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c1e13e1/src/helpers.ts#L1">src/helpers.ts:1</a></li>
-						</ul>
-					</aside>
-					<div class="tsd-type-declaration">
-						<h4>Type declaration</h4>
-						<ul class="tsd-parameters">
-							<li class="tsd-parameter-siganture">
-								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-variable tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Ora</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<div class="tsd-comment tsd-typography">
-											<div class="lead">
-												<p>Elegant terminal spinner.</p>
-											</div>
-											<dl class="tsd-comment-tags">
-												<dt>example</dt>
-												<dd><pre><code><span class="hljs-keyword">import</span> ora = <span class="hljs-built_in">require</span>(<span class="hljs-string">'ora'</span>);
-
-const spinner = ora(<span class="hljs-string">'Loading unicorns'</span>).start();
-
-setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-spinner.color = <span class="hljs-string">'yellow'</span>;
-spinner.text = <span class="hljs-string">'Loading rainbows'</span>;
-}, <span class="hljs-number">1000</span>);</code></pre></dd>
-											</dl>
-										</div>
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-												<div class="tsd-comment tsd-typography">
-													<p>If a string is provided, it is treated as a shortcut for <code>options.text</code>.</p>
-												</div>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Ora</span></h4>
-									</li>
-								</ul>
-							</li>
-							<li class="tsd-parameter">
-								<h5>promise<span class="tsd-signature-symbol">: </span>function</h5>
-								<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-type-literal tsd-is-not-exported">
-									<li class="tsd-signature tsd-kind-icon">promise<span class="tsd-signature-symbol">(</span>action<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span>, options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Ora</span></li>
-								</ul>
-								<ul class="tsd-descriptions">
-									<li class="tsd-description">
-										<aside class="tsd-sources">
-											<ul>
-												<li>Defined in node_modules/ora/index.d.ts:263</li>
-											</ul>
-										</aside>
-										<div class="tsd-comment tsd-typography">
-											<div class="lead">
-												<p>Starts a spinner for a promise. The spinner is stopped with <code>.succeed()</code> if the promise fulfills or with <code>.fail()</code> if it rejects.</p>
-											</div>
-										</div>
-										<h4 class="tsd-parameters-title">Parameters</h4>
-										<ul class="tsd-parameters">
-											<li>
-												<h5>action: <span class="tsd-signature-type">PromiseLike</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></h5>
-												<div class="tsd-comment tsd-typography">
-													<p>The promise to start the spinner for.</p>
-												</div>
-											</li>
-											<li>
-												<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">Options</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></h5>
-												<div class="tsd-comment tsd-typography">
-													<p>If a string is provided, it is treated as a shortcut for <code>options.text</code>.</p>
-												</div>
-											</li>
-										</ul>
-										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Ora</span></h4>
-										<p>The spinner instance.</p>
-									</li>
-								</ul>
-							</li>
-						</ul>
 					</div>
 				</section>
 			</section>
@@ -188,13 +92,18 @@ spinner.text = <span class="hljs-string">'Loading rainbows'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c1e13e1/src/helpers.ts#L8">src/helpers.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/60c2f14/src/helpers.ts#L8">helpers.ts:8</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
 								<div class="lead">
 									<p>Create an ora spinner</p>
 								</div>
+								<dl class="tsd-comment-tags">
+									<dt>see</dt>
+									<dd><p><a href="https://www.npmjs.com/package/ora">https://www.npmjs.com/package/ora</a></p>
+									</dd>
+								</dl>
 							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
@@ -216,7 +125,7 @@ spinner.text = <span class="hljs-string">'Loading rainbows'</span>;
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c1e13e1/src/helpers.ts#L13">src/helpers.ts:13</a></li>
+									<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/60c2f14/src/helpers.ts#L13">helpers.ts:13</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -279,9 +188,6 @@ spinner.text = <span class="hljs-string">'Loading rainbows'</span>;
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable tsd-parent-kind-external-module tsd-is-not-exported">
-						<a href="_helpers_.html#ora" class="tsd-kind-icon">ora</a>
-					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-external-module">
 						<a href="_helpers_.html#createspinner" class="tsd-kind-icon">create<wbr>Spinner</a>
 					</li>

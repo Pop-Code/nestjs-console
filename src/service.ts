@@ -1,9 +1,9 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
-import { Command, CommanderError } from 'commander';
+import commander, { CommanderError } from 'commander';
 
 import { ConsoleOptions, CreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
-import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
+import { Command, CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
 
 @Injectable()
 export class ConsoleService {
@@ -31,11 +31,11 @@ export class ConsoleService {
      * Create an instance of root cli
      */
     static create(): Command {
-        const cli = new Command();
+        const cli = new commander.Command();
         // listen for root not found
-        cli.on('command:*', (args: string[]) => {
-            throw new Error(`"${args[0]}" command not found`);
-        });
+        // cli.on('command:*', (args: string[]) => {
+        //     throw new Error(`"${args[0]}" command not found`);
+        // });
         return cli;
     }
 
@@ -82,18 +82,14 @@ export class ConsoleService {
     /**
      * Wrap an action handler to work with promise.
      */
-    createHandler(
-        action: CommandActionHandler
-    ): CommandActionWrapper {
+    createHandler(action: CommandActionHandler): CommandActionWrapper {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any[]): Promise<CommandResponse> => {
-            const command = args[args.length - 1];
-
+            const command: Command = args.find(c => c instanceof commander.Command);
             let data = action(...args);
             if (data instanceof Promise) {
                 data = await data;
             }
-
             return { data, command };
         };
     }
@@ -106,31 +102,13 @@ export class ConsoleService {
         try {
             // if nothing was provided, display an error
             if (cli.commands.length === 0) {
-                throw new CommanderError(
-                    1,
-                    'empty',
-                    'The cli does not contain sub command'
-                );
+                throw new CommanderError(1, 'empty', 'The cli does not contain sub command');
             }
             cli.exitOverride(e => {
                 throw e;
             });
-
-            const results: [CommandResponse] = await cli.parseAsync(
-                argv
-            );
-
-            if (!results.length) {
-                const command: Command = cli.commands.find((c: Command) => {
-                    const commandName = argv[argv.length - 1];
-                    return c._name === commandName || c._alias === commandName;
-                });
-                if (!command) {
-                    cli.help();
-                } else {
-                    command.help();
-                }
-            }
+            const command = cli.parse(argv);
+            const results = await Promise.all(command._actionResults as Promise<CommandResponse>[]);
             return results[0];
         } catch (e) {
             if (e instanceof CommanderError) {
@@ -139,11 +117,11 @@ export class ConsoleService {
                 if (/(helpDisplayed|commander\.help)/.test(e.code)) {
                     return;
                 }
-                if (e.code.includes('missingArgument')) {
+                if (/(missingArgument|unknownCommand)/.test(e.code)) {
                     throw e;
                 }
-                // display others errors
             }
+            // display others errors
             this.logError(e);
             // always throw for promise
             throw e;
@@ -157,14 +135,18 @@ export class ConsoleService {
      * @param handler The handler of the command
      * @param parent The command to use as a parent
      */
-    createCommand(
-        options: CreateCommandOptions,
-        handler: CommandActionHandler,
-        parent: Command
-    ): Command {
-        const command = parent
-            .command(options.command)
-            .exitOverride((...args) => parent._exitCallback(...args));
+    createCommand(options: CreateCommandOptions, handler: CommandActionHandler, parent: Command): Command {
+        // const command = parent.command(options.command).exitOverride((...args) => parent._exitCallback(...args));
+        const args = options.command.split(' ');
+        const command = new commander.Command(args[0]);
+        command.exitOverride((...args) => parent._exitCallback(...args));
+        if (args.length > 1) {
+            command.arguments(args[1]);
+        }
+
+        // required to avoid collision with command properties
+        command.storeOptionsAsProperties(false);
+        command.allowUnknownOption(false);
 
         if (options.description) {
             command.description(options.description);
@@ -172,19 +154,19 @@ export class ConsoleService {
         if (options.alias) {
             command.alias(options.alias);
         }
-        if (Symbol.iterator in Object(options.options)) {
+        if (Array.isArray(options.options)) {
             for (const opt of options.options) {
-                command.option(
-                    opt.flags,
-                    opt.description,
-                    opt.fn,
-                    opt.defaultValue
-                );
+                command.option(opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
             }
         }
-        // here as any is reequired cause commander bad typing on action for promise
+        // here as any is required cause commander bad typing on action for promise
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        return command.action(this.createHandler(handler) as any);
+        command.action(this.createHandler(handler) as any);
+
+        // add the command to the parent
+        parent.addCommand(command);
+
+        return command;
     }
 
     /**
@@ -194,14 +176,13 @@ export class ConsoleService {
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
     createGroupCommand(options: ConsoleOptions, parent: Command): Command {
+        //throw new Error('Deprecated, use addCommand instead');
         if (parent._args.length > 0) {
-            throw new Error(
-                'Sub commands cannot be applied to command with explicit args'
-            );
+            throw new Error('Sub commands cannot be applied to command with explicit args');
         }
-        const command = parent
-            .command(options.name)
-            .exitOverride((...args) => parent._exitCallback(...args));
+
+        const command = new commander.Command(options.name);
+        command.exitOverride((...args) => parent._exitCallback(...args));
         if (options.description) {
             command.description(options.description);
         }
@@ -209,27 +190,11 @@ export class ConsoleService {
             command.alias(options.alias);
         }
 
-        const name = command.name();
+        // add the command to the service command Map. this will help us to manipulate parent commands
+        this.commands.set(command.name(), command);
 
-        // register all named events now this will prevent commander to call the event command:*
-        const _onSubCommand = (args: string[], unknown: string[]): void => {
-            // Trigger any releated sub command events passing the unknown args from parent
-            // args are the unknown args
-            const commandArgs = command.parseOptions(args.concat(unknown));
-            command.parseArgs(commandArgs.args, commandArgs.unknown);
-        };
-        parent.on('command:' + name, _onSubCommand);
-        if (options.alias) {
-            parent.on('command:' + options.alias, _onSubCommand);
-        }
-
-        // listen for not found on child
-        command.on('command:*', (args: string[]) => {
-            throw new Error(`"${args[0]}" command not found`);
-        });
-
-        // add the command to the command Map. this will help us to manipulate parent commands
-        this.commands.set(name, command);
+        // add the command to his parent
+        parent.addCommand(command);
 
         return command;
     }

@@ -8,11 +8,8 @@ export class CliMergedWithNamedDecorator {
     @Command({
         command: 'subCommandMerged <myArgument>'
     })
-    subCommandMerged(myArgument: string, options: any) {
+    subCommandMerged(myArgument: string): string {
         console.log(myArgument);
-        if (options.optional) {
-            console.log(options.optional);
-        }
         return myArgument;
     }
 }

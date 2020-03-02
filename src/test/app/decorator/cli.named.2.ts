@@ -8,8 +8,8 @@ export class CliWithNamedDecorator2 {
     @Command({
         command: 'subCommand2 <myArgument>'
     })
-    public subCommand2(myArgument: string) {
+    public subCommand2(myArgument: string): string {
         console.log(myArgument);
-        process.exit(0);
+        return myArgument;
     }
 }
