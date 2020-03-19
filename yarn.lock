@@ -325,20 +325,20 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@nestjs/common@6.11.9":
-  version "6.11.9"
-  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.11.9.tgz#1697bed82c0772b97f2d3dd28e463dd8e905b622"
-  integrity sha512-ZxoV0zDZbYovZJ/SQGGu4tkUKkSyEYCfUmHIGptrRq4E3cS2xq1jfXt95ShMnO0FopLfdlfojORHvldGh2db9A==
+"@nestjs/common@6.11.11":
+  version "6.11.11"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-6.11.11.tgz#701da2462a15cc94d55ec863ddd9f2fb0bbd7136"
+  integrity sha512-K4wuK/V2M82AsoudtY0UYV+M1nYDSSb10t8AkMwFiP+AWMuxCJNtE8qLc9jUe2aTKMbhBiQUfsbZFmg/MRinPg==
   dependencies:
     axios "0.19.2"
     cli-color "2.0.0"
     tslib "1.11.1"
     uuid "7.0.1"
 
-"@nestjs/core@6.11.9":
-  version "6.11.9"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.11.9.tgz#c0eb6c68bd9d4d7d3c12fc9fed1aa41574a820bb"
-  integrity sha512-6VTLkxPk1C3RTSKZBKSw0q8FJLv13OWMCIp2aF5FCjajWM9ODvF2r5SvbtszOsOKKKMahNHhGAaorSMQiruI1w==
+"@nestjs/core@6.11.11":
+  version "6.11.11"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-6.11.11.tgz#2b97a3e9c2a853f5693ed84daf81c1ee3b2782b4"
+  integrity sha512-ewUy2rjiRWi6SziI5gXZnlat7PfnVklL3tusnU1qqtUm74cPY1Zre+zDCJ27P/+B7sFJHbkFfpi0qQP2pQv9jQ==
   dependencies:
     "@nuxtjs/opencollective" "0.2.2"
     fast-safe-stringify "2.0.7"
@@ -348,10 +348,10 @@
     tslib "1.11.1"
     uuid "7.0.1"
 
-"@nestjs/platform-express@6.11.9":
-  version "6.11.9"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.11.9.tgz#79053c6ed9910b4c2707c102807b50778dacf604"
-  integrity sha512-mX+PqDhd+RVoKAkqOv8WeWrw4hUdtcezrl8SUlTNie1GPxha34L8pi1cm9nXzrIuY49VHc635kZhMqRraTsuuQ==
+"@nestjs/platform-express@6.11.11":
+  version "6.11.11"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-6.11.11.tgz#d30ea1f39299e92e080553e893a0afac54f20c6e"
+  integrity sha512-4h3F3hDhNlO5+Ruy6eS+lSL2yIz5r4hF/BB3QkZVOuRdfji9n0gZAIR7tuSLTizqYxaHYRZ7dBv+PscQS/7ztQ==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
@@ -359,10 +359,10 @@
     multer "1.4.2"
     tslib "1.11.1"
 
-"@nestjs/testing@6.11.9":
-  version "6.11.9"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.11.9.tgz#4bd31b73467643f6b2934797cacc4a782a368925"
-  integrity sha512-vmYMBUHh3iBH2cev6VDAZAOk73tJGaekfCkcpEO5Gvf6wh6fCFnYSnGtAm0xrclLoVZV8fAU7A5p0+sEYZXqLw==
+"@nestjs/testing@6.11.11":
+  version "6.11.11"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-6.11.11.tgz#c9858e6516cccf923289919764ed9039376d9b3c"
+  integrity sha512-Mqu4IWZhnLdIFfVfueAFFCm3jPfQoWg+YmDLBsFS2kpab3az5gsRCZQv9R9CCHGa1hHKYWqM1lMcz1IQc70kww==
   dependencies:
     optional "0.1.4"
     tslib "1.11.1"
