@@ -15,8 +15,8 @@
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
     "peerDependencies": {
-        "@nestjs/common": "^6",
-        "@nestjs/core": "^6",
+        "@nestjs/common": "^6 || ^7.0.0",
+        "@nestjs/core": "^6 || ^7.0.0",
         "commander": "^4.1.1"
     },
     "dependencies": {
@@ -24,10 +24,10 @@
         "prettier": "1.19.1"
     },
     "devDependencies": {
-        "@nestjs/common": "6.11.9",
-        "@nestjs/core": "6.11.9",
-        "@nestjs/platform-express": "6.11.9",
-        "@nestjs/testing": "6.11.9",
+        "@nestjs/common": "7.0.7",
+        "@nestjs/core": "7.0.7",
+        "@nestjs/platform-express": "7.0.7",
+        "@nestjs/testing": "7.0.7",
         "@types/jest": "25.1.4",
         "@typescript-eslint/eslint-plugin": "2.21.0",
         "@typescript-eslint/parser": "2.21.0",
