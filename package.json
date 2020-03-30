@@ -40,7 +40,7 @@
         "jest": "25.1.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.5.4",
-        "ts-jest": "25.2.1",
+        "ts-jest": "25.3.0",
         "ts-node": "8.7.0",
         "tsconfig-paths": "3.9.0",
         "typedoc": "0.17.1",
