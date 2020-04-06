@@ -43,7 +43,7 @@
         "ts-jest": "25.3.0",
         "ts-node": "8.7.0",
         "tsconfig-paths": "3.9.0",
-        "typedoc": "0.17.3",
+        "typedoc": "0.17.4",
         "typescript": "3.8.3"
     },
     "scripts": {
