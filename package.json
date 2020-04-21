@@ -20,7 +20,7 @@
         "commander": "^4.1.1"
     },
     "dependencies": {
-        "ora": "4.0.3",
+        "ora": "4.0.4",
         "prettier": "1.19.1"
     },
     "devDependencies": {
