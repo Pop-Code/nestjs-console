@@ -1,7 +1,7 @@
 import { INestApplicationContext, Module } from '@nestjs/common';
-import { Command } from 'commander';
 
 import { CLI_SERVICE_TOKEN } from './constants';
+import { Command } from './interfaces';
 import { ConsoleScanner } from './scanner';
 import { ConsoleService } from './service';
 
@@ -17,9 +17,9 @@ const cliProvider = {
 export class ConsoleModule {
     protected scanner: ConsoleScanner = new ConsoleScanner();
 
-    constructor(protected readonly service: ConsoleService) { }
+    constructor(protected readonly service: ConsoleService) {}
 
-    public scan(app: INestApplicationContext, includedModules?: any[]): void {
+    public scan(app: INestApplicationContext, includedModules?: unknown[]): void {
         const scanResponse = this.scanner.scan(app, includedModules);
         const cli = this.service.getCli();
         scanResponse.forEach(({ methods, instance, metadata }) => {
@@ -31,11 +31,7 @@ export class ConsoleModule {
                 }
             }
             for (const method of methods) {
-                this.service.createCommand(
-                    method.metadata,
-                    instance[method.name].bind(instance),
-                    parent
-                );
+                this.service.createCommand(method.metadata, instance[method.name].bind(instance), parent);
             }
         });
     }

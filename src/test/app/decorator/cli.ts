@@ -8,7 +8,7 @@ export class CliWithDecorator {
         alias: 'c',
         description: 'description'
     })
-    command(myArgument: string) {
+    command(myArgument: string): string {
         console.log(myArgument);
         return myArgument;
     }
@@ -18,9 +18,9 @@ export class CliWithDecorator {
         alias: 'ac',
         description: 'description'
     })
-    async asyncCommand(myArgument: string) {
+    async asyncCommand(myArgument: string): Promise<string> {
         // wait 1 second simulating async task
-        return new Promise((ok, fail) => {
+        return new Promise((ok) => {
             setTimeout(() => {
                 console.log(myArgument);
                 ok(myArgument);
@@ -33,7 +33,7 @@ export class CliWithDecorator {
         alias: 'cNoArg',
         description: 'description'
     })
-    commandWithNoArg() {
+    commandWithNoArg(): void {
         const res = 'commandWithNoArg executed';
         console.log(res);
     }
@@ -43,8 +43,13 @@ export class CliWithDecorator {
         alias: 'acNoArg',
         description: 'description'
     })
-    async asyncCommandWithNoArg() {
+    async asyncCommandWithNoArg(): Promise<void> {
         console.log('asyncCommandWithNoArg executed');
+        return new Promise((ok) => {
+            setTimeout(() => {
+                ok();
+            }, 0);
+        });
     }
 
     @Command({
@@ -52,7 +57,7 @@ export class CliWithDecorator {
         alias: 'cErr',
         description: 'description'
     })
-    commandWithError(myArgument: string) {
+    commandWithError(myArgument: string): void {
         throw new Error(myArgument);
     }
 
@@ -61,9 +66,9 @@ export class CliWithDecorator {
         alias: 'acErr',
         description: 'description'
     })
-    async asyncCommandWithError(myArgument: string) {
+    async asyncCommandWithError(myArgument: string): Promise<string> {
         // wait 1 second simulating async task
-        await new Promise((ok, fail) =>
+        return await new Promise((ok, fail) =>
             setTimeout(() => {
                 fail(new Error(myArgument));
             }, 1000)

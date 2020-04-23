@@ -28,6 +28,8 @@ const testScanCliDecorator = (value: ScanResponse): void => {
     expect(value.methods[4].metadata.description).toBe('description');
 
     // TODO Test options
+
+    // TODO test arguments
 };
 
 describe('Scanner', () => {

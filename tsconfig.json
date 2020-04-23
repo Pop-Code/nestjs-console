@@ -2,19 +2,18 @@
     "compilerOptions": {
         "module": "commonjs",
         "esModuleInterop": true,
-        "declaration": true,
+        "declaration": false,
         "noImplicitAny": false,
+        "noUnusedLocals": false,
         "removeComments": true,
         "noLib": false,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "target": "es6",
         "sourceMap": true,
-        "declarationMap": true,
-        "outDir": "./lib",
-        "baseUrl": ".",
-        "allowSyntheticDefaultImports": true,
-        "resolveJsonModule": true
+        "allowJs": true,
+        "outDir": "dist",
+        "lib": ["es7"]
     },
     "include": ["src/**/*"]
 }

@@ -5,7 +5,7 @@ const bootstrap = new BootstrapConsole({
     module: ModuleWithDecoratorsTest,
     useDecorators: true
 });
-bootstrap.init().then(async app => {
+bootstrap.init().then(async (app) => {
     try {
         await app.init();
         await bootstrap.boot();

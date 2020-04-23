@@ -1,9 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Command } from 'commander';
+import commander from 'commander';
+
+export type Command = commander.Command;
 
 /**
  * The Command action handler type
- * Note: The last argument is always the command
+ * Arguments are ordered this way:
+ * arg1, arg2, ...otherArgs, options, command
+ *
+ * args: string[],
+ * options: any[],
+ * command: commander.Command
  */
 export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
 
@@ -12,7 +19,6 @@ export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
  * Note: The last argument is always the command
  */
 export type CommandActionWrapper = (...args: any[]) => Promise<CommandResponse>;
-
 
 /**
  * The response of the

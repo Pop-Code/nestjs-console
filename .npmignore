@@ -2,9 +2,10 @@
 coverage/
 docs/
 src/
-lib/test/
+dist/test/
 resources/
 .prettierrc
+.pretiierignore
 .gitignore
 tsconfig.json
 typedoc.js

@@ -9,7 +9,7 @@ export class ServiceTest {
         this.bindCommands();
     }
 
-    protected bindCommands() {
+    protected bindCommands(): void {
         // get the cli
         const cli = this.consoleService.getCli();
 
@@ -88,7 +88,12 @@ export class ServiceTest {
                 command: 'subCommand1 <myArgument>',
                 alias: 'sub1',
                 description: 'description',
-                options: [{ flags: '-o, --optional [value]' }]
+                options: [
+                    {
+                        flags: '-o, --optional [value]',
+                        fn: (v): boolean => (v ? true : false)
+                    }
+                ]
             },
             this.command,
             subCommand
@@ -153,7 +158,7 @@ export class ServiceTest {
         );
     }
 
-    command = (myArgument: string, options: any) => {
+    command = (myArgument: string, options: { optional?: boolean }): string => {
         console.log(myArgument);
         if (options.optional) {
             console.log(options.optional);
@@ -161,19 +166,19 @@ export class ServiceTest {
         return myArgument;
     };
 
-    commandWithNoArg() {
+    commandWithNoArg = (): void => {
         const res = 'commandWithNoArg executed';
         console.log(res);
-    }
+    };
 
-    subCommandWithNoArg() {
+    subCommandWithNoArg = (): void => {
         const res = 'subCommandWithNoArg executed';
         console.log(res);
-    }
+    };
 
-    asyncCommandWithNoArg = async () => {
+    asyncCommandWithNoArg = async (): Promise<void> => {
         // wait 1 second simulating async task
-        await new Promise((ok, fail) =>
+        await new Promise((ok) =>
             setTimeout(() => {
                 ok();
             }, 1000)
@@ -181,9 +186,9 @@ export class ServiceTest {
         console.log('asyncCommandWithNoArg executed');
     };
 
-    asyncSubCommandWithNoArg = async () => {
+    asyncSubCommandWithNoArg = async (): Promise<void> => {
         // wait 1 second simulating async task
-        await new Promise((ok, fail) =>
+        await new Promise((ok) =>
             setTimeout(() => {
                 ok();
             }, 1000)
@@ -191,13 +196,13 @@ export class ServiceTest {
         console.log('asyncSubCommandWithNoArg executed');
     };
 
-    commandWithError = (myArgument: string) => {
+    commandWithError = (myArgument: string): void => {
         throw new Error(myArgument);
     };
 
-    asyncCommand = async (myArgument: string) => {
+    asyncCommand = async (myArgument: string): Promise<string> => {
         // wait 1 second simulating async task
-        return new Promise((ok, fail) =>
+        return new Promise((ok) =>
             setTimeout(() => {
                 console.log(myArgument);
                 ok(myArgument);
@@ -205,7 +210,7 @@ export class ServiceTest {
         );
     };
 
-    asyncCommandWithError = async (myArgument: string) => {
+    asyncCommandWithError = async (myArgument: string): Promise<void> => {
         // wait 1 second simulating async task
         await new Promise((ok, fail) =>
             setTimeout(() => {

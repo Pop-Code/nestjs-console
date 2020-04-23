@@ -2,6 +2,8 @@ import { Inject } from '@nestjs/common';
 
 import { CLI_SERVICE_TOKEN, COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 
+export type ParserType = (value: string, previous: any) => any;
+
 /**
  * A Param decorator to inject the root cli
  */
@@ -25,7 +27,7 @@ export interface CommandOption {
     /**
      * The function to parse the value
      */
-    fn?: ((arg1: any, arg2: any) => void) | RegExp;
+    fn?: ParserType;
 
     /**
      * The default value
@@ -65,8 +67,10 @@ export interface CreateCommandOptions {
  * The Command decorator is used to decorate a method in a class
  * You can use it in a class that is deecorated by a "@Console" decorator
  */
-export const Command = (options: CreateCommandOptions): MethodDecorator => (target: any, method: string | symbol): void =>
-    Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
+export const Command = (options: CreateCommandOptions): MethodDecorator => (
+    target: any,
+    method: string | symbol
+): void => Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 
 /**
  * The interface to define a console with sub commands
@@ -94,6 +98,5 @@ export interface ConsoleOptions {
  *
  * eg "@Console({name: "mycommand"})"
  */
-export const Console = (options?: ConsoleOptions): ClassDecorator =>
-    (target: any): void => Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
-
+export const Console = (options?: ConsoleOptions): ClassDecorator => (target: any): void =>
+    Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);

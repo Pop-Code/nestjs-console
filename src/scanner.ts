@@ -29,9 +29,7 @@ export class ConsoleScanner {
         if (!include.length) {
             return allModules;
         }
-        return allModules.filter(({ metatype }) =>
-            include.some(item => item === metatype)
-        );
+        return allModules.filter(({ metatype }) => include.some((item) => item === metatype));
     }
 
     /**
@@ -40,9 +38,7 @@ export class ConsoleScanner {
     private getInstanceMethods(instance: any): string[] {
         return Object.getOwnPropertyNames(instance)
             .concat(Object.getOwnPropertyNames(instance.__proto__))
-            .filter(m =>
-                Reflect.hasMetadata(COMMAND_METADATA_NAME, instance, m)
-            );
+            .filter((m) => Reflect.hasMetadata(COMMAND_METADATA_NAME, instance, m));
     }
 
     /**
@@ -50,18 +46,12 @@ export class ConsoleScanner {
      * @param app
      * @param includedModules
      */
-    public scan(
-        app: INestApplicationContext,
-        includedModules?: any[]
-    ): Set<ScanResponse> {
+    public scan(app: INestApplicationContext, includedModules?: any[]): Set<ScanResponse> {
         const set = new Set<ScanResponse>();
         const { container } = app as any;
-        const modules = this.getModules(
-            container.getModules(),
-            includedModules
-        );
-        modules.forEach(m => {
-            m._providers.forEach(p => {
+        const modules = this.getModules(container.getModules(), includedModules);
+        modules.forEach((m) => {
+            m._providers.forEach((p) => {
                 const { metatype, name } = p;
                 if (typeof metatype !== 'function') {
                     return;
@@ -87,16 +77,10 @@ export class ConsoleScanner {
                 const methods = this.getInstanceMethods(instance);
 
                 // get the metadata of the methods
-                const methodsMetadata = methods.map<MethodsMetadata>(
-                    methodMetadata => ({
-                        name: methodMetadata,
-                        metadata: Reflect.getMetadata(
-                            COMMAND_METADATA_NAME,
-                            instance,
-                            methodMetadata
-                        )
-                    })
-                );
+                const methodsMetadata = methods.map<MethodsMetadata>((methodMetadata) => ({
+                    name: methodMetadata,
+                    metadata: Reflect.getMetadata(COMMAND_METADATA_NAME, instance, methodMetadata)
+                }));
 
                 set.add({
                     instance,
