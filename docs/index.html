@@ -102,7 +102,7 @@
 yarn add commander nestjs-console</code></pre>
 				<p>Note:
 					For commander &lt;5.0.0, use <a href="mailto:nestjs-console@2.1.1">nestjs-console@2.1.1</a>
-				For commander &gt;=5.0.0 (latest), use nestjs-console@^2.2.0</p>
+				For commander &gt;=5.0.0 (latest), use nestjs-console@^3.0.0</p>
 				<a href="#create-a-cli-endpoint" id="create-a-cli-endpoint" style="color: inherit; text-decoration: none;">
 					<h2>Create a cli endpoint</h2>
 				</a>
@@ -115,7 +115,7 @@ yarn add commander nestjs-console</code></pre>
     <span class="hljs-keyword">module</span>: MyModule,
     useDecorators: true
 });
-bootstrap.init().then(async app =&gt; {
+bootstrap.init().then(async (app) =&gt; {
     <span class="hljs-keyword">try</span> {
         <span class="hljs-comment">// init your app</span>
         <span class="hljs-keyword">await</span> app.init();
@@ -186,7 +186,7 @@ bootstrap.init().then(async app =&gt; {
         spin.start(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
 
         <span class="hljs-comment">// simulate a long task of 1 seconds</span>
-        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function"><span class="hljs-params">done</span> =&gt;</span> setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]), <span class="hljs-number">1000</span>));
+        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]), <span class="hljs-number">1000</span>));
 
         spin.succeed(<span class="hljs-string">'Listing done'</span>);
 
