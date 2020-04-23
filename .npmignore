@@ -5,7 +5,7 @@ src/
 dist/test/
 resources/
 .prettierrc
-.prettierignore
+.pretiierignore
 .gitignore
 tsconfig.json
 typedoc.js
