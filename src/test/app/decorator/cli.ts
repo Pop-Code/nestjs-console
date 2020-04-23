@@ -20,7 +20,7 @@ export class CliWithDecorator {
     })
     async asyncCommand(myArgument: string): Promise<string> {
         // wait 1 second simulating async task
-        return new Promise(ok => {
+        return new Promise((ok) => {
             setTimeout(() => {
                 console.log(myArgument);
                 ok(myArgument);
@@ -45,7 +45,7 @@ export class CliWithDecorator {
     })
     async asyncCommandWithNoArg(): Promise<void> {
         console.log('asyncCommandWithNoArg executed');
-        return new Promise(ok => {
+        return new Promise((ok) => {
             setTimeout(() => {
                 ok();
             }, 0);

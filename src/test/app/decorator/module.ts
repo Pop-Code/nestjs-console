@@ -8,11 +8,6 @@ import { CliWithNamedDecorator2 } from './cli.named.2';
 
 @Module({
     imports: [ConsoleModule],
-    providers: [
-        CliWithDecorator,
-        CliWithNamedDecorator,
-        CliWithNamedDecorator2,
-        CliMergedWithNamedDecorator
-    ]
+    providers: [CliWithDecorator, CliWithNamedDecorator, CliWithNamedDecorator2, CliMergedWithNamedDecorator]
 })
-export class ModuleWithDecoratorsTest { }
+export class ModuleWithDecoratorsTest {}

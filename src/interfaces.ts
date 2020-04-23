@@ -8,8 +8,6 @@ export type Command = commander.Command;
  * Arguments are ordered this way:
  * arg1, arg2, ...otherArgs, options, command
  *
- * // TODO create a nice typing on handler
- * // Break Changes
  * args: string[],
  * options: any[],
  * command: commander.Command

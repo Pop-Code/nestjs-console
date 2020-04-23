@@ -1,24 +1,7 @@
 {
-    "formatFiles.excludePattern": "**/build/**,**/node_modules,**/.vscode,**/dist/**,**/.chrome",
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "editor.formatOnSave": true,
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[javascript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[javascriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescript]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[typescriptreact]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[json]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
-    "[graphql]": {
-        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "eslint.validate": ["typescript", "javascript"],
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
     }
 }

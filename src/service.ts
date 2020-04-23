@@ -85,7 +85,7 @@ export class ConsoleService {
     createHandler(action: CommandActionHandler): CommandActionWrapper {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any[]): Promise<CommandResponse> => {
-            const command: Command = args.find(c => c instanceof commander.Command);
+            const command: Command = args.find((c) => c instanceof commander.Command);
             let data = action(...args);
             if (data instanceof Promise) {
                 data = await data;
@@ -104,7 +104,7 @@ export class ConsoleService {
             if (cli.commands.length === 0) {
                 throw new CommanderError(1, 'empty', 'The cli does not contain sub command');
             }
-            cli.exitOverride(e => {
+            cli.exitOverride((e) => {
                 throw e;
             });
             const command = cli.parse(argv);

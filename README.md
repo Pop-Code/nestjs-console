@@ -8,6 +8,7 @@
 ![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/commander)
+
 </div>
 
 [nestjs-console][npm] is a module that provide a cli. A ready to use service class for your modules that exposes methods to register commands and sub commands using the [npm package commander][commander]
@@ -37,6 +38,10 @@ npm install commander nestjs-console
 yarn add commander nestjs-console
 ```
 
+Note:
+For commander <5.0.0, use nestjs-console@2.1.1
+For commander >=5.0.0 (latest), use nestjs-console@^3.0.0
+
 ## Create a cli endpoint
 
 Create a file at root next to your entry point named console.ts  
@@ -51,7 +56,7 @@ const bootstrap = new BootstrapConsole({
     module: MyModule,
     useDecorators: true
 });
-bootstrap.init().then(async app => {
+bootstrap.init().then(async (app) => {
     try {
         // init your app
         await app.init();
@@ -137,9 +142,7 @@ export class MyService {
         spin.start(`Listing files in directory ${directory}`);
 
         // simulate a long task of 1 seconds
-        const files = await new Promise(done =>
-            setTimeout(() => done(['fileA', 'fileB']), 1000)
-        );
+        const files = await new Promise((done) => setTimeout(() => done(['fileA', 'fileB']), 1000));
 
         spin.succeed('Listing done');
 
@@ -282,8 +285,8 @@ Add scripts in your package.json (if you want to use them)
     "scripts": {
         // from sources
         "console:dev": "ts-node -r tsconfig-paths/register src/console.ts",
-        // from build (we suppose your app was built in the lib folder)
-        "console": "node lib/console.js"
+        // from build (we suppose your app was built in the dist folder)
+        "console": "node dist/console.js"
     }
 }
 ```
@@ -294,7 +297,7 @@ Call the cli (production)
 
 ```bash
 # using node
-node lib/console.js --help
+node dist/console.js --help
 # using npm
 npm run console -- --help
 # using yarn

@@ -7,4 +7,4 @@ import { ServiceTest } from './service';
     imports: [ConsoleModule],
     providers: [ServiceTest]
 })
-export class ModuleTest { }
+export class ModuleTest {}

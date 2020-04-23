@@ -178,7 +178,7 @@ export class ServiceTest {
 
     asyncCommandWithNoArg = async (): Promise<void> => {
         // wait 1 second simulating async task
-        await new Promise(ok =>
+        await new Promise((ok) =>
             setTimeout(() => {
                 ok();
             }, 1000)
@@ -188,7 +188,7 @@ export class ServiceTest {
 
     asyncSubCommandWithNoArg = async (): Promise<void> => {
         // wait 1 second simulating async task
-        await new Promise(ok =>
+        await new Promise((ok) =>
             setTimeout(() => {
                 ok();
             }, 1000)
@@ -202,7 +202,7 @@ export class ServiceTest {
 
     asyncCommand = async (myArgument: string): Promise<string> => {
         // wait 1 second simulating async task
-        return new Promise(ok =>
+        return new Promise((ok) =>
             setTimeout(() => {
                 console.log(myArgument);
                 ok(myArgument);
