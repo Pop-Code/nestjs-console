@@ -40,7 +40,7 @@ yarn add commander nestjs-console
 
 Note:
 For commander <5.0.0, use nestjs-console@2.1.0
-For commander >=5.0.0 (latest), use nestjs-console@^3.0.0
+For commander >=5.0.0 (latest), use nestjs-console@^3.0.2
 
 ## Create a cli endpoint
 
