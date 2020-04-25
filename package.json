@@ -60,6 +60,24 @@
         "lint": "eslint ./src/**/*.ts",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status"
     },
+    "jest": {
+        "moduleFileExtensions": [
+            "js",
+            "json",
+            "ts"
+        ],
+        "rootDir": "src",
+        "testRegex": ".spec.ts$",
+        "transform": {
+            "^.+\\.(t|j)s$": "ts-jest"
+        },
+        "collectCoverageFrom": [
+            "**/*.{js,jsx,ts}",
+            "!index.ts",
+            "!**/test/**"
+        ],
+        "coverageDirectory": "../coverage"
+    },
     "engines": {
         "node": ">=0.10"
     }
