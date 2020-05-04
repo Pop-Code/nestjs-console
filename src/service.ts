@@ -1,5 +1,5 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
-import commander, { CommanderError } from 'commander';
+import * as commander from 'commander';
 
 import { ConsoleOptions, CreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
@@ -30,7 +30,7 @@ export class ConsoleService {
     /**
      * Create an instance of root cli
      */
-    static create(): Command {
+    static create(): commander.Command {
         const cli = new commander.Command();
         // listen for root not found
         // cli.on('command:*', (args: string[]) => {
@@ -102,7 +102,7 @@ export class ConsoleService {
         try {
             // if nothing was provided, display an error
             if (cli.commands.length === 0) {
-                throw new CommanderError(1, 'empty', 'The cli does not contain sub command');
+                throw new commander.CommanderError(1, 'empty', 'The cli does not contain sub command');
             }
             cli.exitOverride((e) => {
                 throw e;
@@ -111,7 +111,7 @@ export class ConsoleService {
             const results = await Promise.all(command._actionResults as Promise<CommandResponse>[]);
             return results[0];
         } catch (e) {
-            if (e instanceof CommanderError) {
+            if (e instanceof commander.CommanderError) {
                 // if commander throws a CommanderError async event or help has been executed
                 // ignore response and error for help display
                 if (/(helpDisplayed|commander\.help)/.test(e.code)) {

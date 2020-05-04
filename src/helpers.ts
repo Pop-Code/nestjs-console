@@ -1,4 +1,4 @@
-import ora from 'ora';
+import * as ora from 'ora';
 import { format, Options as PrettierOptions } from 'prettier';
 
 /**
