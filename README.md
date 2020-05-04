@@ -1,7 +1,7 @@
 <div align="center">
 
 [![nestjs-console](https://raw.githubusercontent.com/Pop-Code/nestjs-console/master/resources/logo-frame.png)][npm]
-[![Actions Status](https://github.com/Pop-Code/nestjs-console/workflows/CI/badge.svg)](https://github.com/Pop-Code/nestjs-console/actions)
+[![Actions Status](https://github.com/Pop-Code/nestjs-console/workflows/Test/badge.svg)](https://github.com/Pop-Code/nestjs-console/actions)
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
 ![node](https://img.shields.io/node/v/nestjs-console)
