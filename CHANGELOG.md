@@ -4,7 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.0.0] - 2020-23-04
+## [3.0.3] - 2020-04-05
+
+### Changed
+
+-   Update dependencies
+-   Remove ignored files from npm build
+-   Fix #140 replace esModuleInterop by allowSyntheticDefaultImports
+
+## [3.0.2] - 2020-23-04
 
 ### Changed
 
@@ -142,8 +150,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.0...HEAD
-[3.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.1...v3.0.0
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.3...HEAD
+[3.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.1...v3.0.3
+[3.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.1...v3.0.2
 [2.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.3...v2.1.0
 [2.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.2...v2.0.3
 [2.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.1...v2.0.2
