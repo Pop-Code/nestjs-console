@@ -9,10 +9,9 @@ resources/
 .gitignore
 tsconfig.json
 typedoc.js
-jest.config.js
 yarn.lock
 .vscode
 renovate.json
-.eslintrc.js
+.eslintrc
 .github
 *.tgz
