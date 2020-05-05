@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import commander from 'commander';
-
-export type Command = commander.Command;
+import * as commander from 'commander';
 
 /**
  * The Command action handler type
@@ -25,5 +23,5 @@ export type CommandActionWrapper = (...args: any[]) => Promise<CommandResponse>;
  */
 export interface CommandResponse {
     data: any;
-    command: Command;
+    command: commander.Command;
 }

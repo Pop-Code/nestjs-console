@@ -3,7 +3,7 @@ import * as commander from 'commander';
 
 import { ConsoleOptions, CreateCommandOptions, InjectCli } from './decorators';
 import { formatResponse } from './helpers';
-import { Command, CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
+import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
 
 @Injectable()
 export class ConsoleService {
@@ -16,14 +16,14 @@ export class ConsoleService {
     /**
      * A Map holding group commands by name
      */
-    protected commands: Map<string, Command> = new Map();
+    protected commands: Map<string, commander.Command> = new Map();
 
     /**
      * The root cli
      */
-    protected cli: Command;
+    protected cli: commander.Command;
 
-    constructor(@InjectCli() cli: Command) {
+    constructor(@InjectCli() cli: commander.Command) {
         this.cli = cli;
     }
 
@@ -60,7 +60,7 @@ export class ConsoleService {
      * Get a cli
      * @param name Get a cli by name, if not set, the root cli is used
      */
-    getCli(name?: string): Command {
+    getCli(name?: string): commander.Command {
         return name ? this.commands.get(name) : this.cli;
     }
 
@@ -85,7 +85,7 @@ export class ConsoleService {
     createHandler(action: CommandActionHandler): CommandActionWrapper {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any[]): Promise<CommandResponse> => {
-            const command: Command = args.find((c) => c instanceof commander.Command);
+            const command: commander.Command = args.find((c) => c instanceof commander.Command);
             let data = action(...args);
             if (data instanceof Promise) {
                 data = await data;
@@ -135,7 +135,11 @@ export class ConsoleService {
      * @param handler The handler of the command
      * @param parent The command to use as a parent
      */
-    createCommand(options: CreateCommandOptions, handler: CommandActionHandler, parent: Command): Command {
+    createCommand(
+        options: CreateCommandOptions,
+        handler: CommandActionHandler,
+        parent: commander.Command
+    ): commander.Command {
         // const command = parent.command(options.command).exitOverride((...args) => parent._exitCallback(...args));
         const args = options.command.split(' ');
         const command = new commander.Command(args[0]);
@@ -175,7 +179,7 @@ export class ConsoleService {
      * @param parent The command to use as a parent
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
-    createGroupCommand(options: ConsoleOptions, parent: Command): Command {
+    createGroupCommand(options: ConsoleOptions, parent: commander.Command): commander.Command {
         //throw new Error('Deprecated, use addCommand instead');
         if (parent._args.length > 0) {
             throw new Error('Sub commands cannot be applied to command with explicit args');

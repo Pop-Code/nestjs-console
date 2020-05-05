@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.0.5] - 2020-05-05
+
+### Changed
+
+-   Fix #140 and #145 remove allowSyntheticDefaultImports to fit default nest application
+
 ## [3.0.4] - 2020-04-05
 
 ### Changed
@@ -150,8 +156,11 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.3...HEAD
-[3.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.1...v3.0.3
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.5...HEAD
+[3.0.5]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.4...v3.0.5
+[3.0.5]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.3...v3.0.5
+[3.0.4]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.3...v3.0.4
+[3.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.2...v3.0.3
 [3.0.2]: https://github.com/Pop-Code/nestjs-console/compare/v2.1.1...v3.0.2
 [2.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.3...v2.1.0
 [2.0.3]: https://github.com/Pop-Code/nestjs-console/compare/v2.0.2...v2.0.3

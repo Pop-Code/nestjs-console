@@ -1,5 +1,5 @@
 import { INestApplicationContext } from '@nestjs/common';
-import { Command } from 'commander';
+import * as commander from 'commander';
 
 import { BootstrapConsole } from '../bootstrap/console';
 import { ConsoleService } from '../service';
@@ -180,7 +180,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute a command', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'command', 'foobar']);
                 expect(response.data).toBe('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -190,7 +190,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute a command using alias', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'c', 'foobar']);
                 expect(response.data).toBe('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -200,7 +200,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute a command without args', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'commandWithNoArg']);
                 expect(response.data).toBeUndefined();
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual('commandWithNoArg executed');
                 expect(mockError).not.toHaveBeenCalled();
@@ -210,7 +210,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute an async command without args', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'asyncCommandWithNoArg']);
                 expect(response.data).toBeUndefined();
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual('asyncCommandWithNoArg executed');
                 expect(mockError).not.toHaveBeenCalled();
@@ -220,7 +220,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute an async command', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'asyncCommand', 'foobar']);
                 expect(response.data).toBe('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0]).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -230,7 +230,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute an async command using alias', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'ac', 'foobar']);
                 expect(response.data).toBe('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0]).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -397,7 +397,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     'foobar'
                 ]);
                 expect(response.data).toEqual('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -406,7 +406,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute a sub command using alias', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'sub1', 'foobar']);
                 expect(response.data).toEqual('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -421,7 +421,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     'foobar'
                 ]);
                 expect(response.data).toEqual('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -430,7 +430,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute an async sub command using alias', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'acSub1', 'foobar']);
                 expect(response.data).toEqual('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -445,7 +445,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     'foobar'
                 ]);
                 expect(response.data).toEqual('foobar');
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
                 expect(mockError).not.toHaveBeenCalled();
@@ -459,7 +459,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     'subCommandWithNoArg'
                 ]);
                 expect(response.data).toBeUndefined();
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual('subCommandWithNoArg executed');
                 expect(mockError).not.toHaveBeenCalled();
@@ -473,7 +473,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     'asyncSubCommandWithNoArg'
                 ]);
                 expect(response.data).toBeUndefined();
-                expect(response.command).toBeInstanceOf(Command);
+                expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual('asyncSubCommandWithNoArg executed');
                 expect(mockError).not.toHaveBeenCalled();

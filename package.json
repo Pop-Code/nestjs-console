@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "3.0.4",
+    "version": "3.0.5",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
@@ -29,8 +29,8 @@
         "@nestjs/platform-express": "7.0.9",
         "@nestjs/testing": "7.0.9",
         "@types/jest": "25.2.1",
-        "@typescript-eslint/eslint-plugin": "2.30.0",
-        "@typescript-eslint/parser": "2.30.0",
+        "@typescript-eslint/eslint-plugin": "2.31.0",
+        "@typescript-eslint/parser": "2.31.0",
         "@types/node": "13.13.4",
         "codecov": "3.6.5",
         "commander": "5.1.0",
@@ -54,6 +54,7 @@
         "console:dev": "ts-node -r tsconfig-paths/register src/test/console.ts",
         "console:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register src/test/console.ts",
         "test": "jest",
+        "test:build": "jest --testRegex .spec.js",
         "test:watch": "jest --watch",
         "test:cov": "jest --coverage",
         "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest",
@@ -66,7 +67,7 @@
             "json",
             "ts"
         ],
-        "rootDir": "src",
+        "rootDir": ".",
         "testRegex": ".spec.ts$",
         "transform": {
             "^.+\\.(t|j)s$": "ts-jest"
