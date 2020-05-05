@@ -73,11 +73,11 @@
             "^.+\\.(t|j)s$": "ts-jest"
         },
         "collectCoverageFrom": [
-            "**/*.{js,jsx,ts}",
-            "!index.ts",
+            "src/**/*.{js,jsx,ts}",
+            "!src/index.ts",
             "!**/test/**"
         ],
-        "coverageDirectory": "../coverage"
+        "coverageDirectory": "./coverage"
     },
     "engines": {
         "node": ">=0.10"
