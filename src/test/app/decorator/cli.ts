@@ -74,4 +74,15 @@ export class CliWithDecorator {
             }, 1000)
         );
     }
+
+    @Command({
+        command: 'command2 <myArgument> <myArgument2>',
+        alias: 'c2',
+        description: 'description'
+    })
+    command2(myArgument: string, myArgument2: string): string {
+        const joinedArgs = `${myArgument}::${myArgument2}`
+        console.log(joinedArgs);
+        return joinedArgs;
+    }
 }

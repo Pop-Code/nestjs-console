@@ -26,6 +26,16 @@ export class ServiceTest {
 
         this.consoleService.createCommand(
             {
+                command: 'command2 <myArgument> <myArgument2>',
+                description: 'description',
+                alias: 'c2'
+            },
+            this.command2,
+            cli
+        );
+
+        this.consoleService.createCommand(
+            {
                 command: 'asyncCommand <myArgument>',
                 description: 'description',
                 alias: 'ac'
@@ -164,6 +174,12 @@ export class ServiceTest {
             console.log(options.optional);
         }
         return myArgument;
+    };
+
+    command2 = (myArgument: string, myArgument2: string): string => {
+        const joinedArgs = `${myArgument}::${myArgument2}`;
+        console.log(joinedArgs);
+        return joinedArgs;
     };
 
     commandWithNoArg = (): void => {

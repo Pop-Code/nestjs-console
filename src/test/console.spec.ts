@@ -176,7 +176,7 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                 expect(mockLog).not.toHaveBeenCalled();
             });
         });
-        describe('Exectution', () => {
+        describe('Execution', () => {
             it('should execute a command', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'command', 'foobar']);
                 expect(response.data).toBe('foobar');
@@ -190,6 +190,16 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
             it('should execute a command using alias', async () => {
                 const response = await bootstrap.boot([process.argv0, 'console', 'c', 'foobar']);
                 expect(response.data).toBe('foobar');
+                expect(response.command).toBeInstanceOf(commander.Command);
+                expect(mockLog).toHaveBeenCalledTimes(1);
+                expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
+                expect(mockError).not.toHaveBeenCalled();
+                expect(mockStdout).not.toHaveBeenCalled();
+            });
+
+            it('should execute a command with multiple args', async () => {
+                const response = await bootstrap.boot([process.argv0, 'console', 'command2', 'foo', 'bar']);
+                expect(response.data).toBe('foo::bar');
                 expect(response.command).toBeInstanceOf(commander.Command);
                 expect(mockLog).toHaveBeenCalledTimes(1);
                 expect(mockLog.mock.calls[0][0].trim()).toEqual(response.data);
