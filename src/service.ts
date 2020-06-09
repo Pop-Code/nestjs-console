@@ -145,7 +145,7 @@ export class ConsoleService {
         const command = new commander.Command(args[0]);
         command.exitOverride((...args) => parent._exitCallback(...args));
         if (args.length > 1) {
-            command.arguments(args[1]);
+            command.arguments(args.slice(1).join(' '));
         }
 
         // required to avoid collision with command properties
