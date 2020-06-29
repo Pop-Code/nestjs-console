@@ -38,7 +38,7 @@
         "ts-jest": "26.1.0",
         "ts-node": "8.10.2",
         "tsconfig-paths": "3.9.0",
-        "typedoc": "0.17.7",
+        "typedoc": "0.17.8",
         "typescript": "3.9.5",
         "@typescript-eslint/eslint-plugin": "2.31.0",
         "@typescript-eslint/parser": "2.31.0",
