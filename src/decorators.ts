@@ -33,6 +33,11 @@ export interface CommandOption {
      * The default value
      */
     defaultValue?: any;
+
+    /**
+     * True if the option is required
+     */
+    required?: boolean;
 }
 
 /**

@@ -144,6 +144,20 @@ const testCommands = (moduleType: ModuleTest | ModuleWithDecoratorsTest): void =
                     expect(mockLog).not.toHaveBeenCalled();
                 }
             });
+
+            it('should throw an error in a command with required option', async () => {
+                try {
+                    await bootstrap.boot([process.argv0, 'console', 'commandWithRequiredOption']);
+                } catch (e) {
+                    expect(e.message).toEqual(
+                        "error: required option '-o,--requiredOptions [requiredOptions]' not specified"
+                    );
+                    expect(mockError).toHaveBeenCalledTimes(1);
+                    expect(mockError.mock.calls[0][0].trim()).toEqual(e.message);
+                    expect(mockStdout).not.toHaveBeenCalled();
+                    expect(mockLog).not.toHaveBeenCalled();
+                }
+            });
         });
         describe('Help', () => {
             it('should display the help', async () => {

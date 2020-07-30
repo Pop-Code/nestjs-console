@@ -4,15 +4,26 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.1.0] - 2020-07-30
+
+### Changed
+
+-   Update dependencies
+-   Update commander to v6
+
+### Added
+
+-   Support required options (Warning, required options means option is required not the value. To force a required value use `<option>` instead `[option]`)
+
 ## [3.0.6] - 2020-06-10
 
 ### Fixed
 
-- Fix: command accept multiple arguments https://github.com/Pop-Code/nestjs-console/issues/148 (thanks to https://github.com/tzellman)
+-   Fix: command accept multiple arguments https://github.com/Pop-Code/nestjs-console/issues/148 (thanks to https://github.com/tzellman)
 
 ### Changed
 
-- Update dependencies
+-   Update dependencies
 
 ## [3.0.5] - 2020-05-05
 
@@ -166,7 +177,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.6...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.1.0...HEAD
+[3.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.6...v3.1.0
 [3.0.6]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.5...v3.0.6
 [3.0.5]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.4...v3.0.5
 [3.0.5]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.3...v3.0.5

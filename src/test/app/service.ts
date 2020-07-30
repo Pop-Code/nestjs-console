@@ -1,5 +1,6 @@
 // tslint:disable: no-console
 import { Injectable } from '@nestjs/common';
+import { Command } from 'commander';
 
 import { ConsoleService } from '../../service';
 
@@ -166,6 +167,21 @@ export class ServiceTest {
             this.asyncSubCommandWithNoArg,
             subCommand
         );
+
+        // this describe a required option, with optional value
+        this.consoleService.createCommand(
+            {
+                command: 'commandWithRequiredOption',
+                options: [
+                    {
+                        flags: '-o,--requiredOptions [requiredOptions]',
+                        required: true
+                    }
+                ]
+            },
+            this.commandWithRequiredOption,
+            cli
+        );
     }
 
     command = (myArgument: string, options: { optional?: boolean }): string => {
@@ -183,13 +199,11 @@ export class ServiceTest {
     };
 
     commandWithNoArg = (): void => {
-        const res = 'commandWithNoArg executed';
-        console.log(res);
+        console.log('commandWithNoArg executed');
     };
 
     subCommandWithNoArg = (): void => {
-        const res = 'subCommandWithNoArg executed';
-        console.log(res);
+        console.log('subCommandWithNoArg executed');
     };
 
     asyncCommandWithNoArg = async (): Promise<void> => {
@@ -233,5 +247,11 @@ export class ServiceTest {
                 fail(new Error(myArgument));
             }, 1000)
         );
+    };
+
+    commandWithRequiredOption = (command: Command) => {
+        const opts = command.opts();
+        console.log(opts);
+        return true;
     };
 }

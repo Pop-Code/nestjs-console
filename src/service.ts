@@ -86,6 +86,11 @@ export class ConsoleService {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         return async (...args: any[]): Promise<CommandResponse> => {
             const command: commander.Command = args.find((c) => c instanceof commander.Command);
+            
+            //TODO here we must be able to type our handler.
+            // actual signature is arg1, arg2, ...arg, command.
+            // options can be get using command.opts()
+            
             let data = action(...args);
             if (data instanceof Promise) {
                 data = await data;
@@ -117,7 +122,7 @@ export class ConsoleService {
                 if (/(helpDisplayed|commander\.help)/.test(e.code)) {
                     return;
                 }
-                if (/(missingArgument|unknownCommand)/.test(e.code)) {
+                if (/(missingMandatoryOptionValue|optionMissingArgument|missingArgument|unknownCommand)/.test(e.code)) {
                     throw e;
                 }
             }
@@ -160,7 +165,11 @@ export class ConsoleService {
         }
         if (Array.isArray(options.options)) {
             for (const opt of options.options) {
-                command.option(opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
+                let method = 'option';
+                if(opt.required){
+                    method = 'requiredOption';
+                }
+                command[method](opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
             }
         }
         // here as any is required cause commander bad typing on action for promise

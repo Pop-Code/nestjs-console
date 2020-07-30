@@ -4,11 +4,12 @@ import * as commander from 'commander';
 /**
  * The Command action handler type
  * Arguments are ordered this way:
- * arg1, arg2, ...otherArgs, options, command
+ * arg1, arg2, ...otherArgs, command
  *
- * args: string[],
- * options: any[],
+ * args: any[],
  * command: commander.Command
+ *
+ * storeOptionsAsProperties is set to false, to get options, use command.opts()
  */
 export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
 

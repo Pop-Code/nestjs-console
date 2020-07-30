@@ -1,8 +1,8 @@
 import { BootstrapConsole } from '../bootstrap/console';
-import { ModuleWithDecoratorsTest } from './app/decorator/module';
+import { ModuleTest } from './app/module';
 
 const bootstrap = new BootstrapConsole({
-    module: ModuleWithDecoratorsTest,
+    module: ModuleTest,
     useDecorators: true
 });
 bootstrap.init().then(async (app) => {

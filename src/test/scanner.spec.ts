@@ -9,7 +9,7 @@ import { DynamicModuleTest } from './app/module.dynamic';
 
 const testScanCliDecorator = (value: ScanResponse): void => {
     expect(value.instance).toBeInstanceOf(CliWithDecorator);
-    expect(value.methods).toHaveLength(7);
+    expect(value.methods).toHaveLength(8);
 
     expect(value.methods[0]).toHaveProperty('name');
     expect(value.methods[0].name).toBe('command');

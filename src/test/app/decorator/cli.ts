@@ -1,4 +1,6 @@
 // tslint:disable:no-console
+import { Command as CommanderCommand } from 'commander';
+
 import { Command, Console } from '../../../decorators';
 
 @Console()
@@ -81,8 +83,23 @@ export class CliWithDecorator {
         description: 'description'
     })
     command2(myArgument: string, myArgument2: string): string {
-        const joinedArgs = `${myArgument}::${myArgument2}`
+        const joinedArgs = `${myArgument}::${myArgument2}`;
         console.log(joinedArgs);
         return joinedArgs;
+    }
+
+    @Command({
+        command: 'commandWithRequiredOption',
+        options: [
+            {
+                flags: '-o,--requiredOptions [requiredOptions]',
+                required: true
+            }
+        ]
+    })
+    commandWithRequiredOption(command: CommanderCommand) {
+        const opts = command.opts();
+        console.log(opts);
+        return true;
     }
 }
