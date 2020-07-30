@@ -278,7 +278,63 @@ export class MyService {
 }
 ```
 
-Add scripts in your package.json (if you want to use them)
+## Command Handler signature
+
+```ts
+(...commandArguments[]; commandInstance: commander.Command) => Promise<any> | any
+```
+
+Your handler will receive all command arguments, the last argument is the command instance from commander.
+You can read options from the command instance using `command.opts()`
+
+```ts
+@Command({
+    description: 'A complete command handler',
+        command: 'myCommandWithArgumentsAndOptions <arg1> <arg2>',
+
+        options: [
+            {
+                flags: '-o1, --option1 <o1Value>',
+                required: false
+            },
+            {
+                flags: '-o2, --option2 <o1Value>',
+                required: true
+            }
+        ]
+    })
+    completeCommandHandler(arg1: string, arg2: string, command: commander.Command): void {
+        // read command arguments
+        console.log(arg1, arg2);
+
+        // read command options
+        const options = command.opts();
+        console.log(options.option1, options.option2);
+    }
+```
+
+## Command Options
+
+By default the presence of an option is not required.
+
+-   If you need to force the presence of an option, set the required options to true.
+-   If you need to force the presence of the argument of an option, you have to use `<options>` instead of `[options]`
+
+With option.required = false  
+`-o, --option` => option is optionnal and will be true if specified  
+`-o, --option <oValue>` option is optionnal and oValue argument is required  
+`-o, --option [oValue]` option is optionnal and oValue argument is also optionnal
+
+With option.required = true  
+`-o, --option` option is required and will be true  
+`-o, --option <oValue>` option is required and oValue argument is required  
+`-o, --option [oValue]` option is required but oValue argument is optionnal
+
+You can use variadic option argument using `[oValue...]` and `<oValue...>`,
+in this case oValue will be an array.
+Details from commander https://github.com/tj/commander.js#variadic-option
+
+## Add scripts in your package.json (if you want to use them)
 
 ```js
 {
