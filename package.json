@@ -32,7 +32,7 @@
         "@types/node": "14.0.12",
         "codecov": "3.7.1",
         "commander": "5.1.0",
-        "jest": "26.0.1",
+        "jest": "26.2.0",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.6.0",
         "ts-jest": "26.1.0",
