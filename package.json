@@ -27,7 +27,7 @@
         "@nestjs/common": "7.4.1",
         "@nestjs/core": "7.4.1",
         "@nestjs/platform-express": "7.4.1",
-        "@nestjs/testing": "7.4.1",
+        "@nestjs/testing": "7.4.2",
         "@types/jest": "26.0.7",
         "@types/node": "14.0.27",
         "codecov": "3.7.2",
