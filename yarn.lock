@@ -540,13 +540,13 @@
     multer "1.4.2"
     tslib "2.0.0"
 
-"@nestjs/testing@7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-7.4.1.tgz#5c2956faabca31e73f3aa400ff6b9c27e9d97232"
-  integrity sha512-jOp6OvVs5/MxmDvWww5Wb91eq+DAdq3K+E731WC6VJS7cVGgjDgvL1wZ0kYahqHfwn4qa5iHwcWmbTga7uzeqQ==
+"@nestjs/testing@7.4.3":
+  version "7.4.3"
+  resolved "https://registry.yarnpkg.com/@nestjs/testing/-/testing-7.4.3.tgz#2c612bb5ff9c2f93903977cb54a65814c734dcdf"
+  integrity sha512-RWV9ILA5wFQmnrV4PWdtddFC59s/qVGYnHiWoBgfICllmgW6TNnfzM0QSvn+geI45NmB8CNkmYT61ESrwdbBFA==
   dependencies:
     optional "0.1.4"
-    tslib "2.0.0"
+    tslib "2.0.1"
 
 "@nuxtjs/opencollective@0.2.2":
   version "0.2.2"
@@ -5090,6 +5090,11 @@ tslib@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.0.tgz#18d13fc2dce04051e20f074cc8387fd8089ce4f3"
   integrity sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
+
+tslib@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.11.1"
