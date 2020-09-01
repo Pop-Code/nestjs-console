@@ -529,16 +529,16 @@
     tslib "2.0.0"
     uuid "8.3.0"
 
-"@nestjs/platform-express@7.4.1":
-  version "7.4.1"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.4.1.tgz#dc36fa6525419bf2dcd6a1851aa3cd65a850652a"
-  integrity sha512-ecAj4u/BsN9QDIiDVECNBrKzyWp9wkKu4XzNVZlSV8QMl8zkhgZsvQoHRTnW+OgWQPUIB8QakWnoW+O4H4cpyg==
+"@nestjs/platform-express@7.4.4":
+  version "7.4.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-7.4.4.tgz#03429ebd5ae4fe7e38556cd9af8ae38ee42e7d1f"
+  integrity sha512-LO0WuMZuP1P68t2kQbxb3GUh2SfkOGw5Ma2fR+QWNS7N63BL6Vsf/b8Ad43ht51FuVfqOQZo7AJVz8DljDRw3A==
   dependencies:
     body-parser "1.19.0"
     cors "2.8.5"
     express "4.17.1"
     multer "1.4.2"
-    tslib "2.0.0"
+    tslib "2.0.1"
 
 "@nestjs/testing@7.4.1":
   version "7.4.1"
@@ -5090,6 +5090,11 @@ tslib@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.0.tgz#18d13fc2dce04051e20f074cc8387fd8089ce4f3"
   integrity sha512-lTqkx847PI7xEDYJntxZH89L2/aXInsyF2luSafe/+0fHOMjlBNXdH6th7f70qxLDhul7KZK0zC8V5ZIyHl0/g==
+
+tslib@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.0.1.tgz#410eb0d113e5b6356490eec749603725b021b43e"
+  integrity sha512-SgIkNheinmEBgx1IUNirK0TUD4X9yjjBRTqqjggWCU3pUEqIk3/Uwl3yRixYKT6WjQuGiwDv4NomL3wqRCj+CQ==
 
 tslib@^1.8.1, tslib@^1.9.0:
   version "1.11.1"
