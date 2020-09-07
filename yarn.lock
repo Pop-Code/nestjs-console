@@ -4443,10 +4443,10 @@ rsvp@^4.8.4:
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-4.8.5.tgz#c8f155311d167f68f21e168df71ec5b083113734"
   integrity sha512-nfMOlASu9OnRJo1mbEk2cz0D56a1MBNrJ7orjRZQG10XDyuvwksKbuXNp6qa+kbn839HwjwhBzhFmdsaEAfauA==
 
-rxjs@6.6.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.0.tgz#af2901eedf02e3a83ffa7f886240ff9018bbec84"
-  integrity sha512-3HMA8z/Oz61DUHe+SdOiQyzIf4tOx5oQHmMir7IZEu6TMqCLHT4LRcmNaUS0NwOz8VLvmmBduMsoaUvMaIiqzg==
+rxjs@6.6.3:
+  version "6.6.3"
+  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.3.tgz#8ca84635c4daa900c0d3967a6ee7ac60271ee552"
+  integrity sha512-trsQc+xYYXZ3urjOiJOuCOa5N3jAZ3eiSpQB5hIT8zGlL2QfnHLJ2r7GMkBGuIausdJN1OneaI6gQlsqNHHmZQ==
   dependencies:
     tslib "^1.9.0"
 
