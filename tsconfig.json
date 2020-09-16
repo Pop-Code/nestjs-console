@@ -14,7 +14,7 @@
         "allowJs": true,
         "outDir": "dist",
         "baseUrl": ".",
-        "lib": ["es7"]
+        "lib": ["es7", "DOM"]
     },
     "include": ["src/**/*"]
 }
