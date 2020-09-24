@@ -20,8 +20,7 @@
         "commander": "^5 || ^6"
     },
     "dependencies": {
-        "ora": "5.1.0",
-        "prettier": "2.1.2"
+        "ora": "5.1.0"
     },
     "devDependencies": {
         "@nestjs/common": "7.4.4",
@@ -39,6 +38,7 @@
         "eslint-plugin-import": "2.22.0",
         "eslint-plugin-prefer-arrow": "1.2.2",
         "jest": "26.4.2",
+        "prettier": "2.1.2",
         "reflect-metadata": "0.1.13",
         "rxjs": "6.6.3",
         "ts-jest": "26.3.0",
