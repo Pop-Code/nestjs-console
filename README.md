@@ -81,7 +81,7 @@ import { MyService } from './service';
     imports: [
         ConsoleModule // import the ConsoleModule
     ],
-    providers: [MyService]
+    providers: [MyService],
     exports: [MyService]
 })
 export class MyModule {}
