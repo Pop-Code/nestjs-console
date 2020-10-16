@@ -1,5 +1,4 @@
 import * as ora from 'ora';
-import { format, Options as PrettierOptions } from 'prettier';
 
 /**
  * Create an ora spinner
@@ -10,5 +9,10 @@ export const createSpinner = (opts?: ora.Options): ora.Ora => ora(opts);
 /**
  * Format a response using prettier
  */
-export const formatResponse = (data: string | Error, options?: PrettierOptions): string =>
-    data instanceof Error ? data.message : format(data, options);
+export const formatResponse = (
+    data: string | Record<string, unknown> | Error,
+    options?: { space?: number }
+): string => {
+    const opts = { space: 2, ...options };
+    return data instanceof Error ? data.message : JSON.stringify(data, null, opts.space);
+};

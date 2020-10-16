@@ -6,7 +6,9 @@ describe('Helpers', () => {
         expect(spinner).toBeDefined();
     });
     it('should format the response ', () => {
-        const formated = formatResponse('{foo: ["bar"]}', { parser: 'json' });
-        expect(formated).toContain('{ "foo": ["bar"] }');
+        const formated = formatResponse({ foo: ['bar'] });
+        const obj = JSON.parse(formated);
+        expect(obj.foo).toHaveLength(1);
+        expect(obj.foo[0]).toBe('bar');
     });
 });

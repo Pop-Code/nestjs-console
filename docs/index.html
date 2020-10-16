@@ -101,15 +101,15 @@
 <span class="hljs-comment"># or unig yarn</span>
 yarn add commander nestjs-console</code></pre>
 				<p>Note:
-					For commander &lt;5.0.0, use <a href="mailto:&#x6e;&#101;&#x73;&#x74;&#106;&#x73;&#45;&#99;&#x6f;&#110;&#x73;&#111;&#x6c;&#101;&#x40;&#x32;&#x2e;&#49;&#46;&#48;">&#x6e;&#101;&#x73;&#x74;&#106;&#x73;&#45;&#99;&#x6f;&#110;&#x73;&#111;&#x6c;&#101;&#x40;&#x32;&#x2e;&#49;&#46;&#48;</a>
+					For commander &lt;5.0.0, use <a href="mailto:&#x6e;&#x65;&#x73;&#x74;&#x6a;&#x73;&#45;&#x63;&#x6f;&#110;&#x73;&#x6f;&#108;&#101;&#64;&#x32;&#x2e;&#x31;&#x2e;&#48;">&#x6e;&#x65;&#x73;&#x74;&#x6a;&#x73;&#45;&#x63;&#x6f;&#110;&#x73;&#x6f;&#108;&#101;&#64;&#x32;&#x2e;&#x31;&#x2e;&#48;</a>
 				For commander &gt;=5.0.0 (latest), use nestjs-console@^3.0.2</p>
 				<a href="#create-a-cli-endpoint" id="create-a-cli-endpoint" style="color: inherit; text-decoration: none;">
 					<h2>Create a cli endpoint</h2>
 				</a>
 				<p>Create a file at root next to your entry point named console.ts<br>Import your app module or any module you want to be loaded. Usually this is your main nestjs module.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// console.ts - example of entrypoint</span>
-<span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
-<span class="hljs-keyword">import</span> { MyModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'./module'</span>;
+<span class="hljs-keyword">import</span> { BootstrapConsole } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-console&#x27;</span>;
+<span class="hljs-keyword">import</span> { MyModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./module&#x27;</span>;
 
 <span class="hljs-keyword">const</span> bootstrap = <span class="hljs-keyword">new</span> BootstrapConsole({
     <span class="hljs-keyword">module</span>: MyModule,
@@ -130,16 +130,16 @@ bootstrap.init().then(async (app) =&gt; {
 					<h2>Import the ConsoleModule in your main module</h2>
 				</a>
 				<pre><code class="language-ts"><span class="hljs-comment">// module.ts - your module</span>
-<span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
-<span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
-<span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./service'</span>;
+<span class="hljs-keyword">import</span> { Module } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
+<span class="hljs-keyword">import</span> { ConsoleModule } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-console&#x27;</span>;
+<span class="hljs-keyword">import</span> { MyService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./service&#x27;</span>;
 
 <span class="hljs-meta">@Module</span>({
     imports: [
         ConsoleModule <span class="hljs-comment">// import the ConsoleModule</span>
     ],
     providers: [MyService]
-    exports: [MyService]
+    <span class="hljs-built_in">exports</span>: [MyService]
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyModule {}</code></pre>
 				<p>You can now inject the <em>ConsoleService</em> inside any nestjs providers, controllers...</p>
@@ -172,13 +172,13 @@ bootstrap.init().then(async (app) =&gt; {
 				<p>Registering methods using class decorators is very easy.
 				Nestjs providers that are decorated with @Console will be scanned and each member method that is decorated with @Command will be registered on the cli.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider using console decorators</span>
-<span class="hljs-keyword">import</span> { Console, Command, createSpinner } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { Console, Command, createSpinner } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-console&#x27;</span>;
 
 <span class="hljs-meta">@Console</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
     <span class="hljs-meta">@Command</span>({
-        command: <span class="hljs-string">'list &lt;directory&gt;'</span>,
-        description: <span class="hljs-string">'List content of a directory'</span>
+        command: <span class="hljs-string">&#x27;list &lt;directory&gt;&#x27;</span>,
+        description: <span class="hljs-string">&#x27;List content of a directory&#x27;</span>
     })
     <span class="hljs-keyword">async</span> listContent(directory: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
         <span class="hljs-comment">// See Ora npm package for details about spinner</span>
@@ -186,9 +186,9 @@ bootstrap.init().then(async (app) =&gt; {
         spin.start(<span class="hljs-string">`Listing files in directory <span class="hljs-subst">${directory}</span>`</span>);
 
         <span class="hljs-comment">// simulate a long task of 1 seconds</span>
-        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> done([<span class="hljs-string">'fileA'</span>, <span class="hljs-string">'fileB'</span>]), <span class="hljs-number">1000</span>));
+        <span class="hljs-keyword">const</span> files = <span class="hljs-keyword">await</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">done</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> done([<span class="hljs-string">&#x27;fileA&#x27;</span>, <span class="hljs-string">&#x27;fileB&#x27;</span>]), <span class="hljs-number">1000</span>));
 
-        spin.succeed(<span class="hljs-string">'Listing done'</span>);
+        spin.succeed(<span class="hljs-string">&#x27;Listing done&#x27;</span>);
 
         <span class="hljs-comment">// send the response to the  cli</span>
         <span class="hljs-comment">// you could also use process.stdout.write()</span>
@@ -206,13 +206,13 @@ bootstrap.init().then(async (app) =&gt; {
 				Decorated methods of the providers will be registered as a sub command instead of being registered at root.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.new.ts - a nestjs provider using console decorators (sub commands)</span>
 <span class="hljs-meta">@Console</span>({
-    name: <span class="hljs-string">'new'</span>,
-    description: <span class="hljs-string">'A command to create an item'</span>
+    name: <span class="hljs-string">&#x27;new&#x27;</span>,
+    description: <span class="hljs-string">&#x27;A command to create an item&#x27;</span>
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyNewService {
     <span class="hljs-meta">@Command</span>({
-        command: <span class="hljs-string">'file &lt;name&gt;'</span>,
-        description: <span class="hljs-string">'Create a file'</span>
+        command: <span class="hljs-string">&#x27;file &lt;name&gt;&#x27;</span>,
+        description: <span class="hljs-string">&#x27;Create a file&#x27;</span>
     })
     <span class="hljs-keyword">async</span> createFile(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a file named <span class="hljs-subst">${name}</span>`</span>);
@@ -220,8 +220,8 @@ bootstrap.init().then(async (app) =&gt; {
     }
 
     <span class="hljs-meta">@Command</span>({
-        command: <span class="hljs-string">'directory &lt;name&gt;'</span>,
-        description: <span class="hljs-string">'Create a directory'</span>
+        command: <span class="hljs-string">&#x27;directory &lt;name&gt;&#x27;</span>,
+        description: <span class="hljs-string">&#x27;Create a directory&#x27;</span>
     })
     <span class="hljs-keyword">async</span> createDirectory(name: <span class="hljs-built_in">string</span>): <span class="hljs-built_in">void</span> | <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">void</span>&gt; {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">`Creating a directory named <span class="hljs-subst">${name}</span>`</span>);
@@ -230,7 +230,7 @@ bootstrap.init().then(async (app) =&gt; {
 }</code></pre>
 				<p>If you need to register other sub commands from other Class to the same cli container, you have to decorate your class using the @Console decorator with the same name.</p>
 				<pre><code class="language-ts"><span class="hljs-meta">@Console</span>({
-    name: <span class="hljs-string">'new'</span> <span class="hljs-comment">// here the name is the same as the one from MyNewService, grouping all commands</span>
+    name: <span class="hljs-string">&#x27;new&#x27;</span> <span class="hljs-comment">// here the name is the same as the one from MyNewService, grouping all commands</span>
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyOtherService {...}</code></pre>
 				<p><code>Example of Usage: new [options] [command]</code></p>
@@ -239,51 +239,51 @@ bootstrap.init().then(async (app) =&gt; {
 				</a>
 				<p>Registering methods using the ConsoleService is more flexible than decorators.<br>When you use the ConsoleService, you simply bind your methods to the cli manually.<br>This is useful if you need to create the cli or a part of the cli at runtime.<br>This way you can also create multiple commands ans sub commands from the same context.</p>
 				<pre><code class="language-ts"><span class="hljs-comment">// service.ts - a nestjs provider</span>
-<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@nestjs/common'</span>;
-<span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">'nestjs-console'</span>;
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@nestjs/common&#x27;</span>;
+<span class="hljs-keyword">import</span> { ConsoleService } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;nestjs-console&#x27;</span>;
 
 <span class="hljs-meta">@Injectable</span>()
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MyService {
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> readonly consoleService: ConsoleService</span>) {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> <span class="hljs-keyword">readonly</span> consoleService: ConsoleService</span>) {
         <span class="hljs-comment">// get the root cli</span>
-        <span class="hljs-keyword">const</span> cli = <span class="hljs-keyword">this</span>.consoleService.getCli();
+        <span class="hljs-keyword">const</span> cli = <span class="hljs-built_in">this</span>.consoleService.getCli();
 
         <span class="hljs-comment">// create a single command (See [npm commander arguments/options for more details])</span>
-        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+        <span class="hljs-built_in">this</span>.consoleService.createCommand(
             {
-                command: <span class="hljs-string">'list &lt;directory&gt;'</span>,
-                description: <span class="hljs-string">'description'</span>
+                command: <span class="hljs-string">&#x27;list &lt;directory&gt;&#x27;</span>,
+                description: <span class="hljs-string">&#x27;description&#x27;</span>
             },
-            <span class="hljs-keyword">this</span>.listContent,
+            <span class="hljs-built_in">this</span>.listContent,
             cli <span class="hljs-comment">// attach the command to the cli</span>
         );
 
         <span class="hljs-comment">// create a parent command container</span>
-        <span class="hljs-keyword">const</span> groupCommand = <span class="hljs-keyword">this</span>.consoleService.createGroupCommand(
+        <span class="hljs-keyword">const</span> groupCommand = <span class="hljs-built_in">this</span>.consoleService.createGroupCommand(
             {
-                name: <span class="hljs-string">'new'</span>,
-                description: <span class="hljs-string">'A command to create an item'</span>
+                name: <span class="hljs-string">&#x27;new&#x27;</span>,
+                description: <span class="hljs-string">&#x27;A command to create an item&#x27;</span>
             },
             cli <span class="hljs-comment">// attach the command to the root cli</span>
         );
 
         <span class="hljs-comment">// create command</span>
-        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+        <span class="hljs-built_in">this</span>.consoleService.createCommand(
             {
-                command: <span class="hljs-string">'file &lt;name&gt;'</span>,
-                description: <span class="hljs-string">'Create a file'</span>
+                command: <span class="hljs-string">&#x27;file &lt;name&gt;&#x27;</span>,
+                description: <span class="hljs-string">&#x27;Create a file&#x27;</span>
             },
-            <span class="hljs-keyword">this</span>.createFile,
+            <span class="hljs-built_in">this</span>.createFile,
             groupCommand <span class="hljs-comment">// attach the command to the group</span>
         );
 
         <span class="hljs-comment">// create an other sub command</span>
-        <span class="hljs-keyword">this</span>.consoleService.createCommand(
+        <span class="hljs-built_in">this</span>.consoleService.createCommand(
             {
-                command: <span class="hljs-string">'directory &lt;name&gt;'</span>,
-                description: <span class="hljs-string">'Create a directory'</span>
+                command: <span class="hljs-string">&#x27;directory &lt;name&gt;&#x27;</span>,
+                description: <span class="hljs-string">&#x27;Create a directory&#x27;</span>
             },
-            <span class="hljs-keyword">this</span>.createDirectory,
+            <span class="hljs-built_in">this</span>.createDirectory,
             groupCommand <span class="hljs-comment">// attach the command to the group</span>
         );
     }
@@ -303,13 +303,57 @@ bootstrap.init().then(async (app) =&gt; {
         <span class="hljs-comment">// your code...</span>
     };
 }</code></pre>
-				<p>Add scripts in your package.json (if you want to use them)</p>
+				<a href="#command-handler-signature" id="command-handler-signature" style="color: inherit; text-decoration: none;">
+					<h2>Command Handler signature</h2>
+				</a>
+				<pre><code class="language-ts">(...commandArguments[]; commandInstance: commander.Command) =&gt; <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">any</span>&gt; | <span class="hljs-built_in">any</span></code></pre>
+				<p>Your handler will receive all command arguments, the last argument is the command instance from commander.
+				You can read options from the command instance using <code>command.opts()</code></p>
+				<pre><code class="language-ts"><span class="hljs-meta">@Command</span>({
+    description: <span class="hljs-string">&#x27;A complete command handler&#x27;</span>,
+        command: <span class="hljs-string">&#x27;myCommandWithArgumentsAndOptions &lt;arg1&gt; &lt;arg2&gt;&#x27;</span>,
+
+        options: [
+            {
+                flags: <span class="hljs-string">&#x27;-o1, --option1 &lt;o1Value&gt;&#x27;</span>,
+                required: <span class="hljs-literal">false</span>
+            },
+            {
+                flags: <span class="hljs-string">&#x27;-o2, --option2 &lt;o1Value&gt;&#x27;</span>,
+                required: <span class="hljs-literal">true</span>
+            }
+        ]
+    })
+    completeCommandHandler(arg1: <span class="hljs-built_in">string</span>, arg2: <span class="hljs-built_in">string</span>, command: commander.Command): <span class="hljs-built_in">void</span> {
+        <span class="hljs-comment">// read command arguments</span>
+        <span class="hljs-built_in">console</span>.log(arg1, arg2);
+
+        <span class="hljs-comment">// read command options</span>
+        <span class="hljs-keyword">const</span> options = command.opts();
+        <span class="hljs-built_in">console</span>.log(options.option1, options.option2);
+    }</code></pre>
+				<a href="#command-options" id="command-options" style="color: inherit; text-decoration: none;">
+					<h2>Command Options</h2>
+				</a>
+				<p>By default the presence of an option is not required.</p>
+				<ul>
+					<li>If you need to force the presence of an option, set the required options to true.</li>
+					<li>If you need to force the presence of the argument of an option, you have to use <code>&lt;options&gt;</code> instead of <code>[options]</code></li>
+				</ul>
+				<p>With option.required = false<br><code>-o, --option</code> =&gt; option is optionnal and will be true if specified<br><code>-o, --option &lt;oValue&gt;</code> option is optionnal and oValue argument is required<br><code>-o, --option [oValue]</code> option is optionnal and oValue argument is also optionnal</p>
+				<p>With option.required = true<br><code>-o, --option</code> option is required and will be true<br><code>-o, --option &lt;oValue&gt;</code> option is required and oValue argument is required<br><code>-o, --option [oValue]</code> option is required but oValue argument is optionnal</p>
+				<p>You can use variadic option argument using <code>[oValue...]</code> and <code>&lt;oValue...&gt;</code>,
+					in this case oValue will be an array.
+				Details from commander <a href="https://github.com/tj/commander.js#variadic-option">https://github.com/tj/commander.js#variadic-option</a></p>
+				<a href="#add-scripts-in-your-packagejson-if-you-want-to-use-them" id="add-scripts-in-your-packagejson-if-you-want-to-use-them" style="color: inherit; text-decoration: none;">
+					<h2>Add scripts in your package.json (if you want to use them)</h2>
+				</a>
 				<pre><code class="language-js">{
-    <span class="hljs-string">"scripts"</span>: {
+    <span class="hljs-string">&quot;scripts&quot;</span>: {
         <span class="hljs-comment">// from sources</span>
-        <span class="hljs-string">"console:dev"</span>: <span class="hljs-string">"ts-node -r tsconfig-paths/register src/console.ts"</span>,
+        <span class="hljs-string">&quot;console:dev&quot;</span>: <span class="hljs-string">&quot;ts-node -r tsconfig-paths/register src/console.ts&quot;</span>,
         <span class="hljs-comment">// from build (we suppose your app was built in the dist folder)</span>
-        <span class="hljs-string">"console"</span>: <span class="hljs-string">"node dist/console.js"</span>
+        <span class="hljs-string">&quot;console&quot;</span>: <span class="hljs-string">&quot;node dist/console.js&quot;</span>
     }
 }</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
