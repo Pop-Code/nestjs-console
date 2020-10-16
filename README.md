@@ -81,7 +81,7 @@ import { MyService } from './service';
     imports: [
         ConsoleModule // import the ConsoleModule
     ],
-    providers: [MyService]
+    providers: [MyService],
     exports: [MyService]
 })
 export class MyModule {}
@@ -208,7 +208,7 @@ export class MyOtherService {...}
 Registering methods using the ConsoleService is more flexible than decorators.  
 When you use the ConsoleService, you simply bind your methods to the cli manually.  
 This is useful if you need to create the cli or a part of the cli at runtime.  
-This way you can also create multiple commands ans sub commands from the same context.
+This way you can also create multiple commands and sub commands from the same context.
 
 ```ts
 // service.ts - a nestjs provider
