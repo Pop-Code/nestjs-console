@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [4.0.0] - 2020-10-16
+
+### Changed
+
+-   BREAKING CHANGE: Remove Pretiier format helpers and use JSON.stringify instead to reduce package size.
+-   chore: update dependencies
+-   chore: Bump version
+-   docs: update docs
+
 ## [3.1.0] - 2020-07-30
 
 ### Changed
@@ -178,6 +187,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 -   Update the dependencies to support nestjs ^6.0.0
 
 [unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.1.0...HEAD
+[4.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.6...v3.1.0
 [3.0.6]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.5...v3.0.6
 [3.0.5]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.4...v3.0.5
