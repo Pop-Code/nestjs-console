@@ -321,14 +321,14 @@ By default the presence of an option is not required.
 -   If you need to force the presence of the argument of an option, you have to use `<options>` instead of `[options]`
 
 With option.required = false  
-`-o, --option` => option is optionnal and will be true if specified  
-`-o, --option <oValue>` option is optionnal and oValue argument is required  
-`-o, --option [oValue]` option is optionnal and oValue argument is also optionnal
+`-o, --option` => option is optional and will be true if specified  
+`-o, --option <oValue>` option is optional and oValue argument is required  
+`-o, --option [oValue]` option is optional and oValue argument is also optional
 
 With option.required = true  
 `-o, --option` option is required and will be true  
 `-o, --option <oValue>` option is required and oValue argument is required  
-`-o, --option [oValue]` option is required but oValue argument is optionnal
+`-o, --option [oValue]` option is required but oValue argument is optional
 
 You can use variadic option argument using `[oValue...]` and `<oValue...>`,
 in this case oValue will be an array.
