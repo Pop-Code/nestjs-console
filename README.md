@@ -67,7 +67,7 @@ bootstrap.init().then(async (app) => {
         // trigger onModuleDestroy, beforeApplicationShutdown and onApplicationShutdown.
         // For example, in your command doing the database operation and need to close
         // when error or finish.
-        app.close();
+        await app.close();
 
         process.exit(0);
     } catch (e) {
