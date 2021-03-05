@@ -19,8 +19,8 @@ export class ConsoleModule {
 
     constructor(protected readonly service: ConsoleService) {}
 
-    public scan(app: INestApplicationContext, includedModules?: unknown[]): void {
-        const scanResponse = this.scanner.scan(app, includedModules);
+    public async scan(app: INestApplicationContext, includedModules?: unknown[]): Promise<void> {
+        const scanResponse = await this.scanner.scan(app, includedModules);
         const cli = this.service.getCli();
         scanResponse.forEach(({ methods, instance, metadata }) => {
             let parent = cli;

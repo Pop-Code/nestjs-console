@@ -78,9 +78,9 @@ export abstract class AbstractBootstrapConsole<
     /**
      * Activate the decorators scanner
      */
-    protected useDecorators(): this {
+    protected async useDecorators(): Promise<this> {
         const consoleModule = this.container.get(ConsoleModule);
-        consoleModule.scan(this.container, this.options.includeModules);
+        await consoleModule.scan(this.container, this.options.includeModules);
         return this;
     }
 
@@ -97,7 +97,7 @@ export abstract class AbstractBootstrapConsole<
             this.service.setContainer(this.container);
         }
         if (this.options.useDecorators) {
-            this.useDecorators();
+            await this.useDecorators();
         }
         return this.container;
     }

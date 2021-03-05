@@ -39,7 +39,7 @@ describe('Scanner', () => {
         }).compile();
 
         const scanner = new ConsoleScanner();
-        const scanResponse = scanner.scan(mod, [ModuleTest]);
+        const scanResponse = await scanner.scan(mod, [ModuleTest]);
 
         expect(scanResponse).toBeInstanceOf(Set);
         expect(scanResponse.size).toBe(0);
@@ -51,7 +51,7 @@ describe('Scanner', () => {
         }).compile();
 
         const scanner = new ConsoleScanner();
-        const scanResponse = scanner.scan(mod, [ModuleWithDecoratorsTest]);
+        const scanResponse = await scanner.scan(mod, [ModuleWithDecoratorsTest]);
 
         expect(scanResponse).toBeInstanceOf(Set);
 
@@ -65,7 +65,7 @@ describe('Scanner', () => {
         }).compile();
 
         const scanner = new ConsoleScanner();
-        const scanResponse = scanner.scan(mod, [ModuleWithDecoratorsTest]);
+        const scanResponse = await scanner.scan(mod, [ModuleWithDecoratorsTest]);
 
         expect(scanResponse).toBeInstanceOf(Set);
 

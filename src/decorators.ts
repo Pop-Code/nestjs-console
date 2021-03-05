@@ -95,6 +95,8 @@ export interface ConsoleOptions {
      * The alias of this console
      */
     alias?: string;
+
+    request?: Record<string, unknown>;
 }
 
 /**

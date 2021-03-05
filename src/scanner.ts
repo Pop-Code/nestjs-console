@@ -1,4 +1,5 @@
 import { INestApplicationContext } from '@nestjs/common';
+import { ContextIdFactory } from '@nestjs/core';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 import { ConsoleOptions, CreateCommandOptions } from './decorators';
@@ -46,20 +47,20 @@ export class ConsoleScanner {
      * @param app
      * @param includedModules
      */
-    public scan(app: INestApplicationContext, includedModules?: any[]): Set<ScanResponse> {
+    public async scan(app: INestApplicationContext, includedModules?: any[]): Promise<Set<ScanResponse>> {
         const set = new Set<ScanResponse>();
         const { container } = app as any;
         const modules = this.getModules(container.getModules(), includedModules);
-        modules.forEach((m) => {
-            m._providers.forEach((p) => {
+        for (const m of modules) {
+            for (const [i, p] of m._providers) {
                 const { metatype, name } = p;
                 if (typeof metatype !== 'function') {
-                    return;
+                    continue;
                 }
 
                 // ignore providers without instance
                 if (!p.instance) {
-                    return;
+                    continue;
                 }
 
                 const consoleMetadata: ConsoleOptions = Reflect.getMetadata(
@@ -69,11 +70,20 @@ export class ConsoleScanner {
 
                 // ignore providers without the console decorator
                 if (!consoleMetadata) {
-                    return;
+                    continue;
+                }
+
+                let instance;
+                if (consoleMetadata.request) {
+                    const contextId = ContextIdFactory.create();
+                    app.registerRequestByContextId(consoleMetadata.request, contextId);
+                    instance = await app.resolve(name, contextId);
+                } else {
+                    instance = app.get(name);
                 }
 
                 // get the provider instance from the container
-                const instance = app.get(name);
+                // const instance = app.get(name);
                 const methods = this.getInstanceMethods(instance);
 
                 // get the metadata of the methods
@@ -87,8 +97,10 @@ export class ConsoleScanner {
                     metadata: consoleMetadata,
                     methods: methodsMetadata
                 });
-            });
-        });
+                // });
+                // });
+            }
+        }
 
         return set;
     }
