@@ -1,7 +1,10 @@
+/**
+ * @module ConsoleScanner
+ */
 import { INestApplicationContext } from '@nestjs/common';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
-import { ConsoleOptions, CreateCommandOptions } from './decorators';
+import { CreateCommandOptions } from './decorators';
 
 /**
  * The interface for command method metadata
@@ -16,7 +19,7 @@ export interface MethodsMetadata {
  */
 export interface ScanResponse {
     instance: any;
-    metadata: ConsoleOptions;
+    metadata: CreateCommandOptions;
     methods: MethodsMetadata[];
 }
 
@@ -62,7 +65,7 @@ export class ConsoleScanner {
                     return;
                 }
 
-                const consoleMetadata: ConsoleOptions = Reflect.getMetadata(
+                const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
                     CONSOLE_METADATA_NAME,
                     p.instance.constructor
                 );

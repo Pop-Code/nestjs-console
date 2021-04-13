@@ -1,3 +1,6 @@
+/**
+ * @module AbstractBootstrapConsole
+ */
 import { INestApplicationContext } from '@nestjs/common';
 import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
 
@@ -14,14 +17,7 @@ export interface CommonBootstrapConsoleOptions {
      * If you are using a dynamic module as a root module, you must create a module that imports your dynamic module first.
      * "@Module({imports: [MyDynamicModule.register()]})"
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     module: any;
-
-    /**
-     * If true the ConsoleService will hold an instance of the application.
-     * This is true if useDecorators is true.
-     */
-    withContainer?: boolean;
 
     /**
      * If true the BootstrapConsole will scan the application to find Console and Command decorators
@@ -90,12 +86,7 @@ export abstract class AbstractBootstrapConsole<
     async init(): Promise<A> {
         this.container = await this.create();
         this.service = this.container.get(ConsoleService);
-        if (
-            (this.options.withContainer || this.options.useDecorators) &&
-            typeof this.service.setContainer === 'function'
-        ) {
-            this.service.setContainer(this.container);
-        }
+        this.service.setContainer(this.container);
         if (this.options.useDecorators) {
             this.useDecorators();
         }

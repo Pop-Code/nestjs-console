@@ -1,4 +1,8 @@
 /**
+ * @module Constants
+ */
+
+/**
  * The token to store the root instance of commander
  */
 export const CLI_SERVICE_TOKEN = 'nests-console.Cli';

@@ -1,3 +1,6 @@
+/**
+ * @module ConsoleModule
+ */
 import { INestApplicationContext, Module } from '@nestjs/common';
 import * as commander from 'commander';
 
@@ -7,7 +10,7 @@ import { ConsoleService } from './service';
 
 const cliProvider = {
     provide: CLI_SERVICE_TOKEN,
-    useFactory: (): commander.Command => ConsoleService.create()
+    useFactory: (): commander.Command => ConsoleService.createCli()
 };
 
 @Module({
@@ -21,17 +24,26 @@ export class ConsoleModule {
 
     public scan(app: INestApplicationContext, includedModules?: unknown[]): void {
         const scanResponse = this.scanner.scan(app, includedModules);
-        const cli = this.service.getCli();
+        const cli = this.service.getRootCli();
         scanResponse.forEach(({ methods, instance, metadata }) => {
-            let parent = cli;
-            if (metadata.name) {
-                parent = this.service.getCli(metadata.name);
-                if (!parent) {
+            let parent: commander.Command = cli;
+            let subCli = this.service.getCli(metadata.command);
+            if (subCli !== undefined) {
+                parent = subCli;
+            } else {
+                const commandNames = metadata.command.split('.');
+                if (commandNames.length > 1) {
+                    commandNames.pop();
+                    subCli = this.service.getCli(commandNames.join('.'));
+                }
+                if (subCli === undefined) {
                     parent = this.service.createGroupCommand(metadata, cli);
+                } else {
+                    parent = this.service.createGroupCommand(metadata, subCli);
                 }
             }
             for (const method of methods) {
-                this.service.createCommand(method.metadata, instance[method.name].bind(instance), parent);
+                this.service.createCommand(method.metadata, { instance, methodName: method.name }, parent);
             }
         });
     }
