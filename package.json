@@ -49,7 +49,7 @@
         "typescript": "4.2.4"
     },
     "scripts": {
-        "build": "rm -Rf ./dist && tsc -b",
+        "build": "rm -Rf ./dist && tsc -b tsconfig.build.json",
         "doc": "rm -Rf ./docs && typedoc && touch ./docs/.nojekyll",
         "console": "node -r tsconfig-paths/register -r ts-node/register test/console.ts",
         "console:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register test/console.ts",
