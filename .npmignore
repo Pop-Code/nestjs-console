@@ -15,3 +15,4 @@ renovate.json
 .eslintrc
 .github
 *.tgz
+test
