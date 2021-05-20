@@ -8,7 +8,7 @@ jobs:
 
         strategy:
             matrix:
-                node-version: [10.x, 12.x, 13.x]
+                node-version: [12.x, 14.x, 15.x]
 
         steps:
             - uses: actions/checkout@v1
@@ -22,9 +22,8 @@ jobs:
                   yarn run lint
                   yarn run build
                   yarn run test:cov
-                  yarn run test:build
             - name: Codecov
-              uses: codecov/codecov-action@v1.0.5
+              uses: codecov/codecov-action@v1
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   file: ./coverage/coverage-final.json

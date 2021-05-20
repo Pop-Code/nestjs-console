@@ -1,8 +1,10 @@
+/**
+ * @module ConsoleService
+ */
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import * as commander from 'commander';
 
-import { ConsoleOptions, CreateCommandOptions, InjectCli } from './decorators';
-import { formatResponse } from './helpers';
+import { CreateCommandOptions, InjectCli } from './decorators';
 import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
 
 @Injectable()
@@ -27,15 +29,10 @@ export class ConsoleService {
         this.cli = cli;
     }
 
-    /**
-     * Create an instance of root cli
-     */
-    static create(): commander.Command {
-        const cli = new commander.Command();
-        // listen for root not found
-        // cli.on('command:*', (args: string[]) => {
-        //     throw new Error(`"${args[0]}" command not found`);
-        // });
+    static createCli(name?: string): commander.Command {
+        const cli = new commander.Command(name);
+        cli.storeOptionsAsProperties(false);
+        cli.allowUnknownOption(false);
         return cli;
     }
 
@@ -43,25 +40,28 @@ export class ConsoleService {
      * Reset the cli stack (for testing purpose only)
      */
     resetCli(): void {
-        this.cli = ConsoleService.create();
+        this.cli = ConsoleService.createCli();
     }
 
     /**
-     * Log an error
-     * @param command The command related to the error
-     * @param error The error to format
+     * Get the root cli
      */
-    logError(error: Error): void {
-        // eslint-disable-next-line no-console
-        console.error(formatResponse(error));
+    getRootCli(): commander.Command {
+        return this.cli;
     }
 
     /**
      * Get a cli
      * @param name Get a cli by name, if not set, the root cli is used
      */
-    getCli(name?: string): commander.Command {
-        return name ? this.commands.get(name) : this.cli;
+    getCli(name?: string): commander.Command | undefined {
+        let cli: commander.Command | undefined;
+        if (typeof name === 'string') {
+            cli = this.commands.get(name);
+        } else {
+            cli = this.cli;
+        }
+        return cli;
     }
 
     /**
@@ -75,23 +75,22 @@ export class ConsoleService {
     /**
      * Get the container
      */
-    getContainer(): INestApplicationContext {
+    getContainer(): INestApplicationContext | undefined {
         return this.container;
     }
 
     /**
      * Wrap an action handler to work with promise.
      */
-    createHandler(action: CommandActionHandler): CommandActionWrapper {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    static createHandler(action: CommandActionHandler): CommandActionWrapper {
         return async (...args: any[]): Promise<CommandResponse> => {
             const command: commander.Command = args.find((c) => c instanceof commander.Command);
-            
-            //TODO here we must be able to type our handler.
-            // actual signature is arg1, arg2, ...arg, command.
-            // options can be get using command.opts()
-            
-            let data = action(...args);
+            let data: CommandResponse;
+            if (typeof action === 'object') {
+                data = action.instance[action.methodName](...args);
+            } else {
+                data = action(...args);
+            }
             if (data instanceof Promise) {
                 data = await data;
             }
@@ -102,35 +101,10 @@ export class ConsoleService {
     /**
      * Execute the cli
      */
-    async init(argv: string[]): Promise<CommandResponse | undefined> {
-        const cli = this.getCli();
-        try {
-            // if nothing was provided, display an error
-            if (cli.commands.length === 0) {
-                throw new commander.CommanderError(1, 'empty', 'The cli does not contain sub command');
-            }
-            cli.exitOverride((e) => {
-                throw e;
-            });
-            const command = cli.parse(argv);
-            const results = await Promise.all(command._actionResults as Promise<CommandResponse>[]);
-            return results[0];
-        } catch (e) {
-            if (e instanceof commander.CommanderError) {
-                // if commander throws a CommanderError async event or help has been executed
-                // ignore response and error for help display
-                if (/(helpDisplayed|commander\.help)/.test(e.code)) {
-                    return;
-                }
-                if (/(missingMandatoryOptionValue|optionMissingArgument|missingArgument|unknownCommand)/.test(e.code)) {
-                    throw e;
-                }
-            }
-            // display others errors
-            this.logError(e);
-            // always throw for promise
-            throw e;
-        }
+    async init(argv: string[]): Promise<CommandResponse> {
+        await this.cli.parseAsync(argv);
+        const results = await Promise.all((this.cli as any)._actionResults as Promise<CommandResponse>[]);
+        return results[0];
     }
 
     /**
@@ -143,41 +117,40 @@ export class ConsoleService {
     createCommand(
         options: CreateCommandOptions,
         handler: CommandActionHandler,
-        parent: commander.Command
+        parent: commander.Command,
+        commanderOptions?: commander.CommandOptions
     ): commander.Command {
-        // const command = parent.command(options.command).exitOverride((...args) => parent._exitCallback(...args));
         const args = options.command.split(' ');
-        const command = new commander.Command(args[0]);
-        command.exitOverride((...args) => parent._exitCallback(...args));
+        const commandNames = args[0].split('.');
+        const command = ConsoleService.createCli(commandNames[commandNames.length - 1]);
+
         if (args.length > 1) {
             command.arguments(args.slice(1).join(' '));
         }
 
-        // required to avoid collision with command properties
-        command.storeOptionsAsProperties(false);
-        command.allowUnknownOption(false);
-
-        if (options.description) {
+        if (options.description !== undefined) {
             command.description(options.description);
         }
-        if (options.alias) {
+        if (options.alias !== undefined) {
             command.alias(options.alias);
         }
         if (Array.isArray(options.options)) {
             for (const opt of options.options) {
                 let method = 'option';
-                if(opt.required){
+                if (opt.required === true) {
                     method = 'requiredOption';
                 }
                 command[method](opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
             }
         }
         // here as any is required cause commander bad typing on action for promise
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        command.action(this.createHandler(handler) as any);
+        command.action(ConsoleService.createHandler(handler) as any);
 
         // add the command to the parent
-        parent.addCommand(command);
+        parent.addCommand(command, commanderOptions);
+
+        // add the command to cli stack
+        this.commands.set(this.getCommandFullName(command), command);
 
         return command;
     }
@@ -188,27 +161,43 @@ export class ConsoleService {
      * @param parent The command to use as a parent
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
-    createGroupCommand(options: ConsoleOptions, parent: commander.Command): commander.Command {
-        //throw new Error('Deprecated, use addCommand instead');
-        if (parent._args.length > 0) {
+    createGroupCommand(options: CreateCommandOptions, parent: commander.Command): commander.Command {
+        if ((parent as any)._args.length > 0) {
             throw new Error('Sub commands cannot be applied to command with explicit args');
         }
+        const commandNames = options.command.split('.');
+        const command = ConsoleService.createCli(commandNames[commandNames.length - 1]);
 
-        const command = new commander.Command(options.name);
-        command.exitOverride((...args) => parent._exitCallback(...args));
-        if (options.description) {
+        if (options.description !== undefined) {
             command.description(options.description);
         }
-        if (options.alias) {
+        if (options.alias !== undefined) {
             command.alias(options.alias);
         }
-
-        // add the command to the service command Map. this will help us to manipulate parent commands
-        this.commands.set(command.name(), command);
-
-        // add the command to his parent
+        if (Array.isArray(options.options)) {
+            for (const opt of options.options) {
+                let method = 'option';
+                if (opt.required === true) {
+                    method = 'requiredOption';
+                }
+                command[method](opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
+            }
+        }
         parent.addCommand(command);
-
+        this.commands.set(this.getCommandFullName(command), command);
         return command;
+    }
+
+    /**
+     * Get the full name of a command (parents names + command names separated by dot)
+     */
+    getCommandFullName(command: commander.Command): string {
+        let fullName = command.name();
+        let commandParent = command.parent;
+        while (commandParent instanceof commander.Command && commandParent.name() !== '') {
+            fullName = `${commandParent.name()}.${fullName}`;
+            commandParent = commandParent.parent;
+        }
+        return fullName;
     }
 }

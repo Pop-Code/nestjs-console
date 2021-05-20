@@ -4,14 +4,45 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [4.0.0] - 2020-10-16
+## [5.0.0] - 2021-04-13
+
+### BREAKING CHANGE
+
+-   Signature of `@Console` decorator has been updated.  
+    ConsoleOptions has been replaced by CreateCommandOptions, to update from ^4.0.0 you simply have to change property `name` by `command`.  
+    eg: `@Console({name: "myCommand"})` => `@Console({command: "myCommand"})`
+-   Command handler signature has changed. Options are now passed to the handler. See [the command handler signature for more details](https://github.com/Pop-Code/nestjs-console/wiki/Command-handler-signature#signature)
+-   Commander@< 7.2.0 is not any more supported. Please upgrade to latest version `npm install commander@^7.2.0` or using yarn `yarn add commander@^7.2.0`
+-   The helper formatResponse has been removed
 
 ### Changed
 
--   BREAKING CHANGE: Remove Pretiier format helpers and use JSON.stringify instead to reduce package size.
--   chore: update dependencies
--   chore: Bump version
--   docs: update docs
+-   Update tests
+-   Remove calls to `command.exitOverride()` to simplify code
+-   Native errors handling with commander
+-   update docs
+-   update dependencies
+-   Update to work with commander@7.2.0
+
+### Added
+
+-   All commands and sub commands are stored in the ConsoleService and can be found using the `ConsoleService.getCommand(name: string)`. Name is a command path separated by dots. eg: `parent.command.subcommand`
+-   Sub commands can now be registered on other subCommand without any args. If a parent command define options, they can be retrieved using `command.parent.opts()` inside the executed subCommand. This allow you to create group of command with global options based on parent options
+
+### Fixed
+
+-   fix #302
+
+## [4.0.0] - 2020-10-16
+
+### BREAKING CHANGE
+
+-   Remove Pretiier format helpers and use JSON.stringify instead to reduce package size.
+
+### Changed
+
+-   update dependencies
+-   update docs
 
 ## [3.1.0] - 2020-07-30
 
@@ -186,7 +217,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v3.1.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v5.0.0...HEAD
+[5.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v4.0.0...HEAD
 [4.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v3.1.0...v4.0.0
 [3.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.6...v3.1.0
 [3.0.6]: https://github.com/Pop-Code/nestjs-console/compare/v3.0.5...v3.0.6

@@ -1,4 +1,6 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+/**
+ * @module Interfaces
+ */
 import * as commander from 'commander';
 
 /**
@@ -11,7 +13,7 @@ import * as commander from 'commander';
  *
  * storeOptionsAsProperties is set to false, to get options, use command.opts()
  */
-export type CommandActionHandler = (...args: any[]) => any | Promise<any>;
+export type CommandActionHandler = ((...args: any[]) => any | Promise<any>) | { instance: any; methodName: string };
 
 /**
  * The wrapper type of a Command action handler

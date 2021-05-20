@@ -1,3 +1,6 @@
+/**
+ * @module BootstrapConsole
+ */
 import { INestApplicationContext } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 

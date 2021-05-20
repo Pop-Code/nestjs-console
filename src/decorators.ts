@@ -1,3 +1,6 @@
+/**
+ * @module Decorators
+ */
 import { Inject } from '@nestjs/common';
 
 import { CLI_SERVICE_TOKEN, COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
@@ -78,30 +81,10 @@ export const Command = (options: CreateCommandOptions): MethodDecorator => (
 ): void => Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 
 /**
- * The interface to define a console with sub commands
- */
-export interface ConsoleOptions {
-    /**
-     * The name of the group. If set, this name will be used as a parent command.
-     */
-    name?: string;
-
-    /**
-     * The description of this console
-     */
-    description?: string;
-
-    /**
-     * The alias of this console
-     */
-    alias?: string;
-}
-
-/**
  * The Console decorator is used to decorate a class
  * All commands in class that are decorated by a "@Console" with identical name will be grouped
  *
  * eg "@Console({name: "mycommand"})"
  */
-export const Console = (options?: ConsoleOptions): ClassDecorator => (target: any): void =>
+export const Console = (options?: CreateCommandOptions): ClassDecorator => (target: any): void =>
     Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
