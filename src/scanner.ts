@@ -55,7 +55,7 @@ export class ConsoleScanner {
         const modules = this.getModules(container.getModules(), includedModules);
         modules.forEach((m) => {
             m._providers.forEach((p) => {
-                const { metatype, name } = p;
+                const { metatype, token } = p;
                 if (typeof metatype !== 'function') {
                     return;
                 }
@@ -76,7 +76,7 @@ export class ConsoleScanner {
                 }
 
                 // get the provider instance from the container
-                const instance = app.get(name);
+                const instance = app.get(token);
                 const methods = this.getInstanceMethods(instance);
 
                 // get the metadata of the methods
