@@ -5,6 +5,9 @@ import { INestApplicationContext } from '@nestjs/common';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 import { CreateCommandOptions } from './decorators';
+import { ModuleRef } from '@nestjs/core';
+import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
+import { Injectable } from '@nestjs/common/interfaces';
 
 /**
  * The interface for command method metadata
@@ -49,49 +52,57 @@ export class ConsoleScanner {
      * @param app
      * @param includedModules
      */
-    public scan(app: INestApplicationContext, includedModules?: any[]): Set<ScanResponse> {
+    public async scan(app: INestApplicationContext, includedModules?: any[]): Promise<Set<ScanResponse>> {
         const set = new Set<ScanResponse>();
         const { container } = app as any;
         const modules = this.getModules(container.getModules(), includedModules);
-        modules.forEach((m) => {
-            m._providers.forEach((p) => {
-                const { metatype, token } = p;
-                if (typeof metatype !== 'function') {
-                    return;
-                }
 
-                // ignore providers without instance
-                if (!p.instance) {
-                    return;
-                }
+        await Promise.all(
+            modules.map((m) => {
+                return Promise.all(
+                    Array.from<InstanceWrapper<Injectable>>(m._providers.values()).map(async (p) => {
+                        const { metatype, token } = p;
+                        if (typeof metatype !== 'function') {
+                            return;
+                        }
 
-                const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
-                    CONSOLE_METADATA_NAME,
-                    p.instance.constructor
+                        // ignore providers without instance
+                        if (!p.instance) {
+                            return;
+                        }
+
+                        const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
+                            CONSOLE_METADATA_NAME,
+                            // @ts-ignore
+                            p.instance.constructor
+                        );
+
+                        // ignore providers without the console decorator
+                        if (!consoleMetadata) {
+                            return;
+                        }
+
+                        // get the provider instance from the container
+                        const instance = await app.resolve(token, undefined, {
+                            strict: false
+                        });
+                        const methods = this.getInstanceMethods(instance);
+
+                        // get the metadata of the methods
+                        const methodsMetadata = methods.map<MethodsMetadata>((methodMetadata) => ({
+                            name: methodMetadata,
+                            metadata: Reflect.getMetadata(COMMAND_METADATA_NAME, instance, methodMetadata)
+                        }));
+
+                        set.add({
+                            instance,
+                            metadata: consoleMetadata,
+                            methods: methodsMetadata
+                        });
+                    })
                 );
-
-                // ignore providers without the console decorator
-                if (!consoleMetadata) {
-                    return;
-                }
-
-                // get the provider instance from the container
-                const instance = app.get(token);
-                const methods = this.getInstanceMethods(instance);
-
-                // get the metadata of the methods
-                const methodsMetadata = methods.map<MethodsMetadata>((methodMetadata) => ({
-                    name: methodMetadata,
-                    metadata: Reflect.getMetadata(COMMAND_METADATA_NAME, instance, methodMetadata)
-                }));
-
-                set.add({
-                    instance,
-                    metadata: consoleMetadata,
-                    methods: methodsMetadata
-                });
-            });
-        });
+            })
+        );
 
         return set;
     }
