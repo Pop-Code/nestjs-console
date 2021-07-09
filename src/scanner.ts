@@ -5,9 +5,9 @@ import { INestApplicationContext } from '@nestjs/common';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 import { CreateCommandOptions } from './decorators';
-import { ModuleRef } from '@nestjs/core';
+import { ModulesContainer, NestContainer } from '@nestjs/core';
 import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
-import { Injectable } from '@nestjs/common/interfaces';
+import { Module } from '@nestjs/core/injector/module';
 
 /**
  * The interface for command method metadata
@@ -30,7 +30,7 @@ export class ConsoleScanner {
     /**
      * Get all the modules
      */
-    private getModules(modulesContainer: Map<any, any>, include: any[] = []): any[] {
+    private getModules(modulesContainer: ModulesContainer, include: any[] = []): Module[] {
         const allModules = [...modulesContainer.values()];
         if (!include.length) {
             return allModules;
@@ -54,13 +54,13 @@ export class ConsoleScanner {
      */
     public async scan(app: INestApplicationContext, includedModules?: any[]): Promise<Set<ScanResponse>> {
         const set = new Set<ScanResponse>();
-        const { container } = app as any;
+        const container = (app as any).container as unknown as NestContainer;
         const modules = this.getModules(container.getModules(), includedModules);
 
         await Promise.all(
             modules.map((m) => {
                 return Promise.all(
-                    Array.from<InstanceWrapper<Injectable>>(m._providers.values()).map(async (p) => {
+                    Array.from(m.providers.values()).map(async (p: InstanceWrapper<new () => unknown>) => {
                         const { metatype, token } = p;
                         if (typeof metatype !== 'function') {
                             return;
@@ -73,7 +73,6 @@ export class ConsoleScanner {
 
                         const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
                             CONSOLE_METADATA_NAME,
-                            // @ts-ignore
                             p.instance.constructor
                         );
 
