@@ -8,6 +8,7 @@ resources/
 .prettierignore
 .gitignore
 tsconfig.json
+tsconfig.build.json
 typedoc.js
 yarn.lock
 .vscode
