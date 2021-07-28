@@ -102,9 +102,8 @@ export class ConsoleService {
      * Execute the cli
      */
     async init(argv: string[]): Promise<CommandResponse> {
-        await this.cli.parseAsync(argv);
-        const results = await Promise.all((this.cli as any)._actionResults as Promise<CommandResponse>[]);
-        return results[0];
+        const userArgs = (this.cli as any)._prepareUserArgs(argv);
+        return await (this.cli as any)._parseCommand([], userArgs);
     }
 
     /**
