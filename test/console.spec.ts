@@ -45,7 +45,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                     writeOut: stdoutMock,
                     writeErr: stderrMock
                 });
-                const error = `error: unknown command 'unknowcommand'. See 'console --help'.`;
+                const error = `error: unknown command 'unknowcommand'`;
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'unknowcommand']);
                 } catch (e) {
@@ -62,7 +62,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                     writeOut: stdoutMock,
                     writeErr: stderrMock
                 });
-                const error = `error: unknown command 'unknowcommand'. See 'console --help'.`;
+                const error = `error: unknown command 'unknowcommand'`;
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'unknowcommand', 'argument']);
                 } catch (e) {
@@ -420,7 +420,6 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                 const mockHandler = jest.spyOn(service, 'command').mockImplementation();
                 const arg = `foobar`;
                 await bootstrap.boot([process.argv0, 'console', 'command', arg]);
-
                 expect(mockHandler).toHaveBeenCalledTimes(1);
                 expect(mockHandler.mock.calls[0][0]).toBe(arg);
                 expect(typeof mockHandler.mock.calls[0][1]).toBe('object');
@@ -466,7 +465,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                     writeOut: stdoutMock,
                     writeErr: stderrMock
                 });
-                const error = `error: unknown command 'unknowcommand'. See 'console groupCommand --help'.`;
+                const error = `error: unknown command 'unknowcommand'`;
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'unknowcommand']);
                 } catch (e) {
@@ -483,7 +482,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                     writeOut: stdoutMock,
                     writeErr: stderrMock
                 });
-                const error = `error: unknown command 'unknowcommand'. See 'console groupCommand --help'.`;
+                const error = `error: unknown command 'unknowcommand'`;
                 try {
                     await bootstrap.boot([process.argv0, 'console', 'groupCommand', 'unknowcommand', 'argument']);
                 } catch (e) {
