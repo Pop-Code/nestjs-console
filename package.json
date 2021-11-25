@@ -20,7 +20,7 @@
         "@nestjs/core": "^8"
     },
     "dependencies": {
-        "ora": "5.4.1",
+        "ora": "6.0.1",
         "commander": "^8.1.0"
     },
     "devDependencies": {
