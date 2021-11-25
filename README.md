@@ -4,7 +4,6 @@
 [![Actions Status](https://github.com/Pop-Code/nestjs-console/workflows/Test/badge.svg)](https://github.com/Pop-Code/nestjs-console/actions)
 [![codecov](https://codecov.io/gh/Pop-Code/nestjs-console/branch/master/graph/badge.svg)][codecov]
 [![NPM Downloads](https://img.shields.io/npm/dm/nestjs-console.svg?style=flat)][npmchart]
-![node](https://img.shields.io/node/v/nestjs-console)
 ![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
 ![npm dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/commander)
