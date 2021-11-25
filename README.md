@@ -7,7 +7,7 @@
 ![node](https://img.shields.io/node/v/nestjs-console)
 ![npm (tag)](https://img.shields.io/npm/v/nestjs-console/latest)
 ![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/@nestjs/core)
-![npm peer dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/peer/commander)
+![npm dependency version (scoped)](https://img.shields.io/npm/dependency-version/nestjs-console/commander)
 
 </div>
 
