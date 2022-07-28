@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [8.0.0] - 2022-07-28
+
+### Changed
+
+-   Support nestjs v9
+
 ## [7.0.1] - 2021-11-25
 
 ### Changed
@@ -238,7 +244,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 -   Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v7.0.1...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v8.0.0...HEAD
+[8.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v7.0.1...v8.0.0
 [7.0.1]: https://github.com/Pop-Code/nestjs-console/compare/v7.0.0...v7.0.1
 [7.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v6.0.0...v5.0.1
 [6.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v5.0.1...v4.0.0
