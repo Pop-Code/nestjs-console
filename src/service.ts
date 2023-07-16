@@ -6,6 +6,7 @@ import * as commander from 'commander';
 
 import { CreateCommandOptions, InjectCli } from './decorators';
 import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
+import { EventEmitter } from 'stream';
 
 @Injectable()
 export class ConsoleService {
@@ -24,6 +25,8 @@ export class ConsoleService {
      * The root cli
      */
     protected cli: commander.Command;
+
+    protected responseListener: EventEmitter = new EventEmitter();;
 
     constructor(@InjectCli() cli: commander.Command) {
         this.cli = cli;
@@ -102,8 +105,16 @@ export class ConsoleService {
      * Execute the cli
      */
     async init(argv: string[]): Promise<CommandResponse> {
-        const userArgs = (this.cli as any)._prepareUserArgs(argv);
-        return await (this.cli as any)._parseCommand([], userArgs);
+        const userArgs = (this.cli as any)._prepareUserArgs(argv);        
+        return new Promise((resolve, reject) => {
+            this.responseListener.once('response', (res) => {
+                resolve(res)
+            });
+            this.responseListener.once('error', (error) => {
+                reject(error);
+            });
+            (this.cli as any)._parseCommand([], userArgs);
+        })
     }
 
     /**
@@ -143,13 +154,22 @@ export class ConsoleService {
             }
         }
         // here as any is required cause commander bad typing on action for promise
-        command.action(ConsoleService.createHandler(handler) as any);
+        command.action(async (...args) => {
+            try{
+                const res = await ConsoleService.createHandler(handler)(...args)
+                this.responseListener.emit('response', res);
+            }catch(e){
+                this.responseListener.emit('error', e);
+            }
+        });
 
         // add the command to the parent
         parent.addCommand(command, commanderOptions);
 
         // add the command to cli stack
         this.commands.set(this.getCommandFullName(command), command);
+
+        command.on('response', (res) => {})
 
         return command;
     }
