@@ -5,10 +5,10 @@
 
 version: 2
 updates:
-    - package-ecosystem: 'npm'
+    - package-ecosystem: 'yarn'
       directory: '/'
       schedule:
-          interval: 'daily'
+          interval: 'weekly'
       # Always increase the version requirement
       # to match the new version.
       versioning-strategy: increase
