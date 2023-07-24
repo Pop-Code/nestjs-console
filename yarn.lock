@@ -740,10 +740,10 @@
     path-to-regexp "3.2.0"
     tslib "2.6.0"
 
-"@nestjs/platform-express@10.0.5":
-  version "10.0.5"
-  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-10.0.5.tgz#3c875dd72e0bd8f9d8866a86d04d162379a6808a"
-  integrity sha512-mNHXiVsfJsknjfgC1kEUM82ynvkCxod5tNOEAnEcZ7UpPWy5dsxspq+ynt6RF6bd/3AD6sZoxApwqAKbcQnzxw==
+"@nestjs/platform-express@10.1.1":
+  version "10.1.1"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-10.1.1.tgz#3573214210e3ecda85e426aad00c8b0fd61c8aca"
+  integrity sha512-IqVHAn7K/P50v1dCinedxEbAOF7W4ijiGe9EmRn237BaCrlQZzgLX/N5P0mJb57DoRClxIsDr4NjvGar627Feg==
   dependencies:
     body-parser "1.20.2"
     cors "2.8.5"
