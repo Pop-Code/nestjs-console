@@ -15,7 +15,7 @@
 ## Why
 
 The nestjs framework is missing a cli to access the application context.  
-Common use case : Headless application, cront task, export data, etc...
+Common use case : Headless application, cron task, export data, etc...
 [nestjs-console][npm] provide a way to bind cli command and subcommands to providers's methods.
 
 ## How it works
