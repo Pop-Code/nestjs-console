@@ -27,7 +27,6 @@ export interface CommonBootstrapConsoleOptions {
     /**
      * An optional list of Nest Modules to scan. If set, only listed modules will be scanned.
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     includeModules?: any[];
 
     /**
