@@ -13,7 +13,7 @@ typedoc.js
 yarn.lock
 .vscode
 renovate.json
-.eslintrc
+eslint.config.mjs
 .github
 *.tgz
 test
