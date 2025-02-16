@@ -24,7 +24,7 @@ export type CommandActionWrapper = (...args: any[]) => Promise<CommandResponse>;
 /**
  * The response of the
  */
-export interface CommandResponse {
-    data: any;
+export interface CommandResponse<D = any> {
+    data: D;
     command: commander.Command;
 }

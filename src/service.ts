@@ -19,14 +19,14 @@ export class ConsoleService {
     /**
      * A Map holding group commands by name
      */
-    protected commands: Map<string, commander.Command> = new Map();
+    protected commands = new Map<string, commander.Command>();
 
     /**
      * The root cli
      */
     protected cli: commander.Command;
 
-    protected responseListener: EventEmitter = new EventEmitter();;
+    protected responseListener: EventEmitter = new EventEmitter();
 
     constructor(@InjectCli() cli: commander.Command) {
         this.cli = cli;
@@ -86,8 +86,11 @@ export class ConsoleService {
      * Wrap an action handler to work with promise.
      */
     static createHandler(action: CommandActionHandler): CommandActionWrapper {
-        return async (...args: any[]): Promise<CommandResponse> => {
-            const command: commander.Command = args.find((c) => c instanceof commander.Command);
+        return async (...args: any[]) => {
+            const command: commander.Command | undefined = args.find((c) => c instanceof commander.Command);
+            if (!command) {
+                throw new Error('Command not found in arguments');
+            }
             let data: CommandResponse;
             if (typeof action === 'object') {
                 data = action.instance[action.methodName](...args);
@@ -104,17 +107,17 @@ export class ConsoleService {
     /**
      * Execute the cli
      */
-    async init(argv: string[]): Promise<CommandResponse> {
-        const userArgs = (this.cli as any)._prepareUserArgs(argv);        
+    async init<D = any>(argv: string[]): Promise<CommandResponse<D>> {
+        const userArgs = (this.cli as any)._prepareUserArgs(argv);
         return new Promise((resolve, reject) => {
             this.responseListener.once('response', (res) => {
-                resolve(res)
+                resolve(res);
             });
             this.responseListener.once('error', (error) => {
                 reject(error);
             });
             (this.cli as any)._parseCommand([], userArgs);
-        })
+        });
     }
 
     /**
@@ -155,10 +158,10 @@ export class ConsoleService {
         }
         // here as any is required cause commander bad typing on action for promise
         command.action(async (...args) => {
-            try{
-                const res = await ConsoleService.createHandler(handler)(...args)
+            try {
+                const res = await ConsoleService.createHandler(handler)(...args);
                 this.responseListener.emit('response', res);
-            }catch(e){
+            } catch (e) {
                 this.responseListener.emit('error', e);
             }
         });
@@ -169,7 +172,7 @@ export class ConsoleService {
         // add the command to cli stack
         this.commands.set(this.getCommandFullName(command), command);
 
-        command.on('response', (res) => {})
+        command.on('response', (res) => {});
 
         return command;
     }
