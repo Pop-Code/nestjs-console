@@ -27,4 +27,9 @@ describe('ConsoleService', () => {
         expect(cli).toBeDefined();
         expect(cli).toBeInstanceOf(Command);
     });
+
+    it('should throw an error if command is not found', () => {
+        const handler = ConsoleService.createHandler(() => {});
+        expect(() => handler('test')).rejects.toThrow('Command not found');
+    });
 });
