@@ -9,8 +9,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 ### Changed
 
 - Support nestjs v11
-- Support commander v11 & v12
+- Support commander v12 & v13
 - Update dependencies
+- Update node engine to be >= v18 (required by commander v13)
 
 ## [9.0.0] - 2023-07-15
 
