@@ -30,10 +30,9 @@ The console service will be accessible inside the container.
 
 # Documentation
 
--   [Wiki](https://github.com/Pop-Code/nestjs-console/wiki)
--   [API](https://pop-code.github.io/nestjs-console)
--   [Changelog](https://github.com/Pop-Code/nestjs-console/blob/master/CHANGELOG.md)
--   [Upgrade from v4 to v5](https://github.com/Pop-Code/nestjs-console/wiki/Upgrade-from-v4-to-v5)
+- [Wiki](https://github.com/Pop-Code/nestjs-console/wiki)
+- [API](https://pop-code.github.io/nestjs-console)
+- [Changelog](https://github.com/Pop-Code/nestjs-console/blob/master/CHANGELOG.md)
 
 [npm]: https://www.npmjs.com/package/nestjs-console
 [npmchart]: https://npmcharts.com/compare/nestjs-console?minimal=true
