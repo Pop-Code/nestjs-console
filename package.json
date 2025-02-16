@@ -16,8 +16,8 @@
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
     "peerDependencies": {
-        "@nestjs/common": "^11.0.0",
-        "@nestjs/core": "^11.0.0"
+        "@nestjs/common": "^9.0.0 || ^10.0.0 || ^11.0.0",
+        "@nestjs/core": "^9.0.0 || ^10.0.0 || ^11.0.0"
     },
     "dependencies": {
         "commander": "^11.0.0 || ^12.0.0 || ^13.0.0"
