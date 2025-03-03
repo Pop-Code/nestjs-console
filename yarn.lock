@@ -986,10 +986,10 @@
     iterare "1.2.1"
     tslib "2.8.1"
 
-"@nestjs/core@11.0.9":
-  version "11.0.9"
-  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-11.0.9.tgz#067239809fd050c72e913b62455a0b6afb7249af"
-  integrity sha512-w32ZF1acSnidiRERGRC/Ki7eSrnTdP7twRnjy15Qnmij3oYRCdgX5aZvbUNv17A7bn9S22p+wMNcpHxqwUiOsQ==
+"@nestjs/core@11.0.11":
+  version "11.0.11"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-11.0.11.tgz#bb86a0454d6d49929a7ceb06238740bcfcb66d4e"
+  integrity sha512-jMH3jrjrPiaGrkQ5hANNcgDWN+j+hcM5GMQ3jSs4vOWNs3lmKHTVR11wJ9y5tTNnwKydzMogeju0VTUdfXDI5Q==
   dependencies:
     uid "2.0.2"
     "@nuxt/opencollective" "0.4.1"
@@ -4244,15 +4244,10 @@ tsconfig-paths@4.2.0:
     minimist "^1.2.6"
     strip-bom "^3.0.0"
 
-tslib@2.8.1:
+tslib@2.8.1, tslib@^2.1.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.8.1.tgz#612efe4ed235d567e8aba5f2a5fab70280ade83f"
   integrity sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==
-
-tslib@^2.1.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-2.6.0.tgz#b295854684dbda164e181d259a22cd779dcd7bc3"
-  integrity sha512-7At1WUettjcSRHXCyYtTselblcHl9PJFFVKiCAy/bY97+BPZXSQ2wbq0P9s8tK2G7dFQfNnlJnPAiArVBVBsfA==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
