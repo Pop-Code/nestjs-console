@@ -13,8 +13,10 @@
         "sourceMap": true,
         "allowJs": true,
         "outDir": "dist",
-        "baseUrl": ".",
+        "rootDir": ".",
+        "types": ["node", "jest"],
         "lib": ["es7", "DOM"],
+        "strict": false,
         "strictNullChecks": true
     }
 }
