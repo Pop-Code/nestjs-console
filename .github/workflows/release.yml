@@ -79,7 +79,11 @@ jobs:
                       gh release create "$TAG" --title "Release $TAG" --notes-file "$RUNNER_TEMP/release-notes.md" --verify-tag
                   fi
 
-            - name: Publish to npm
+            # Staged publishing requires npm >= 11.15.0
+            - name: Update npm
+              run: npm install -g npm@^11.15.0 && npm --version
+
+            - name: Stage on npm (approve on npmjs.com with 2FA)
               run: |
                   NAME="$(node -p "require('./package.json').name")"
                   VERSION="${TAG#v}"
@@ -87,11 +91,18 @@ jobs:
                       echo "$NAME@$VERSION is already on npm, skipping"
                       exit 0
                   fi
-                  # Prereleases (e.g. 12.0.0-beta.1) go to the "next" dist-tag instead of "latest"
+                  # Prereleases (e.g. 12.0.0-beta.1) go to the "next" dist-tag instead of "latest".
+                  # The tag is fixed when staging: to change it, reject the staged version and re-run.
                   DIST_TAG=latest
                   case "$VERSION" in *-*) DIST_TAG=next ;; esac
-                  npm --version
                   npm pack --dry-run
                   # Authenticates with GitHub OIDC (trusted publishing): no NPM_TOKEN needed.
-                  # Provenance is generated automatically.
-                  npm publish --access public --tag "$DIST_TAG"
+                  # The version stays hidden until a maintainer approves it with 2FA.
+                  npm stage publish --access public --tag "$DIST_TAG" --provenance
+                  {
+                      echo "### $NAME@$VERSION is staged on npm"
+                      echo
+                      echo "Approve it with 2FA to make it public:"
+                      echo "- npmjs.com: package page → **Staged Packages** → **Approve**"
+                      echo "- or CLI: \`npm stage list $NAME\` then \`npm stage approve <stage-id>\`"
+                  } >> "$GITHUB_STEP_SUMMARY"
