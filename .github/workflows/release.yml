@@ -85,6 +85,9 @@ jobs:
               run: npm install -g npm@^11.15.0 && npm --version
 
             - name: Stage on npm (approve on npmjs.com with 2FA)
+              env:
+                  # npm only logs why the OIDC token exchange failed at verbose level
+                  NPM_CONFIG_LOGLEVEL: verbose
               run: |
                   NAME="$(node -p "require('./package.json').name")"
                   VERSION="${TAG#v}"
