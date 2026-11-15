@@ -36,8 +36,9 @@ jobs:
               uses: actions/setup-node@v7
               with:
                   node-version: 24.x
+                  # No registry-url: it writes an .npmrc with ${NODE_AUTH_TOKEN}, which breaks yarn 1
+                  # when the variable is unset. npm >= 11.5 gets the OIDC token for trusted publishing itself.
                   cache: yarn
-                  registry-url: 'https://registry.npmjs.org'
 
             - name: Check tag matches package.json version
               run: |
