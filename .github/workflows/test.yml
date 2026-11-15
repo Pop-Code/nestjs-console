@@ -15,24 +15,35 @@ jobs:
         runs-on: ubuntu-latest
 
         strategy:
+            fail-fast: false
             matrix:
-                node-version: [20.x, 22.x]
+                # Node 22 is supported at runtime (>=22.12, require(esm)), but Jest can only
+                # load the ESM-only NestJS 12 / commander 15 packages on Node >= 24.9,
+                # so the Jest suite runs on 24+ and Node 22 runs the smoke test only.
+                node-version: [22.x, 24.x, 26.x]
 
         steps:
-            - uses: actions/checkout@v1
+            - uses: actions/checkout@v7
             - name: Use Node.js ${{ matrix.node-version }}
-              uses: actions/setup-node@v4
+              uses: actions/setup-node@v7
               with:
                   node-version: ${{ matrix.node-version }}
-            - name: npm install, build, and test
-              run: |
-                  yarn install
-                  yarn run lint
-                  yarn run build
-                  yarn run test:cov
+                  cache: yarn
+            - name: Install
+              run: yarn install --frozen-lockfile
+            - name: Lint
+              run: yarn run lint
+            - name: Build
+              run: yarn run build
+            - name: Smoke test (built package + CLI)
+              run: yarn run test:smoke
+            - name: Test
+              if: ${{ matrix.node-version != '22.x' }}
+              run: yarn run test:cov
             - name: Codecov
-              uses: codecov/codecov-action@v1
+              if: ${{ matrix.node-version == '24.x' }}
+              uses: codecov/codecov-action@v7
               with:
                   token: ${{ secrets.CODECOV_TOKEN }}
-                  file: ./coverage/coverage-final.json
+                  files: ./coverage/coverage-final.json
                   fail_ci_if_error: true

@@ -16,4 +16,4 @@ renovate.json
 eslint.config.mjs
 .github
 *.tgz
-test
+test*.tsbuildinfo

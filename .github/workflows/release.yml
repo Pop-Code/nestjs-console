@@ -1,25 +1,59 @@
+name: Git Release
+
 on:
     push:
         # Sequence of patterns matched against refs/tags
         tags:
             - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
-name: Git Release
+permissions:
+    contents: write
 
 jobs:
-    build:
+    release:
         name: Create Release
         runs-on: ubuntu-latest
         steps:
             - name: Checkout code
-              uses: actions/checkout@master
-            - name: Create Release
-              id: create_release
-              uses: actions/create-release@v1
-              env:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+              uses: actions/checkout@v7
+
+            - name: Use Node.js 24.x
+              uses: actions/setup-node@v7
               with:
-                  tag_name: ${{ github.ref }}
-                  release_name: Release ${{ github.ref }}
-                  draft: false
-                  prerelease: false
+                  node-version: 24.x
+                  cache: yarn
+
+            - name: Check tag matches package.json version
+              run: |
+                  PKG_VERSION="v$(node -p "require('./package.json').version")"
+                  if [ "$PKG_VERSION" != "$GITHUB_REF_NAME" ]; then
+                      echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $PKG_VERSION"
+                      exit 1
+                  fi
+
+            - name: Install, lint, build and test
+              run: |
+                  yarn install --frozen-lockfile
+                  yarn run lint
+                  yarn run build
+                  yarn run test:smoke
+                  yarn run test
+
+            - name: Extract release notes from CHANGELOG.md
+              run: |
+                  VERSION="${GITHUB_REF_NAME#v}"
+                  awk -v v="$VERSION" '
+                      $0 ~ "^## \\[" v "\\]" { found = 1; next }
+                      found && /^## \[/ { exit }
+                      found { print }
+                  ' CHANGELOG.md > release-notes.md
+                  if [ ! -s release-notes.md ]; then
+                      echo "::error::No CHANGELOG.md entry found for $VERSION"
+                      exit 1
+                  fi
+                  cat release-notes.md
+
+            - name: Create GitHub release
+              env:
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              run: gh release create "$GITHUB_REF_NAME" --title "Release $GITHUB_REF_NAME" --notes-file release-notes.md --verify-tag

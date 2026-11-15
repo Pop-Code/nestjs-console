@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [11.0.0] - 2026-11-15
+
+### BREAKING CHANGE
+
+- Node engine is now `>= 22.12.0` (required by commander v15, and by `require(esm)` used to load the ESM-only NestJS v12 / commander v15 packages from this CommonJS package). Node 20 is end-of-life.
+
+### Changed
+
+- Support nestjs v12
+- Support commander v14 & v15
+- Update dependencies (TypeScript 6, Jest 30, ESLint 10, typedoc 0.28)
+- Tests run Jest with `--experimental-vm-modules` so Jest can load ESM-only dependencies (Node >= 24.9 required to run the test suite)
+- Add a `test:smoke` script that checks the built package and the example CLI
+- CI tests on Node 22 (smoke only), 24 and 26, and uses up-to-date GitHub Actions
+- Release workflow: replace the archived `actions/create-release` with the `gh` CLI, verify the tag matches `package.json`, run lint/build/tests before releasing, and use the CHANGELOG entry as release notes
+- Refresh `yarn.lock` (no more high/critical audit advisories) and update `SECURITY.md` supported versions
+
 ## [10.0.0] - 2025-02-15
 
 ### Changed

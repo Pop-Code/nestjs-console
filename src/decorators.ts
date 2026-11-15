@@ -75,10 +75,10 @@ export interface CreateCommandOptions {
  * The Command decorator is used to decorate a method in a class
  * You can use it in a class that is deecorated by a "@Console" decorator
  */
-export const Command = (options: CreateCommandOptions): MethodDecorator => (
-    target: any,
-    method: string | symbol
-): void => Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
+export const Command =
+    (options: CreateCommandOptions): MethodDecorator =>
+    (target: any, method: string | symbol): void =>
+        Reflect.defineMetadata(COMMAND_METADATA_NAME, options, target, method);
 
 /**
  * The Console decorator is used to decorate a class
@@ -86,5 +86,7 @@ export const Command = (options: CreateCommandOptions): MethodDecorator => (
  *
  * eg "@Console({name: "mycommand"})"
  */
-export const Console = (options?: CreateCommandOptions): ClassDecorator => (target: any): void =>
-    Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
+export const Console =
+    (options?: CreateCommandOptions): ClassDecorator =>
+    (target: any): void =>
+        Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
