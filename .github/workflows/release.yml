@@ -1,33 +1,49 @@
-name: Git Release
+name: Release
 
 on:
     push:
         # Sequence of patterns matched against refs/tags
         tags:
             - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+    # Re-run a release for an existing tag (e.g. if the npm publish step failed)
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'Existing tag to release, e.g. v11.0.1'
+                required: true
 
 permissions:
-    contents: write
+    contents: write # create the GitHub release
+    id-token: write # npm trusted publishing (OIDC) + provenance
+
+concurrency:
+    group: release-${{ github.event.inputs.tag || github.ref_name }}
+    cancel-in-progress: false
 
 jobs:
     release:
-        name: Create Release
+        name: Release to GitHub and npm
         runs-on: ubuntu-latest
+        env:
+            TAG: ${{ github.event.inputs.tag || github.ref_name }}
         steps:
             - name: Checkout code
               uses: actions/checkout@v7
+              with:
+                  ref: ${{ env.TAG }}
 
             - name: Use Node.js 24.x
               uses: actions/setup-node@v7
               with:
                   node-version: 24.x
                   cache: yarn
+                  registry-url: 'https://registry.npmjs.org'
 
             - name: Check tag matches package.json version
               run: |
                   PKG_VERSION="v$(node -p "require('./package.json').version")"
-                  if [ "$PKG_VERSION" != "$GITHUB_REF_NAME" ]; then
-                      echo "::error::Tag $GITHUB_REF_NAME does not match package.json version $PKG_VERSION"
+                  if [ "$PKG_VERSION" != "$TAG" ]; then
+                      echo "::error::Tag $TAG does not match package.json version $PKG_VERSION"
                       exit 1
                   fi
 
@@ -41,19 +57,52 @@ jobs:
 
             - name: Extract release notes from CHANGELOG.md
               run: |
-                  VERSION="${GITHUB_REF_NAME#v}"
+                  VERSION="${TAG#v}"
                   awk -v v="$VERSION" '
                       $0 ~ "^## \\[" v "\\]" { found = 1; next }
                       found && /^## \[/ { exit }
                       found { print }
-                  ' CHANGELOG.md > release-notes.md
-                  if [ ! -s release-notes.md ]; then
+                  ' CHANGELOG.md > "$RUNNER_TEMP/release-notes.md"
+                  if [ ! -s "$RUNNER_TEMP/release-notes.md" ]; then
                       echo "::error::No CHANGELOG.md entry found for $VERSION"
                       exit 1
                   fi
-                  cat release-notes.md
+                  cat "$RUNNER_TEMP/release-notes.md"
 
             - name: Create GitHub release
               env:
                   GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-              run: gh release create "$GITHUB_REF_NAME" --title "Release $GITHUB_REF_NAME" --notes-file release-notes.md --verify-tag
+              run: |
+                  if gh release view "$TAG" >/dev/null 2>&1; then
+                      echo "GitHub release $TAG already exists, skipping"
+                  else
+                      gh release create "$TAG" --title "Release $TAG" --notes-file "$RUNNER_TEMP/release-notes.md" --verify-tag
+                  fi
+
+            # Staged publishing requires npm >= 11.15.0
+            - name: Update npm
+              run: npm install -g npm@^11.15.0 && npm --version
+
+            - name: Stage on npm (approve on npmjs.com with 2FA)
+              run: |
+                  NAME="$(node -p "require('./package.json').name")"
+                  VERSION="${TAG#v}"
+                  if [ "$(npm view "$NAME@$VERSION" version 2>/dev/null)" = "$VERSION" ]; then
+                      echo "$NAME@$VERSION is already on npm, skipping"
+                      exit 0
+                  fi
+                  # Prereleases (e.g. 12.0.0-beta.1) go to the "next" dist-tag instead of "latest".
+                  # The tag is fixed when staging: to change it, reject the staged version and re-run.
+                  DIST_TAG=latest
+                  case "$VERSION" in *-*) DIST_TAG=next ;; esac
+                  npm pack --dry-run
+                  # Authenticates with GitHub OIDC (trusted publishing): no NPM_TOKEN needed.
+                  # The version stays hidden until a maintainer approves it with 2FA.
+                  npm stage publish --access public --tag "$DIST_TAG" --provenance
+                  {
+                      echo "### $NAME@$VERSION is staged on npm"
+                      echo
+                      echo "Approve it with 2FA to make it public:"
+                      echo "- npmjs.com: package page → **Staged Packages** → **Approve**"
+                      echo "- or CLI: \`npm stage list $NAME\` then \`npm stage approve <stage-id>\`"
+                  } >> "$GITHUB_STEP_SUMMARY"

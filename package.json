@@ -12,7 +12,16 @@
     ],
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
-    "repository": "git@github.com:Pop-Code/nestjs-console.git",
+    "files": [
+        "dist",
+        "!dist/**/*.tsbuildinfo",
+        "CHANGELOG.md",
+        "SECURITY.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pop-Code/nestjs-console.git"
+    },
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
     "peerDependencies": {
@@ -55,7 +64,8 @@
         "test:debug": "node --inspect-brk --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --runInBand",
         "lint": "eslint ./src/**/*.ts",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-        "test:smoke": "node -e \"require('./dist')\" && node -r ts-node/register test/console.ts command smoke && node -r ts-node/register test/console.decorators.ts asyncCommand smoke"
+        "test:smoke": "node -e \"require('./dist')\" && node -r ts-node/register test/console.ts command smoke && node -r ts-node/register test/console.decorators.ts asyncCommand smoke",
+        "prepublishOnly": "npm run build"
     },
     "jest": {
         "moduleFileExtensions": [
