@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Changed
+
+- Publish to npm from the release workflow (npm trusted publishing with provenance, no token stored in GitHub)
+- Define package contents with the `files` field in `package.json` (replaces `.npmignore`)
+
 ## [11.0.0] - 2026-11-15
 
 ### BREAKING CHANGE

@@ -12,7 +12,16 @@
     ],
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
-    "repository": "git@github.com:Pop-Code/nestjs-console.git",
+    "files": [
+        "dist",
+        "!dist/**/*.tsbuildinfo",
+        "CHANGELOG.md",
+        "SECURITY.md"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Pop-Code/nestjs-console.git"
+    },
     "author": "Rmannn <alex.hermann@pop-code.com>",
     "license": "MIT",
     "peerDependencies": {
