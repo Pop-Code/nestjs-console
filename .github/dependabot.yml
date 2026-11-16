@@ -1,7 +1,5 @@
-# To get started with Dependabot version updates, you'll need to specify which
-# package ecosystems to update and where the package manifests are located.
-# Please see the documentation for all configuration options:
-# https://help.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+# Dependabot version updates
+# https://docs.github.com/code-security/dependabot/working-with-dependabot/dependabot-options-reference
 
 version: 2
 updates:
@@ -9,6 +7,39 @@ updates:
       directory: '/'
       schedule:
           interval: 'weekly'
-      # Always increase the version requirement
-      # to match the new version.
-      versioning-strategy: increase
+      # Only touch package.json ranges when the new version needs it: the lockfile is updated
+      # for versions already inside a range (e.g. commander 15.x), so the supported ranges
+      # (peer @nestjs/*, commander ^11 || ... || ^15) are never narrowed.
+      versioning-strategy: increase-if-necessary
+      ignore:
+          # New majors of the runtime deps change the supported range and the peer deps:
+          # they are done by hand (see CHANGELOG), not by Dependabot.
+          - dependency-name: 'commander'
+            update-types: ['version-update:semver-major']
+          - dependency-name: '@nestjs/*'
+            update-types: ['version-update:semver-major']
+          # ts-jest, typescript-eslint and typedoc do not support TypeScript 7 yet
+          - dependency-name: 'typescript'
+            update-types: ['version-update:semver-major']
+      groups:
+          nestjs:
+              patterns: ['@nestjs/*']
+          lint:
+              patterns: ['eslint', '@eslint/*', 'typescript-eslint', 'prettier']
+          test:
+              patterns: ['jest', 'ts-jest', '@types/jest']
+          dev-dependencies:
+              dependency-type: 'development'
+              update-types: ['minor', 'patch']
+      commit-message:
+          prefix: 'chore(deps)'
+
+    - package-ecosystem: 'github-actions'
+      directory: '/'
+      schedule:
+          interval: 'weekly'
+      groups:
+          github-actions:
+              patterns: ['*']
+      commit-message:
+          prefix: 'chore(ci)'
