@@ -28,6 +28,51 @@ The console service will be accessible inside the container.
 3. nestjs-console invoke commander
 4. commander will do the rest.
 
+## Features
+
+- Commands and sub commands (git style) declared with decorators or registered with a service, on any provider
+- All the commander features: arguments with descriptions, choices and defaults, options with choices, environment variables, conflicts..., aliases, hidden and default commands, help groups and texts
+- Nest parameter decorators `@Arg()`, `@Opt()` and `@Cmd()`, with pipes (`ParseIntPipe`, `ValidationPipe` on a DTO...)
+- Guards, interceptors and exception filters on commands
+- `run()` executes the command, prints the errors, sets the exit code and closes the application
+- `runCommand()` to test the commands
+- Shell completion for bash, zsh and fish
+
+## Example
+
+```ts
+// console.ts
+import { BootstrapConsole } from 'nestjs-console';
+import { AppModule } from './app.module';
+
+new BootstrapConsole({ module: AppModule, useDecorators: true, cli: { name: 'my-cli' } }).run();
+```
+
+```ts
+// users.cli.ts, a provider of a module that imports ConsoleModule
+import { ParseIntPipe } from '@nestjs/common';
+import { Arg, Command, Console, Opt } from 'nestjs-console';
+
+@Console({ command: 'users', description: 'Manage the users' })
+export class UsersCli {
+    constructor(private readonly users: UsersService) {}
+
+    @Command({
+        command: 'show <id>',
+        description: 'Show a user',
+        options: [{ flags: '-f, --format <format>', choices: ['json', 'table'], defaultValue: 'table' }]
+    })
+    async show(@Arg('id', ParseIntPipe) id: number, @Opt('format') format: 'json' | 'table') {
+        const user = await this.users.find(id);
+        console.log(format === 'json' ? JSON.stringify(user) : user);
+    }
+}
+```
+
+```bash
+node dist/console.js users show 42 --format json
+```
+
 # Documentation
 
 - [Wiki](https://github.com/Pop-Code/nestjs-console/wiki)
