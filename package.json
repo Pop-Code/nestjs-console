@@ -39,6 +39,8 @@
         "@nestjs/testing": "12.5.0",
         "@types/jest": "30.0.0",
         "@types/node": "26.6.6",
+        "class-transformer": "0.5.1",
+        "class-validator": "0.15.1",
         "eslint": "10.15.0",
         "jest": "30.5.2",
         "prettier": "3.10.1",
@@ -64,7 +66,7 @@
         "test:debug": "node --inspect-brk --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --runInBand",
         "lint": "eslint ./src/**/*.ts",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-        "test:smoke": "node -e \"require('./dist')\" && node -r ts-node/register test/console.ts command smoke && node -r ts-node/register test/console.decorators.ts asyncCommand smoke",
+        "test:smoke": "node -e \"require('./dist')\" && node test/smoke.mjs && node -r ts-node/register test/console.ts command smoke && node -r ts-node/register test/console.decorators.ts asyncCommand smoke",
         "prepublishOnly": "npm run build"
     },
     "jest": {

@@ -1,17 +1,9 @@
 import { BootstrapConsole } from '../src/bootstrap/console';
 import { ModuleWithDecoratorsTest } from './app/decorator/module';
 
-const bootstrap = new BootstrapConsole({
+// run() inits the application, executes the command, prints errors, sets the exit code and closes the application
+new BootstrapConsole({
     module: ModuleWithDecoratorsTest,
-    useDecorators: true
-});
-bootstrap.init().then(async (app) => {
-    try {
-        await app.init();
-        await bootstrap.boot();
-        await app.close();
-    } catch (e) {
-        console.error(e);
-        process.exit(1);
-    }
-});
+    useDecorators: true,
+    completion: true
+}).run();

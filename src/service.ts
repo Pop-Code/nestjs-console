@@ -4,9 +4,60 @@
 import { INestApplicationContext, Injectable } from '@nestjs/common';
 import * as commander from 'commander';
 
-import { CreateCommandOptions, InjectCli } from './decorators';
+import { CommandArgument, CommandOption, CreateCommandOptions, HelpTextPosition, InjectCli } from './decorators';
 import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
-import { EventEmitter } from 'stream';
+
+/**
+ * The options of a command that can also be applied to an existing command (eg the root cli)
+ */
+export type CommandSettings = Omit<CreateCommandOptions, 'command' | 'hidden' | 'isDefault'>;
+
+/**
+ * Settings that commander copies from a parent to the sub commands created with `.command()`
+ * (exitOverride, configureOutput, showHelpAfterError, helpOption...).
+ * Snapshot them through the public `copyInheritedSettings()` so the list follows the commander version.
+ */
+const getInheritableSettings = (command: commander.Command): Record<string, unknown> => {
+    const probe = new commander.Command();
+    probe.copyInheritedSettings(command);
+    // copy plain objects (eg the output configuration), older commander versions update them in place
+    return Object.fromEntries(
+        Object.entries(probe).map(([key, value]) => [key, isPlainObject(value) ? { ...value } : value])
+    );
+};
+
+const isPlainObject = (value: unknown): value is Record<string, unknown> =>
+    typeof value === 'object' && value !== null && Object.getPrototypeOf(value) === Object.prototype;
+
+const isSameSetting = (a: unknown, b: unknown): boolean => {
+    if (isPlainObject(a) && isPlainObject(b)) {
+        const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
+        return [...keys].every((key) => a[key] === b[key]);
+    }
+    return a === b;
+};
+
+const isCommanderOption = (value: unknown): value is commander.Option =>
+    typeof (value as commander.Option)?.attributeName === 'function';
+
+const isCommanderArgument = (value: unknown): value is commander.Argument =>
+    typeof (value as commander.Argument)?.name === 'function';
+
+/**
+ * The arguments declared on a command (public `registeredArguments` since commander 11.1)
+ */
+export const getRegisteredArguments = (command: commander.Command): readonly commander.Argument[] =>
+    (command as any).registeredArguments ?? (command as any)._args ?? [];
+
+/**
+ * Set the help group of a command or an option (commander >= 14)
+ */
+const setHelpGroup = (target: commander.Command | commander.Option, heading: string): void => {
+    if (typeof (target as any).helpGroup !== 'function') {
+        throw new Error('The helpGroup setting requires commander >= 14');
+    }
+    (target as any).helpGroup(heading);
+};
 
 @Injectable()
 export class ConsoleService {
@@ -26,10 +77,19 @@ export class ConsoleService {
      */
     protected cli: commander.Command;
 
-    protected responseListener: EventEmitter = new EventEmitter();
+    /**
+     * The settings of each command when it was created, to know which ones were changed later
+     */
+    protected initialSettings = new WeakMap<commander.Command, Record<string, unknown>>();
+
+    /**
+     * Receives the response of the command executed by the current `init()` call
+     */
+    protected onResponse?: (response: CommandResponse) => void;
 
     constructor(@InjectCli() cli: commander.Command) {
         this.cli = cli;
+        this.trackSettings(cli);
     }
 
     static createCli(name?: string): commander.Command {
@@ -44,6 +104,8 @@ export class ConsoleService {
      */
     resetCli(): void {
         this.cli = ConsoleService.createCli();
+        this.trackSettings(this.cli);
+        this.commands.clear();
     }
 
     /**
@@ -91,7 +153,7 @@ export class ConsoleService {
             if (!command) {
                 throw new Error('Command not found in arguments');
             }
-            let data: CommandResponse;
+            let data: any;
             if (typeof action === 'object') {
                 data = action.instance[action.methodName](...args);
             } else {
@@ -106,18 +168,60 @@ export class ConsoleService {
 
     /**
      * Execute the cli
+     *
+     * Resolves with the value returned by the command handler, rejects with the error it throws.
+     * If no handler is executed, `data` is undefined and `command` is the root cli.
+     *
+     * @param argv The arguments to parse, process.argv by default
+     * @param parseOptions The commander parse options, eg `{ from: 'user' }` when argv only contains the user arguments
      */
-    async init<D = any>(argv: string[]): Promise<CommandResponse<D>> {
-        const userArgs = (this.cli as any)._prepareUserArgs(argv);
-        return new Promise((resolve, reject) => {
-            this.responseListener.once('response', (res) => {
-                resolve(res);
-            });
-            this.responseListener.once('error', (error) => {
-                reject(error);
-            });
-            (this.cli as any)._parseCommand([], userArgs);
-        });
+    async init<D = any>(
+        argv: readonly string[] = process.argv,
+        parseOptions?: commander.ParseOptions
+    ): Promise<CommandResponse<D>> {
+        this.applyInheritedSettings(this.cli);
+        let response: CommandResponse<D> | undefined;
+        this.onResponse = (res) => {
+            response = res;
+        };
+        try {
+            await this.cli.parseAsync(argv, parseOptions);
+        } finally {
+            this.onResponse = undefined;
+        }
+        return response ?? { data: undefined as D, command: this.cli };
+    }
+
+    /**
+     * Copy the settings changed on a command (exitOverride, configureOutput, showHelpAfterError...)
+     * to its sub commands that did not change them, like commander does when creating sub commands with `.command()`.
+     * Sub commands created by nestjs-console are created before the root cli is configured, so this runs before each parse.
+     */
+    protected applyInheritedSettings(parent: commander.Command): void {
+        const parentInitial = this.initialSettings.get(parent);
+        const parentSettings = getInheritableSettings(parent);
+        for (const child of parent.commands) {
+            const childInitial = this.initialSettings.get(child);
+            if (parentInitial && childInitial) {
+                const childSettings = getInheritableSettings(child);
+                for (const [key, value] of Object.entries(parentSettings)) {
+                    if (
+                        !isSameSetting(value, parentInitial[key]) &&
+                        isSameSetting(childSettings[key], childInitial[key])
+                    ) {
+                        (child as any)[key] = (parent as any)[key] ?? value;
+                    }
+                }
+            }
+            this.applyInheritedSettings(child);
+        }
+    }
+
+    /**
+     * Remember the settings of a new command, before it is configured
+     */
+    protected trackSettings(command: commander.Command): void {
+        this.initialSettings.set(command, getInheritableSettings(command));
     }
 
     /**
@@ -136,45 +240,20 @@ export class ConsoleService {
         const args = options.command.split(' ');
         const commandNames = args[0].split('.');
         const command = ConsoleService.createCli(commandNames[commandNames.length - 1]);
+        this.trackSettings(command);
 
         if (args.length > 1) {
             command.arguments(args.slice(1).join(' '));
         }
 
-        if (options.description !== undefined) {
-            command.description(options.description);
-        }
-        if (options.alias !== undefined) {
-            command.alias(options.alias);
-        }
-        if (Array.isArray(options.options)) {
-            for (const opt of options.options) {
-                let method = 'option';
-                if (opt.required === true) {
-                    method = 'requiredOption';
-                }
-                command[method](opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
-            }
-        }
-        // here as any is required cause commander bad typing on action for promise
-        command.action(async (...args) => {
-            try {
-                const res = await ConsoleService.createHandler(handler)(...args);
-                this.responseListener.emit('response', res);
-            } catch (e) {
-                this.responseListener.emit('error', e);
-            }
+        this.configureCommand(command, options);
+
+        command.action(async (...actionArgs: any[]) => {
+            const res = await ConsoleService.createHandler(handler)(...actionArgs);
+            this.onResponse?.(res);
         });
 
-        // add the command to the parent
-        parent.addCommand(command, commanderOptions);
-
-        // add the command to cli stack
-        this.commands.set(this.getCommandFullName(command), command);
-
-        command.on('response', (res) => {});
-
-        return command;
+        return this.addCommand(command, options, parent, commanderOptions);
     }
 
     /**
@@ -184,39 +263,156 @@ export class ConsoleService {
      * @throws an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)
      */
     createGroupCommand(options: CreateCommandOptions, parent: commander.Command): commander.Command {
-        if ((parent as any)._args.length > 0) {
+        if (getRegisteredArguments(parent).length > 0) {
             throw new Error('Sub commands cannot be applied to command with explicit args');
         }
         const commandNames = options.command.split('.');
         const command = ConsoleService.createCli(commandNames[commandNames.length - 1]);
+        this.trackSettings(command);
+        this.configureCommand(command, options);
+        return this.addCommand(command, options, parent);
+    }
 
+    /**
+     * Apply settings to a command (description, arguments, options, help...)
+     */
+    configureCommand(command: commander.Command, options: CommandSettings): commander.Command {
         if (options.description !== undefined) {
             command.description(options.description);
+        }
+        if (options.summary !== undefined) {
+            command.summary(options.summary);
+        }
+        if (options.usage !== undefined) {
+            command.usage(options.usage);
         }
         if (options.alias !== undefined) {
             command.alias(options.alias);
         }
-        if (Array.isArray(options.options)) {
-            for (const opt of options.options) {
-                let method = 'option';
-                if (opt.required === true) {
-                    method = 'requiredOption';
-                }
-                command[method](opt.flags, opt.description, opt.fn || opt.defaultValue, opt.defaultValue);
-            }
+        for (const alias of options.aliases ?? []) {
+            command.alias(alias);
         }
-        parent.addCommand(command);
+        for (const argument of options.arguments ?? []) {
+            command.addArgument(this.createArgument(argument));
+        }
+        for (const option of options.options ?? []) {
+            command.addOption(this.createOption(option));
+        }
+        if (options.helpGroup !== undefined) {
+            setHelpGroup(command, options.helpGroup);
+        }
+        for (const [position, text] of Object.entries(options.helpText ?? {})) {
+            command.addHelpText(position as HelpTextPosition, text);
+        }
+        if (options.allowUnknownOption !== undefined) {
+            command.allowUnknownOption(options.allowUnknownOption);
+        }
+        if (options.allowExcessArguments !== undefined) {
+            command.allowExcessArguments(options.allowExcessArguments);
+        }
+        if (options.passThroughOptions !== undefined) {
+            command.passThroughOptions(options.passThroughOptions);
+        }
+        if (options.enablePositionalOptions !== undefined) {
+            command.enablePositionalOptions(options.enablePositionalOptions);
+        }
+        if (options.showHelpAfterError !== undefined) {
+            command.showHelpAfterError(options.showHelpAfterError);
+        }
+        if (options.showSuggestionAfterError !== undefined) {
+            command.showSuggestionAfterError(options.showSuggestionAfterError);
+        }
+        options.configure?.(command);
+        return command;
+    }
+
+    /**
+     * Create a commander option from an option definition
+     */
+    createOption(definition: CommandOption | commander.Option): commander.Option {
+        if (isCommanderOption(definition)) {
+            return definition;
+        }
+        const option = new commander.Option(definition.flags, definition.description);
+        if (definition.fn !== undefined) {
+            option.argParser(definition.fn);
+        }
+        if (definition.defaultValue !== undefined) {
+            option.default(definition.defaultValue, definition.defaultValueDescription);
+        }
+        if (definition.required === true) {
+            option.makeOptionMandatory();
+        }
+        if (definition.choices !== undefined) {
+            option.choices(definition.choices);
+        }
+        if (definition.env !== undefined) {
+            option.env(definition.env);
+        }
+        if (definition.conflicts !== undefined) {
+            option.conflicts(definition.conflicts);
+        }
+        if (definition.implies !== undefined) {
+            option.implies(definition.implies);
+        }
+        if (definition.preset !== undefined) {
+            option.preset(definition.preset);
+        }
+        if (definition.hidden === true) {
+            option.hideHelp();
+        }
+        if (definition.helpGroup !== undefined) {
+            setHelpGroup(option, definition.helpGroup);
+        }
+        return option;
+    }
+
+    /**
+     * Create a commander argument from an argument definition
+     */
+    createArgument(definition: CommandArgument | commander.Argument): commander.Argument {
+        if (isCommanderArgument(definition)) {
+            return definition;
+        }
+        const argument = new commander.Argument(definition.name, definition.description);
+        if (definition.fn !== undefined) {
+            argument.argParser(definition.fn);
+        }
+        if (definition.defaultValue !== undefined) {
+            argument.default(definition.defaultValue, definition.defaultValueDescription);
+        }
+        if (definition.choices !== undefined) {
+            argument.choices(definition.choices);
+        }
+        return argument;
+    }
+
+    protected addCommand(
+        command: commander.Command,
+        options: CreateCommandOptions,
+        parent: commander.Command,
+        commanderOptions?: commander.CommandOptions
+    ): commander.Command {
+        const addOptions: commander.CommandOptions = { ...commanderOptions };
+        if (options.hidden !== undefined) {
+            addOptions.hidden = options.hidden;
+        }
+        if (options.isDefault !== undefined) {
+            addOptions.isDefault = options.isDefault;
+        }
+        parent.addCommand(command, addOptions);
         this.commands.set(this.getCommandFullName(command), command);
         return command;
     }
 
     /**
-     * Get the full name of a command (parents names + command names separated by dot)
+     * Get the full name of a command (parents names + command names separated by dot).
+     * The name of the root cli is not included.
      */
     getCommandFullName(command: commander.Command): string {
         let fullName = command.name();
         let commandParent = command.parent;
-        while (commandParent instanceof commander.Command && commandParent.name() !== '') {
+        while (commandParent instanceof commander.Command && commandParent.parent) {
             fullName = `${commandParent.name()}.${fullName}`;
             commandParent = commandParent.parent;
         }
