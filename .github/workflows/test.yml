@@ -47,3 +47,41 @@ jobs:
                   token: ${{ secrets.CODECOV_TOKEN }}
                   files: ./coverage/coverage-final.json
                   fail_ci_if_error: true
+
+    # The build job tests the latest versions (NestJS 12, commander 15),
+    # this one tests the other supported majors of the peer dependencies.
+    compatibility:
+        name: NestJS ${{ matrix.nest }} / commander ${{ matrix.commander }}
+        runs-on: ubuntu-latest
+
+        strategy:
+            fail-fast: false
+            matrix:
+                include:
+                    - nest: 9
+                      commander: 11
+                    - nest: 10
+                      commander: 12
+                    - nest: 11
+                      commander: 13
+                    - nest: 12
+                      commander: 14
+
+        steps:
+            - uses: actions/checkout@v7
+            - name: Use Node.js 24.x
+              uses: actions/setup-node@v7
+              with:
+                  node-version: 24.x
+                  cache: yarn
+            - name: Install
+              run: |
+                  yarn install --frozen-lockfile
+                  yarn add --dev --ignore-scripts \
+                      @nestjs/common@^${{ matrix.nest }} @nestjs/core@^${{ matrix.nest }} \
+                      @nestjs/testing@^${{ matrix.nest }} @nestjs/platform-express@^${{ matrix.nest }} \
+                      commander@~${{ matrix.commander }}.0.0
+            - name: Build
+              run: yarn run build
+            - name: Test
+              run: yarn run test
