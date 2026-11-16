@@ -11,7 +11,7 @@
 <li><a href="" aria-current="page">ConsoleService</a></li></ul>
 <h1>Class ConsoleService</h1></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L72">src/service.ts:72</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L94">src/service.ts:94</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -28,11 +28,14 @@
 <a href="#container" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>container?</span></a>
 <a href="#initialsettings" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>initial<wbr/>Settings</span></a>
 <a href="#onresponse" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>on<wbr/>Response?</span></a>
+<a href="#prompt" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>prompt</span></a>
 </div></section>
 <section class="tsd-index-section">
 <h3 class="tsd-index-heading tsd-anchor-link" id="methods">Methods<a href="#methods" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-index-list"><a href="#addcommand" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Command</span></a>
 <a href="#applyinheritedsettings" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Inherited<wbr/>Settings</span></a>
+<a href="#askmissingvalues" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ask<wbr/>Missing<wbr/>Values</span></a>
+<a href="#askvalue" class="tsd-index-link tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ask<wbr/>Value</span></a>
 <a href="#configurecommand" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>configure<wbr/>Command</span></a>
 <a href="#createargument" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Argument</span></a>
 <a href="#createcommand" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Command</span></a>
@@ -41,6 +44,7 @@
 <a href="#getcli" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Cli</span></a>
 <a href="#getcommandfullname" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Command<wbr/>Full<wbr/>Name</span></a>
 <a href="#getcontainer" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Container</span></a>
+<a href="#getprompt" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Prompt</span></a>
 <a href="#getrootcli" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Root<wbr/>Cli</span></a>
 <a href="#init" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>init</span></a>
 <a href="#resetcli" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reset<wbr/>Cli</span></a>
@@ -56,15 +60,16 @@
 <h3 class="tsd-anchor-link" id="constructor"><span>constructor</span><a href="#constructor" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
 <li class="">
-<div class="tsd-signature tsd-anchor-link" id="constructorconsoleservice"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">ConsoleService</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">cli</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">ConsoleService</a><a href="#constructorconsoleservice" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-signature tsd-anchor-link" id="constructorconsoleservice"><span class="tsd-signature-keyword">new</span> <span class="tsd-kind-constructor-signature">ConsoleService</span><span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">cli</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">,</span> <span class="tsd-kind-parameter">prompt</span><span class="tsd-signature-symbol">?:</span> <a href="PromptService.html" class="tsd-signature-type tsd-kind-class">PromptService</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <a href="" class="tsd-signature-type tsd-kind-class">ConsoleService</a><a href="#constructorconsoleservice" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
 <div class="tsd-description">
 <div class="tsd-parameters">
 <h4 class="tsd-parameters-title">Parameters</h4>
 <ul class="tsd-parameter-list">
-<li><span><span class="tsd-kind-parameter">cli</span>: <span class="tsd-signature-type">Command</span></span></li></ul></div>
+<li><span><span class="tsd-kind-parameter">cli</span>: <span class="tsd-signature-type">Command</span></span></li>
+<li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">prompt</span>: <a href="PromptService.html" class="tsd-signature-type tsd-kind-class">PromptService</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ConsoleService</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L99">src/service.ts:99</a></li></ul></aside></div></li></ul></section></section></details>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L126">src/service.ts:126</a></li></ul></aside></div></li></ul></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -74,14 +79,14 @@
 <div class="tsd-comment tsd-typography"><p>The root cli</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L87">src/service.ts:87</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L109">src/service.ts:109</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="commands"><code class="tsd-tag">Protected</code><span>commands</span><a href="#commands" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">commands</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Map</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 <div class="tsd-comment tsd-typography"><p>A Map holding group commands by name</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L82">src/service.ts:82</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L104">src/service.ts:104</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="container"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Optional</code><span>container</span><a href="#container" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">container</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">INestApplicationContext</span></div>
@@ -89,21 +94,28 @@
 Required to scan the application</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L77">src/service.ts:77</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L99">src/service.ts:99</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="initialsettings"><code class="tsd-tag">Protected</code><span>initial<wbr/>Settings</span><a href="#initialsettings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">initialSettings</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">WeakMap</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> = ...</span></div>
 <div class="tsd-comment tsd-typography"><p>The settings of each command when it was created, to know which ones were changed later</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L92">src/service.ts:92</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L114">src/service.ts:114</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="onresponse"><code class="tsd-tag">Protected</code> <code class="tsd-tag">Optional</code><span>on<wbr/>Response</span><a href="#onresponse" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">onResponse</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">response</span><span class="tsd-signature-symbol">:</span> <a href="../interfaces/CommandResponse.html" class="tsd-signature-type tsd-kind-interface">CommandResponse</a><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span></div>
 <div class="tsd-comment tsd-typography"><p>Receives the response of the command executed by the current <code>init()</code> call</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L97">src/service.ts:97</a></li></ul></aside></section></section></details>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L119">src/service.ts:119</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="prompt"><code class="tsd-tag">Protected</code><span>prompt</span><a href="#prompt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">prompt</span><span class="tsd-signature-symbol">:</span> <a href="PromptService.html" class="tsd-signature-type tsd-kind-class">PromptService</a></div>
+<div class="tsd-comment tsd-typography"><p>Asks the values of the options and arguments declared with <code>prompt</code></p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L124">src/service.ts:124</a></li></ul></aside></section></section></details>
 <details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
 <h2 class="tsd-anchor-link" id="methods-1">Methods<a href="#methods-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
 <section>
@@ -122,7 +134,7 @@ Required to scan the application</p>
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">commanderOptions</span>: <span class="tsd-signature-type">CommandOptions</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L399">src/service.ts:399</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L533">src/service.ts:533</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="applyinheritedsettings"><code class="tsd-tag">Protected</code><span>apply<wbr/>Inherited<wbr/>Settings</span><a href="#applyinheritedsettings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -139,7 +151,40 @@ Sub commands created by nestjs-console are created before the root cli is config
 <li><span><span class="tsd-kind-parameter">parent</span>: <span class="tsd-signature-type">Command</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L209">src/service.ts:209</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L244">src/service.ts:244</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="askmissingvalues"><code class="tsd-tag">Protected</code><span>ask<wbr/>Missing<wbr/>Values</span><a href="#askmissingvalues" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="askmissingvalues-1"><span class="tsd-kind-call-signature">askMissingValues</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">command</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">promptedArguments</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PromptedArgument</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">promptedOptions</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">PromptedOption</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span><a href="#askmissingvalues-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Ask the values of the prompted arguments and options that were not passed.
+When the terminal is not interactive, fail like commander for the required ones.</p>
+</div>
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">command</span>: <span class="tsd-signature-type">Command</span></span></li>
+<li><span><span class="tsd-kind-parameter">promptedArguments</span>: <span class="tsd-signature-type">PromptedArgument</span><span class="tsd-signature-symbol">[]</span></span></li>
+<li><span><span class="tsd-kind-parameter">promptedOptions</span>: <span class="tsd-signature-type">PromptedOption</span><span class="tsd-signature-symbol">[]</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L457">src/service.ts:457</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member tsd-is-protected">
+<h3 class="tsd-anchor-link" id="askvalue"><code class="tsd-tag">Protected</code><span>ask<wbr/>Value</span><a href="#askvalue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures tsd-is-protected">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="askvalue-1"><span class="tsd-kind-call-signature">askValue</span><span class="tsd-signature-symbol">(</span><br/>    <span class="tsd-kind-parameter">setting</span><span class="tsd-signature-symbol">:</span> <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">description</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span><br/>    <span class="tsd-kind-parameter">__namedParameters</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><br/>        <span class="tsd-kind-property">choices</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">;</span><br/>        <span class="tsd-kind-property">flag</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">,</span><br/><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span><a href="#askvalue-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-parameters">
+<h4 class="tsd-parameters-title">Parameters</h4>
+<ul class="tsd-parameter-list">
+<li><span><span class="tsd-kind-parameter">setting</span>: <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></span></li>
+<li><span><span class="tsd-kind-parameter">description</span>: <span class="tsd-signature-type">string</span></span></li>
+<li><span><span class="tsd-kind-parameter">__namedParameters</span>: <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">choices</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">default</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">flag</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span> <span class="tsd-signature-symbol">}</span></span></li></ul></div>
+<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L513">src/service.ts:513</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="configurecommand"><span>configure<wbr/>Command</span><a href="#configurecommand" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -155,7 +200,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 <li><span><span class="tsd-kind-parameter">options</span>: <a href="../types/CommandSettings.html" class="tsd-signature-type tsd-kind-type-alias">CommandSettings</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L288">src/service.ts:288</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L323">src/service.ts:323</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createargument"><span>create<wbr/>Argument</span><a href="#createargument" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -170,7 +215,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 <li><span><span class="tsd-kind-parameter">definition</span>: <span class="tsd-signature-type">Argument</span> <span class="tsd-signature-symbol">|</span> <a href="../interfaces/CommandArgument.html" class="tsd-signature-type tsd-kind-interface">CommandArgument</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Argument</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L382">src/service.ts:382</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L432">src/service.ts:432</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createcommand"><span>create<wbr/>Command</span><a href="#createcommand" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -194,7 +239,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">commanderOptions</span>: <span class="tsd-signature-type">CommandOptions</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L243">src/service.ts:243</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L278">src/service.ts:278</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="creategroupcommand"><span>create<wbr/>Group<wbr/>Command</span><a href="#creategroupcommand" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -218,7 +263,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 <h4 class="tsd-anchor-link" id="throws">Throws<a href="#throws" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h4><p>an error if the parent command contains explicit arguments, only simple commands are allowed (no spaces)</p>
 </div></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L274">src/service.ts:274</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L309">src/service.ts:309</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createoption"><span>create<wbr/>Option</span><a href="#createoption" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -233,7 +278,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 <li><span><span class="tsd-kind-parameter">definition</span>: <span class="tsd-signature-type">Option</span> <span class="tsd-signature-symbol">|</span> <a href="../interfaces/CommandOption.html" class="tsd-signature-type tsd-kind-interface">CommandOption</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Option</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L341">src/service.ts:341</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L390">src/service.ts:390</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getcli"><span>get<wbr/>Cli</span><a href="#getcli" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -250,7 +295,7 @@ Sub commands created by nestjs-console are created before the root cli is config
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L131">src/service.ts:131</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L166">src/service.ts:166</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getcommandfullname"><span>get<wbr/>Command<wbr/>Full<wbr/>Name</span><a href="#getcommandfullname" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -266,7 +311,7 @@ The name of the root cli is not included.</p>
 <li><span><span class="tsd-kind-parameter">command</span>: <span class="tsd-signature-type">Command</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L421">src/service.ts:421</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L555">src/service.ts:555</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getcontainer"><span>get<wbr/>Container</span><a href="#getcontainer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -277,7 +322,18 @@ The name of the root cli is not included.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">INestApplicationContext</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">undefined</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L152">src/service.ts:152</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L187">src/service.ts:187</a></li></ul></aside></div></li></ul></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="getprompt"><span>get<wbr/>Prompt</span><a href="#getprompt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<ul class="tsd-signatures">
+<li class="">
+<div class="tsd-signature tsd-anchor-link" id="getprompt-1"><span class="tsd-kind-call-signature">getPrompt</span><span class="tsd-signature-symbol">()</span><span class="tsd-signature-symbol">:</span> <a href="PromptService.html" class="tsd-signature-type tsd-kind-class">PromptService</a><a href="#getprompt-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></div>
+<div class="tsd-description">
+<div class="tsd-comment tsd-typography"><p>Get the service asking the missing values</p>
+</div>
+<h4 class="tsd-returns-title">Returns <a href="PromptService.html" class="tsd-signature-type tsd-kind-class">PromptService</a></h4><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L135">src/service.ts:135</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="getrootcli"><span>get<wbr/>Root<wbr/>Cli</span><a href="#getrootcli" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -288,7 +344,7 @@ The name of the root cli is not included.</p>
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L123">src/service.ts:123</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L158">src/service.ts:158</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="init"><span>init</span><a href="#init" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -314,7 +370,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 </div></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/CommandResponse.html" class="tsd-signature-type tsd-kind-interface">CommandResponse</a><span class="tsd-signature-symbol">&lt;</span><a class="tsd-signature-type tsd-kind-type-parameter" href="#initd">D</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L187">src/service.ts:187</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L222">src/service.ts:222</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="resetcli"><span>reset<wbr/>Cli</span><a href="#resetcli" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -325,7 +381,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 </div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L114">src/service.ts:114</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L149">src/service.ts:149</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="setcontainer"><span>set<wbr/>Container</span><a href="#setcontainer" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -340,7 +396,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 <li><span><span class="tsd-kind-parameter">container</span>: <span class="tsd-signature-type">INestApplicationContext</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="" class="tsd-signature-type tsd-kind-class">ConsoleService</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L144">src/service.ts:144</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L179">src/service.ts:179</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member tsd-is-protected">
 <h3 class="tsd-anchor-link" id="tracksettings"><code class="tsd-tag">Protected</code><span>track<wbr/>Settings</span><a href="#tracksettings" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures tsd-is-protected">
@@ -355,7 +411,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 <li><span><span class="tsd-kind-parameter">command</span>: <span class="tsd-signature-type">Command</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L232">src/service.ts:232</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L267">src/service.ts:267</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createcli"><code class="tsd-tag">Static</code><span>create<wbr/>Cli</span><a href="#createcli" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -368,7 +424,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 <li><span><code class="tsd-tag">Optional</code><span class="tsd-kind-parameter">name</span>: <span class="tsd-signature-type">string</span></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Command</span></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L104">src/service.ts:104</a></li></ul></aside></div></li></ul></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L139">src/service.ts:139</a></li></ul></aside></div></li></ul></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="createhandler"><code class="tsd-tag">Static</code><span>create<wbr/>Handler</span><a href="#createhandler" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <ul class="tsd-signatures">
@@ -383,7 +439,7 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 <li><span><span class="tsd-kind-parameter">action</span>: <a href="../types/CommandActionHandler.html" class="tsd-signature-type tsd-kind-type-alias">CommandActionHandler</a></span></li></ul></div>
 <h4 class="tsd-returns-title">Returns <a href="../types/CommandActionWrapper.html" class="tsd-signature-type tsd-kind-type-alias">CommandActionWrapper</a></h4><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/service.ts#L159">src/service.ts:159</a></li></ul></aside></div></li></ul></section></section></details></div>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/service.ts#L194">src/service.ts:194</a></li></ul></aside></div></li></ul></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
@@ -403,9 +459,9 @@ If no handler is executed, <code>data</code> is undefined and <code>command</cod
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Constructors"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Constructors</summary>
 <div><a href="#constructor"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Constructor"><use href="../assets/icons.svg#icon-512"></use></svg><span>constructor</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
-<div><a href="#cli" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>cli</span></a><a href="#commands" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>commands</span></a><a href="#container" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>container</span></a><a href="#initialsettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>initial<wbr/>Settings</span></a><a href="#onresponse" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>on<wbr/>Response</span></a></div></details>
+<div><a href="#cli" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>cli</span></a><a href="#commands" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>commands</span></a><a href="#container" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>container</span></a><a href="#initialsettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>initial<wbr/>Settings</span></a><a href="#onresponse" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>on<wbr/>Response</span></a><a href="#prompt" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>prompt</span></a></div></details>
 <details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Methods"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Methods</summary>
-<div><a href="#addcommand" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Command</span></a><a href="#applyinheritedsettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Inherited<wbr/>Settings</span></a><a href="#configurecommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>configure<wbr/>Command</span></a><a href="#createargument"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Argument</span></a><a href="#createcommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Command</span></a><a href="#creategroupcommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Group<wbr/>Command</span></a><a href="#createoption"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Option</span></a><a href="#getcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Cli</span></a><a href="#getcommandfullname"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Command<wbr/>Full<wbr/>Name</span></a><a href="#getcontainer"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Container</span></a><a href="#getrootcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Root<wbr/>Cli</span></a><a href="#init"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>init</span></a><a href="#resetcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reset<wbr/>Cli</span></a><a href="#setcontainer"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Container</span></a><a href="#tracksettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>track<wbr/>Settings</span></a><a href="#createcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Cli</span></a><a href="#createhandler"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Handler</span></a></div></details></div></details></div>
+<div><a href="#addcommand" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>add<wbr/>Command</span></a><a href="#applyinheritedsettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>apply<wbr/>Inherited<wbr/>Settings</span></a><a href="#askmissingvalues" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ask<wbr/>Missing<wbr/>Values</span></a><a href="#askvalue" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>ask<wbr/>Value</span></a><a href="#configurecommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>configure<wbr/>Command</span></a><a href="#createargument"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Argument</span></a><a href="#createcommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Command</span></a><a href="#creategroupcommand"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Group<wbr/>Command</span></a><a href="#createoption"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Option</span></a><a href="#getcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Cli</span></a><a href="#getcommandfullname"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Command<wbr/>Full<wbr/>Name</span></a><a href="#getcontainer"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Container</span></a><a href="#getprompt"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Prompt</span></a><a href="#getrootcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>get<wbr/>Root<wbr/>Cli</span></a><a href="#init"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>init</span></a><a href="#resetcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>reset<wbr/>Cli</span></a><a href="#setcontainer"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>set<wbr/>Container</span></a><a href="#tracksettings" class="tsd-is-protected"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>track<wbr/>Settings</span></a><a href="#createcli"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Cli</span></a><a href="#createhandler"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Method"><use href="../assets/icons.svg#icon-2048"></use></svg><span>create<wbr/>Handler</span></a></div></details></div></details></div>
 <div class="site-menu">
 <nav class="tsd-navigation"><a href="../modules.html">NestJS Console - v11.1.0</a>
 <ul class="tsd-small-nested-navigation" id="tsd-nav-container">

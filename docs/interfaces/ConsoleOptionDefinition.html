@@ -1,0 +1,193 @@
+<!DOCTYPE html><html class="default" lang="en" data-base="../"><head><meta charset="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>ConsoleOptionDefinition | NestJS Console - v11.1.0</title><meta name="description" content="Documentation for NestJS Console"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="../assets/style.css"/><link rel="stylesheet" href="../assets/highlight.css"/><script defer src="../assets/main.js"></script><script async src="../assets/icons.js" id="tsd-icons-script"></script><script async src="../assets/search.js" id="tsd-search-script"></script><script async src="../assets/navigation.js" id="tsd-nav-script"></script><script async src="../assets/hierarchy.js" id="tsd-hierarchy-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os";document.body.style.display="none";setTimeout(() => window.app?app.showPage():document.body.style.removeProperty("display"),500)</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container"><a href="../index.html" class="title">NestJS Console - v11.1.0</a>
+<div id="tsd-toolbar-links"></div><button id="tsd-search-trigger" class="tsd-widget" aria-label="Search"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-search"></use></svg></button><dialog id="tsd-search" aria-label="Search"><input role="combobox" id="tsd-search-input" aria-controls="tsd-search-results" aria-autocomplete="list" aria-expanded="true" autocapitalize="off" autocomplete="off" placeholder="Search the docs" maxLength="100"/>
+<ul role="listbox" id="tsd-search-results"></ul>
+<div id="tsd-search-status" aria-live="polite" aria-atomic="true">
+<div>Preparing search index...</div></div></dialog><a href="#" class="tsd-widget menu" id="tsd-toolbar-menu-trigger" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-menu"></use></svg></a></div></header>
+<div class="container container-main">
+<div class="col-content">
+<div class="tsd-page-title">
+<ul class="tsd-breadcrumb" aria-label="Breadcrumb">
+<li><a href="" aria-current="page">ConsoleOptionDefinition</a></li></ul>
+<h1>Interface ConsoleOptionDefinition</h1></div>
+<section class="tsd-panel tsd-comment">
+<div class="tsd-comment tsd-typography"><p>An option declared on a property with the ConsoleOption decorator</p>
+</div></section>
+<div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">ConsoleOptionDefinition</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#choices">choices</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#conflicts">conflicts</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#defaultvalue">defaultValue</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#defaultvaluedescription">defaultValueDescription</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#description">description</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#env">env</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#flags">flags</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#fn">fn</a><span class="tsd-signature-symbol">?:</span> <a href="../types/ParserType.html" class="tsd-signature-type tsd-kind-type-alias">ParserType</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#helpgroup">helpGroup</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#hidden">hidden</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#implies">implies</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#preset">preset</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#prompt">prompt</a><span class="tsd-signature-symbol">?:</span> <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#required">required</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#short">short</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
+<section class="tsd-panel tsd-hierarchy" data-refl="203">
+<h4>Hierarchy</h4>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="CommandOption.html" class="tsd-signature-type tsd-kind-interface">CommandOption</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;flags&quot;</span><span class="tsd-signature-symbol">&gt;</span>
+<ul class="tsd-hierarchy">
+<li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">ConsoleOptionDefinition</span></li></ul></li></ul></section><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L331">src/decorators.ts:331</a></li></ul></aside>
+<section class="tsd-panel-group tsd-index-group">
+<section class="tsd-panel tsd-index-panel">
+<details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h5 class="tsd-index-heading uppercase">Index</h5></summary>
+<div class="tsd-accordion-details">
+<section class="tsd-index-section">
+<h3 class="tsd-index-heading tsd-anchor-link" id="properties">Properties<a href="#properties" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-index-list"><a href="#choices" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>choices?</span></a>
+<a href="#conflicts" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>conflicts?</span></a>
+<a href="#defaultvalue" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value?</span></a>
+<a href="#defaultvaluedescription" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value<wbr/>Description?</span></a>
+<a href="#description" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>description?</span></a>
+<a href="#env" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>env?</span></a>
+<a href="#flags" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>flags?</span></a>
+<a href="#fn" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>fn?</span></a>
+<a href="#helpgroup" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>help<wbr/>Group?</span></a>
+<a href="#hidden" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>hidden?</span></a>
+<a href="#implies" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>implies?</span></a>
+<a href="#preset" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>preset?</span></a>
+<a href="#prompt" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>prompt?</span></a>
+<a href="#required" class="tsd-index-link tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>required?</span></a>
+<a href="#short" class="tsd-index-link"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>short?</span></a>
+</div></section></div></details></section></section>
+<details class="tsd-panel-group tsd-member-group tsd-accordion" open><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h2 class="tsd-anchor-link" id="properties-1">Properties<a href="#properties-1" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h2></summary>
+<section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="choices"><code class="tsd-tag">Optional</code><span>choices</span><a href="#choices" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">choices</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Only allow these values</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#choices">choices</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L61">src/decorators.ts:61</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="conflicts"><code class="tsd-tag">Optional</code><span>conflicts</span><a href="#conflicts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">conflicts</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
+<div class="tsd-comment tsd-typography"><p>Names of options that cannot be used together with this one</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#conflicts">conflicts</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L71">src/decorators.ts:71</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="defaultvalue"><code class="tsd-tag">Optional</code><span>default<wbr/>Value</span><a href="#defaultvalue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">defaultValue</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">any</span></div>
+<div class="tsd-comment tsd-typography"><p>The default value</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#defaultvalue">defaultValue</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L46">src/decorators.ts:46</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="defaultvaluedescription"><code class="tsd-tag">Optional</code><span>default<wbr/>Value<wbr/>Description</span><a href="#defaultvaluedescription" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">defaultValueDescription</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The text displayed in the help instead of the default value</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#defaultvaluedescription">defaultValueDescription</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L51">src/decorators.ts:51</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="description"><code class="tsd-tag">Optional</code><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The description of the option</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#description">description</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L36">src/decorators.ts:36</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="env"><code class="tsd-tag">Optional</code><span>env</span><a href="#env" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">env</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>Read the value from this environment variable when the option is not passed</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#env">env</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L66">src/decorators.ts:66</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="flags"><code class="tsd-tag">Optional</code><span>flags</span><a href="#flags" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">flags</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The flags, by default &quot;--&quot; and the property name in kebab case, with a value depending on the type of the property:
+none for a boolean (<code>--dry-run</code>), a list for an array (<code>--tags &lt;tags...&gt;</code>), else one value (<code>--env &lt;env&gt;</code>)</p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L336">src/decorators.ts:336</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="fn"><code class="tsd-tag">Optional</code><span>fn</span><a href="#fn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">fn</span><span class="tsd-signature-symbol">?:</span> <a href="../types/ParserType.html" class="tsd-signature-type tsd-kind-type-alias">ParserType</a></div>
+<div class="tsd-comment tsd-typography"><p>The function to parse the value</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#fn">fn</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L41">src/decorators.ts:41</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="helpgroup"><code class="tsd-tag">Optional</code><span>help<wbr/>Group</span><a href="#helpgroup" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">helpGroup</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>The heading of the help group the option is listed in (requires commander &gt;= 14)</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#helpgroup">helpGroup</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L91">src/decorators.ts:91</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="hidden"><code class="tsd-tag">Optional</code><span>hidden</span><a href="#hidden" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">hidden</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>Hide the option from the help</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#hidden">hidden</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L86">src/decorators.ts:86</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="implies"><code class="tsd-tag">Optional</code><span>implies</span><a href="#implies" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">implies</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
+<div class="tsd-comment tsd-typography"><p>Values set on other options when this option is used, eg <code>{ logLevel: 'debug' }</code></p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#implies">implies</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L76">src/decorators.ts:76</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="preset"><code class="tsd-tag">Optional</code><span>preset</span><a href="#preset" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">preset</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div>
+<div class="tsd-comment tsd-typography"><p>The value used when the option is passed without a value (option with an optional value <code>[value]</code>)</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#preset">preset</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L81">src/decorators.ts:81</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="prompt"><code class="tsd-tag">Optional</code><span>prompt</span><a href="#prompt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">prompt</span><span class="tsd-signature-symbol">?:</span> <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a></div>
+<div class="tsd-comment tsd-typography"><p>Ask the value in the terminal when the option is not passed (and the terminal is interactive).
+<code>true</code> uses the description as question. Choices are asked with a list, options without value with yes/no.</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#prompt">prompt</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L97">src/decorators.ts:97</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member tsd-is-inherited">
+<h3 class="tsd-anchor-link" id="required"><code class="tsd-tag">Optional</code><span>required</span><a href="#required" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">required</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
+<div class="tsd-comment tsd-typography"><p>True if the option is required</p>
+</div><aside class="tsd-sources">
+<p>Inherited from <a href="CommandOption.html">CommandOption</a>.<a href="CommandOption.html#required">required</a></p>
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L56">src/decorators.ts:56</a></li></ul></aside></section>
+<section class="tsd-panel tsd-member">
+<h3 class="tsd-anchor-link" id="short"><code class="tsd-tag">Optional</code><span>short</span><a href="#short" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
+<div class="tsd-signature"><span class="tsd-kind-property">short</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
+<div class="tsd-comment tsd-typography"><p>A short flag added to the default flags, eg &quot;p&quot; for <code>-p, --port &lt;port&gt;</code></p>
+</div><aside class="tsd-sources">
+<ul>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L341">src/decorators.ts:341</a></li></ul></aside></section></section></details></div>
+<div class="col-sidebar">
+<div class="page-menu">
+<div class="tsd-navigation settings">
+<details class="tsd-accordion"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility"><span class="settings-label">Member Visibility</span>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-private" name="private"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Private</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-external" name="external"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>External</span></label></li></ul></div>
+<div class="tsd-theme-toggle"><label class="settings-label" for="tsd-theme">Theme</label><select id="tsd-theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<details open class="tsd-accordion tsd-page-navigation"><summary class="tsd-accordion-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
+<h3>On This Page</h3></summary>
+<div class="tsd-accordion-details">
+<details open class="tsd-accordion tsd-page-navigation-section"><summary class="tsd-accordion-summary" data-key="section-Properties"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>Properties</summary>
+<div><a href="#choices" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>choices</span></a><a href="#conflicts" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>conflicts</span></a><a href="#defaultvalue" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value</span></a><a href="#defaultvaluedescription" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>default<wbr/>Value<wbr/>Description</span></a><a href="#description" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>description</span></a><a href="#env" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>env</span></a><a href="#flags"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>flags</span></a><a href="#fn" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>fn</span></a><a href="#helpgroup" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>help<wbr/>Group</span></a><a href="#hidden" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>hidden</span></a><a href="#implies" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>implies</span></a><a href="#preset" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>preset</span></a><a href="#prompt" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>prompt</span></a><a href="#required" class="tsd-is-inherited"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>required</span></a><a href="#short"><svg class="tsd-kind-icon" viewBox="0 0 24 24" aria-label="Property"><use href="../assets/icons.svg#icon-1024"></use></svg><span>short</span></a></div></details></div></details></div>
+<div class="site-menu">
+<nav class="tsd-navigation"><a href="../modules.html">NestJS Console - v11.1.0</a>
+<ul class="tsd-small-nested-navigation" id="tsd-nav-container">
+<li>Loading...</li></ul></nav></div></div></div><footer></footer>
+<div class="overlay"></div></body></html>

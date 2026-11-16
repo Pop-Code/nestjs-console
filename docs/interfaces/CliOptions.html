@@ -14,14 +14,14 @@
 <div class="tsd-comment tsd-typography"><p>The options of the root cli</p>
 </div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">CliOptions</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#allowexcessarguments">allowExcessArguments</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#allowunknownoption">allowUnknownOption</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#arguments">arguments</a><span class="tsd-signature-symbol">?:</span> (<span class="tsd-signature-type">Argument</span> <span class="tsd-signature-symbol">|</span> <a href="CommandArgument.html" class="tsd-signature-type tsd-kind-interface">CommandArgument</a>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#configure">configure</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">command</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#description">description</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#enablepositionaloptions">enablePositionalOptions</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#exitoverride">exitOverride</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#helptext">helpText</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/HelpTextPosition.html" class="tsd-signature-type tsd-kind-type-alias">HelpTextPosition</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#name">name</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#options">options</a><span class="tsd-signature-symbol">?:</span> (<span class="tsd-signature-type">Option</span> <span class="tsd-signature-symbol">|</span> <a href="CommandOption.html" class="tsd-signature-type tsd-kind-interface">CommandOption</a>)<span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#output">output</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">OutputConfiguration</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#passthroughoptions">passThroughOptions</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#showhelpaftererror">showHelpAfterError</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#showsuggestionaftererror">showSuggestionAfterError</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#summary">summary</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#usage">usage</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#version">version</a><span class="tsd-signature-symbol">?:</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><br/>        <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">flags</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">version</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div>
-<section class="tsd-panel tsd-hierarchy" data-refl="1">
+<section class="tsd-panel tsd-hierarchy" data-refl="2">
 <h4>Hierarchy</h4>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-signature-type">Omit</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/CommandSettings.html" class="tsd-signature-type tsd-kind-type-alias">CommandSettings</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">&quot;alias&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;aliases&quot;</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">&quot;helpGroup&quot;</span><span class="tsd-signature-symbol">&gt;</span>
 <ul class="tsd-hierarchy">
 <li class="tsd-hierarchy-item"><span class="tsd-hierarchy-target">CliOptions</span></li></ul></li></ul></section><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/bootstrap/abstract.ts#L16">src/bootstrap/abstract.ts:16</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/bootstrap/abstract.ts#L22">src/bootstrap/abstract.ts:22</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -57,7 +57,7 @@
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#allowexcessarguments">allowExcessArguments</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L211">src/decorators.ts:211</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L229">src/decorators.ts:229</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="allowunknownoption"><code class="tsd-tag">Optional</code><span>allow<wbr/>Unknown<wbr/>Option</span><a href="#allowunknownoption" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">allowUnknownOption</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -65,7 +65,7 @@
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#allowunknownoption">allowUnknownOption</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L206">src/decorators.ts:206</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L224">src/decorators.ts:224</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="arguments"><code class="tsd-tag">Optional</code><span>arguments</span><a href="#arguments" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">arguments</span><span class="tsd-signature-symbol">?:</span> (<span class="tsd-signature-type">Argument</span> <span class="tsd-signature-symbol">|</span> <a href="CommandArgument.html" class="tsd-signature-type tsd-kind-interface">CommandArgument</a>)<span class="tsd-signature-symbol">[]</span></div>
@@ -74,7 +74,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#arguments">arguments</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L176">src/decorators.ts:176</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L194">src/decorators.ts:194</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="configure"><code class="tsd-tag">Optional</code><span>configure</span><a href="#configure" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">configure</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-kind-parameter">command</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Command</span><span class="tsd-signature-symbol">)</span> <span class="tsd-signature-symbol">=&gt;</span> <span class="tsd-signature-type">void</span></div>
@@ -82,7 +82,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#configure">configure</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L237">src/decorators.ts:237</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L255">src/decorators.ts:255</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="description"><code class="tsd-tag">Optional</code><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -90,7 +90,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#description">description</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L150">src/decorators.ts:150</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L168">src/decorators.ts:168</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="enablepositionaloptions"><code class="tsd-tag">Optional</code><span>enable<wbr/>Positional<wbr/>Options</span><a href="#enablepositionaloptions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">enablePositionalOptions</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -98,7 +98,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#enablepositionaloptions">enablePositionalOptions</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L222">src/decorators.ts:222</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L240">src/decorators.ts:240</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="exitoverride"><code class="tsd-tag">Optional</code><span>exit<wbr/>Override</span><a href="#exitoverride" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">exitOverride</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -106,7 +106,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 (always enabled by <code>run()</code>)</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/bootstrap/abstract.ts#L31">src/bootstrap/abstract.ts:31</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/bootstrap/abstract.ts#L37">src/bootstrap/abstract.ts:37</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="helptext"><code class="tsd-tag">Optional</code><span>help<wbr/>Text</span><a href="#helptext" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">helpText</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Partial</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><a href="../types/HelpTextPosition.html" class="tsd-signature-type tsd-kind-type-alias">HelpTextPosition</a><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
@@ -114,14 +114,14 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#helptext">helpText</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L201">src/decorators.ts:201</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L219">src/decorators.ts:219</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="name"><code class="tsd-tag">Optional</code><span>name</span><a href="#name" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">name</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The name of the cli displayed in the help (default: the name of the script)</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/bootstrap/abstract.ts#L20">src/bootstrap/abstract.ts:20</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/bootstrap/abstract.ts#L26">src/bootstrap/abstract.ts:26</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="options"><code class="tsd-tag">Optional</code><span>options</span><a href="#options" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">options</span><span class="tsd-signature-symbol">?:</span> (<span class="tsd-signature-type">Option</span> <span class="tsd-signature-symbol">|</span> <a href="CommandOption.html" class="tsd-signature-type tsd-kind-interface">CommandOption</a>)<span class="tsd-signature-symbol">[]</span></div>
@@ -129,14 +129,14 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#options">options</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L181">src/decorators.ts:181</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L199">src/decorators.ts:199</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="output"><code class="tsd-tag">Optional</code><span>output</span><a href="#output" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">output</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">OutputConfiguration</span></div>
 <div class="tsd-comment tsd-typography"><p>Where commander writes the help and the errors</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/bootstrap/abstract.ts#L36">src/bootstrap/abstract.ts:36</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/bootstrap/abstract.ts#L42">src/bootstrap/abstract.ts:42</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="passthroughoptions"><code class="tsd-tag">Optional</code><span>pass<wbr/>Through<wbr/>Options</span><a href="#passthroughoptions" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">passThroughOptions</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -145,7 +145,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#passthroughoptions">passThroughOptions</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L217">src/decorators.ts:217</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L235">src/decorators.ts:235</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="showhelpaftererror"><code class="tsd-tag">Optional</code><span>show<wbr/>Help<wbr/>After<wbr/>Error</span><a href="#showhelpaftererror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">showHelpAfterError</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">boolean</span></div>
@@ -153,7 +153,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#showhelpaftererror">showHelpAfterError</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L227">src/decorators.ts:227</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L245">src/decorators.ts:245</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="showsuggestionaftererror"><code class="tsd-tag">Optional</code><span>show<wbr/>Suggestion<wbr/>After<wbr/>Error</span><a href="#showsuggestionaftererror" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">showSuggestionAfterError</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
@@ -161,7 +161,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#showsuggestionaftererror">showSuggestionAfterError</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L232">src/decorators.ts:232</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L250">src/decorators.ts:250</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="summary"><code class="tsd-tag">Optional</code><span>summary</span><a href="#summary" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">summary</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -169,7 +169,7 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#summary">summary</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L155">src/decorators.ts:155</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L173">src/decorators.ts:173</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member tsd-is-inherited">
 <h3 class="tsd-anchor-link" id="usage"><code class="tsd-tag">Optional</code><span>usage</span><a href="#usage" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">usage</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
@@ -177,14 +177,14 @@ They are added after the arguments declared in <code>command</code>.</p>
 </div><aside class="tsd-sources">
 <p>Inherited from <a href="CreateCommandOptions.html">CreateCommandOptions</a>.<a href="CreateCommandOptions.html#usage">usage</a></p>
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/decorators.ts#L160">src/decorators.ts:160</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/decorators.ts#L178">src/decorators.ts:178</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="version"><code class="tsd-tag">Optional</code><span>version</span><a href="#version" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">version</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-symbol">{</span> <span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">flags</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span> <span class="tsd-kind-property">version</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">}</span></div>
 <div class="tsd-comment tsd-typography"><p>Add a &quot;-V, --version&quot; option that prints this version</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/ab5c77e1260064e51360a13e22f14740b71e127e/src/bootstrap/abstract.ts#L25">src/bootstrap/abstract.ts:25</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/c3ff9e3d89fe03c92a5611ed640629f7ad52e604/src/bootstrap/abstract.ts#L31">src/bootstrap/abstract.ts:31</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
