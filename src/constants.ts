@@ -34,6 +34,11 @@ export const CONSOLE_METADATA_NAME = 'nests-console.Console';
 export const COMMAND_METADATA_NAME = 'nests-console.Command:';
 
 /**
+ * The key to store the options declared with the ConsoleOption decorator on a class
+ */
+export const CONSOLE_OPTIONS_METADATA = 'nests-console.Options';
+
+/**
  * The type of the execution context of a command,
  * returned by `ExecutionContext.getType()` in guards, interceptors and filters
  */

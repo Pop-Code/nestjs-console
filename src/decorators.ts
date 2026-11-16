@@ -8,6 +8,7 @@ import {
     CLI_SERVICE_TOKEN,
     COMMAND_METADATA_NAME,
     CONSOLE_METADATA_NAME,
+    CONSOLE_OPTIONS_METADATA,
     ConsoleParamType,
     ROUTE_ARGS_METADATA
 } from './constants';
@@ -323,3 +324,82 @@ export const Opt = createConsoleParamDecorator(ConsoleParamType.OPTION);
  * Inject the commander command being executed
  */
 export const Cmd = (): ParameterDecorator => createConsoleParamDecorator(ConsoleParamType.COMMAND)();
+
+/**
+ * An option declared on a property with the ConsoleOption decorator
+ */
+export interface ConsoleOptionDefinition extends Omit<CommandOption, 'flags'> {
+    /**
+     * The flags, by default "--" and the property name in kebab case, with a value depending on the type of the property:
+     * none for a boolean (`--dry-run`), a list for an array (`--tags <tags...>`), else one value (`--env <env>`)
+     */
+    flags?: string;
+
+    /**
+     * A short flag added to the default flags, eg "p" for `-p, --port <port>`
+     */
+    short?: string;
+}
+
+interface ConsoleOptionMetadata {
+    property: string;
+    type: unknown;
+    definition: ConsoleOptionDefinition;
+}
+
+/**
+ * Declare an option on a property of a class.
+ * The options of the class are added to the commands that inject it with `@Opt()`,
+ * or can be passed to a command with `options: getClassOptions(MyOptions)`.
+ *
+ * eg
+ * ```ts
+ * class DeployOptions {
+ *     @ConsoleOption({ choices: ['staging', 'production'] })
+ *     env: string;
+ *
+ *     @ConsoleOption({ short: 'p' }) // a number property is parsed as a number
+ *     port: number;
+ * }
+ * ```
+ */
+export const ConsoleOption =
+    (definition: ConsoleOptionDefinition = {}): PropertyDecorator =>
+    (target: object, property: string | symbol): void => {
+        if (typeof property !== 'string') {
+            throw new Error('ConsoleOption can only decorate properties with a string name');
+        }
+        const options: ConsoleOptionMetadata[] = [
+            ...(Reflect.getMetadata(CONSOLE_OPTIONS_METADATA, target.constructor) ?? [])
+        ];
+        options.push({ property, type: Reflect.getMetadata('design:type', target, property), definition });
+        Reflect.defineMetadata(CONSOLE_OPTIONS_METADATA, options, target.constructor);
+    };
+
+const toKebabCase = (name: string): string => name.replace(/[A-Z]/g, (char) => `-${char.toLowerCase()}`);
+
+const parseNumber = (value: string): number => {
+    const number = Number(value);
+    if (value.trim() === '' || Number.isNaN(number)) {
+        throw new commander.InvalidArgumentError('Not a number.');
+    }
+    return number;
+};
+
+/**
+ * Get the options declared with the ConsoleOption decorator on a class (and its parent classes)
+ */
+export const getClassOptions = (type: unknown): CommandOption[] => {
+    const options: ConsoleOptionMetadata[] =
+        typeof type === 'function' ? (Reflect.getMetadata(CONSOLE_OPTIONS_METADATA, type) ?? []) : [];
+    return options.map(({ property, type: propertyType, definition }) => {
+        const { flags, short, ...option } = definition;
+        const name = toKebabCase(property);
+        const value = propertyType === Boolean ? '' : propertyType === Array ? ` <${name}...>` : ` <${name}>`;
+        return {
+            ...option,
+            flags: flags ?? [short && `-${short}`, `--${name}${value}`].filter(Boolean).join(', '),
+            fn: option.fn ?? (propertyType === Number ? parseNumber : undefined)
+        };
+    });
+};
