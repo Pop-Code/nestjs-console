@@ -15,7 +15,9 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Bootstrap `cli` option to configure the root cli (`name`, `version`, `description`, `exitOverride`, `output`, global options...)
 - `BootstrapConsole.run()`: init the application, execute the command, print the error and set `process.exitCode` on failure, and always close the application (so `onModuleDestroy` hooks run)
 - `runCommand(argv, options)` to test commands: returns the data, the error, the exit code and the output of commander, and accepts a `create` function to use a `TestingModule` with overridden providers
-- Shell completion for bash, zsh and fish with the bootstrap `completion` option (`my-cli completion zsh`)
+- Shell completion for bash, zsh and fish with the bootstrap `completion` option (`my-cli completion zsh`), tested in the 3 shells in CI
+- Interactive prompts: `PromptService` (`input`, `confirm`, `password`, `select`), injectable in any provider, and the `prompt` setting of options and arguments to ask the missing values when the terminal is interactive (a list for choices, yes/no for flags). The bootstrap `prompt` option changes the streams, and `runCommand()` accepts `answers`
+- Typed options: the `@ConsoleOption()` property decorator declares the options on a class (flags from the property name, numbers parsed), added to the commands that inject the class with `@Opt()`, or with `getClassOptions(MyOptions)`
 - `boot()` and `ConsoleService.init()` accept commander parse options, eg `{ from: 'user' }`
 - CI tests every supported major of NestJS (9 to 12) and commander (11 to 15)
 
@@ -31,7 +33,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ### Changed
 
-- The cli is executed with the public `parseAsync()` of commander instead of private methods, and the decorators are found with the public `DiscoveryService` of NestJS instead of the private container
+- The cli is executed with the public `parseAsync()` of commander instead of private methods, the decorators are found with the public `DiscoveryService` of NestJS instead of the private container, and only the public entry points of NestJS are imported
 - Compile to ES2022 (Node >= 22)
 - Removed the protected `responseListener` event emitter of the `ConsoleService`
 
