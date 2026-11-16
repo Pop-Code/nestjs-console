@@ -29,7 +29,8 @@ import { BootstrapConsole } from '../src/bootstrap/console';
 import { CONSOLE_CONTEXT_TYPE, ConsoleContextType } from '../src/constants';
 import { Arg, Cmd, Command, Console, Opt } from '../src/decorators';
 import { ConsoleModule } from '../src/module';
-import { ConsoleService } from '../src/service';
+import { ConsoleParamsFactory } from '../src/params-factory';
+import { ConsoleService, getRegisteredArguments } from '../src/service';
 import { runCommand } from '../src/testing';
 
 const createModule = (...providers: any[]): any => {
@@ -167,6 +168,33 @@ describe('Service', () => {
         expect(response.data).toBeUndefined();
         expect(response.command).toBe(cli);
         await app.close();
+    });
+
+    it('does not change the commands added with commander', async () => {
+        const { bootstrap, app, cli } = await init();
+        const writeErr = jest.fn();
+        cli.exitOverride().configureOutput({ writeErr });
+        cli.addCommand(new commander.Command('raw').action(() => undefined));
+        expect((await bootstrap.boot(['node', 'cli', 'raw'])).data).toBeUndefined();
+        await app.close();
+    });
+
+    it('parses process.argv by default', async () => {
+        const { bootstrap, app } = await init();
+        const argv = process.argv;
+        process.argv = ['node', 'cli', 'group', 'cmd', 'x'];
+        try {
+            expect((await bootstrap.getService().init()).data).toEqual({ value: 'x', flag: undefined });
+        } finally {
+            process.argv = argv;
+        }
+        await app.close();
+    });
+
+    it('reads the arguments of older commander versions', () => {
+        const argument = new commander.Argument('<a>');
+        expect(getRegisteredArguments({ _args: [argument] } as any)).toEqual([argument]);
+        expect(getRegisteredArguments({} as any)).toEqual([]);
     });
 
     it('rejects boot() before init()', async () => {
@@ -331,6 +359,45 @@ describe('Command settings', () => {
         expect((await run(['tools', 'lint', '--help'], Tools)).stdout).toContain('Fixes:\n  --fix');
     });
 
+    it('explains that help groups need commander >= 14', () => {
+        const service = new ConsoleService(ConsoleService.createCli());
+        const optionHelpGroup = Object.getOwnPropertyDescriptor(commander.Option.prototype, 'helpGroup');
+        const commandHelpGroup = Object.getOwnPropertyDescriptor(commander.Command.prototype, 'helpGroup');
+        delete (commander.Option.prototype as any).helpGroup;
+        delete (commander.Command.prototype as any).helpGroup;
+        try {
+            expect(() => service.createOption({ flags: '--fix', helpGroup: 'Fixes:' })).toThrow(
+                'The helpGroup setting requires commander >= 14'
+            );
+            expect(() => service.configureCommand(new commander.Command('x'), { helpGroup: 'Group:' })).toThrow(
+                'The helpGroup setting requires commander >= 14'
+            );
+        } finally {
+            if (optionHelpGroup) {
+                Object.defineProperty(commander.Option.prototype, 'helpGroup', optionHelpGroup);
+            }
+            if (commandHelpGroup) {
+                Object.defineProperty(commander.Command.prototype, 'helpGroup', commandHelpGroup);
+            }
+        }
+    });
+
+    it('disables the suggestions after an error', async () => {
+        @Console()
+        class Suggest {
+            @Command({ command: 'install', showSuggestionAfterError: false })
+            install() {}
+
+            @Command({ command: 'build' })
+            build() {}
+        }
+        expect((await run(['instal'], Suggest)).stderr).toContain('Did you mean install?');
+        expect((await run(['build', '--wach'], Suggest)).stderr).toContain(`unknown option '--wach'`);
+        const service = new ConsoleService(ConsoleService.createCli());
+        const command = service.configureCommand(new commander.Command('x'), { showSuggestionAfterError: false });
+        expect((command as any)._showSuggestionAfterError).toBe(false);
+    });
+
     it('fails for an unknown argument name', async () => {
         @Console()
         class Unknown {
@@ -470,6 +537,28 @@ describe('Parameter decorators and enhancers', () => {
         expect((error as Error).message).toContain('numeric string is expected');
     });
 
+    it('accepts a pipe as the first argument of Opt', async () => {
+        @Console()
+        class PipeFirst {
+            @Command({ command: 'create', options: [{ flags: '--name <name>' }] })
+            create(@Opt(new ValidationPipe({ transform: true })) options: CreateUserOptions) {
+                return options;
+            }
+        }
+        const result = await run(['create', '--name', 'john'], PipeFirst);
+        expect(result.data).toBeInstanceOf(CreateUserOptions);
+    });
+
+    it('only decorates method parameters', () => {
+        expect(() => Arg('name')(class {}, undefined, 0)).toThrow('can only be used on methods');
+    });
+
+    it('returns undefined for an unknown parameter type', () => {
+        expect(new ConsoleParamsFactory().exchangeKeyForValue(99, undefined, [{}, new commander.Command()])).toBe(
+            undefined
+        );
+    });
+
     it('validates and transforms the options with the ValidationPipe', async () => {
         const valid = await runUsers(['create', '--name', 'john', '--age', '42']);
         expect(valid.data).toBeInstanceOf(CreateUserOptions);
@@ -596,6 +685,66 @@ describe('Bootstrap', () => {
         expect(help).toContain('Usage: my-cli [options] [command]');
         expect(help).toContain('My cli');
         expect(help).toContain('-V, --version');
+    });
+
+    it('configures the version flags', async () => {
+        const writeOut = jest.fn();
+        await new BootstrapConsole({
+            module: createModule(Cli),
+            useDecorators: true,
+            cli: {
+                version: { version: '2.0.0', flags: '-v, --vers', description: 'show the version' },
+                output: { writeOut }
+            }
+        }).run(['-v'], { from: 'user' });
+        expect(writeOut).toHaveBeenCalledWith('2.0.0\n');
+    });
+
+    it('run() uses process.argv by default', async () => {
+        const argv = process.argv;
+        process.argv = ['node', 'cli', 'ok'];
+        try {
+            expect((await createBootstrap().run())?.data).toBe('ok');
+        } finally {
+            process.argv = argv;
+        }
+    });
+
+    it('run() prints the message of an error without stack', async () => {
+        @Console()
+        class NoStack {
+            @Command({ command: 'fail' })
+            fail() {
+                const error = new Error('no stack');
+                delete error.stack;
+                throw error;
+            }
+        }
+        const writeErr = jest.fn();
+        await new BootstrapConsole({
+            module: createModule(NoStack),
+            useDecorators: true,
+            cli: { output: { writeErr } }
+        }).run(['fail'], { from: 'user' });
+        expect(writeErr).toHaveBeenCalledWith('no stack\n');
+    });
+
+    it('run() prints a thrown value that is not an error', async () => {
+        @Console()
+        class ThrowString {
+            @Command({ command: 'throw' })
+            throw() {
+                throw 'not an error';
+            }
+        }
+        const writeErr = jest.fn();
+        await new BootstrapConsole({
+            module: createModule(ThrowString),
+            useDecorators: true,
+            cli: { output: { writeErr } }
+        }).run(['throw'], { from: 'user' });
+        expect(writeErr).toHaveBeenCalledWith('not an error\n');
+        expect(process.exitCode).toBe(1);
     });
 
     it('run() returns the response and closes the application', async () => {

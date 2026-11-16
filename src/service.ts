@@ -20,11 +20,20 @@ export type CommandSettings = Omit<CreateCommandOptions, 'command' | 'hidden' | 
 const getInheritableSettings = (command: commander.Command): Record<string, unknown> => {
     const probe = new commander.Command();
     probe.copyInheritedSettings(command);
-    // copy plain objects (eg the output configuration), older commander versions update them in place
-    return Object.fromEntries(
-        Object.entries(probe).map(([key, value]) => [key, isPlainObject(value) ? { ...value } : value])
-    );
+    return { ...probe };
 };
+
+/**
+ * A snapshot of the inheritable settings. Plain objects (eg the output configuration) are copied,
+ * older commander versions update them in place.
+ */
+const snapshotSettings = (command: commander.Command): Record<string, unknown> =>
+    Object.fromEntries(
+        Object.entries(getInheritableSettings(command)).map(([key, value]) => [
+            key,
+            isPlainObject(value) ? { ...value } : value
+        ])
+    );
 
 const isPlainObject = (value: unknown): value is Record<string, unknown> =>
     typeof value === 'object' && value !== null && Object.getPrototypeOf(value) === Object.prototype;
@@ -209,7 +218,7 @@ export class ConsoleService {
                         !isSameSetting(value, parentInitial[key]) &&
                         isSameSetting(childSettings[key], childInitial[key])
                     ) {
-                        (child as any)[key] = (parent as any)[key] ?? value;
+                        (child as any)[key] = value;
                     }
                 }
             }
@@ -221,7 +230,7 @@ export class ConsoleService {
      * Remember the settings of a new command, before it is configured
      */
     protected trackSettings(command: commander.Command): void {
-        this.initialSettings.set(command, getInheritableSettings(command));
+        this.initialSettings.set(command, snapshotSettings(command));
     }
 
     /**

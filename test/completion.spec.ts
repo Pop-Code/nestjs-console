@@ -13,7 +13,9 @@ class DbCli {
         options: [
             { flags: '-e, --env <env>', choices: ['dev', 'prod'] },
             { flags: '--dry-run' },
-            { flags: '--secret', hidden: true }
+            { flags: '--secret', hidden: true },
+            { flags: '--tag <tags...>' },
+            { flags: '--target <dir>' }
         ]
     })
     migrate() {}
@@ -57,14 +59,63 @@ describe('Completion', () => {
     });
 
     it('completes the options', async () => {
-        expect(await complete('db', 'migrate', '-')).toEqual(['--env', '-e', '--dry-run', '--help', '-h']);
+        expect(await complete('db', 'migrate', '-')).toEqual([
+            '--env',
+            '-e',
+            '--dry-run',
+            '--tag',
+            '--target',
+            '--help',
+            '-h'
+        ]);
+        // variadic options can be repeated
+        expect(await complete('db', 'migrate', '--tag', 'a', '--dry-run', '--t')).toEqual(['--tag', '--target']);
         expect(await complete('db', 'migrate', '--d')).toEqual(['--dry-run']);
     });
 
     it('completes the choices of an option', async () => {
         expect(await complete('db', 'migrate', '--env', '')).toEqual(['dev', 'prod']);
         expect(await complete('db', 'migrate', '-e', 'p')).toEqual(['prod']);
-        expect(await complete('db', 'migrate', '--env=dev', '--')).toEqual(['--dry-run', '--help']);
+        expect(await complete('db', 'migrate', '--env=dev', '--')).toEqual([
+            '--dry-run',
+            '--tag',
+            '--target',
+            '--help'
+        ]);
+        expect(await complete('db', 'migrate', '--env', 'dev', '--')).toEqual([
+            '--dry-run',
+            '--tag',
+            '--target',
+            '--help'
+        ]);
+    });
+
+    it('completes nothing for an option value without choices', async () => {
+        expect(await complete('db', 'migrate', '--target', '')).toEqual([]);
+    });
+
+    it('completes nothing after the operands separator or the arguments', async () => {
+        expect(await complete('db', '--', 'migrate', '')).toEqual([]);
+        expect(await complete('hello', 'john', '')).toEqual([]);
+        expect(await complete('db', 'migrate', '')).toEqual([]);
+    });
+
+    it('uses the current shell and the cli name by default', async () => {
+        const shell = process.env.SHELL;
+        try {
+            process.env.SHELL = '/usr/bin/fish';
+            const fish = await runCommand(['completion'], {
+                module: CompletionModule,
+                completion: true,
+                cli: { name: 'my-cli' }
+            });
+            expect(fish.stdout).toBe(getCompletionScript('fish', 'my-cli'));
+            delete process.env.SHELL;
+            const bash = await runCommand(['completion'], { module: CompletionModule, completion: true });
+            expect(bash.stdout).toContain('complete -o default');
+        } finally {
+            process.env.SHELL = shell;
+        }
     });
 
     it('completes the choices of an argument', async () => {

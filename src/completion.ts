@@ -163,18 +163,13 @@ export const getCompletionScript = (shell: CompletionShell, programName: string)
 /**
  * Add the "completion [shell]" command and the hidden command used by the completion scripts
  */
-export const registerCompletion = (service: ConsoleService, options: CompletionOptions = {}): void => {
+export const registerCompletion = (service: ConsoleService, options: CompletionOptions): void => {
     const root = service.getRootCli();
     const currentShell = (process.env.SHELL ?? '').split('/').pop();
     const defaultShell = COMPLETION_SHELLS.find((shell) => shell === currentShell) ?? 'bash';
-    const write = (command: commander.Command, text: string): void => {
-        const { writeOut } = command.configureOutput();
-        if (writeOut) {
-            writeOut(text);
-        } else {
-            process.stdout.write(text);
-        }
-    };
+    // commander always defines writeOut (process.stdout by default)
+    const write = (command: commander.Command, text: string): void =>
+        (command.configureOutput() as Required<commander.OutputConfiguration>).writeOut(text);
 
     service.createCommand(
         {
@@ -201,8 +196,8 @@ export const registerCompletion = (service: ConsoleService, options: CompletionO
             allowUnknownOption: true,
             configure: (command) => command.helpOption(false)
         },
-        (words: string[] | undefined, _options: unknown, command: commander.Command) => {
-            const completions = getCompletions(root, words ?? []);
+        (words: string[], _options: unknown, command: commander.Command) => {
+            const completions = getCompletions(root, words);
             write(command, completions.length ? `${completions.join('\n')}\n` : '');
             return completions;
         },

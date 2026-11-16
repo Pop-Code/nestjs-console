@@ -214,7 +214,8 @@ export abstract class AbstractBootstrapConsole<
             if (e instanceof commander.CommanderError) {
                 process.exitCode = e.exitCode;
             } else {
-                const writeErr = cli.configureOutput().writeErr ?? ((str: string) => process.stderr.write(str));
+                // commander always defines writeErr (process.stderr by default)
+                const { writeErr } = cli.configureOutput() as Required<commander.OutputConfiguration>;
                 writeErr(`${e instanceof Error ? (e.stack ?? e.message) : String(e)}\n`);
                 process.exitCode = 1;
             }
