@@ -16,6 +16,7 @@ import {
 } from './constants';
 import { CreateCommandOptions } from './decorators';
 import { ConsoleParamsFactory } from './params-factory';
+import { PromptService } from './prompt';
 import { ConsoleScanner, ScanResponse } from './scanner';
 import { ConsoleService } from './service';
 
@@ -28,8 +29,8 @@ const getDepth = ({ metadata }: ScanResponse): number =>
     metadata.command === undefined ? 0 : metadata.command.split('.').length;
 
 @Module({
-    providers: [cliProvider, ConsoleService],
-    exports: [ConsoleService]
+    providers: [cliProvider, ConsoleService, PromptService],
+    exports: [ConsoleService, PromptService]
 })
 export class ConsoleModule {
     protected scanner: ConsoleScanner = new ConsoleScanner();

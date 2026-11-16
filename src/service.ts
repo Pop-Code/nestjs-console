@@ -1,11 +1,30 @@
 /**
  * @module ConsoleService
  */
-import { INestApplicationContext, Injectable } from '@nestjs/common';
+import { INestApplicationContext, Injectable, Optional } from '@nestjs/common';
 import * as commander from 'commander';
 
-import { CommandArgument, CommandOption, CreateCommandOptions, HelpTextPosition, InjectCli } from './decorators';
+import {
+    CommandArgument,
+    CommandOption,
+    CreateCommandOptions,
+    HelpTextPosition,
+    InjectCli,
+    PromptSetting
+} from './decorators';
 import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
+import { PromptService } from './prompt';
+
+interface PromptedOption {
+    option: commander.Option;
+    definition: CommandOption;
+}
+
+interface PromptedArgument {
+    index: number;
+    argument: commander.Argument;
+    definition: CommandArgument;
+}
 
 /**
  * The options of a command that can also be applied to an existing command (eg the root cli)
@@ -45,6 +64,9 @@ const isSameSetting = (a: unknown, b: unknown): boolean => {
     }
     return a === b;
 };
+
+const parse = (parser: ((value: string, previous: unknown) => unknown) | undefined, value: unknown): unknown =>
+    parser && typeof value === 'string' ? parser(value, undefined) : value;
 
 const isCommanderOption = (value: unknown): value is commander.Option =>
     typeof (value as commander.Option)?.attributeName === 'function';
@@ -96,9 +118,22 @@ export class ConsoleService {
      */
     protected onResponse?: (response: CommandResponse) => void;
 
-    constructor(@InjectCli() cli: commander.Command) {
+    /**
+     * Asks the values of the options and arguments declared with `prompt`
+     */
+    protected prompt: PromptService;
+
+    constructor(@InjectCli() cli: commander.Command, @Optional() prompt?: PromptService) {
         this.cli = cli;
+        this.prompt = prompt ?? new PromptService();
         this.trackSettings(cli);
+    }
+
+    /**
+     * Get the service asking the missing values
+     */
+    getPrompt(): PromptService {
+        return this.prompt;
     }
 
     static createCli(name?: string): commander.Command {
@@ -301,11 +336,28 @@ export class ConsoleService {
         for (const alias of options.aliases ?? []) {
             command.alias(alias);
         }
-        for (const argument of options.arguments ?? []) {
-            command.addArgument(this.createArgument(argument));
+        const promptedArguments: PromptedArgument[] = [];
+        for (const definition of options.arguments ?? []) {
+            const argument = this.createArgument(definition);
+            if (!isCommanderArgument(definition) && definition.prompt) {
+                promptedArguments.push({ index: getRegisteredArguments(command).length, argument, definition });
+            }
+            command.addArgument(argument);
         }
-        for (const option of options.options ?? []) {
-            command.addOption(this.createOption(option));
+        const promptedOptions: PromptedOption[] = [];
+        for (const definition of options.options ?? []) {
+            const option = this.createOption(definition);
+            if (!isCommanderOption(definition) && definition.prompt) {
+                promptedOptions.push({ option, definition });
+            }
+            command.addOption(option);
+        }
+        if (promptedArguments.length > 0 || promptedOptions.length > 0) {
+            command.hook('preAction', async (_hookedCommand, actionCommand) => {
+                if (actionCommand === command) {
+                    await this.askMissingValues(command, promptedArguments, promptedOptions);
+                }
+            });
         }
         if (options.helpGroup !== undefined) {
             setHelpGroup(command, options.helpGroup);
@@ -349,7 +401,8 @@ export class ConsoleService {
         if (definition.defaultValue !== undefined) {
             option.default(definition.defaultValue, definition.defaultValueDescription);
         }
-        if (definition.required === true) {
+        // a prompted option is checked after the prompt
+        if (definition.required === true && !definition.prompt) {
             option.makeOptionMandatory();
         }
         if (definition.choices !== undefined) {
@@ -393,7 +446,91 @@ export class ConsoleService {
         if (definition.choices !== undefined) {
             argument.choices(definition.choices);
         }
+        // a prompted argument is checked after the prompt
+        if (definition.prompt) {
+            argument.argOptional();
+        }
         return argument;
+    }
+
+    /**
+     * Ask the values of the prompted arguments and options that were not passed.
+     * When the terminal is not interactive, fail like commander for the required ones.
+     */
+    protected async askMissingValues(
+        command: commander.Command,
+        promptedArguments: PromptedArgument[],
+        promptedOptions: PromptedOption[]
+    ): Promise<void> {
+        const interactive = this.prompt.isInteractive();
+        for (const { index, argument, definition } of promptedArguments) {
+            const current = command.processedArgs[index];
+            // a missing variadic argument is an empty array
+            if (current !== undefined && !(argument.variadic && Array.isArray(current) && current.length === 0)) {
+                continue;
+            }
+            if (!interactive) {
+                if (definition.name.startsWith('<')) {
+                    command.error(`error: missing required argument '${argument.name()}'`, {
+                        code: 'commander.missingArgument'
+                    });
+                }
+                continue;
+            }
+            const answer = await this.askValue(definition.prompt, definition.description ?? argument.name(), {
+                choices: (argument as any).argChoices
+            });
+            const value = argument.variadic ? String(answer).split(/\s+/).filter(Boolean) : answer;
+            command.processedArgs[index] = parse((argument as any).parseArg, value);
+        }
+        for (const { option, definition } of promptedOptions) {
+            const name = option.attributeName();
+            const source = command.getOptionValueSource(name);
+            if (source !== undefined && source !== 'default') {
+                continue;
+            }
+            if (!interactive) {
+                if (definition.required) {
+                    command.error(`error: required option '${option.flags}' not specified`, {
+                        code: 'commander.missingMandatoryOptionValue'
+                    });
+                }
+                continue;
+            }
+            const current = command.getOptionValue(name);
+            const answer = await this.askValue(
+                definition.prompt,
+                definition.description ?? option.long ?? option.flags,
+                {
+                    choices: option.argChoices,
+                    flag: !option.required && !option.optional,
+                    // a negated flag (--no-color) asks if the negation is wanted
+                    default: option.negate ? current === false : current
+                }
+            );
+            const value = typeof answer === 'boolean' ? answer !== option.negate : parse(option.parseArg, answer);
+            command.setOptionValueWithSource(name, value, 'cli');
+        }
+    }
+
+    protected askValue(
+        setting: PromptSetting | undefined,
+        description: string,
+        { choices, flag, default: defaultValue }: { choices?: readonly string[]; flag?: boolean; default?: unknown }
+    ): Promise<string | boolean> {
+        const message =
+            typeof setting === 'string' ? setting : (typeof setting === 'object' && setting.message) || description;
+        if (flag) {
+            return this.prompt.confirm(message, defaultValue === true);
+        }
+        const fallback = defaultValue === undefined ? undefined : String(defaultValue);
+        if (choices?.length) {
+            return this.prompt.select(message, choices, { default: fallback });
+        }
+        if (typeof setting === 'object' && setting.password) {
+            return this.prompt.password(message);
+        }
+        return this.prompt.input(message, { default: fallback });
     }
 
     protected addCommand(

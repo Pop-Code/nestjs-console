@@ -6,6 +6,7 @@ export * from './decorators';
 export * from './interfaces';
 export * from './module';
 export * from './params-factory';
+export * from './prompt';
 export * from './scanner';
 export * from './service';
 export * from './testing';

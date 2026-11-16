@@ -27,6 +27,8 @@ CASES=(
     "my-cli db migrate --|--env --dry-run --help"
     "my-cli db migrate --env |dev prod"
     "my-cli db seed l|large"
+    "my-cli db migrate --d|--dry-run"
+    "my-cli db migrate -|--env -e --dry-run --help -h"
 )
 
 complete_bash() {

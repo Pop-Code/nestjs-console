@@ -803,7 +803,7 @@ describe('runCommand', () => {
                     .useValue({ greet: (name: string) => `mocked ${name}` })
                     .compile()
         });
-        expect(result).toEqual({ data: 'mocked john', exitCode: 0, stdout: '', stderr: '' });
+        expect(result).toEqual({ data: 'mocked john', exitCode: 0, stdout: '', stderr: '', prompts: '' });
     });
 
     it('works with commands created with the service', async () => {

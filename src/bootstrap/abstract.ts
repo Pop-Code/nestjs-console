@@ -7,6 +7,7 @@ import * as commander from 'commander';
 
 import { CompletionOptions, registerCompletion } from '../completion';
 import { CommandResponse } from '../interfaces';
+import { PromptOptions } from '../prompt';
 import { ConsoleModule } from '../module';
 import { CommandSettings, ConsoleService } from '../service';
 
@@ -76,6 +77,11 @@ export interface CommonBootstrapConsoleOptions {
      * Add a "completion" command that prints the shell completion script (bash, zsh, fish)
      */
     completion?: boolean | CompletionOptions;
+
+    /**
+     * Where the prompts read the answers and write the questions (default: stdin and stderr)
+     */
+    prompt?: PromptOptions;
 }
 
 /**
@@ -158,6 +164,9 @@ export abstract class AbstractBootstrapConsole<
             );
         }
         this.service.setContainer(this.container);
+        if (this.options.prompt) {
+            this.service.getPrompt().configure(this.options.prompt);
+        }
         this.configureCli();
         if (this.options.useDecorators) {
             await this.useDecorators();

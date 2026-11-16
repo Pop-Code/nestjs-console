@@ -88,7 +88,18 @@ export interface CommandOption {
      * The heading of the help group the option is listed in (requires commander >= 14)
      */
     helpGroup?: string;
+
+    /**
+     * Ask the value in the terminal when the option is not passed (and the terminal is interactive).
+     * `true` uses the description as question. Choices are asked with a list, options without value with yes/no.
+     */
+    prompt?: PromptSetting;
 }
+
+/**
+ * How to ask a missing value: true (the question is the description), the question, or the question and the type of answer
+ */
+export type PromptSetting = boolean | string | { message?: string; password?: boolean };
 
 /**
  * An argument of the command
@@ -124,6 +135,12 @@ export interface CommandArgument {
      * Only allow these values
      */
     choices?: readonly string[];
+
+    /**
+     * Ask the value in the terminal when the argument is not passed (and the terminal is interactive).
+     * The argument becomes optional on the command line, and is still required if it is declared with `<name>`.
+     */
+    prompt?: PromptSetting;
 }
 
 /**
