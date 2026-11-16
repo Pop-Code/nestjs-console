@@ -19,7 +19,7 @@
 </div></div></section>
 <div class="tsd-signature"><span class="tsd-signature-keyword">interface</span> <span class="tsd-kind-interface">CommandOption</span> <span class="tsd-signature-symbol">{</span><br/>    <a class="tsd-kind-property" href="#choices">choices</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-keyword">readonly</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#conflicts">conflicts</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#defaultvalue">defaultValue</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#defaultvaluedescription">defaultValueDescription</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#description">description</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#env">env</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#flags">flags</a><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#fn">fn</a><span class="tsd-signature-symbol">?:</span> <a href="../types/ParserType.html" class="tsd-signature-type tsd-kind-type-alias">ParserType</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#helpgroup">helpGroup</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#hidden">hidden</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#implies">implies</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#preset">preset</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#prompt">prompt</a><span class="tsd-signature-symbol">?:</span> <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a><span class="tsd-signature-symbol">;</span><br/>    <a class="tsd-kind-property" href="#required">required</a><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">;</span><br/><span class="tsd-signature-symbol">}</span></div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L27">src/decorators.ts:27</a></li></ul></aside>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L27">src/decorators.ts:27</a></li></ul></aside>
 <section class="tsd-panel-group tsd-index-group">
 <section class="tsd-panel tsd-index-panel">
 <details class="tsd-index-content tsd-accordion" open><summary class="tsd-accordion-summary tsd-index-summary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><use href="../assets/icons.svg#icon-chevronDown"></use></svg>
@@ -51,84 +51,84 @@
 <div class="tsd-comment tsd-typography"><p>Only allow these values</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L61">src/decorators.ts:61</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L61">src/decorators.ts:61</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="conflicts"><code class="tsd-tag">Optional</code><span>conflicts</span><a href="#conflicts" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">conflicts</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span> <span class="tsd-signature-symbol">|</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 <div class="tsd-comment tsd-typography"><p>Names of options that cannot be used together with this one</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L71">src/decorators.ts:71</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L71">src/decorators.ts:71</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="defaultvalue"><code class="tsd-tag">Optional</code><span>default<wbr/>Value</span><a href="#defaultvalue" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">defaultValue</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">any</span></div>
 <div class="tsd-comment tsd-typography"><p>The default value</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L46">src/decorators.ts:46</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L46">src/decorators.ts:46</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="defaultvaluedescription"><code class="tsd-tag">Optional</code><span>default<wbr/>Value<wbr/>Description</span><a href="#defaultvaluedescription" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">defaultValueDescription</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The text displayed in the help instead of the default value</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L51">src/decorators.ts:51</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L51">src/decorators.ts:51</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="description"><code class="tsd-tag">Optional</code><span>description</span><a href="#description" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">description</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The description of the option</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L36">src/decorators.ts:36</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L36">src/decorators.ts:36</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="env"><code class="tsd-tag">Optional</code><span>env</span><a href="#env" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">env</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>Read the value from this environment variable when the option is not passed</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L66">src/decorators.ts:66</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L66">src/decorators.ts:66</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="flags"><span>flags</span><a href="#flags" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">flags</span><span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The flags the command uses eg '-p,--port <port>'</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L31">src/decorators.ts:31</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L31">src/decorators.ts:31</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="fn"><code class="tsd-tag">Optional</code><span>fn</span><a href="#fn" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">fn</span><span class="tsd-signature-symbol">?:</span> <a href="../types/ParserType.html" class="tsd-signature-type tsd-kind-type-alias">ParserType</a></div>
 <div class="tsd-comment tsd-typography"><p>The function to parse the value</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L41">src/decorators.ts:41</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L41">src/decorators.ts:41</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="helpgroup"><code class="tsd-tag">Optional</code><span>help<wbr/>Group</span><a href="#helpgroup" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">helpGroup</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">string</span></div>
 <div class="tsd-comment tsd-typography"><p>The heading of the help group the option is listed in (requires commander &gt;= 14)</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L91">src/decorators.ts:91</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L91">src/decorators.ts:91</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="hidden"><code class="tsd-tag">Optional</code><span>hidden</span><a href="#hidden" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">hidden</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>Hide the option from the help</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L86">src/decorators.ts:86</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L86">src/decorators.ts:86</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="implies"><code class="tsd-tag">Optional</code><span>implies</span><a href="#implies" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">implies</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">,</span> <span class="tsd-signature-type">unknown</span><span class="tsd-signature-symbol">&gt;</span></div>
 <div class="tsd-comment tsd-typography"><p>Values set on other options when this option is used, eg <code>{ logLevel: 'debug' }</code></p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L76">src/decorators.ts:76</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L76">src/decorators.ts:76</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="preset"><code class="tsd-tag">Optional</code><span>preset</span><a href="#preset" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">preset</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">unknown</span></div>
 <div class="tsd-comment tsd-typography"><p>The value used when the option is passed without a value (option with an optional value <code>[value]</code>)</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L81">src/decorators.ts:81</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L81">src/decorators.ts:81</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="prompt"><code class="tsd-tag">Optional</code><span>prompt</span><a href="#prompt" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">prompt</span><span class="tsd-signature-symbol">?:</span> <a href="../types/PromptSetting.html" class="tsd-signature-type tsd-kind-type-alias">PromptSetting</a></div>
@@ -136,14 +136,14 @@
 <code>true</code> uses the description as question. Choices are asked with a list, options without value with yes/no.</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L97">src/decorators.ts:97</a></li></ul></aside></section>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L97">src/decorators.ts:97</a></li></ul></aside></section>
 <section class="tsd-panel tsd-member">
 <h3 class="tsd-anchor-link" id="required"><code class="tsd-tag">Optional</code><span>required</span><a href="#required" aria-label="Permalink" class="tsd-anchor-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="../assets/icons.svg#icon-anchor"></use></svg></a></h3>
 <div class="tsd-signature"><span class="tsd-kind-property">required</span><span class="tsd-signature-symbol">?:</span> <span class="tsd-signature-type">boolean</span></div>
 <div class="tsd-comment tsd-typography"><p>True if the option is required</p>
 </div><aside class="tsd-sources">
 <ul>
-<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/82ff5e66e7735ad840c49774702d647eb8df85a0/src/decorators.ts#L56">src/decorators.ts:56</a></li></ul></aside></section></section></details></div>
+<li>Defined in <a href="https://github.com/Pop-Code/nestjs-console/blob/master/src/decorators.ts#L56">src/decorators.ts:56</a></li></ul></aside></section></section></details></div>
 <div class="col-sidebar">
 <div class="page-menu">
 <div class="tsd-navigation settings">
