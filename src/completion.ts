@@ -3,7 +3,7 @@
  */
 import * as commander from 'commander';
 
-import { ConsoleService, getRegisteredArguments } from './service';
+import { ConsoleService, getRegisteredArguments } from './service.js';
 
 export type CompletionShell = 'bash' | 'zsh' | 'fish';
 
@@ -152,7 +152,7 @@ export const getCompletionScript = (shell: CompletionShell, programName: string)
                 `    set -l current (commandline -ct)`,
                 `    ${complete} $tokens[2..-1] "$current" 2>/dev/null`,
                 `end`,
-                `complete -c ${programName} -f -a '(${fn})'`,
+                `complete -c ${programName} -f -k -a '(${fn})'`,
                 ''
             ].join('\n');
         default:

@@ -8,16 +8,18 @@ import * as commander from 'commander';
 import {
     CLI_SERVICE_TOKEN,
     CONSOLE_CONTEXT_TYPE,
+    ConsoleParamType,
     EXCEPTION_FILTERS_METADATA,
     GUARDS_METADATA,
     INTERCEPTORS_METADATA,
     PIPES_METADATA,
     ROUTE_ARGS_METADATA
-} from './constants';
-import { CreateCommandOptions } from './decorators';
-import { ConsoleParamsFactory } from './params-factory';
-import { ConsoleScanner, ScanResponse } from './scanner';
-import { ConsoleService } from './service';
+} from './constants.js';
+import { CreateCommandOptions, getClassOptions } from './decorators.js';
+import { ConsoleParamsFactory } from './params-factory.js';
+import { PromptService } from './prompt.js';
+import { ConsoleScanner, ScanResponse } from './scanner.js';
+import { ConsoleService } from './service.js';
 
 const cliProvider = {
     provide: CLI_SERVICE_TOKEN,
@@ -28,8 +30,8 @@ const getDepth = ({ metadata }: ScanResponse): number =>
     metadata.command === undefined ? 0 : metadata.command.split('.').length;
 
 @Module({
-    providers: [cliProvider, ConsoleService],
-    exports: [ConsoleService]
+    providers: [cliProvider, ConsoleService, PromptService],
+    exports: [ConsoleService, PromptService]
 })
 export class ConsoleModule {
     protected scanner: ConsoleScanner = new ConsoleScanner();
@@ -48,12 +50,32 @@ export class ConsoleModule {
             const parent = this.getGroup(metadata);
             for (const method of methods) {
                 this.service.createCommand(
-                    method.metadata,
+                    this.addClassOptions(instance, method.name, method.metadata),
                     this.createHandler(contextCreator, instance, method.name),
                     parent
                 );
             }
         }
+    }
+
+    /**
+     * Add the options of the class injected with `@Opt()` (declared with the ConsoleOption decorator).
+     * An option declared in the command with the same name is kept.
+     */
+    protected addClassOptions(instance: any, methodName: string, metadata: CreateCommandOptions): CreateCommandOptions {
+        const params: Record<string, { index: number; data?: unknown }> =
+            Reflect.getMetadata(ROUTE_ARGS_METADATA, instance.constructor, methodName) ?? {};
+        const paramTypes: unknown[] = Reflect.getMetadata('design:paramtypes', instance, methodName) ?? [];
+        const classOptions = Object.entries(params)
+            .filter(([key, param]) => key.startsWith(`${ConsoleParamType.OPTION}:`) && param.data === undefined)
+            .flatMap(([, param]) => getClassOptions(paramTypes[param.index]));
+        if (classOptions.length === 0) {
+            return metadata;
+        }
+        const options = metadata.options ?? [];
+        const names = new Set(options.map((option) => this.service.createOption(option).attributeName()));
+        const added = classOptions.filter((option) => !names.has(this.service.createOption(option).attributeName()));
+        return { ...metadata, options: [...options, ...added] };
     }
 
     /**
@@ -83,7 +105,7 @@ export class ConsoleModule {
      * If the method uses parameter decorators (Arg, Opt, Cmd...) or enhancers (UseGuards, UseInterceptors, UsePipes, UseFilters),
      * on the method or on its class, it runs in a nest execution context: the guards, interceptors, pipes and filters
      * are applied, including the global ones (APP_GUARD...).
-     * Otherwise the method receives the arguments of commander, as before v11.1.0.
+     * Otherwise the method receives the arguments of commander, as before v12.0.0.
      */
     protected createHandler(contextCreator: ExternalContextCreator, instance: any, methodName: string) {
         return (...args: unknown[]): unknown => {

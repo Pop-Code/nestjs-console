@@ -23,15 +23,16 @@ import { Test } from '@nestjs/testing';
 import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsString, Max, Min } from 'class-validator';
 import * as commander from 'commander';
+import { createRequire } from 'module';
 import { map } from 'rxjs';
 
-import { BootstrapConsole } from '../src/bootstrap/console';
-import { CONSOLE_CONTEXT_TYPE, ConsoleContextType } from '../src/constants';
-import { Arg, Cmd, Command, Console, Opt } from '../src/decorators';
-import { ConsoleModule } from '../src/module';
-import { ConsoleParamsFactory } from '../src/params-factory';
-import { ConsoleService, getRegisteredArguments } from '../src/service';
-import { runCommand } from '../src/testing';
+import { BootstrapConsole } from '../src/bootstrap/console.js';
+import { CONSOLE_CONTEXT_TYPE, ConsoleContextType } from '../src/constants.js';
+import { Arg, Cmd, Command, Console, Opt } from '../src/decorators.js';
+import { ConsoleModule } from '../src/module.js';
+import { ConsoleParamsFactory } from '../src/params-factory.js';
+import { ConsoleService, getRegisteredArguments } from '../src/service.js';
+import { runCommand } from '../src/testing.js';
 
 const createModule = (...providers: any[]): any => {
     @Module({ imports: [ConsoleModule], providers })
@@ -617,7 +618,7 @@ describe('Parameter decorators and enhancers', () => {
         const options = { module: GlobalGuardModule, useDecorators: true };
         expect((await runCommand(['plain', 'x'], options)).data).toBe('x');
         // the global enhancers are applied by NestJS >= 10
-        const nestMajor = parseInt(require('@nestjs/core/package.json').version, 10);
+        const nestMajor = parseInt(createRequire(import.meta.url)('@nestjs/core/package.json').version, 10);
         const decorated = await runCommand(['decorated', 'x'], options);
         if (nestMajor >= 10) {
             expect(decorated.error).toBeInstanceOf(ForbiddenException);
@@ -628,7 +629,7 @@ describe('Parameter decorators and enhancers', () => {
 
     it('does not log errors with the nest logger when no filter is declared', async () => {
         const stderr = jest.spyOn(process.stderr, 'write').mockImplementation(() => true);
-        const consoleError = jest.spyOn(console, 'error').mockImplementation();
+        const consoleError = jest.spyOn(console, 'error').mockImplementation(() => undefined);
         await runUsers(['denied']);
         expect(stderr).not.toHaveBeenCalled();
         expect(consoleError).not.toHaveBeenCalled();
@@ -803,7 +804,7 @@ describe('runCommand', () => {
                     .useValue({ greet: (name: string) => `mocked ${name}` })
                     .compile()
         });
-        expect(result).toEqual({ data: 'mocked john', exitCode: 0, stdout: '', stderr: '' });
+        expect(result).toEqual({ data: 'mocked john', exitCode: 0, stdout: '', stderr: '', prompts: '' });
     });
 
     it('works with commands created with the service', async () => {

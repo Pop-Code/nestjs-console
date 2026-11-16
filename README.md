@@ -34,6 +34,8 @@ The console service will be accessible inside the container.
 - All the commander features: arguments with descriptions, choices and defaults, options with choices, environment variables, conflicts..., aliases, hidden and default commands, help groups and texts
 - Nest parameter decorators `@Arg()`, `@Opt()` and `@Cmd()`, with pipes (`ParseIntPipe`, `ValidationPipe` on a DTO...)
 - Guards, interceptors and exception filters on commands
+- Typed options declared on a class with `@ConsoleOption()`
+- Interactive prompts, and prompts for the missing options and arguments
 - `run()` executes the command, prints the errors, sets the exit code and closes the application
 - `runCommand()` to test the commands
 - Shell completion for bash, zsh and fish

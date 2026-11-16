@@ -1,5 +1,5 @@
-import { BootstrapConsole } from '../src/bootstrap/console';
-import { ModuleTest } from './app/module';
+import { BootstrapConsole } from '../src/bootstrap/console.js';
+import { ModuleTest } from './app/module.js';
 
 const bootstrap = new BootstrapConsole({
     module: ModuleTest

@@ -1,0 +1,11 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "outDir": ".examples",
+        "rootDir": ".",
+        "declaration": false,
+        "declarationMap": false,
+        "sourceMap": false
+    },
+    "include": ["test/console.ts", "test/console.decorators.ts", "test/completion/cli.ts"]
+}

@@ -4,8 +4,9 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as commander from 'commander';
+import { Readable, Writable } from 'stream';
 
-import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './bootstrap/abstract';
+import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './bootstrap/abstract.js';
 
 export interface RunCommandOptions extends Omit<CommonBootstrapConsoleOptions, 'module'> {
     /**
@@ -18,6 +19,12 @@ export interface RunCommandOptions extends Omit<CommonBootstrapConsoleOptions, '
      * `() => Test.createTestingModule({ imports: [AppModule] }).overrideProvider(Db).useValue(db).compile()`
      */
     create?: () => Promise<INestApplicationContext>;
+
+    /**
+     * The answers to the questions asked by the command (prompts), one per question.
+     * Without answers, the prompts are not interactive.
+     */
+    answers?: string[];
 }
 
 export interface RunCommandResult<D = any> {
@@ -46,6 +53,11 @@ export interface RunCommandResult<D = any> {
      * What commander wrote to stderr (errors)
      */
     stderr: string;
+
+    /**
+     * The questions asked by the prompts
+     */
+    prompts: string;
 }
 
 class TestingBootstrapConsole extends AbstractBootstrapConsole<INestApplicationContext> {
@@ -74,13 +86,24 @@ export const runCommand = async <D = any>(
     argv: readonly string[],
     options: RunCommandOptions
 ): Promise<RunCommandResult<D>> => {
-    const { create, ...bootstrapOptions } = options;
+    const { create, answers, ...bootstrapOptions } = options;
     let stdout = '';
     let stderr = '';
+    let prompts = '';
     const bootstrap = new TestingBootstrapConsole(
         {
             ...bootstrapOptions,
             module: bootstrapOptions.module,
+            prompt: {
+                input: Readable.from(answers ? [answers.map((answer) => `${answer}\n`).join('')] : []),
+                output: new Writable({
+                    write: (chunk, _encoding, callback) => {
+                        prompts += chunk.toString();
+                        callback();
+                    }
+                }),
+                interactive: answers !== undefined
+            },
             cli: {
                 ...bootstrapOptions.cli,
                 exitOverride: true,
@@ -97,10 +120,10 @@ export const runCommand = async <D = any>(
     try {
         await app.init();
         const response = await bootstrap.boot(argv, { from: 'user' });
-        return { data: response.data, exitCode: 0, stdout, stderr };
+        return { data: response.data, exitCode: 0, stdout, stderr, prompts };
     } catch (error) {
         const exitCode = error instanceof commander.CommanderError ? error.exitCode : 1;
-        return { error, exitCode, stdout, stderr };
+        return { error, exitCode, stdout, stderr, prompts };
     } finally {
         await app.close();
     }

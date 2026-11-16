@@ -85,3 +85,22 @@ jobs:
               run: yarn run build
             - name: Test
               run: yarn run test
+
+    # Check the completion scripts in real shells
+    completion:
+        name: Shell completion
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v7
+            - name: Use Node.js 24.x
+              uses: actions/setup-node@v7
+              with:
+                  node-version: 24.x
+                  cache: yarn
+            - name: Install
+              run: |
+                  sudo apt-get update
+                  sudo apt-get install -y zsh fish
+                  yarn install --frozen-lockfile
+            - name: Test bash, zsh and fish
+              run: ./test/completion/test-shells.sh bash zsh fish

@@ -1,4 +1,4 @@
-import { Command, Console } from '../../../src/decorators';
+import { Command, Console } from '../../../src/decorators.js';
 
 @Console({
     command: 'groupCommand'

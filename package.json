@@ -1,6 +1,6 @@
 {
     "name": "nestjs-console",
-    "version": "11.0.0",
+    "version": "12.0.0",
     "description": "A NestJS module that provide a cli",
     "keywords": [
         "nestjs",
@@ -10,8 +10,16 @@
         "commander",
         "terminal"
     ],
+    "type": "module",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
+        },
+        "./package.json": "./package.json"
+    },
     "files": [
         "dist",
         "!dist/**/*.tsbuildinfo",
@@ -47,8 +55,6 @@
         "reflect-metadata": "0.2.2",
         "rxjs": "7.8.2",
         "ts-jest": "29.4.15",
-        "ts-node": "10.9.2",
-        "tsconfig-paths": "4.2.0",
         "typedoc": "0.28.20",
         "typescript": "6.0.3",
         "typescript-eslint": "8.72.2"
@@ -56,18 +62,19 @@
     "scripts": {
         "build": "rm -Rf ./dist && tsc -b tsconfig.build.json",
         "doc": "rm -Rf ./docs && typedoc && touch ./docs/.nojekyll",
-        "console": "node -r tsconfig-paths/register -r ts-node/register test/console.ts",
-        "console:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register test/console.ts",
-        "console:decorators": "node -r tsconfig-paths/register -r ts-node/register test/console.decorators.ts",
-        "console:decorators:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register test/console.decorators.ts",
+        "console": "npm run -s build:examples && node .examples/test/console.js",
+        "console:debug": "npm run -s build:examples && node --inspect-brk .examples/test/console.js",
+        "console:decorators": "npm run -s build:examples && node .examples/test/console.decorators.js",
+        "console:decorators:debug": "npm run -s build:examples && node --inspect-brk .examples/test/console.decorators.js",
         "test": "node --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js",
         "test:watch": "node --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --watch",
         "test:cov": "node --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --coverage",
         "test:debug": "node --inspect-brk --experimental-vm-modules --no-warnings=ExperimentalWarning node_modules/jest/bin/jest.js --runInBand",
         "lint": "eslint ./src/**/*.ts",
         "format": "prettier \"**/*.ts\" --ignore-path ./.prettierignore --write && git status",
-        "test:smoke": "node -e \"require('./dist')\" && node test/smoke.mjs && node -r ts-node/register test/console.ts command smoke && node -r ts-node/register test/console.decorators.ts asyncCommand smoke",
-        "prepublishOnly": "npm run build"
+        "test:smoke": "node test/smoke.mjs && npm run -s build:examples && node .examples/test/console.js command smoke && node .examples/test/console.decorators.js asyncCommand smoke",
+        "prepublishOnly": "npm run build",
+        "build:examples": "rm -Rf ./.examples && tsc -p tsconfig.examples.json"
     },
     "jest": {
         "moduleFileExtensions": [
@@ -77,8 +84,22 @@
         ],
         "rootDir": ".",
         "testRegex": ".spec.ts$",
+        "extensionsToTreatAsEsm": [
+            ".ts"
+        ],
+        "moduleNameMapper": {
+            "^(\\.{1,2}/.*)\\.js$": "$1"
+        },
+        "setupFiles": [
+            "./test/setup-jest.mjs"
+        ],
         "transform": {
-            "^.+\\.(t|j)s$": "ts-jest"
+            "^.+\\.ts$": [
+                "ts-jest",
+                {
+                    "useESM": true
+                }
+            ]
         },
         "collectCoverageFrom": [
             "src/**/*.{js,jsx,ts}",

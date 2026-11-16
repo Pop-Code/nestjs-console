@@ -2,13 +2,19 @@
  * @module AbstractBootstrapConsole
  */
 import { INestApplicationContext } from '@nestjs/common';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
+import { NestFactory } from '@nestjs/core';
 import * as commander from 'commander';
 
-import { CompletionOptions, registerCompletion } from '../completion';
-import { CommandResponse } from '../interfaces';
-import { ConsoleModule } from '../module';
-import { CommandSettings, ConsoleService } from '../service';
+import { CompletionOptions, registerCompletion } from '../completion.js';
+import { CommandResponse } from '../interfaces.js';
+import { PromptOptions } from '../prompt.js';
+import { ConsoleModule } from '../module.js';
+import { CommandSettings, ConsoleService } from '../service.js';
+
+/**
+ * The options of NestFactory.createApplicationContext()
+ */
+export type NestApplicationContextOptions = NonNullable<Parameters<typeof NestFactory.createApplicationContext>[1]>;
 
 /**
  * The options of the root cli
@@ -71,6 +77,11 @@ export interface CommonBootstrapConsoleOptions {
      * Add a "completion" command that prints the shell completion script (bash, zsh, fish)
      */
     completion?: boolean | CompletionOptions;
+
+    /**
+     * Where the prompts read the answers and write the questions (default: stdin and stderr)
+     */
+    prompt?: PromptOptions;
 }
 
 /**
@@ -153,6 +164,9 @@ export abstract class AbstractBootstrapConsole<
             );
         }
         this.service.setContainer(this.container);
+        if (this.options.prompt) {
+            this.service.getPrompt().configure(this.options.prompt);
+        }
         this.configureCli();
         if (this.options.useDecorators) {
             await this.useDecorators();
