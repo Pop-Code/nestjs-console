@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [11.1.0] - 2026-11-16
 
 ### Added
 
@@ -313,7 +313,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v11.1.0...HEAD
+[11.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...v11.1.0
 [11.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v10.0.0...v11.0.0
 [10.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v9.0.0...v10.0.0
 [9.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v8.0.0...v9.0.0

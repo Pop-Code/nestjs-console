@@ -257,7 +257,10 @@ export const Console =
     (target: any): void =>
         Reflect.defineMetadata(CONSOLE_METADATA_NAME, options || {}, target);
 
-type PipeParam = Type<PipeTransform> | PipeTransform;
+/**
+ * A pipe class or instance passed to the Arg and Opt decorators
+ */
+export type PipeParam = Type<PipeTransform> | PipeTransform;
 
 const isPipe = (value: unknown): value is PipeParam =>
     typeof value === 'function' || (typeof value === 'object' && value !== null && 'transform' in value);
