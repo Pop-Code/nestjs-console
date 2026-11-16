@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- Parameter decorators `@Arg(name?, ...pipes)`, `@Opt(name?, ...pipes)` and `@Cmd()` to inject the arguments, the options and the command. Pipes receive arguments with the type `param` and options with the type `query`, so the `ValidationPipe` validates and transforms them (eg a DTO of options). Custom decorators made with `createParamDecorator` work too
+- Guards (`@UseGuards`), interceptors (`@UseInterceptors`), pipes (`@UsePipes`) and exception filters (`@UseFilters`) on decorated commands and their classes. `ExecutionContext.getType()` returns `'console'` (`CONSOLE_CONTEXT_TYPE`). Only the commands that use a parameter decorator or an enhancer run in this execution context, where the global enhancers (`APP_GUARD`...) apply too with NestJS >= 10; the other commands are executed as before
+- Command settings: `arguments` (description, parser, default value, choices), `summary`, `usage`, `aliases`, `hidden`, `isDefault`, `helpGroup` (commander >= 14), `helpText`, `allowUnknownOption`, `allowExcessArguments`, `passThroughOptions`, `enablePositionalOptions`, `showHelpAfterError`, `showSuggestionAfterError`, and `configure(command)` for anything else
+- Option settings: `choices`, `env`, `conflicts`, `implies`, `preset`, `hidden`, `helpGroup` (commander >= 14), `defaultValueDescription`. Options and arguments can also be commander `Option` and `Argument` instances
+- Bootstrap `cli` option to configure the root cli (`name`, `version`, `description`, `exitOverride`, `output`, global options...)
+- `BootstrapConsole.run()`: init the application, execute the command, print the error and set `process.exitCode` on failure, and always close the application (so `onModuleDestroy` hooks run)
+- `runCommand(argv, options)` to test commands: returns the data, the error, the exit code and the output of commander, and accepts a `create` function to use a `TestingModule` with overridden providers
+- Shell completion for bash, zsh and fish with the bootstrap `completion` option (`my-cli completion zsh`)
+- `boot()` and `ConsoleService.init()` accept commander parse options, eg `{ from: 'user' }`
+- CI tests every supported major of NestJS (9 to 12) and commander (11 to 15)
+
+### Fixed
+
+- A group declared with `@Console({ command: 'parent.child' })` was registered at the root when its parent group was scanned after it. Missing parent groups are now created
+- Commands inherited from a grand parent class were not registered
+- Settings of the root cli (`exitOverride()`, `configureOutput()`, `showHelpAfterError()`...) were not applied to the sub commands, eg a command error exited the process even with `exitOverride()`. They are now inherited like with commander `.command()`, unless the sub command sets its own
+- An async hook (`preAction`...) that failed caused an unhandled rejection instead of rejecting `boot()`
+- Options kept their values between two `boot()` calls (fixed with commander >= 13, which resets them before each parse), and a lone `--no-*` root option had no default value
+- `boot()` never settled when no command was executed. It now resolves with `data` undefined and the root cli
+- Clear errors when `ConsoleModule` is not imported and when `boot()` is called before `init()`
+
+### Changed
+
+- The cli is executed with the public `parseAsync()` of commander instead of private methods, and the decorators are found with the public `DiscoveryService` of NestJS instead of the private container
+- Compile to ES2022 (Node >= 22)
+- Removed the protected `responseListener` event emitter of the `ConsoleService`
+
 ## [11.0.0] - 2026-11-15
 
 ### BREAKING CHANGE
@@ -282,7 +313,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v10.0.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...HEAD
+[11.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v10.0.0...v11.0.0
 [10.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v9.0.0...v10.0.0
 [9.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v8.0.0...v9.0.0
 [8.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v7.0.1...v8.0.0

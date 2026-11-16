@@ -3,7 +3,8 @@ import tseslint from 'typescript-eslint';
 
 export default tseslint.config(eslint.configs.recommended, tseslint.configs.recommended, {
     rules: {
-        indent: ['error', 4],
+        // formatting is checked by prettier (the indent rule conflicts with it)
+        indent: 'off',
         '@typescript-eslint/interface-name-prefix': 'off',
         '@typescript-eslint/explicit-function-return-type': 'off',
         '@typescript-eslint/no-explicit-any': 'off',

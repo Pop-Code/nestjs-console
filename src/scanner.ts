@@ -2,12 +2,10 @@
  * @module ConsoleScanner
  */
 import { INestApplicationContext } from '@nestjs/common';
+import { DiscoveryService, ModulesContainer } from '@nestjs/core';
 
 import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
 import { CreateCommandOptions } from './decorators';
-import { ModulesContainer, NestContainer } from '@nestjs/core';
-import { InstanceWrapper } from '@nestjs/core/injector/instance-wrapper';
-import { Module } from '@nestjs/core/injector/module';
 
 /**
  * The interface for command method metadata
@@ -28,80 +26,67 @@ export interface ScanResponse {
 
 export class ConsoleScanner {
     /**
-     * Get all the modules
-     */
-    private getModules(modulesContainer: ModulesContainer, include: any[] = []): Module[] {
-        const allModules = [...modulesContainer.values()];
-        if (!include.length) {
-            return allModules;
-        }
-        return allModules.filter(({ metatype }) => include.some((item) => item === metatype));
-    }
-
-    /**
-     * Get a list of classes methods
+     * Get the names of the methods decorated with "@Command", including the ones inherited from parent classes
      */
     private getInstanceMethods(instance: any): string[] {
-        return Object.getOwnPropertyNames(instance)
-            .concat(Object.getOwnPropertyNames(instance.__proto__))
-            .filter((m) => Reflect.hasMetadata(COMMAND_METADATA_NAME, instance, m));
+        const names = new Set<string>(Object.getOwnPropertyNames(instance));
+        let proto = Object.getPrototypeOf(instance);
+        while (proto && proto !== Object.prototype) {
+            for (const name of Object.getOwnPropertyNames(proto)) {
+                names.add(name);
+            }
+            proto = Object.getPrototypeOf(proto);
+        }
+        return [...names].filter((m) => m !== 'constructor' && Reflect.hasMetadata(COMMAND_METADATA_NAME, instance, m));
     }
 
     /**
      * Scan an application
      * @param app
-     * @param includedModules
+     * @param includedModules Only scan the providers of these modules
      */
     public async scan(app: INestApplicationContext, includedModules?: any[]): Promise<Set<ScanResponse>> {
         const set = new Set<ScanResponse>();
-        const container = (app as any).container as unknown as NestContainer;
-        const modules = this.getModules(container.getModules(), includedModules);
+        const discovery = new DiscoveryService(app.get(ModulesContainer, { strict: false }));
+        const providers = discovery.getProviders(includedModules?.length ? { include: includedModules } : undefined);
 
-        await Promise.all(
-            modules.map((m) => {
-                return Promise.all(
-                    Array.from(m.providers.values()).map(async (p: InstanceWrapper<new () => unknown>) => {
-                        const { metatype, token } = p;
-                        if (typeof metatype !== 'function') {
-                            return;
-                        }
+        // resolve in order, so commands are registered in the order of the providers
+        for (const wrapper of providers) {
+            const { metatype, token, instance: wrapperInstance } = wrapper;
+            if (typeof metatype !== 'function') {
+                continue;
+            }
 
-                        // ignore providers without instance
-                        if (!p.instance) {
-                            return;
-                        }
+            // ignore providers without instance
+            if (!wrapperInstance) {
+                continue;
+            }
 
-                        const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
-                            CONSOLE_METADATA_NAME,
-                            p.instance.constructor
-                        );
+            const consoleMetadata: CreateCommandOptions = Reflect.getMetadata(
+                CONSOLE_METADATA_NAME,
+                wrapperInstance.constructor
+            );
 
-                        // ignore providers without the console decorator
-                        if (!consoleMetadata) {
-                            return;
-                        }
+            // ignore providers without the console decorator
+            if (!consoleMetadata) {
+                continue;
+            }
 
-                        // get the provider instance from the container
-                        const instance = await app.resolve(token, undefined, {
-                            strict: false
-                        });
-                        const methods = this.getInstanceMethods(instance);
+            // get the provider instance from the container
+            const instance = await app.resolve(token, undefined, {
+                strict: false
+            });
+            const methods = this.getInstanceMethods(instance);
 
-                        // get the metadata of the methods
-                        const methodsMetadata = methods.map<MethodsMetadata>((methodMetadata) => ({
-                            name: methodMetadata,
-                            metadata: Reflect.getMetadata(COMMAND_METADATA_NAME, instance, methodMetadata)
-                        }));
-
-                        set.add({
-                            instance,
-                            metadata: consoleMetadata,
-                            methods: methodsMetadata
-                        });
-                    })
-                );
-            })
-        );
+            set.add({
+                instance,
+                metadata: consoleMetadata,
+                methods: methods.map<MethodsMetadata>((name) => ({
+                    name,
+                    metadata: Reflect.getMetadata(COMMAND_METADATA_NAME, instance, name)
+                }))
+            });
+        }
 
         return set;
     }
