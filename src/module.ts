@@ -105,7 +105,7 @@ export class ConsoleModule {
      * If the method uses parameter decorators (Arg, Opt, Cmd...) or enhancers (UseGuards, UseInterceptors, UsePipes, UseFilters),
      * on the method or on its class, it runs in a nest execution context: the guards, interceptors, pipes and filters
      * are applied, including the global ones (APP_GUARD...).
-     * Otherwise the method receives the arguments of commander, as before v11.1.0.
+     * Otherwise the method receives the arguments of commander, as before v12.0.0.
      */
     protected createHandler(contextCreator: ExternalContextCreator, instance: any, methodName: string) {
         return (...args: unknown[]): unknown => {

@@ -12,12 +12,6 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - The `exports` field only exposes the main entry point: deep imports (`nestjs-console/dist/...`) are not possible any more, import everything from `nestjs-console`
 - Jest in CommonJS mode needs to load ES modules, as it already does for commander 15 and NestJS 12: run it with `--experimental-vm-modules` (Node >= 24.9), or compile `nestjs-console` and `commander` with a Jest transform (see the wiki page "Upgrade from v11 to v12")
 
-### Changed
-
-- The examples and the smoke test run compiled code instead of ts-node, Jest runs the tests as ES modules
-
-## [11.1.0] - 2026-11-16
-
 ### Added
 
 - Parameter decorators `@Arg(name?, ...pipes)`, `@Opt(name?, ...pipes)` and `@Cmd()` to inject the arguments, the options and the command. Pipes receive arguments with the type `param` and options with the type `query`, so the `ValidationPipe` validates and transforms them (eg a DTO of options). Custom decorators made with `createParamDecorator` work too
@@ -48,6 +42,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - The cli is executed with the public `parseAsync()` of commander instead of private methods, the decorators are found with the public `DiscoveryService` of NestJS instead of the private container, and only the public entry points of NestJS are imported
 - Compile to ES2022 (Node >= 22)
 - Removed the protected `responseListener` event emitter of the `ConsoleService`
+- The examples and the smoke test run compiled code instead of ts-node, Jest runs the tests as ES modules
 
 ## [11.0.0] - 2026-11-15
 
@@ -328,8 +323,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Update the dependencies to support nestjs ^6.0.0
 
 [unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v12.0.0...HEAD
-[12.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.1.0...v12.0.0
-[11.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...v11.1.0
+[12.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...v12.0.0
 [11.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v10.0.0...v11.0.0
 [10.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v9.0.0...v10.0.0
 [9.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v8.0.0...v9.0.0
