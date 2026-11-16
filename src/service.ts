@@ -15,12 +15,18 @@ import {
 import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
 import { PromptService } from './prompt';
 
-interface PromptedOption {
+/**
+ * An option asked when it is missing
+ */
+export interface PromptedOption {
     option: commander.Option;
     definition: CommandOption;
 }
 
-interface PromptedArgument {
+/**
+ * An argument asked when it is missing
+ */
+export interface PromptedArgument {
     index: number;
     argument: commander.Argument;
     definition: CommandArgument;

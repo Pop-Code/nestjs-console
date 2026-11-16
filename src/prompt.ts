@@ -3,7 +3,10 @@
  */
 import { Injectable } from '@nestjs/common';
 
-type PromptInput = NodeJS.ReadableStream & { isTTY?: boolean; setRawMode?: (mode: boolean) => unknown };
+/**
+ * A readable stream, with the TTY methods of process.stdin
+ */
+export type PromptInput = NodeJS.ReadableStream & { isTTY?: boolean; setRawMode?: (mode: boolean) => unknown };
 
 /**
  * Where the prompts read the answers and write the questions
