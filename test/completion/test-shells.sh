@@ -55,7 +55,7 @@ complete_zsh() {
 }
 
 complete_fish() {
-    fish --no-config -c 'my-cli completion fish | source; string join " " (complete -C "$argv[1]")' "$1"
+    fish --no-config -c 'my-cli completion fish | source; string join " " -- (complete -C "$argv[1]")' "$1"
 }
 
 for shell in "${@:-bash zsh fish}"; do
