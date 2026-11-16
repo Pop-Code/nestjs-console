@@ -5,7 +5,8 @@ cd "$(dirname "$0")/../.."
 
 BIN="$(mktemp -d)"
 trap 'rm -rf "$BIN"' EXIT
-printf '#!/bin/sh\nexec node -r ts-node/register/transpile-only %s/test/completion/cli.ts "$@"\n' "$PWD" > "$BIN/my-cli"
+npm run -s build:examples
+printf '#!/bin/sh\nexec node %s/.examples/test/completion/cli.js "$@"\n' "$PWD" > "$BIN/my-cli"
 chmod +x "$BIN/my-cli"
 export PATH="$BIN:$PATH"
 

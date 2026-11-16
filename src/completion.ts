@@ -3,7 +3,7 @@
  */
 import * as commander from 'commander';
 
-import { ConsoleService, getRegisteredArguments } from './service';
+import { ConsoleService, getRegisteredArguments } from './service.js';
 
 export type CompletionShell = 'bash' | 'zsh' | 'fish';
 

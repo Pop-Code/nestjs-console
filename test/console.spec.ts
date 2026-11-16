@@ -1,13 +1,13 @@
 import { INestApplicationContext, Type } from '@nestjs/common';
 import * as commander from 'commander';
 
-import { BootstrapConsole } from '../src/bootstrap/console';
-import { ConsoleService } from '../src/service';
-import { CliWithDecorator } from './app/decorator/cli';
-import { ModuleWithDecoratorsTest } from './app/decorator/module';
-import { ModuleTest } from './app/module';
-import { ServiceTest } from './app/service';
-import { TestBootstrapConsole } from './bootstrap.spec';
+import { BootstrapConsole } from '../src/bootstrap/console.js';
+import { ConsoleService } from '../src/service.js';
+import { CliWithDecorator } from './app/decorator/cli.js';
+import { ModuleWithDecoratorsTest } from './app/decorator/module.js';
+import { ModuleTest } from './app/module.js';
+import { ServiceTest } from './app/service.js';
+import { TestBootstrapConsole } from './bootstrap.spec.js';
 
 const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): void => {
     let app: INestApplicationContext;
@@ -26,7 +26,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
         consoleService = app.get<ConsoleService>(ConsoleService);
         stdoutMock = jest.fn();
         stderrMock = jest.fn();
-        logMock = jest.spyOn(console, 'log').mockImplementation();
+        logMock = jest.spyOn(console, 'log').mockImplementation(() => undefined);
     });
 
     afterEach(() => {
@@ -417,7 +417,7 @@ const testCommands = (moduleType: Type<ModuleTest | ModuleWithDecoratorsTest>): 
                     service = app.get(CliWithDecorator);
                 }
                 service.command = service.command.bind(service);
-                const mockHandler = jest.spyOn(service, 'command').mockImplementation();
+                const mockHandler = jest.spyOn(service, 'command').mockImplementation(() => undefined as any);
                 const arg = `foobar`;
                 await bootstrap.boot([process.argv0, 'console', 'command', arg]);
                 expect(mockHandler).toHaveBeenCalledTimes(1);

@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
 import * as commander from 'commander';
 
-import { getCompletions, getCompletionScript } from '../src/completion';
-import { Command, Console } from '../src/decorators';
-import { ConsoleModule } from '../src/module';
-import { runCommand } from '../src/testing';
+import { getCompletions, getCompletionScript } from '../src/completion.js';
+import { Command, Console } from '../src/decorators.js';
+import { ConsoleModule } from '../src/module.js';
+import { runCommand } from '../src/testing.js';
 
 @Console({ command: 'db', description: 'Database commands' })
 class DbCli {

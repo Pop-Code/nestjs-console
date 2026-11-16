@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from '@nestjs/common';
 
-import { ModuleWithDecoratorsTest } from './decorator/module';
+import { ModuleWithDecoratorsTest } from './decorator/module.js';
 
 @Module({})
 export class DynamicModuleTest {

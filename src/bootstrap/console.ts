@@ -4,7 +4,7 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 
-import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './abstract';
+import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './abstract.js';
 
 /**
  * A class to boot a nestjs application context from cli

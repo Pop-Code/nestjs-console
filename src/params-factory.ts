@@ -3,8 +3,8 @@
  */
 import * as commander from 'commander';
 
-import { ConsoleParamType } from './constants';
-import { getRegisteredArguments } from './service';
+import { ConsoleParamType } from './constants.js';
+import { getRegisteredArguments } from './service.js';
 
 /**
  * Get the values of the parameters decorated with Arg, Opt and Cmd

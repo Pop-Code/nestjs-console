@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import commander = require('commander');
+import * as commander from 'commander';
 
-import { ConsoleService } from '../../src/service';
+import { ConsoleService } from '../../src/service.js';
 
 @Injectable()
 export class ServiceTest {

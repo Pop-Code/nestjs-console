@@ -11,7 +11,7 @@ import {
     CONSOLE_OPTIONS_METADATA,
     ConsoleParamType,
     ROUTE_ARGS_METADATA
-} from './constants';
+} from './constants.js';
 
 export type ParserType = (value: string, previous: any) => any;
 

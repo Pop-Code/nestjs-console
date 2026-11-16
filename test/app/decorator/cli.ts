@@ -1,6 +1,6 @@
-import commander = require('commander');
+import * as commander from 'commander';
 
-import { Command, Console } from '../../../src/decorators';
+import { Command, Console } from '../../../src/decorators.js';
 
 @Console()
 export class CliWithDecorator {

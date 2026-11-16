@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "nodenext",
+        "moduleResolution": "nodenext",
         "declaration": true,
         "declarationMap": true,
         "noImplicitAny": false,
@@ -19,5 +20,6 @@
         "lib": ["es2022"],
         "strict": false,
         "strictNullChecks": true
-    }
+    },
+    "exclude": ["node_modules", "dist", ".examples", "docs", "coverage", "**/*.mjs"]
 }
