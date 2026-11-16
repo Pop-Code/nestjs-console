@@ -5,11 +5,11 @@ import { INestApplicationContext } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import * as commander from 'commander';
 
-import { CompletionOptions, registerCompletion } from '../completion';
-import { CommandResponse } from '../interfaces';
-import { PromptOptions } from '../prompt';
-import { ConsoleModule } from '../module';
-import { CommandSettings, ConsoleService } from '../service';
+import { CompletionOptions, registerCompletion } from '../completion.js';
+import { CommandResponse } from '../interfaces.js';
+import { PromptOptions } from '../prompt.js';
+import { ConsoleModule } from '../module.js';
+import { CommandSettings, ConsoleService } from '../service.js';
 
 /**
  * The options of NestFactory.createApplicationContext()

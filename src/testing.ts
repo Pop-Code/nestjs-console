@@ -6,7 +6,7 @@ import { NestFactory } from '@nestjs/core';
 import * as commander from 'commander';
 import { Readable, Writable } from 'stream';
 
-import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './bootstrap/abstract';
+import { AbstractBootstrapConsole, CommonBootstrapConsoleOptions } from './bootstrap/abstract.js';
 
 export interface RunCommandOptions extends Omit<CommonBootstrapConsoleOptions, 'module'> {
     /**

@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
 
-import { BootstrapConsole } from '../../src/bootstrap/console';
-import { Command, Console } from '../../src/decorators';
-import { ConsoleModule } from '../../src/module';
+import { BootstrapConsole } from '../../src/bootstrap/console.js';
+import { Command, Console } from '../../src/decorators.js';
+import { ConsoleModule } from '../../src/module.js';
 
 @Console({ command: 'db', description: 'Database commands' })
 class DbCli {

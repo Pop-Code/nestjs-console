@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Command } from 'commander';
 
-import { ConsoleModule } from '../src/module';
-import { ConsoleService } from '../src/service';
+import { ConsoleModule } from '../src/module.js';
+import { ConsoleService } from '../src/service.js';
 
 let mod: TestingModule;
 let service: ConsoleService;

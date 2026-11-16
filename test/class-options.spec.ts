@@ -2,9 +2,9 @@ import { Module, ValidationPipe } from '@nestjs/common';
 import { IsIn, IsInt, Max } from 'class-validator';
 import * as commander from 'commander';
 
-import { Command, Console, ConsoleOption, getClassOptions, Opt } from '../src/decorators';
-import { ConsoleModule } from '../src/module';
-import { runCommand } from '../src/testing';
+import { Command, Console, ConsoleOption, getClassOptions, Opt } from '../src/decorators.js';
+import { ConsoleModule } from '../src/module.js';
+import { runCommand } from '../src/testing.js';
 
 class BaseOptions {
     @ConsoleOption({ description: 'Display more logs' })

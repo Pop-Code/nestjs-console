@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 
-import { ConsoleModule } from '../../src/module';
-import { ServiceTest } from './service';
+import { ConsoleModule } from '../../src/module.js';
+import { ServiceTest } from './service.js';
 
 @Module({
     imports: [ConsoleModule],

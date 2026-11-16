@@ -8,7 +8,7 @@ import {
     INTERCEPTORS_METADATA,
     PIPES_METADATA,
     ROUTE_ARGS_METADATA
-} from '../src/constants';
+} from '../src/constants.js';
 
 // nestjs-console copies these values to only import the public entry points of NestJS
 describe('NestJS constants', () => {

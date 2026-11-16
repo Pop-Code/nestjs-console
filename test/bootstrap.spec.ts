@@ -1,9 +1,9 @@
 import { NestApplicationContext } from '@nestjs/core';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { AbstractBootstrapConsole } from '../src/bootstrap/abstract';
-import { BootstrapConsole } from '../src/bootstrap/console';
-import { ModuleTest } from './app/module';
+import { AbstractBootstrapConsole } from '../src/bootstrap/abstract.js';
+import { BootstrapConsole } from '../src/bootstrap/console.js';
+import { ModuleTest } from './app/module.js';
 
 export class TestBootstrapConsole extends AbstractBootstrapConsole<TestingModule> {
     create(): Promise<TestingModule> {
@@ -65,7 +65,7 @@ describe('BootstrapConsole', () => {
         await bootstrap.init();
         // get the service and check the container
         const service = bootstrap.getService();
-        const mockServiceBoot = jest.spyOn(service, 'init').mockImplementation();
+        const mockServiceBoot = jest.spyOn(service, 'init').mockImplementation(async () => undefined as any);
 
         await bootstrap.boot();
         expect(mockServiceBoot).toHaveBeenCalledWith(process.argv);

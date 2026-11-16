@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [12.0.0] - 2026-11-16
+
+### BREAKING CHANGE
+
+- The package is ESM only (`"type": "module"`), like NestJS 12 and commander 15. CommonJS projects keep working without changes: Node >= 22.12 loads ES modules with `require()`, and TypeScript resolves the types with `module: commonjs` or `nodenext`
+- The `exports` field only exposes the main entry point: deep imports (`nestjs-console/dist/...`) are not possible any more, import everything from `nestjs-console`
+- Jest in CommonJS mode needs to load ES modules, as it already does for commander 15 and NestJS 12: run it with `--experimental-vm-modules` (Node >= 24.9), or compile `nestjs-console` and `commander` with a Jest transform (see the wiki page "Upgrade from v11 to v12")
+
+### Changed
+
+- The examples and the smoke test run compiled code instead of ts-node, Jest runs the tests as ES modules
+
 ## [11.1.0] - 2026-11-16
 
 ### Added
@@ -315,7 +327,8 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 - Update the dependencies to support nestjs ^6.0.0
 
-[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v11.1.0...HEAD
+[unreleased]: https://github.com/Pop-Code/nestjs-console/compare/v12.0.0...HEAD
+[12.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.1.0...v12.0.0
 [11.1.0]: https://github.com/Pop-Code/nestjs-console/compare/v11.0.0...v11.1.0
 [11.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v10.0.0...v11.0.0
 [10.0.0]: https://github.com/Pop-Code/nestjs-console/compare/v9.0.0...v10.0.0

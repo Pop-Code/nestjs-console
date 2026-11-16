@@ -4,8 +4,8 @@
 import { INestApplicationContext } from '@nestjs/common';
 import { DiscoveryService, ModulesContainer } from '@nestjs/core';
 
-import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants';
-import { CreateCommandOptions } from './decorators';
+import { COMMAND_METADATA_NAME, CONSOLE_METADATA_NAME } from './constants.js';
+import { CreateCommandOptions } from './decorators.js';
 
 /**
  * The interface for command method metadata

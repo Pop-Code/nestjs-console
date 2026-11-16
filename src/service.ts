@@ -11,9 +11,9 @@ import {
     HelpTextPosition,
     InjectCli,
     PromptSetting
-} from './decorators';
-import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces';
-import { PromptService } from './prompt';
+} from './decorators.js';
+import { CommandActionHandler, CommandActionWrapper, CommandResponse } from './interfaces.js';
+import { PromptService } from './prompt.js';
 
 /**
  * An option asked when it is missing

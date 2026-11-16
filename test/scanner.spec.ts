@@ -1,11 +1,11 @@
 import { Test } from '@nestjs/testing';
 
-import { ConsoleModule } from '../src/module';
-import { ConsoleScanner, ScanResponse } from '../src/scanner';
-import { CliWithDecorator } from './app/decorator/cli';
-import { ModuleWithDecoratorsTest } from './app/decorator/module';
-import { ModuleTest } from './app/module';
-import { DynamicModuleTest } from './app/module.dynamic';
+import { ConsoleModule } from '../src/module.js';
+import { ConsoleScanner, ScanResponse } from '../src/scanner.js';
+import { CliWithDecorator } from './app/decorator/cli.js';
+import { ModuleWithDecoratorsTest } from './app/decorator/module.js';
+import { ModuleTest } from './app/module.js';
+import { DynamicModuleTest } from './app/module.dynamic.js';
 
 const testScanCliDecorator = (value: ScanResponse): void => {
     expect(value.instance).toBeInstanceOf(CliWithDecorator);

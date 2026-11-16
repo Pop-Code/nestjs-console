@@ -1,11 +1,11 @@
 import { Module } from '@nestjs/common';
 import { PassThrough } from 'stream';
 
-import { BootstrapConsole } from '../src/bootstrap/console';
-import { Command, Console } from '../src/decorators';
-import { ConsoleModule } from '../src/module';
-import { PromptError, PromptService } from '../src/prompt';
-import { runCommand } from '../src/testing';
+import { BootstrapConsole } from '../src/bootstrap/console.js';
+import { Command, Console } from '../src/decorators.js';
+import { ConsoleModule } from '../src/module.js';
+import { PromptError, PromptService } from '../src/prompt.js';
+import { runCommand } from '../src/testing.js';
 
 const createPrompt = (interactive = true) => {
     const input = new PassThrough();

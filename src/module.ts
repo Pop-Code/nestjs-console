@@ -14,12 +14,12 @@ import {
     INTERCEPTORS_METADATA,
     PIPES_METADATA,
     ROUTE_ARGS_METADATA
-} from './constants';
-import { CreateCommandOptions, getClassOptions } from './decorators';
-import { ConsoleParamsFactory } from './params-factory';
-import { PromptService } from './prompt';
-import { ConsoleScanner, ScanResponse } from './scanner';
-import { ConsoleService } from './service';
+} from './constants.js';
+import { CreateCommandOptions, getClassOptions } from './decorators.js';
+import { ConsoleParamsFactory } from './params-factory.js';
+import { PromptService } from './prompt.js';
+import { ConsoleScanner, ScanResponse } from './scanner.js';
+import { ConsoleService } from './service.js';
 
 const cliProvider = {
     provide: CLI_SERVICE_TOKEN,
