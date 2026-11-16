@@ -134,6 +134,19 @@ describe('PromptService', () => {
         await expect(prompt.input('Name?')).rejects.toThrow('Cannot ask "Name?": the input is not interactive');
     });
 
+    it('writes the questions to stderr by default', async () => {
+        const input = new PassThrough();
+        const write = jest.spyOn(process.stderr, 'write').mockImplementation(() => true);
+        try {
+            const prompt = new PromptService().configure({ input, interactive: true });
+            input.write('x\n');
+            expect(await prompt.input('Name?')).toBe('x');
+            expect(write).toHaveBeenCalledWith('Name? ');
+        } finally {
+            write.mockRestore();
+        }
+    });
+
     it('is interactive when stdin is a terminal', () => {
         const prompt = new PromptService();
         expect(prompt.isInteractive()).toBe(!!process.stdin.isTTY);
@@ -234,6 +247,25 @@ describe('Prompted options and arguments', () => {
     it('displays a prompted argument as optional in the help', async () => {
         const { stdout } = await run(['create', '--help']);
         expect(stdout).toContain('create [options] [name] [tags...]');
+    });
+
+    it('asks the options of a group before a sub command, and uses the flags as question', async () => {
+        @Console({ command: 'deploy', options: [{ flags: '-e <env>', prompt: true }] })
+        class Deploy {
+            @Command({ command: 'run' })
+            run(options: unknown, command: any) {
+                return command.parent.opts();
+            }
+        }
+        @Module({ imports: [ConsoleModule], providers: [Deploy] })
+        class DeployModule {}
+        const result = await runCommand(['deploy', 'run'], {
+            module: DeployModule,
+            useDecorators: true,
+            answers: ['prod']
+        });
+        expect(result.data).toEqual({ e: 'prod' });
+        expect(result.prompts).toBe('-e <env> ');
     });
 
     it('configures the prompts of the bootstrap', async () => {

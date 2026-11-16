@@ -353,11 +353,8 @@ export class ConsoleService {
             command.addOption(option);
         }
         if (promptedArguments.length > 0 || promptedOptions.length > 0) {
-            command.hook('preAction', async (_hookedCommand, actionCommand) => {
-                if (actionCommand === command) {
-                    await this.askMissingValues(command, promptedArguments, promptedOptions);
-                }
-            });
+            // runs before the action of the command, and of its sub commands for the options of a group
+            command.hook('preAction', () => this.askMissingValues(command, promptedArguments, promptedOptions));
         }
         if (options.helpGroup !== undefined) {
             setHelpGroup(command, options.helpGroup);
