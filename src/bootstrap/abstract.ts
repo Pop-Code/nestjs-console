@@ -2,13 +2,18 @@
  * @module AbstractBootstrapConsole
  */
 import { INestApplicationContext } from '@nestjs/common';
-import { NestApplicationContextOptions } from '@nestjs/common/interfaces/nest-application-context-options.interface';
+import { NestFactory } from '@nestjs/core';
 import * as commander from 'commander';
 
 import { CompletionOptions, registerCompletion } from '../completion';
 import { CommandResponse } from '../interfaces';
 import { ConsoleModule } from '../module';
 import { CommandSettings, ConsoleService } from '../service';
+
+/**
+ * The options of NestFactory.createApplicationContext()
+ */
+export type NestApplicationContextOptions = NonNullable<Parameters<typeof NestFactory.createApplicationContext>[1]>;
 
 /**
  * The options of the root cli
