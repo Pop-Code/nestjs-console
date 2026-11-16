@@ -294,12 +294,7 @@ describe('Command settings', () => {
     it('uses the help groups, the usage and the help settings', async () => {
         @Console({ command: 'tools', enablePositionalOptions: true, showHelpAfterError: '(run with --help)' })
         class Tools {
-            @Command({
-                command: 'lint',
-                helpGroup: 'Quality:',
-                usage: '[files]',
-                options: [{ flags: '--fix', helpGroup: 'Fixes:' }]
-            })
+            @Command({ command: 'lint', usage: '[files]', options: [{ flags: '--fix' }] })
             lint(options: unknown) {
                 return options;
             }
@@ -309,11 +304,8 @@ describe('Command settings', () => {
                 return command.args;
             }
         }
-        const help = await run(['tools', '--help'], Tools);
-        expect(help.stdout).toContain('Quality:\n  lint');
         const lintHelp = await run(['tools', 'lint', '--help'], Tools);
         expect(lintHelp.stdout).toContain('tools lint [files]');
-        expect(lintHelp.stdout).toContain('Fixes:\n  --fix');
         // pass through options require positional options on all the parents
         const exec = await runCommand(['tools', 'exec', 'ls', '-la'], {
             module: createModule(Tools),
@@ -323,6 +315,20 @@ describe('Command settings', () => {
         expect(exec.error).toBeUndefined();
         expect(exec.data).toEqual(['ls', '-la']);
         expect((await run(['tools', 'lint', '--nope'], Tools)).stderr).toContain('(run with --help)');
+    });
+
+    it('uses the help groups (commander >= 14)', async () => {
+        @Console({ command: 'tools' })
+        class Tools {
+            @Command({ command: 'lint', helpGroup: 'Quality:', options: [{ flags: '--fix', helpGroup: 'Fixes:' }] })
+            lint() {}
+        }
+        if (typeof (commander.Command.prototype as any).helpGroup !== 'function') {
+            await expect(run(['tools', '--help'], Tools)).rejects.toThrow('requires commander >= 14');
+            return;
+        }
+        expect((await run(['tools', '--help'], Tools)).stdout).toContain('Quality:\n  lint');
+        expect((await run(['tools', 'lint', '--help'], Tools)).stdout).toContain('Fixes:\n  --fix');
     });
 
     it('fails for an unknown argument name', async () => {
@@ -521,7 +527,14 @@ describe('Parameter decorators and enhancers', () => {
         class GlobalGuardModule {}
         const options = { module: GlobalGuardModule, useDecorators: true };
         expect((await runCommand(['plain', 'x'], options)).data).toBe('x');
-        expect((await runCommand(['decorated', 'x'], options)).error).toBeInstanceOf(ForbiddenException);
+        // the global enhancers are applied by NestJS >= 10
+        const nestMajor = parseInt(require('@nestjs/core/package.json').version, 10);
+        const decorated = await runCommand(['decorated', 'x'], options);
+        if (nestMajor >= 10) {
+            expect(decorated.error).toBeInstanceOf(ForbiddenException);
+        } else {
+            expect(decorated.data).toBe('x');
+        }
     });
 
     it('does not log errors with the nest logger when no filter is declared', async () => {
